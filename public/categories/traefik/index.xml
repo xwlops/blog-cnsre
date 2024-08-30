@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Traefik on SRE运维博客</title>
+    <link>http://www.cnsre.cn:80/categories/traefik/</link>
+    <description>Recent content in Traefik on SRE运维博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Fri, 26 Nov 2021 10:03:07 +0800</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="http://www.cnsre.cn:80/categories/traefik/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>k3s 卸载 traefik</title>
+        <link>http://www.cnsre.cn:80/posts/211126003074/</link>
+        <pubDate>Fri, 26 Nov 2021 10:03:07 +0800</pubDate>
+        
+        <atom:modified>Wed, 10 Aug 2022 08:55:27 +0800</atom:modified>
+        <guid>http://www.cnsre.cn:80/posts/211126003074/</guid>
+        <description>作者：SRE运维博客 博客地址： https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/211126003074/ 相关话题：http</description>
+        <content:encoded>&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址： &lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn/&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/211126003074/&#34;&gt;https://www.cnsre.cn/posts/211126003074/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/k3s/&#34;&gt;https://www.cnsre.cn/tags/k3s/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;p&gt;安装了 k3s 以后，发现 traefik 并没有 ingress 用的习惯，于是我就打算吧 traefik 卸载了安装上ingress。&lt;/p&gt;
+&lt;h2 id=&#34;删除traefik&#34;&gt;删除traefik&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;删除traefik舵图资源：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;kubectl -n kube-system delete helmcharts.helm.cattle.io traefik
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;kubectl -n kube-system delete helmcharts.helm.cattle.io traefik-crd
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;修改-k3sservice-配置文件&#34;&gt;修改 k3s.service 配置文件&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;停止k3s服务： &lt;code&gt;systemctl stop  k3s &lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;编辑服务文件&lt;code&gt;vim /etc/systemd/system/k3s.service&lt;/code&gt;并将此行添加到&lt;code&gt;ExecStart&lt;/code&gt; ：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;--disable traefik \
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;重新加载服务文件： &lt;code&gt;systemctl daemon-reload&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;从自动部署文件夹中删除清单文件： &lt;code&gt;rm /var/lib/rancher/k3s/server/manifests/traefik.yaml&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;启动k3s服务： &lt;code&gt;systemctl start  k3s&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;script async src=&#34;https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4855142804875926&#34;
+     crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+&lt;p&gt;&lt;ins class=&#34;adsbygoogle&#34;
+style=&#34;display:block; text-align:center;&#34;
+data-ad-layout=&#34;in-article&#34;
+data-ad-format=&#34;fluid&#34;
+data-ad-client=&#34;ca-pub-4855142804875926&#34;
+data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
+&lt;script&gt;
+     (adsbygoogle = window.adsbygoogle || []).push({});
+&lt;/script&gt;
+&lt;h2 id=&#34;安装ingress&#34;&gt;安装ingress&lt;/h2&gt;
+&lt;p&gt;安装 ingress 的话 参考我之前的文章 &lt;a href=&#34;https://www.cnsre.cn/posts/210902330007/#%E4%BD%BF%E7%94%A8-hostnetwork-%E7%9A%84%E6%96%B9%E5%BC%8F%E9%83%A8%E7%BD%B2-ingress-nginx&#34;&gt;kubernetes 安装 ingress controller&lt;/a&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址： &lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn/&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/211126003074/&#34;&gt;https://www.cnsre.cn/posts/211126003074/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/k3s/&#34;&gt;https://www.cnsre.cn/tags/k3s/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+</content:encoded>
+        <dc:creator>CNSRE</dc:creator>
+        <media:content url="http://www.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/k3s.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>k3s</category>
+            
+          
+            
+              <category>traefik</category>
+            
+          
+        
+        
+          
+            
+              <category>ingress</category>
+            
+          
+            
+              <category>traefik</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

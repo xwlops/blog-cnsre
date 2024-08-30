@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Python on SRE运维博客</title>
+    <link>http://www.cnsre.cn:80/categories/python/</link>
+    <description>Recent content in Python on SRE运维博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Sat, 06 May 2023 14:25:09 +0800</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="http://www.cnsre.cn:80/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>如何使用 Lambda 自动添加CloudWatch所有实例磁盘告警及 SNS 通知</title>
+        <link>http://www.cnsre.cn:80/posts/230506425079/</link>
+        <pubDate>Sat, 06 May 2023 14:25:09 +0800</pubDate>
+        
+        <atom:modified>Sat, 06 May 2023 15:37:47 +0800</atom:modified>
+        <guid>http://www.cnsre.cn:80/posts/230506425079/</guid>
+        <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/23</description>
+        <content:encoded>&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn/&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/230506425079/&#34;&gt;https://www.cnsre.cn/posts/230506425079/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/lambda/&#34;&gt;https://www.cnsre.cn/tags/lambda/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h1 id=&#34;利用lambda轻松实现ec2实例监控&#34;&gt;利用Lambda轻松实现EC2实例监控&lt;/h1&gt;
+&lt;p&gt;最近新增了一些服务器，因为每个服务器的基础监控都是要做的。我就想，如何能够快速便捷的方式把这些基础指标都监控上呢？本文将详细介绍如何通过Lambda自动为所有EC2实例添加CloudWatch磁盘告警,并在磁盘利用率超过阈值时,通过SNS主题发送通知。&lt;/p&gt;
+&lt;h2 id=&#34;准备工作&#34;&gt;准备工作&lt;/h2&gt;
+&lt;p&gt;在开始前,我们需要准备:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;AWS账号:开通一个AWS账号。&lt;/li&gt;
+&lt;li&gt;SNS主题:在SNS上创建一个主题,并添加订阅者。订阅方式可以是邮件、短信等。&lt;/li&gt;
+&lt;li&gt;VPC ID:登录VPC控制台获取VPC ID。&lt;/li&gt;
+&lt;li&gt;Lambda：需要创建一个Lambda。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;script async src=&#34;https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4855142804875926&#34;
+     crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+&lt;p&gt;&lt;ins class=&#34;adsbygoogle&#34;
+style=&#34;display:block; text-align:center;&#34;
+data-ad-layout=&#34;in-article&#34;
+data-ad-format=&#34;fluid&#34;
+data-ad-client=&#34;ca-pub-4855142804875926&#34;
+data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
+&lt;script&gt;
+     (adsbygoogle = window.adsbygoogle || []).push({});
+&lt;/script&gt;
+&lt;h2 id=&#34;创建sns主题&#34;&gt;创建SNS主题&lt;/h2&gt;
+&lt;p&gt;接下来,我们需要在AWS SNS上创建一个主题,并将订阅者添加到主题中。这些订阅者将会接收磁盘使用超过阈值时的通知。我们可以选择电子邮件、短信等通知方式。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;登录到 &lt;a href=&#34;https://console.amazonaws.cn/sns/v3/home?region=cn-north-1#/homepage&#34;&gt;Amazon SNS&lt;/a&gt; 控制台。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|关键词&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/35f69846480d63485a46b59553ab6f8c.png&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;单击左侧面板上的“主题”,然后单击“创建主题”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|关键词&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/28afa523cc51670d6cf30d17ca3b9c0c.png&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;输入主题名称和主题显示名称,单击“创建主题”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|关键词&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/2a3f4ac194863e700d01db8ff0623ac1.png&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在主题页面上,单击“订阅”,选择希望接收通知的通知方式。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|关键词&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/55338f231c2a9eceed812612abc75bd3.png&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;根据选定的订阅类型输入相关信息,单击“创建订阅”。&lt;/li&gt;
+&lt;li&gt;在主题页面上,您将看到已创建的订阅。&lt;br /&gt;
+举个例子,如果我们选择“邮件”作为订阅方式:&lt;/li&gt;
+&lt;li&gt;在“电子邮件订阅”下,输入接收通知的电子邮件地址。&lt;/li&gt;
+&lt;li&gt;单击“创建订阅”。&lt;/li&gt;
+&lt;li&gt;您应会收到一封来自AWS通知的验证电子邮件。请按照电子邮件中的说明进行验证。&lt;/li&gt;
+&lt;li&gt;一旦验证通过,该订阅将变为“已验证”状态。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;现在,当CloudWatch告警触发并调用SNS主题时,验证的电子邮件地址将收到有关警报的电子邮件通知。我们也可以添加多个订阅以接收通过不同渠道的通知,例如电子邮件、短信等。 添加订阅者后,我们可以在SNS主题的“概述”页查看订阅的详细信息和状态。在测试Lambda函数时,这有助于确保订阅设置正确和通知能正常发送。&lt;/p&gt;
+&lt;h2 id=&#34;创建lambda函数&#34;&gt;创建Lambda函数&lt;/h2&gt;
+&lt;p&gt;接下来,我们可以在Lambda控制台创建一个新的Lambda函数。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;访问 &lt;a href=&#34;https://cn-north-1.console.amazonaws.cn/lambda/home?region=cn-north-1#/&#34;&gt;Amazon Lambda&lt;/a&gt; 控制台,点击“&lt;a href=&#34;https://cn-north-1.console.amazonaws.cn/lambda/home?region=cn-north-1#/create/function&#34;&gt;创建函数&lt;/a&gt;”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|关键词&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/3268706f5e6d1e71367b976d84919a82.png&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;选择“从头开始” ,输入函数名称,如“create_cloudwatch_alarm_for_ec2_disk_usage”。&lt;/li&gt;
+&lt;li&gt;选择Python作为运行环境,选择 创建具有基本 Lambda 权限的新角色。&lt;/li&gt;
+&lt;li&gt;点击“创建函数”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|关键词&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/ea193563e767167c9216936e943e7383.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;编写lambda函数代码&#34;&gt;编写Lambda函数代码&lt;/h2&gt;
+&lt;p&gt;代码我已经写好了，各位大佬收好。代码功能是为所有EC2实例设置CloudWatch磁盘告警,当磁盘利用率超过阈值时,通过SNS主题发送通知。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;连接EC2客户端。&lt;/li&gt;
+&lt;li&gt;获取VPC中运行的EC2实例列表。&lt;/li&gt;
+&lt;li&gt;遍历实例创建CloudWatch磁盘使用百分比告警。默认阈值是80%。&lt;/li&gt;
+&lt;li&gt;告警触发SNS主题“you_sns_arn”。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;将下面代码复制后进行部分修改。然后替换掉原有代码后，然后保存并部署。&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|关键词&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/f9796ca0b55f18f7187dcb9795cac07a.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;下面是具体代码内容：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;61
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;Author       : Wenlong Xue 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;Date         : 2023-02-27 13:35
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;LastEditors  : Wenlong Xue 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;LastEditTime : 2023-02-27 17:52
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;Description  : 为 VPC 中的 EC2 实例创建磁盘使用百分比的 CloudWatch 告警，并在磁盘使用超过阈值时发送通知到 SNS 主题
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;boto3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;lambda_handler&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;event&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;context&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# 连接到 EC2 客户端&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;ec2&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;boto3&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;client&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;ec2&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# 获取 VPC 中运行中的实例列表&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ec2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;describe_instances&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;Filters&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;s1&#34;&gt;&amp;#39;Name&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;vpc-id&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;s1&#34;&gt;&amp;#39;Values&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;vpc-xxxxxx&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;      &lt;span class=&#34;c1&#34;&gt;# 修改VPC ID&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;s1&#34;&gt;&amp;#39;Name&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;instance-state-name&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;s1&#34;&gt;&amp;#39;Values&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;running&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# 遍历实例并为磁盘使用百分比创建 CloudWatch 告警&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;reservation&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Reservations&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;instance&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;reservation&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Instances&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;c1&#34;&gt;# 获取实例 ID 和 Name 标签&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;instance_id&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;instance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;InstanceId&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;instance_name&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tag&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;instance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Tags&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tag&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Key&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;Name&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                    &lt;span class=&#34;n&#34;&gt;instance_name&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tag&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Value&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                    &lt;span class=&#34;k&#34;&gt;break&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;c1&#34;&gt;# 创建磁盘使用百分比的 CloudWatch 告警&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;cloudwatch&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;boto3&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;client&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;cloudwatch&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;cloudwatch&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;put_metric_alarm&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;n&#34;&gt;AlarmName&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{}&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;-磁盘使用百分比&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;instance_name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;n&#34;&gt;AlarmDescription&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{}&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt; - 磁盘使用百分比&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;instance_name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;n&#34;&gt;ActionsEnabled&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;True&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;n&#34;&gt;AlarmActions&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;you_sns_arn&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;   &lt;span class=&#34;c1&#34;&gt;# 修改sns主题,如:arn:aws-cn:sns:cn-north-1:xxxxx:HighDiskUsed&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;n&#34;&gt;MetricName&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;disk_used_percent&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# 根据情况修改&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;n&#34;&gt;Namespace&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;CWAgent&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;            &lt;span class=&#34;c1&#34;&gt;# 根据情况修改&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;n&#34;&gt;Dimensions&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                        &lt;span class=&#34;s1&#34;&gt;&amp;#39;Name&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;InstanceId&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                        &lt;span class=&#34;s1&#34;&gt;&amp;#39;Value&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;instance_id&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;n&#34;&gt;Statistic&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Maximum&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;n&#34;&gt;Period&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;300&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;n&#34;&gt;EvaluationPeriods&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;n&#34;&gt;Threshold&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;80.0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;n&#34;&gt;ComparisonOperator&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;GreaterThanOrEqualToThreshold&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;给iam角色添加权限&#34;&gt;给IAM角色添加权限&lt;/h2&gt;
+&lt;p&gt;因为 创建具有基本 Lambda 权限的新角色 的权限并不完整，所以我们要把代码中所要用到的权限给到这个新角色。&lt;/p&gt;
+&lt;p&gt;首先,Lambda中找到这个觉得然后给他添加对应的权限。&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|关键词&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/abb1aa9e258106f69746d686e8cb7530.png&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;找到创建的Lambda 函数。&lt;/li&gt;
+&lt;li&gt;选择函数汇总的配置&amp;ndash;权限。&lt;/li&gt;
+&lt;li&gt;找到执行角色，并点击角色名称连接。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|关键词&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/f77517e4f2441405ee4a9483692ac510.png&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;点击添加权限，选择附加策略。&lt;/li&gt;
+&lt;li&gt;添加 &lt;code&gt;CloudWatchFullAccess&lt;/code&gt; 和 &lt;code&gt;AmazonEC2ReadOnlyAccess&lt;/code&gt; 权限&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;最后权限如下：&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|关键词&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/bfa33a880cfce1bcd9a60e2fc8f04d46.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;注意&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&#34;alert alert-warning&#34; role=&#34;alert&#34; data-dir=&#34;ltr&#34;&gt;⚠️ 若提示确少什么权限就补充什么权限。&lt;/div&gt;
+&lt;h2 id=&#34;测试函数&#34;&gt;测试函数&lt;/h2&gt;
+&lt;p&gt;现在,我们已经创建Lambda函数和SNS主题,并将订阅者添加到主题。我们可以测试Lambda函数功能。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;我们可以手动运行测试来观察 CloudWatch告警项有没有被添加。&lt;/li&gt;
+&lt;li&gt;我们也可以进行添加触发器。如：固定时间段运行一次，来遍历新加的服务器。然后添加告警项。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;常见问题及解决方案&#34;&gt;常见问题及解决方案&lt;/h2&gt;
+&lt;div class=&#34;notices info&#34; data-title=&#34;常见问题及解决方案&#34;&gt;
+  Q1: 没收到SNS通知怎么办?&lt;br /&gt;
+A1: 确认订阅邮箱是否正确。检查AWS账号是否有权限向SNS发送通知。&lt;br /&gt;
+Q2: 如何修改磁盘使用阈值?&lt;br /&gt;
+A2: 编辑Lambda函数代码,更改&amp;quot;Threshold&amp;quot;的值。&lt;br /&gt;
+Q3: CloudWatch的告警项中显示数据不足怎么办?&lt;br /&gt;
+A3: 查看CloudWatch中原本磁盘的指标名称，并修改Lambda函数代码对应的值：MetricName=&amp;lsquo;disk_used_percent&amp;rsquo;；Namespace=&amp;lsquo;CWAgent&amp;rsquo;
+&lt;/div&gt;
+&lt;h2 id=&#34;参考资料&#34;&gt;参考资料&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;AWS Lambda文档: &lt;a href=&#34;https://docs.aws.amazon.com/lambda/&#34;&gt;https://docs.aws.amazon.com/lambda/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;AWS CloudWatch文档: &lt;a href=&#34;https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/&#34;&gt;https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;AWS SNS文档: &lt;a href=&#34;https://docs.aws.amazon.com/sns/index.html&#34;&gt;https://docs.aws.amazon.com/sns/index.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn/&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/230506425079/&#34;&gt;https://www.cnsre.cn/posts/230506425079/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/lambda/&#34;&gt;https://www.cnsre.cn/tags/lambda/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+</content:encoded>
+        <dc:creator>CNSRE</dc:creator>
+        <media:content url="http://www.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/lambda.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>lambda</category>
+            
+          
+            
+              <category>aws</category>
+            
+          
+            
+              <category>cloudwatch</category>
+            
+          
+            
+              <category>sns</category>
+            
+          
+            
+              <category>python</category>
+            
+          
+        
+        
+          
+            
+              <category>lambda</category>
+            
+          
+            
+              <category>cloudwatch</category>
+            
+          
+            
+              <category>aws</category>
+            
+          
+            
+              <category>sns</category>
+            
+          
+            
+              <category>python</category>
+            
+          
+        
+        
+      </item>
+      
+      <item>
+        <title>Lambda函数检查S3文件夹是否存在</title>
+        <link>http://www.cnsre.cn:80/posts/230410659053/</link>
+        <pubDate>Mon, 10 Apr 2023 16:59:07 +0800</pubDate>
+        
+        <atom:modified>Tue, 11 Apr 2023 20:38:08 +0800</atom:modified>
+        <guid>http://www.cnsre.cn:80/posts/230410659053/</guid>
+        <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/23</description>
+        <content:encoded>&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn/&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/230410659053/&#34;&gt;https://www.cnsre.cn/posts/230410659053/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/lambda/&#34;&gt;https://www.cnsre.cn/tags/lambda/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h1 id=&#34;lambda函数检查s3文件夹是否存在&#34;&gt;Lambda函数检查S3文件夹是否存在&lt;/h1&gt;
+&lt;p&gt;作为 AWS 中最常用的对象存储服务，S3 可以用于存储各种类型的文件，包括网站文件、媒体文件、备份文件等等。在 S3 中存储的文件可以通过不同的方式访问，例如在 Web 应用程序中、通过移动应用程序或直接使用 AWS SDK 访问等。&lt;/p&gt;
+&lt;p&gt;在进行 S3 存储时，如果我们需要将存储的日志同步到另一个桶或区域中，则可以使用 AWS 的 S3 日志同步任务功能。通过将日志同步到其他存储桶或区域中，我们可以更方便地对日志进行分析、监控和管理。&lt;/p&gt;
+&lt;p&gt;但是，如果 S3 日志同步任务出现故障，我们可能无法及时获取相关的日志信息。因此，为了确保日志同步任务的正常运行，我们需要对任务进行监控。在本文中，我们将介绍如何使用 AWS Lambda 监控 S3 日志同步任务。&lt;/p&gt;
+&lt;script async src=&#34;https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4855142804875926&#34;
+     crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+&lt;p&gt;&lt;ins class=&#34;adsbygoogle&#34;
+style=&#34;display:block; text-align:center;&#34;
+data-ad-layout=&#34;in-article&#34;
+data-ad-format=&#34;fluid&#34;
+data-ad-client=&#34;ca-pub-4855142804875926&#34;
+data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
+&lt;script&gt;
+     (adsbygoogle = window.adsbygoogle || []).push({});
+&lt;/script&gt;
+&lt;h2 id=&#34;介绍&#34;&gt;介绍&lt;/h2&gt;
+&lt;p&gt;AWS Lambda 是一种无服务器计算服务，可使您在云中运行代码，而无需自己管理服务器。通过使用 Lambda，您可以将代码上传到云中，然后 Lambda 会根据需要自动扩展和缩减计算资源，以满足您的应用程序的请求。Lambda 还支持许多编程语言和库，使您能够编写功能强大的应用程序和服务。&lt;/p&gt;
+&lt;p&gt;在本文中，我们将使用 Lambda 编写一个函数，该函数将定期检查 S3 存储桶中的文件夹是否存在。如果不存在任何文件夹，则 Lambda 将向指定的 SNS 主题发送一条消息，以便管理员可以及时采取措施。通过使用 Lambda 监控 S3 存储桶中的文件夹，我们可以确保日志同步任务的正常运行。&lt;/p&gt;
+&lt;h2 id=&#34;1-准备工作&#34;&gt;1. 准备工作&lt;/h2&gt;
+&lt;p&gt;在开始之前，我们需要先准备好以下工作：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一个S3桶，用于存储我们要检查的文件夹。&lt;/li&gt;
+&lt;li&gt;一个SNS主题，用于发送消息提醒。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2-创建lambda函数&#34;&gt;2. 创建Lambda函数&lt;/h2&gt;
+&lt;p&gt;在AWS控制台上创建一个Python Lambda函数，名称为&lt;code&gt;s3-folder-exist-checker&lt;/code&gt;，并使用以下代码：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import boto3
+from datetime import datetime, timedelta
+from dateutil import tz
+
+def lambda_handler(event, context):
+    print(&amp;#39;Lambda 函数已启动.&amp;#39;)
+    
+    s3 = boto3.resource(&amp;#39;s3&amp;#39;)
+    bucket_name = &amp;#39;my_s3_bucket_name&amp;#39;
+    local_tz = tz.gettz(&amp;#39;Asia/Shanghai&amp;#39;)
+    now = datetime.now()
+    date_prefix = now.strftime(&amp;#39;%Y/%m/%d/&amp;#39;)
+    
+    folder_prefixes = [&amp;#39;my_prefixes/&amp;#39; + date_prefix, &amp;#39;my_prefixes/&amp;#39; + date_prefix, &amp;#39;RGC-Prod-3in1oven/&amp;#39; + date_prefix]
+    folder_prefixes = [prefix + &amp;#39;/&amp;#39; if not prefix.endswith(&amp;#39;/&amp;#39;) else prefix for prefix in folder_prefixes]  # 确保每个前缀以斜杠结尾
+    
+    print(&amp;#39;正在检查以下 S3 文件夹：&amp;#39;, folder_prefixes)
+    
+    sns = boto3.client(&amp;#39;sns&amp;#39;)
+    topic_arn = &amp;#39;arn:aws-cn:sns:cn-north-1:1234567890:s3-logs-monitoring&amp;#39;
+    
+    for prefix in folder_prefixes:
+        resp = s3.meta.client.list_objects_v2(Bucket=bucket_name, Prefix=prefix, Delimiter=&amp;#39;/&amp;#39;)
+        subfolders = [p[&amp;#39;Prefix&amp;#39;] for p in resp.get(&amp;#39;CommonPrefixes&amp;#39;, [])]
+    
+        if len(subfolders) &amp;gt; 0:
+            print(f&amp;#34;子文件夹 &amp;#39;{prefix}&amp;#39; 存在:&amp;#34;)
+            for folder in subfolders:
+                print(f&amp;#34;发现子文件夹: {folder}&amp;#34;)
+        else:
+            message = f&amp;#34;S3桶&amp;#39;{bucket_name}中&amp;#39;{prefix}&amp;#39;下不存在新增文件夹,即日志同步S3桶任务失败.请检查.&amp;#39;&amp;#34;
+            sns.publish(TopicArn=topic_arn, Message=message)
+            print(f&amp;#34;已发送 SNS 消息: {message}&amp;#34;)
+        
+    print(&amp;#39;Lambda 函数已完成.&amp;#39;)
+    
+    return {
+        &amp;#39;statusCode&amp;#39;: 200,
+        &amp;#39;body&amp;#39;: &amp;#39;S3 文件夹存在性检查已完成.&amp;#39;
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;接下来是对 Lambda 函数中的一些细节进行讲解。首先，我们定义了 S3 的资源，并且指定了 S3 桶的名称：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;s3 = boto3.resource(&amp;#39;s3&amp;#39;)
+bucket_name = &amp;#39;my_bucket_name&amp;#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;接着，我们获取当前的时间，并且根据当前时间生成一个目录前缀。我们使用 &lt;code&gt;dateutil&lt;/code&gt; 模块中的 &lt;code&gt;tz.gettz&lt;/code&gt; 函数来获取一个本地的时区信息。为了确保时区的准确性，我们建议在使用 Lambda 函数时，显式地设置时区信息：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;local_tz = tz.gettz(&amp;#39;Asia/Shanghai&amp;#39;)
+now = datetime.now(local_tz)
+date_prefix = now.strftime(&amp;#39;%Y/%m/%d/&amp;#39;)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在 Lambda 函数中，我们使用了 &lt;code&gt;list_objects_v2&lt;/code&gt; 方法来列举指定的文件夹。具体来说，我们使用了 &lt;code&gt;CommonPrefixes&lt;/code&gt; 参数，该参数可以返回指定前缀下的子文件夹列表。如果返回的子文件夹列表为空，则说明指定的文件夹不存在。如果子文件夹列表不为空，则说明文件夹存在，并且我们可以将每个子文件夹的路径打印出来：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;resp = s3.meta.client.list_objects_v2(Bucket=bucket_name, Prefix=prefix, Delimiter=&amp;#39;/&amp;#39;)
+subfolders = [p[&amp;#39;Prefix&amp;#39;] for p in resp.get(&amp;#39;CommonPrefixes&amp;#39;, [])]
+
+if len(subfolders) &amp;gt; 0:
+    print(f&amp;#34;子文件夹 &amp;#39;{prefix}&amp;#39; 存在:&amp;#34;)
+    for folder in subfolders:
+        print(f&amp;#34;发现子文件夹: {folder}&amp;#34;)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果子文件夹列表为空，则说明文件夹不存在。在这种情况下，我们可以使用 SNS 服务发送一条消息来通知管理员：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;if len(subfolders) == 0:
+    message = f&amp;#34;S3桶&amp;#39;{bucket_name}中&amp;#39;{prefix}&amp;#39;下不存在新增文件夹,即日志同步S3桶任务失败.请检查.&amp;#39;&amp;#34;
+    sns.publish(TopicArn=topic_arn, Message=message)
+    print(f&amp;#34;已发送 SNS 消息: {message}&amp;#34;)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;最后，我们返回了一个包含状态码和消息的字典，以便可以在 Lambda 函数执行过程中监控执行状态：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;return {
+    &amp;#39;statusCode&amp;#39;: 200,
+    &amp;#39;body&amp;#39;: &amp;#39;S3 文件夹存在性检查已完成.&amp;#39;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;确保您的 Lambda 函数有权限访问 S3 和 SNS&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在 AWS Lambda 控制台中，创建一个新的 Lambda 函数。在函数代码中将 Python 代码粘贴到代码编辑器中。请确保您选择了正确的运行时环境，并设置以下环境变量：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;BUCKET_NAME&lt;/code&gt;：您的 S3 桶名称&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SNS_TOPIC_ARN&lt;/code&gt;：SNS 主题的 ARN&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;配置 Lambda 函数的基本设置和高级设置，包括内存和超时。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在 Lambda 控制台中，测试 Lambda 函数，以确保 Lambda 函数能够访问 S3 桶和 SNS 主题。为了测试该函数，您可以创建一个测试事件，该事件需要一个空的 JSON 对象，例如：&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;最后，您需要在 Amazon CloudWatch 中设置 CloudWatch Events 规则以定期触发 Lambda 函数。这样您的 Lambda 函数就能在您预定的时间检查 S3 文件夹是否存在并发送通知。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
+&lt;p&gt;在这篇文章中，我们介绍了一个使用 AWS Lambda、S3 和 SNS 的自动化任务，该任务定期检查 S3 文件夹是否存在并发送通知。我们解释了如何编写 Python 代码来实现此任务，并提供了一个详细的代码示例。我们还介绍了如何在 AWS Lambda 和 Amazon SNS 控制台上配置 Lambda 函数和 SNS 主题，并在 Amazon CloudWatch 中创建定期触发器来触发 Lambda 函数。最后，我们提供了一些最佳实践和注意事项，以确保您的 Lambda 函数和 SNS 主题能够正常工作。&lt;/p&gt;
+&lt;p&gt;希望这篇文章对您有所帮助！如果您有任何疑问或建议，请在下面的评论区留言。&lt;/p&gt;
+&lt;h2 id=&#34;参考文献&#34;&gt;参考文献&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.aws.amazon.com/lambda/index.html&#34;&gt;AWS Lambda 文档&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.aws.amazon.com/s3/index.html&#34;&gt;AWS S3 文档&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.aws.amazon.com/sns/index.html&#34;&gt;AWS SNS 文档&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn/&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/230410659053/&#34;&gt;https://www.cnsre.cn/posts/230410659053/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/lambda/&#34;&gt;https://www.cnsre.cn/tags/lambda/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+</content:encoded>
+        <dc:creator>CNSRE</dc:creator>
+        <media:content url="http://www.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/lambda.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>lambda</category>
+            
+          
+            
+              <category>python</category>
+            
+          
+            
+              <category>aws</category>
+            
+          
+        
+        
+          
+            
+              <category>lambda</category>
+            
+          
+            
+              <category>python</category>
+            
+          
+            
+              <category>aws</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

@@ -1,0 +1,32 @@
+<!--
+ * @Author: Wenlong Xue 
+ * @Date: 2023-10-20 09:38:48
+ * @LastEditors: Wenlong Xue 
+ * @LastEditTime: 2023-12-14 17:05:10
+ * @FilePath: /blog/themes/zzo/layouts/partials/comments/waline.html
+ * @Description: comments
+-->
+</br>
+</br>
+</br>
+</br>  <!-- nav与comment保持四行间距 -->
+<section id="comments">
+  <div id="waline"></div>
+    <script src="https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20231214b1dc03dc02f057e2da670c9779d0b080.js"></script>
+    <link rel="stylesheet" href="https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20231214f9a6e928169c9000c7fdc6e2d4fe39ef.css"/>
+
+  <script>
+      Waline.init({
+        el: '#waline',
+      serverURL: '{{ .Site.Params.waline.ServerURL }}',
+      placeholder: '{{ .Site.Params.waline.Placeholder }}',
+      avatar: '{{ .Site.Params.waline.Avatar }}',
+      meta: {{ .Site.Params.waline.Meta }},
+      pageSize: {{ .Site.Params.waline.PageSize }},
+      lang: '{{ .Site.Params.waline.Lang }}',
+      highlight: {{ .Site.Params.waline.Highlight }},
+      avatarCDN: '{{ .Site.Params.waline.AvatarCDN }}',
+      requiredFields: {{ .Site.Params.waline.RequiredFields }}
+  });
+  </script>
+</body>

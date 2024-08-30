@@ -1,0 +1,49 @@
+{{- if .Site.Params.valine.visitor -}}
+  <span id="{{ .RelPermalink | relLangURL }}" class="leancloud_visitors" data-flag-title="{{ .Title }}">
+  <span class="post-meta-item-text">文章阅读量 </span>
+  <span class="leancloud-visitors-count">0</span>
+  <p></p>
+  </span>
+{{- end }}
+
+<div id="vcomments"></div>
+
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/gh/HCLonely/Valine@latest/dist/Valine.min.js'></script>
+
+<script>
+  new Valine({
+      el: '#vcomments' ,
+      appId: '{{ .Site.Params.valine.appId }}',
+      appKey: '{{ .Site.Params.valine.appKey }}',
+      master: 'fa0f39403a7c7b35442d1082eb759c6c',   //博主邮箱md5
+      tagMeta: ["博主","小伙伴","访客"],     //标识字段名
+      friends:  ["fe01ce2a7fbac8fafaed7c982a04e229","fe01ce2a7fbac8fafaed7c982a04e229","1ac3c8127a8e32ad5caf31982f3488cf"],  //小伙伴邮箱Md5
+      notify: {{ .Site.Params.valine.notify }},
+      verify: {{ .Site.Params.valine.verify }},
+      avatar:'{{ .Site.Params.valine.avatar }}',
+      placeholder: '{{ .Site.Params.valine.placeholder }}',
+      visitor: {{ .Site.Params.valine.visitor }},
+      // 自定义表情       
+      // emojiCDN: '//cdn.jsdelivr.net/gh/zops/ImagesHosting/bilibili/', 
+      // emojiMaps: {
+      //   "？？？": "01.png",
+      //   "爱你哦": "02.png",
+      //   "傲娇": "03.png",
+      //   "吃包群众": "04.png",
+      //   "吃药": "05.png",
+      //   "打尻": "06.png",
+      //   "哈哈哈": "07.png",
+      //   "滑稽": "08.png",
+      //   "看透一切": "09.png",
+      //   "可以": "10.png",
+      //   "冷漠": "11.png",
+      //   "前排": "12.png",
+      //   "去吧": "13.png",
+      //   "无言以对": "14.png",
+      //   "掀桌": "15.png",
+      //   "消灭你": "16.png",
+      //   "阴阳先生": "17.png",
+      // }
+  });
+</script>

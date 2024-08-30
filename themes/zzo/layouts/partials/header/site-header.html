@@ -1,0 +1,19 @@
+{{ if .IsHome }}
+<header class="header {{ if $.Param "hideHomeHeaderWhenMobile" }}hide-mobile{{ end }}">
+    {{ if and ($.Param "homeHeaderType") (eq ($.Param "homeHeaderType") "slide") }}
+        {{ partial "header/header-slide" . }}
+    {{ else if and ($.Param "homeHeaderType") (eq ($.Param "homeHeaderType") "img") }}
+        {{ partial "header/header-img" . }}
+    {{ else if and ($.Param "homeHeaderType") (eq ($.Param "homeHeaderType") "text") }}
+        {{ partial "header/header-text" . }}
+    {{ else if and ($.Param "homeHeaderType") (eq ($.Param "homeHeaderType") "typewriter") }}
+        {{ partial "header/header-typewriter" . }}
+    {{ else }}
+        {{ partial "header/custom-header" . }}
+    {{ end }}
+    
+<!--百度站长bai平台验证网站du归属权zhi的验证代码 -->
+    <meta name="baidu-site-verification" content="code-dKVoJKTVWx" />
+<!--头条平台验证网站 -->    
+    <meta name="bytedance-verification-code" content="mB8UWhqy/pQD1SNKP1rK" />
+{{ end }}

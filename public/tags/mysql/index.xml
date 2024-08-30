@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Mysql on SRE运维博客</title>
+    <link>http://www.cnsre.cn:80/tags/mysql/</link>
+    <description>Recent content in Mysql on SRE运维博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Tue, 13 Apr 2021 13:10:21 +0800</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="http://www.cnsre.cn:80/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>数据库CPU 100%处理记录</title>
+        <link>http://www.cnsre.cn:80/posts/210413131020/</link>
+        <pubDate>Tue, 13 Apr 2021 13:10:21 +0800</pubDate>
+        
+        <atom:modified>Wed, 10 Aug 2022 08:55:27 +0800</atom:modified>
+        <guid>http://www.cnsre.cn:80/posts/210413131020/</guid>
+        <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
+        <content:encoded>&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/210413131020/&#34;&gt;https://www.cnsre.cn/posts/210413131020/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/%E6%95%85%E9%9A%9C%E9%9B%86/&#34;&gt;https://www.cnsre.cn/tags/故障集/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;问题描述&#34;&gt;问题描述&lt;/h2&gt;
+&lt;p&gt;2020年7月13日一大早收到告警，测试环境数据库CPU告警。&lt;/p&gt;
+&lt;h3 id=&#34;登录aws查看监控如下图&#34;&gt;登录aws查看监控如下图&lt;/h3&gt;
+&lt;p&gt;&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210413131400.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;问题分析&#34;&gt;问题分析&lt;/h2&gt;
+&lt;p&gt;出现这种cpu 100%的问题，一般都是因为sql性能问题导致的。&lt;br /&gt;
+主要表现于 cpu消耗过大，有慢sql造成、慢sql全表扫描，扫描数据库过大，内存排序，队列等等&lt;br /&gt;
+并发现写入相对于查询来说比较高（这是一个关键点）&lt;br /&gt;
+有了大概的思路下边开始排查吧&lt;/p&gt;
+&lt;h3 id=&#34;查看进程&#34;&gt;查看进程&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;show full processlist;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210413131627.png&#34;&gt;&lt;br /&gt;
+发现有大量的语句状态为 &lt;code&gt;sending data sending data:&lt;/code&gt; sql正从表中查询数据，如果查询条件没有适当索引，会导致sql执行时间过长。&lt;/p&gt;
+&lt;h3 id=&#34;查看慢日志配置&#34;&gt;查看慢日志配置&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;mysql&amp;gt; show variables like &amp;#39;slow_query%&amp;#39;;
++---------------------+----------------------------------------------+
+| Variable_name       | Value                                        |
++---------------------+----------------------------------------------+
+| slow_query_log      | ON                                           |
+| slow_query_log_file | /rdsdbdata/log/slowquery/mysql-slowquery.log |
++---------------------+----------------------------------------------+
+2 rows in set
+mysql&amp;gt; show variables like &amp;#39;slow_launch_time&amp;#39;;
++------------------+-------+
+| Variable_name    | Value |
++------------------+-------+
+| slow_launch_time | 1     |
++------------------+-------+
+1 row in set
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;看到慢日志已经开启&lt;/p&gt;
+&lt;p&gt;登录aws cloudwatch查看慢日志发现大部分为这条sql&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# User@Host: admin[admin] @  [10.0.11.12]  Id:  2302
+# Query_time: 3.602910  Lock_time: 0.100585 Rows_sent: 2  Rows_examined: 4454
+SET timestamp=1594629311;
+SELECT a.enum_value,a.enum_value
+        FROM external_mapping a
+        LEFT JOIN external_command_key b ON a.command_id=b.id
+        LEFT JOIN external_command_options c ON a.options_id=c.id
+        LEFT JOIN external_command_key d ON a.command_id=d.id
+        LEFT JOIN category h ON a.category_id=h.id
+        where 1=1
+            AND b.code=&amp;#39;Common.Status.Event&amp;#39;
+            AND c.code=&amp;#39;Common.Setting.Rm4Valve&amp;#39;
+            AND d.code=&amp;#39;Rm4_Valve&amp;#39;
+            AND a.platform_id=119
+            AND h.cname = &amp;#39;TT&amp;#39;;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;查看是否有锁表&#34;&gt;查看是否有锁表&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;mysql&amp;gt; show OPEN TABLES where In_use &amp;gt; 0;
+#查看是否有锁表
+SELECT * FROM INFORMATION_SCHEMA.INNODB_LOCKS;
+#查看正在锁的事务
+Empty set
+SELECT * FROM INFORMATION_SCHEMA.INNODB_LOCK_WAITS; 
+#查看等待锁的事务
+Empty set
+暂时没有看到锁表的情况
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;查看缓存命中&#34;&gt;查看缓存命中&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;mysql&amp;gt; show global status like &amp;#39;Qca%&amp;#39;;
++-------------------------+-----------+
+| Variable_name           | Value     |
++-------------------------+-----------+
+| Qcache_free_blocks      | 1         |
+| Qcache_free_memory      | 134199912 |
+| Qcache_hits             | 0         |
+| Qcache_inserts          | 0         |
+| Qcache_lowmem_prunes    | 0         |
+| Qcache_not_cached       | 44950579  |
+| Qcache_queries_in_cache | 0         |
+| Qcache_total_blocks     | 1         |
++-------------------------+-----------+
+8 rows in set
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;div class=&#34;notices success&#34; data-title=&#34;说明：&#34;&gt;
+  &lt;ul&gt;
+&lt;li&gt;Qcache_hits：查询缓存命中次数。&lt;/li&gt;
+&lt;li&gt;Qcache_inserts：将查询和结果集写入到查询缓存中的次数。&lt;/li&gt;
+&lt;li&gt;Qcache_not_cached：不可以缓存的查询次数。&lt;/li&gt;
+&lt;li&gt;Qcache_queries_in_cache：查询缓存中缓存的查询量。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;/div&gt;&lt;br /&gt;
+查看到缓存命中为0%&lt;/p&gt;
+&lt;h3 id=&#34;查看引擎状态&#34;&gt;查看引擎状态&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;mysql&amp;gt; show engine innodb status;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;通过上边一系列的查询，发现以下几个问题&lt;/p&gt;
+&lt;h4 id=&#34;1慢查询全表扫描过多&#34;&gt;1、慢查询、全表扫描过多&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;描述&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;慢sql&lt;/strong&gt;：查看到sql语句执行时间过长。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;全表扫描&lt;/strong&gt;：这个策略用于检查百分比&lt;code&gt;（(Handler_read_rnd+Handler_read_rnd_next)/(Handler_read_first+Handler_read_key+Handler_read_next+Handler_read_prev+Handler_read_rnd+Handler_read_rnd_next)）&lt;/code&gt;。 这是一个需要读取全表内容的操作，而不是仅读取使用索引选定的部分。 通常使用小型查找表执行，或者在具有大型表的数据仓库情况下执行而其中所有可用数据都被聚合和分析。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;建议&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;慢sql：&lt;/strong&gt; 根据sql 检查语句并进行索引优化。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;全表扫描&lt;/strong&gt;:应该尽量保持这个值尽可能的低。尝试隔离那些不使用索引的查询。一旦识别了那些查询，请创建适当的索引或重写查询以使用索引。MySQL 有一个很棒的功能 - 慢速查询日志，它允许你记录所有需要超过指定时间运行的查询。慢速速查询日志可用于识别需要很长时间才能完成的查询。&lt;/p&gt;
+&lt;h4 id=&#34;2数据库最大并发连接数量&#34;&gt;2、数据库最大并发连接数量&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;描述&lt;/strong&gt;&lt;br /&gt;
+当服务器启动后，&lt;code&gt;（max_used_connections）&lt;/code&gt;变量将提供一个基准，以帮助你确定服务器支持的最大连接数量。 它还可以帮助进行流量分析。&lt;br /&gt;
+&lt;strong&gt;建议&lt;/strong&gt;&lt;br /&gt;
+如果需要支持更多的连接，应该增加变量 &lt;code&gt;max_connections&lt;/code&gt; 的值。MySQL 支持的最大连接数量是取决于给定平台上线程库的质量、可用 RAM 的数量、每个连接可使用多少 RAM、每个连接的工作负载以及所需的响应时间。&lt;/p&gt;
+&lt;h4 id=&#34;3查询缓存要配置&#34;&gt;3、查询缓存要配置&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;缓存描述&lt;/strong&gt;&lt;br /&gt;
+这个策略用于检查查询缓存命中率&lt;code&gt;（Qcache_hits/(Qcache_hits + Com_select)）&lt;/code&gt;。 MySQL 查询缓存将缓存一个分析的查询及其整个结果集。 当你有许多小型的查询返回小型数据集时，这是非常好的，因为查询缓存将允许返回结果立即可供使用，而不是每次发生时都重新运行查询。&lt;br /&gt;
+&lt;strong&gt;建议&lt;/strong&gt;&lt;br /&gt;
+理想情况下，查询缓存的命中率应该接近 100%。MySQL 的查询缓存是一项强大的技术，并且在管理良好的情况下可以显着提高数据库的吞吐量。一旦你的应用程序被创建，你可以看看它如何使用数据库，并相应地调整查询缓存。有足够大的缓存，避免碎片化和排除大型的查询，你就应该能够保持极高的缓存命中率，并享受出色的性能。&lt;/p&gt;
+&lt;h2 id=&#34;处理过程&#34;&gt;处理过程&lt;/h2&gt;
+&lt;p&gt;根据上边发现的问题进行了配置的修改&lt;/p&gt;
+&lt;h3 id=&#34;1修改慢查询以及全表扫描&#34;&gt;1、修改慢查询以及全表扫描&lt;/h3&gt;
+&lt;p&gt;此问题联系开发进行索引优化，减少全表扫描。&lt;/p&gt;
+&lt;h3 id=&#34;2数据库最大连接数量&#34;&gt;2、数据库最大连接数量&lt;/h3&gt;
+&lt;p&gt;修改配置 &lt;code&gt;max_user_connections&lt;/code&gt; 我这边设置的为&lt;code&gt;1000&lt;/code&gt;&lt;br /&gt;
+&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210413132522.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;3查询缓存的配置&#34;&gt;3、查询缓存的配置&lt;/h3&gt;
+&lt;p&gt;&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210413132548.png&#34;&gt;&lt;br /&gt;
+&lt;div class=&#34;notices success&#34; data-title=&#34;参数说明&#34;&gt;
+  &lt;ul&gt;
+&lt;li&gt;query_cache_size：分配用于缓存查询结果的内存量。&lt;/li&gt;
+&lt;li&gt;query_cache_limit：不要缓存大于此字节数的结果。&lt;/li&gt;
+&lt;li&gt;query_cache_type：对于查询结果，不缓存（= OFF），不缓存NO_CACHE（= ON），或仅缓存（= DEMAND）分别用012 表示&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;/div&gt;&lt;br /&gt;
+修改完数据但是需要重启才能生效。&lt;/p&gt;
+&lt;h2 id=&#34;问题解决&#34;&gt;问题解决&lt;/h2&gt;
+&lt;p&gt;正在准备空闲时间重启RDS的时候，开发那边有了进展。&lt;br /&gt;
+&lt;strong&gt;开发同事把缓存写错了！！！！&lt;/strong&gt;😳😳😳&lt;/p&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;理下业务&lt;/strong&gt;&lt;br /&gt;
+程序暴露接口给测试部门，测试部门在上报了50W条数据，开发这边程序有没有添加数据过滤（过滤掉垃圾数据），并且&amp;hellip;开发在程序中写错了缓存。所以导致相对于读取来说写入较高。因为在缓存查询不到想到的数据，就进行了全表扫描，继而出现了大量进程以及连接数队列等等。。&lt;br /&gt;
+处理问题可以，别主动背锅。。。在接手数据库的时候最好检查下配置，了解数据库的情况，在出现问题的时候能够最快速的定位解决问题。&lt;br /&gt;
+另外，经过此次的故障处理，加固了对业务以及数据库一些参数的理解。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/210413131020/&#34;&gt;https://www.cnsre.cn/posts/210413131020/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/%E6%95%85%E9%9A%9C%E9%9B%86/&#34;&gt;https://www.cnsre.cn/tags/故障集/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+</content:encoded>
+        <dc:creator>CNSRE</dc:creator>
+        <media:content url="http://www.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>mysql</category>
+            
+          
+            
+              <category>故障集</category>
+            
+          
+        
+        
+          
+            
+              <category>aws</category>
+            
+          
+            
+              <category>故障集</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

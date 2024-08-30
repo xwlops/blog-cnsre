@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Ssl证书 on SRE运维博客</title>
+    <link>http://www.cnsre.cn:80/tags/ssl%E8%AF%81%E4%B9%A6/</link>
+    <description>Recent content in Ssl证书 on SRE运维博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Wed, 14 Apr 2021 13:10:58 +0800</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="http://www.cnsre.cn:80/tags/ssl%E8%AF%81%E4%B9%A6/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>证书链证书过期问题</title>
+        <link>http://www.cnsre.cn:80/posts/210414131058/</link>
+        <pubDate>Wed, 14 Apr 2021 13:10:58 +0800</pubDate>
+        
+        <atom:modified>Wed, 10 Aug 2022 08:55:27 +0800</atom:modified>
+        <guid>http://www.cnsre.cn:80/posts/210414131058/</guid>
+        <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
+        <content:encoded>&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/210414131058/&#34;&gt;https://www.cnsre.cn/posts/210414131058/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/%E6%95%85%E9%9A%9C%E9%9B%86/&#34;&gt;https://www.cnsre.cn/tags/故障集/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;故障描述&#34;&gt;故障描述&lt;/h2&gt;
+&lt;p&gt;在我们的生产环境中，我们制作了一个健康检查页面，并通过脚本去监控他的健康状态，可是在前天（2020-5-30 周六）下午 18:50 左右的时候收到告警健康检查页面故障，等我登录服务器排查故障的时候发现是curl命令报错，报错的内容为：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;root@ip-10-0-10-100 ~&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;# curl -v  https://xxxxxx.cn/hcaextension/hcmini/v1/healthyCheck&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;*   Trying 54.223.xxx.xx...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;* TCP_NODELAY &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;* Connected to xxxxxxxx.cn &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;54.223.xx.xx&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; port &lt;span class=&#34;m&#34;&gt;443&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;#0)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;* ALPN, offering h2
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;* ALPN, offering http/1.1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;* Cipher selection: ALL:!EXPORT:!EXPORT40:!EXPORT56:!aNULL:!LOW:!RC4:@STRENGTH
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;* successfully &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; certificate verify locations:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;*   CAfile: /etc/pki/tls/certs/ca-bundle.crt
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  CApath: none
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;* TLSv1.2 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;OUT&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;, TLS header, Certificate Status &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;22&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;* TLSv1.2 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;OUT&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;, TLS handshake, Client hello &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;1&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;* TLSv1.2 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;IN&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;, TLS handshake, Server hello &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;2&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;* TLSv1.2 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;IN&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;, TLS handshake, Certificate &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;11&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;* TLSv1.2 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;OUT&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;, TLS alert, certificate expired &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;557&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;* SSL certificate problem: certificate has expired
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;* Closing connection &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;60&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; SSL certificate problem: certificate has expired
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;More details here: https://curl.haxx.se/docs/sslcerts.html
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl failed to verify the legitimacy of the server and therefore could not
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;establish a secure connection to it. To learn more about this situation and
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;how to fix it, please visit the web page mentioned above.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;在通过我今天上午的测试，我发现AWS EC2为：Linux 、Linux2 的操作系统不能够正常使用，在AWS EC2 -Centos 7.7、阿里云以及物理机房中测试是没有问题的。&lt;/p&gt;
+&lt;h2 id=&#34;分析过程&#34;&gt;分析过程&lt;/h2&gt;
+&lt;p&gt;经过查看报错信息，发现是由于SSL握手的时候证书验证错误导致的，以下是排查的步骤：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Curl 的-k参数可以忽略SLL证书的验证，您可以添加-k参数临时避免遇到此错误，如下是我的测试，发现可以正常的访问页面：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl -k  https://xxxxxx.cn/hcaextension/hcmini/v1/healthyCheck
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;code&amp;#34;&lt;/span&gt;:0,&lt;span class=&#34;s2&#34;&gt;&amp;#34;msg&amp;#34;&lt;/span&gt;:&lt;span class=&#34;s2&#34;&gt;&amp;#34;成功&amp;#34;&lt;/span&gt;,&lt;span class=&#34;s2&#34;&gt;&amp;#34;messageid&amp;#34;&lt;/span&gt;:&lt;span class=&#34;s2&#34;&gt;&amp;#34;29250cf5-176b-4993-a724-e5c9d7cc2ace&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;通过进一步分析证书“xxxxx.cn”，我们发现证书链是存在问题的，我们的证书自身并没有过期，但是一个证书链证书过期了，我们提取了证书链的信息，您可以参考附件的信息。&lt;br /&gt;
+&lt;a href=&#34;https://myssl.com/&#34;&gt;检测地址&lt;/a&gt;&lt;br /&gt;
+&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210414131543.png&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;解决方法&#34;&gt;解决方法&lt;/h2&gt;
+&lt;p&gt;更新证书链，将过期的证书链信息去除，尝试是否可以正常访问：&lt;br /&gt;
+&lt;a href=&#34;https://docs.amazonaws.cn/IAM/latest/UserGuide/id_credentials_server-certs.html&#34;&gt;https://docs.amazonaws.cn/IAM/latest/UserGuide/id_credentials_server-certs.html&lt;/a&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/210414131058/&#34;&gt;https://www.cnsre.cn/posts/210414131058/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/%E6%95%85%E9%9A%9C%E9%9B%86/&#34;&gt;https://www.cnsre.cn/tags/故障集/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+</content:encoded>
+        <dc:creator>CNSRE</dc:creator>
+        <media:content url="http://www.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>ssl证书</category>
+            
+          
+            
+              <category>故障集</category>
+            
+          
+        
+        
+          
+            
+              <category>aws</category>
+            
+          
+            
+              <category>故障集</category>
+            
+          
+        
+        
+      </item>
+      
+      <item>
+        <title>zabbix 监控域名证书到期时间</title>
+        <link>http://www.cnsre.cn:80/posts/210406154942/</link>
+        <pubDate>Tue, 06 Apr 2021 15:49:43 +0800</pubDate>
+        
+        <atom:modified>Wed, 10 Aug 2022 08:55:27 +0800</atom:modified>
+        <guid>http://www.cnsre.cn:80/posts/210406154942/</guid>
+        <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
+        <content:encoded>&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/210406154942/&#34;&gt;https://www.cnsre.cn/posts/210406154942/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/zabbix/&#34;&gt;https://www.cnsre.cn/tags/zabbix/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;server端操作&#34;&gt;server端操作&lt;/h2&gt;
+&lt;p&gt;找一个安装有agent 的server 进行一下操作&lt;/p&gt;
+&lt;h3 id=&#34;安装所需组件&#34;&gt;安装所需组件&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;yum install bc gcc  gcc-c++  -y
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 安装openssl&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;yum install openssl -y 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 验证openssl &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;root@elk scripts&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;openssl version
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;OpenSSL 1.0.2k-fips  &lt;span class=&#34;m&#34;&gt;26&lt;/span&gt; Jan &lt;span class=&#34;m&#34;&gt;2017&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;脚本内容&#34;&gt;脚本内容&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#!/bin/sh
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;host&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;end_date&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;openssl s_client -servername &lt;span class=&#34;nv&#34;&gt;$host&lt;/span&gt; -host &lt;span class=&#34;nv&#34;&gt;$host&lt;/span&gt; -port &lt;span class=&#34;m&#34;&gt;443&lt;/span&gt; -showcerts &amp;lt;/dev/null 2&amp;gt;/dev/null &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  sed -n &lt;span class=&#34;s1&#34;&gt;&amp;#39;/BEGIN CERTIFICATE/,/END CERT/p&amp;#39;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  openssl x509 -text 2&amp;gt;/dev/null &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  sed -n &lt;span class=&#34;s1&#34;&gt;&amp;#39;s/ *Not After : *//p&amp;#39;&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt; -n &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$end_date&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nv&#34;&gt;end_date_seconds&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;date &lt;span class=&#34;s1&#34;&gt;&amp;#39;+%s&amp;#39;&lt;/span&gt; --date &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$end_date&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nv&#34;&gt;now_seconds&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;date &lt;span class=&#34;s1&#34;&gt;&amp;#39;+%s&amp;#39;&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$end_date_seconds&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$now_seconds&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;)/24/3600&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; bc
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;fi&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;验证脚本&#34;&gt;验证脚本&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 赋执行权限&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;root@bac scripts&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; chmod +x check_ssl.sh
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;root@elk scripts&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;./check_ssl.sh xxxx-xxxx.cn              
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;565&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#单位为天&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;zabbix-配置文件中添加配置&#34;&gt;zabbix 配置文件中添加配置&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;root@elk scripts&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;cat /etc/zabbix/zabbix_agentd.conf &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;grep  ssl
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;UserParameter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;check.ssl&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;,/etc/zabbix/scripts/check_ssl.sh &lt;span class=&#34;nv&#34;&gt;$1&lt;/span&gt;、
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;重启zabbix-agent&#34;&gt;重启zabbix agent&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;systemctl  restart  zabbix-agent
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;web端操作&#34;&gt;web端操作&lt;/h2&gt;
+&lt;h3 id=&#34;创建监控项&#34;&gt;创建监控项&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;登录zabbix 创建新的监控项&lt;br /&gt;
+&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210406095202.png&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;名称：随意填写&lt;/li&gt;
+&lt;li&gt;类型：Zabbix 客户端&lt;/li&gt;
+&lt;li&gt;键值：添加在配置文件中的&lt;code&gt;check.ssl[*]&lt;/code&gt; *为你的域名&lt;/li&gt;
+&lt;li&gt;更新间隔因为证书不需要做实时的检查 所以时间可以设置长一点（12h或者24h）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;检查创建监控项是否生效&lt;br /&gt;
+创建完成以后可以在&lt;code&gt;检测&lt;/code&gt;&amp;ndash;&lt;code&gt;最新数据&lt;/code&gt;中查看监控项&lt;br /&gt;
+&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210406095405.png&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;创建触发器&#34;&gt;创建触发器&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;监控项有了 接下来创建触发器&lt;br /&gt;
+&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210406095719.png&#34;&gt;&lt;/li&gt;
+&lt;li&gt;创建完毕 来测试下告警&lt;br /&gt;
+把阈值调为600 天来测试下告警&lt;br /&gt;
+&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210406095848.png&#34;&gt;&lt;br /&gt;
+因为我们把更新间隔调的时间比较长 所以我们为了快速验证告警可以调小&lt;br /&gt;
+&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210406095914.png&#34;&gt;&lt;br /&gt;
+这个时候我们可以看到告警信息&lt;br /&gt;
+&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210406095948.png&#34;&gt;&lt;br /&gt;
+到这SSL 证书监控告警已经完成&lt;/li&gt;
+&lt;li&gt;看到告警信息之后记得阈值调回来&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/210406154942/&#34;&gt;https://www.cnsre.cn/posts/210406154942/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/zabbix/&#34;&gt;https://www.cnsre.cn/tags/zabbix/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+</content:encoded>
+        <dc:creator>CNSRE</dc:creator>
+        <media:content url="http://www.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>ssl证书</category>
+            
+          
+            
+              <category>zabbix</category>
+            
+          
+        
+        
+          
+            
+              <category>zabbix</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

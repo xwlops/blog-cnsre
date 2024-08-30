@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Kube-Eventer on SRE运维博客</title>
+    <link>http://www.cnsre.cn:80/tags/kube-eventer/</link>
+    <description>Recent content in Kube-Eventer on SRE运维博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Fri, 17 Sep 2021 11:28:05 +0800</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="http://www.cnsre.cn:80/tags/kube-eventer/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>kube-eventer事件监控</title>
+        <link>http://www.cnsre.cn:80/posts/210917128049/</link>
+        <pubDate>Fri, 17 Sep 2021 11:28:05 +0800</pubDate>
+        
+        <atom:modified>Wed, 10 Aug 2022 08:55:27 +0800</atom:modified>
+        <guid>http://www.cnsre.cn:80/posts/210917128049/</guid>
+        <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
+        <content:encoded>&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/210917128049/&#34;&gt;https://www.cnsre.cn/posts/210917128049/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/kubernetes/&#34;&gt;https://www.cnsre.cn/tags/kubernetes/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;下载deployment&#34;&gt;下载deployment&lt;/h2&gt;
+&lt;p&gt;我这里保存成kube-event.yaml&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# cat kube-event.yaml
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    name: kube-eventer
+  name: kube-eventer
+  namespace: kube-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kube-eventer
+  template:
+    metadata:
+      labels:
+        app: kube-eventer
+      annotations:
+        scheduler.alpha.kubernetes.io/critical-pod: &amp;#39;&amp;#39;
+    spec:
+      dnsPolicy: ClusterFirstWithHostNet
+      serviceAccount: kube-eventer
+      containers:
+        - image: registry.aliyuncs.com/acs/kube-eventer-amd64:v1.2.0-484d9cd-aliyun
+          name: kube-eventer
+          command:
+            - &amp;#34;/kube-eventer&amp;#34;
+            - &amp;#34;--source=kubernetes:https://kubernetes.default&amp;#34;
+            ## .e.g,dingtalk sink demo
+            #- --sink=dingtalk:[your_webhook_url]&amp;amp;label=[your_cluster_id]&amp;amp;level=[Normal or Warning(default)]
+            - --sink=dingtalk:https://oapi.dingtalk.com/robot/send?access_token=355cf0156xxxxxxxxxxxxxxxxxx&amp;amp;level=Warning
+          env:
+          # If TZ is assigned, set the TZ value as the time zone
+          - name: TZ
+            value: &amp;#34;Asia/Shanghai&amp;#34;
+          volumeMounts:
+            - name: localtime
+              mountPath: /etc/localtime
+              readOnly: true
+            - name: zoneinfo
+              mountPath: /usr/share/zoneinfo
+              readOnly: true
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 500m
+              memory: 250Mi
+      volumes:
+        - name: localtime
+          hostPath:
+            path: /etc/localtime
+        - name: zoneinfo
+          hostPath:
+            path: /usr/share/zoneinfo
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: kube-eventer
+rules:
+  - apiGroups:
+      - &amp;#34;&amp;#34;
+    resources:
+      - configmaps
+      - events
+    verbs:
+      - get
+      - list
+      - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: kube-eventer
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: kube-eventer
+subjects:
+  - kind: ServiceAccount
+    name: kube-eventer
+    namespace: kube-system
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: kube-eventer
+  namespace: kube-system
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;钉钉群里创建自定义webhook&#34;&gt;钉钉群里创建自定义webhook&lt;/h2&gt;
+&lt;p&gt;设置&amp;ndash;智能群助手&amp;ndash;添加机器人&amp;ndash;选择WeebHook。定义机器人名称和安全设置&lt;/p&gt;
+&lt;p&gt;安全设置这里我定义了关键字，Waring。创建后复制webhook地址。然后更改上面deployment中的sink处。&lt;/p&gt;
+&lt;p&gt;我把上面的label删掉了，只留下了level=Waring，刚好对应了我关键字的Waring。只有带有关键字的才会触发告警。&lt;/p&gt;
+&lt;h2 id=&#34;测试告警&#34;&gt;测试告警&lt;/h2&gt;
+&lt;p&gt;然后创建一个测试的Tomcat的deployment，故意把image镜像的tag写错，让他无法拉取镜像&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[root@master allenjol]# kubectl apply -f deploy-tomcat-test.yaml
+deployment.apps/tomcat-deployment-allenjol created
+service/tomcat-service-allenjol created
+
+[root@master allenjol]# kubectl get po
+NAME                                        READY   STATUS             RESTARTS   AGE
+tomcat-deployment-allenjol-b6687f99-l5vj9   0/1     ImagePullBackOff   0          45s
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;部署kube-event.yaml并查看日志。可以看到隔30s去检测一次&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;]# kubectl apply -f kube-event.yaml
+]# kubectl get po -n kube-system | grep kube-event
+
+
+[root@master allenjol]# kubectl logs -f kube-eventer-648f64c985-zfkkg -n kube-system
+I0708 09:26:36.409034       1 eventer.go:67] /kube-eventer --source=kubernetes:https://kubernetes.default --sink=dingtalk:https://oapi.dingtalk.com/robot/send?access_token=355cf01569aef206dc6c05681aaf3ed0ea19ed3597db4c26c565dbeb69ce1303&amp;amp;level=Warning
+I0708 09:26:36.409191       1 eventer.go:68] kube-eventer version: v1.2.0 commit: 484d9cd
+I0708 09:26:36.411557       1 eventer.go:94] Starting with DingTalkSink sink
+I0708 09:26:36.411596       1 eventer.go:108] Starting eventer
+I0708 09:26:36.411678       1 eventer.go:116] Starting eventer http service
+I0708 09:27:00.000163       1 manager.go:102] Exporting 5 events
+I0708 09:27:30.000130       1 manager.go:102] Exporting 9 events
+I0708 09:28:00.000147       1 manager.go:102] Exporting 1 events
+I0708 09:28:30.000150       1 manager.go:102] Exporting 4 events
+I0708 09:29:00.000138       1 manager.go:102] Exporting 1 events
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;可以看到这里已经看到了钉钉的webhook地址了，并且还收集到了events。&lt;br /&gt;
+查看钉钉群，就会看到已经出现了告警了。&lt;br /&gt;
+&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210716123532.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;其实这个告警当前还存在点问题。个人认为不应该这么频繁发送，应该像prometheus一样可以配置抑制和静默。然后监控时间可以更改。当然熟悉go语言可以自己改源码然后构建成镜像。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/210917128049/&#34;&gt;https://www.cnsre.cn/posts/210917128049/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/kubernetes/&#34;&gt;https://www.cnsre.cn/tags/kubernetes/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+</content:encoded>
+        <dc:creator>CNSRE</dc:creator>
+        <media:content url="http://www.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/kubernetes.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>kubernetes</category>
+            
+          
+            
+              <category>kube-eventer</category>
+            
+          
+        
+        
+          
+            
+              <category>kubernetes</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

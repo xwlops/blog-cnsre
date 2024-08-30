@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Kafka on SRE运维博客</title>
+    <link>http://www.cnsre.cn:80/categories/kafka/</link>
+    <description>Recent content in Kafka on SRE运维博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Tue, 30 Mar 2021 13:57:19 +0800</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="http://www.cnsre.cn:80/categories/kafka/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>Kafka内外网访问</title>
+        <link>http://www.cnsre.cn:80/posts/210330135719/</link>
+        <pubDate>Tue, 30 Mar 2021 13:57:19 +0800</pubDate>
+        
+        <atom:modified>Wed, 10 Aug 2022 08:55:27 +0800</atom:modified>
+        <guid>http://www.cnsre.cn:80/posts/210330135719/</guid>
+        <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
+        <content:encoded>&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/210330135719/&#34;&gt;https://www.cnsre.cn/posts/210330135719/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/kafka/&#34;&gt;https://www.cnsre.cn/tags/kafka/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h1 id=&#34;kafka内外网访问&#34;&gt;Kafka内外网访问&lt;/h1&gt;
+&lt;p&gt;本文介绍了Kafka内外网访问的设置。&lt;/p&gt;
+&lt;h2 id=&#34;kafka的两个配置listeners和advertisedlisteners&#34;&gt;kafka的两个配置listeners和advertised.listeners&lt;/h2&gt;
+&lt;h3 id=&#34;listeners&#34;&gt;listeners&lt;/h3&gt;
+&lt;p&gt;kafka监听的网卡的ip，假设你机器上有两张网卡，内网&lt;code&gt;192.168.0.213&lt;/code&gt;和外网&lt;code&gt;101.89.163.1&lt;/code&gt; 如下配置&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;listeners=PLAINTEXT://192.168.0.213:9092
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;那么kafka只监听内网网卡，即只接收内网网卡的数据，如果你不能把外网网卡流量转发到内网网卡（为什么要强调这一点，下面说），那么kafka就接收不到外网网卡数据。如果配置成外网ip同理。当然你可以配置成0.0.0.0，监听所有网卡。&lt;/p&gt;
+&lt;h3 id=&#34;advertisedlisteners&#34;&gt;advertised.listeners&lt;/h3&gt;
+&lt;p&gt;我们观察kafka的配置文件&lt;code&gt;server.properties&lt;/code&gt;，会发现里面记录了zookeeper集群的各个节点的访问地址，但是并没有记录kafka兄弟节点的地址。kafka节点启动后，会向zookeeper注册自己，同时从zookeeper中获取兄弟节点的地址，以便与兄弟节点通信。&lt;br /&gt;
+同样，我们使用客户端连接kafka后，kafka返回给客户端的是集群各节点的访问地址，这个地址也是上面说的从zookeeper中获得的地址。&lt;br /&gt;
+这个地址哪里来，就是kafka节点向zookeeper注册时提供的&lt;code&gt;advertised.listeners&lt;/code&gt;。如果没有，就会使用&lt;code&gt;listeners&lt;/code&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;三种情景搭配使用这两个配置&#34;&gt;三种情景，搭配使用这两个配置&lt;/h2&gt;
+&lt;h2 id=&#34;只需要内网访问kafka&#34;&gt;只需要内网访问kafka&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;listeners=PLAINTEXT://192.168.0.213:9092
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;只需要内网访问kafka-1&#34;&gt;只需要内网访问kafka&lt;/h2&gt;
+&lt;p&gt;你肯定想到了最简单的一个方法，&lt;code&gt;listeners&lt;/code&gt;使用外网ip&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;listeners=PLAINTEXT://101.89.163.1:9092
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;需要外网访问&#34;&gt;需要外网访问&lt;/h2&gt;
+&lt;p&gt;如果宿主机有外网网卡，这么配当然没问题。如果没有（ifconfig看不到外网ip的网卡，基本上就不存在这个外网网卡），很可能和我使用的的宿主机一样是通过NAT映射或者啥办法搞出来的外网ip，此时kafka无法监听这个外网ip（因为不存在，启动就会报错）。&lt;br /&gt;
+这时候就是&lt;code&gt;advertised.listeners&lt;/code&gt;真正发挥作用的时候了。使用如下配置：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;listeners=PLAINTEXT://192.168.0.213:9092
+advertised.listeners=PLAINTEXT://101.89.163.1:9092
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;此时一个完整的kafka客户端访问服务端的流程：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;客户端访问101.89.163.1:9092，被kafka宿主机所在环境映射到内网192.168.0.213:9092，访问到了kafka节点，请求获得kafka服务端的访问地址&lt;/li&gt;
+&lt;li&gt;kafka从zookeeper拿到自己和其他兄弟节点通过advertised.listeners注册到zookeeper的101.89.163.1:9092等外网地址，作为kafka的服务端访问地址返回给客户端&lt;/li&gt;
+&lt;li&gt;客户端拿这些地址访问kafka集群，被kafka宿主机所在环境映射到各kafka节点的内网ip，访问到了kafka服务端&amp;hellip;&amp;hellip;完美循环&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;你可能会问已经配置了访问地址，为什么还要在第一次访问的时候请求获得kafka的访问地址。因为如果是kafka集群，你可以选择只给客户端配置一个kafka节点的地址（这样是不推荐的），但是客户端必须要访问集群中的每一个节点，所以必须通过这个节点获得集群中每一个节点的访问地址。&lt;br /&gt;
+如果不配置&lt;code&gt;advertised.listeners=PLAINTEXT://101.89.163.1:9092&lt;/code&gt;，你会发现虽然你给kafka客户端配置的访问地址是&lt;code&gt;101.89.163.1:9092&lt;/code&gt;，但是kafka客户端访问时报错，报错原因是&lt;code&gt;Connection to node -1[192.168.0.213:9092] could not be established. Broker may not be available.&lt;/code&gt;。这就是因为不配置&lt;code&gt;advertised.listeners&lt;/code&gt;则&lt;code&gt;advertised.listeners&lt;/code&gt;默认使用&lt;code&gt;listeners&lt;/code&gt;配置的地址，客户端拿到的就是&lt;code&gt;listeners&lt;/code&gt;配置的内网地址&lt;/p&gt;
+&lt;h2 id=&#34;内外网分流&#34;&gt;内外网分流&lt;/h2&gt;
+&lt;p&gt;上面说的有外网ip的情况，直接配置外网ip有没有问题呢？&lt;br /&gt;
+如果既要内网访问，又要外网访问，本来可以走内网的流量都走外网网卡，显然不合适；而且有的环境可能被配置成这些kafka宿主机是没有外网访问权限的，即虽然他可以访问自己的外网ip，但是访问不了兄弟节点的外网ip。这时候就要配置内外网。&lt;br /&gt;
+配置1：&lt;br /&gt;
+
+&lt;div id=&#34;e92312cfc7c1c81e&#34; class=&#34;codetab&#34;&gt;
+  &lt;div class=&#34;codetab__links&#34;&gt;
+    
+      &lt;button class=&#34;codetab__link&#34; aria-label=&#34;Tab link&#34;&gt;配置1&lt;/button&gt;
+    
+      &lt;button class=&#34;codetab__link&#34; aria-label=&#34;Tab link&#34;&gt;配置2&lt;/button&gt;
+    
+  &lt;/div&gt;
+  
+ 
+&lt;div id=&#34;76775553cd9e7be8&#34; class=&#34;codetab__content&#34;&gt;
+  &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;listener.security.protocol.map=INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
+listeners=INTERNAL://192.168.0.213:9092,EXTERNAL://192.168.0.213:19092
+advertised.listeners=INTERNAL://192.168.0.213:9092,EXTERNAL://101.89.163.9:19092
+inter.broker.listener.name=INTERNAL
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;80f6bc86f5a77181&#34; class=&#34;codetab__content&#34;&gt;
+  &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;listener.security.protocol.map=INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
+listeners=INTERNAL://192.168.0.213:9092,EXTERNAL://101.89.163.9:19092
+advertised.listeners=INTERNAL://192.168.0.213:9092,EXTERNAL://101.89.163.9:19092
+inter.broker.listener.name=INTERNAL
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;script&gt;
+  &#39;use strict&#39;;
+
+  var containerId = JSON.parse(&#34;\&#34;e92312cfc7c1c81e\&#34;&#34;);
+  var containerElem = document.getElementById(containerId);
+  var codetabLinks = null;
+  var codetabContents = null;
+  var ids = [];
+
+  if (containerElem) {
+    codetabLinks = containerElem.querySelectorAll(&#39;.codetab__link&#39;);
+    codetabContents = containerElem.querySelectorAll(&#39;.codetab__content&#39;);
+  }
+
+  for (var i = 0; i &lt; codetabContents.length; i++) {
+    ids = ids.concat(codetabContents[i].getAttribute(&#39;id&#39;));
+    codetabContents[i].style.display = &#39;none&#39;;
+
+    if (0 === parseInt(i, 10) &amp;&amp; !codetabContents[i].classList.contains(&#39;active&#39;)) {
+      codetabContents[i].classList.add(&#39;active&#39;);
+    }
+  }
+
+  for (var i = 0; i &lt; codetabLinks.length; i++) {
+    codetabLinks[i].setAttribute(&#39;id&#39;, ids[i]);
+
+    if (0 === parseInt(i, 10) &amp;&amp; !codetabLinks[i].classList.contains(&#39;active&#39;)) {
+      codetabLinks[i].classList.add(&#39;active&#39;);
+    } else {
+      codetabLinks[i].classList.remove(&#39;active&#39;);
+    }
+  }
+
+  if (codetabContents.length &gt; 0) {
+    codetabContents[0].style.display = &#39;block&#39;;
+  }
+&lt;/script&gt;&lt;br /&gt;
+注意这两的区别是&lt;code&gt;listeners&lt;/code&gt;的&lt;code&gt;EXTERNAL&lt;/code&gt;使用的ip不一样，一个使用内网ip，一个使用外网ip。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果你的kafka宿主机有外网网卡，只能用外网ip，若使用配置1，kafka通过&lt;code&gt;listeners&lt;/code&gt;监听的两个端口都是内网网卡的数据，无法接收到外网网卡数据；&lt;/li&gt;
+&lt;li&gt;如果你的kafka宿主机外网ip是映射来的，只能使用内网ip，原因也是上面说过的，不存在外网网卡，kafka启动监听就会报错，而使用内网ip有环境配置好的转发，可以接收到外网ip的数据。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/210330135719/&#34;&gt;https://www.cnsre.cn/posts/210330135719/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/kafka/&#34;&gt;https://www.cnsre.cn/tags/kafka/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+</content:encoded>
+        <dc:creator>CNSRE</dc:creator>
+        <media:content url="http://www.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210203111840.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>kafka</category>
+            
+          
+        
+        
+          
+            
+              <category>kafka</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

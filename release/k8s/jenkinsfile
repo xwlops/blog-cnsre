@@ -1,0 +1,160 @@
+node {
+   stage('拉取代码') { 
+    sh 'pwd'   
+   //拉取代码
+    git 'git@github.com:zops/cnsre.git'
+    sh 'rm -rf cnsre/*. && cd public/ &&  tar -cvf cnsre.tar ./* '
+    script {
+      env.imageTag = sh (script: 'git rev-parse --short HEAD ${GIT_COMMIT}', returnStdout: true).trim()
+}
+   }
+   // 项目打包到镜像并推送到镜像仓库
+   stage('构建推送镜像') {
+sh '''
+REPOSITORY=wenlongxue/nginx:cnsre-${imageTag}
+#REPOSITORY=registry.cn-hangzhou.aliyuncs.com/cnsre/nginx:cnsre-${imageTag}
+cat > Dockerfile << EOF
+FROM wenlongxue/nginx_sh_zone:latest
+
+## 设置工作目录
+WORKDIR /usr/local/nginx/html
+
+RUN  rm -rf /usr/local/nginx/html/* 
+ADD  public/cnsre.tar  /usr/local/nginx/html/
+RUN apk update && apk add tzdata 
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime 
+RUN echo "Asia/Shanghai" > /etc/timezone
+
+## 启动nginx
+CMD ["nginx","-g","daemon off;"]
+EOF
+
+docker build -t nginx:cnsre-${imageTag} .
+docker login 
+#docker login --username=allenjol@1040992050142591 registry.cn-hangzhou.aliyuncs.com -pAllenjol123!
+docker tag nginx:cnsre-${imageTag} $REPOSITORY
+docker push $REPOSITORY
+'''
+   }
+   // 部署到k8s主机
+   stage('部署到k8s') 
+{
+sh '''
+app=cnsre
+REPOSITORY=wenlongxue/nginx:${app}-${imageTag}
+#REPOSITORY=registry.cn-hangzhou.aliyuncs.com/cnsre/nginx:${app}-${imageTag}
+cat > cnsre.yaml << EOF
+apiVersion: apps/v1     #与k8s集群版本有关，使用 kubectl api-versions 即可查看当前集群支持的版本
+kind: Deployment        #该配置的类型，我们使用的是 Deployment
+metadata:               #译名为元数据，即 Deployment 的一些基本属性和信息
+  name: ${app}-deployment        #Deployment 的名称
+  labels:           #标签，可以灵活定位一个或多个资源，其中key和value均可自定义，可以定义多组，目前不需要理解
+    app: ${app}   #为该Deployment设置key为app，value为nginx的标签
+spec:           #这是关于该Deployment的描述，可以理解为你期待该Deployment在k8s中如何使用
+  replicas: 2   #使用该Deployment创建一个应用程序实例
+  selector:         #标签选择器，与上面的标签共同作用，目前不需要理解
+    matchLabels: #选择包含标签app:nginx的资源
+      app: ${app} 
+  minReadySeconds: 1
+  progressDeadlineSeconds: 60
+  revisionHistoryLimit: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:         #这是选择或创建的Pod的模板
+    metadata:   #Pod的元数据
+      labels:   #Pod的标签，上面的selector即选择包含标签app:nginx的Pod
+        app: ${app}
+    spec:           #期望Pod实现的功能（即在pod中部署）
+      imagePullSecrets:
+        - name: "registry-auth-cnsre"
+      containers:       #生成container，与docker中的container是同一种
+      - name: ${app}     #container的名称
+        image: ${REPOSITORY}     #使用镜像nginx:1.7.9创建container，该container默认80端口可访问
+        imagePullPolicy: Always           #总是拉取最新的。默认为,本地有则使用本地镜像,不拉取
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "100Mi"
+            cpu: "100m"
+          limits: 
+            memory: "500Mi" 
+            cpu: "250m"
+        readinessProbe:
+          httpGet:
+            path: /index.html
+            port: 80
+          initialDelaySeconds: 10                                 
+          periodSeconds: 10                                       
+          successThreshold: 1                                     
+          timeoutSeconds: 1 
+        volumeMounts:
+        - mountPath: "/usr/local/nginx/logs"
+          name: ${app}
+          
+      volumes:
+      - name: ${app}
+        persistentVolumeClaim:
+          claimName: ${app}		  
+---
+apiVersion: v1
+kind: Service
+metadata:      
+  name: ${app}-service
+  labels:      
+    app: ${app}
+spec:        
+  selector:   
+    app: ${app} 
+  ports:
+  - name: ${app}-port 
+    protocol: TCP      
+    port: 80         
+    targetPort: 80   
+  type: NodePort
+  externalTrafficPolicy: Local
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ${app}
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  tls:
+  - hosts:
+    - www.cnsre.cn
+    secretName: www-cnsre-secre-23
+  rules:
+  - host: www.cnsre.cn
+    http:
+      paths:
+      - path: "/"
+        pathType: Prefix
+        backend:
+          service:
+            name: ${app}-service
+            port:
+              number: 80
+EOF
+sudo /usr/local/bin/kubectl  apply -f  cnsre.yaml
+'''
+   }
+   stage('检查服务状态') 
+{
+sh'''
+app=cnsre
+sleep 120s
+sudo sh  /home/scripts/check_k8s.sh  ${app}
+'''
+}
+   stage('推送百度接口') 
+{
+sh'''
+sudo sh  /home/scripts/push_cnsre_api.sh
+'''
+}
+}

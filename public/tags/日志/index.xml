@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>日志 on SRE运维博客</title>
+    <link>http://www.cnsre.cn:80/tags/%E6%97%A5%E5%BF%97/</link>
+    <description>Recent content in 日志 on SRE运维博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Wed, 11 Aug 2021 11:13:53 +0800</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="http://www.cnsre.cn:80/tags/%E6%97%A5%E5%BF%97/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>Zabbix 监控日志</title>
+        <link>http://www.cnsre.cn:80/posts/210811113507/</link>
+        <pubDate>Wed, 11 Aug 2021 11:13:53 +0800</pubDate>
+        
+        <atom:modified>Wed, 10 Aug 2022 08:55:27 +0800</atom:modified>
+        <guid>http://www.cnsre.cn:80/posts/210811113507/</guid>
+        <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
+        <content:encoded>&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/210811113507/&#34;&gt;https://www.cnsre.cn/posts/210811113507/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/zabbix/&#34;&gt;https://www.cnsre.cn/tags/zabbix/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;p&gt;日志中能透露的信息很多，从日志中，可以知道程序的运行状态，可以知道系统是否正常等，但是对于日志的监控却很让人头疼，要是能监控日志的变化情况，就可以及时的知道系统发生了什么，从而做出相应的对策。对于日志监控，zabbix有话说，zabbix从较早的版本就有了日志监控的功能。&lt;/p&gt;
+&lt;h2 id=&#34;日志监控功能&#34;&gt;日志监控功能&lt;/h2&gt;
+&lt;p&gt;zabbix-agent支持日志文件的监控，可以对日志文件关键字进行监控，然后告警，日志监控支持普通的日志文件，支持日志轮询，切割的文件。当日志文件中出现特殊的字符串（告警，报错的字符串）可以发通知给客户&lt;/p&gt;
+&lt;p&gt;日志监控必须满足以下条件：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;zabbix-agent必须运行，且工作方式必须是主动模式&lt;/li&gt;
+&lt;li&gt;日志的Item必须设置，必须指定文件名&lt;/li&gt;
+&lt;li&gt;zabbix-agent有读取日志的权限&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;日志监控的监控指标&#34;&gt;日志监控的监控指标&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;log&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;/path/to/file/file_name,,,,,,,&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;logrt&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;path/to/file/regexpo_describing_filename_pattern,,,,,,,&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;log.count&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;/path/to/file/file_name,,,,,,&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;logrt.cunt&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;path/to/file/regexpo_describing_filename_pattern,,,,,,&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;参数&lt;/th&gt;
+&lt;th&gt;含义&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;file_name&lt;/td&gt;
+&lt;td&gt;日志文件所在的路径或者绝对路径名&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;regexp&lt;/td&gt;
+&lt;td&gt;匹配正则表达式&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;encoding&lt;/td&gt;
+&lt;td&gt;在Linux/unix系统下默认编码为UTF-8，在Windows系统下默认编码为ANSI&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;maxlines&lt;/td&gt;
+&lt;td&gt;每次给zabbix-server或者zabbix-Proxy发送的日志的最大行数，此参数会高于zabbix-agent.conf中的MaxLinesPerSecond参数值，通过此参数，可以控制一次发送的日志的数据条数，如果发送次数过多，可能会对zabbix-agnet的负载和I/O有很大的影响&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;mode&lt;/td&gt;
+&lt;td&gt;all为默认参数，表示匹配所有的日志，包括以前存的日志也会进行匹配&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;skip&lt;/td&gt;
+&lt;td&gt;表示跳过已存在的日志数据，只有新的日志才会进行匹配&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;output&lt;/td&gt;
+&lt;td&gt;表示匹配输出的正则表达式，1~9表示返回的匹配的第几个字符串，表示返回匹配的全部字符串&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;maxdelay&lt;/td&gt;
+&lt;td&gt;以秒为单位的最大延迟，用用于忽略老的日志数据，及时获取获取当前的日志数据。（4.0+）当处理日志过多，在更新周期内达到maxlines的发送上限，但还有日志未发送时，会导致大量堆积，在严重的情况下，会造成日志处理速度跟不上，使用此参数忽略过期的日志发送0是默认值，永远不会忽略日志文件行输入可以是浮点数（float）&amp;gt;0.0,忽略较旧的行，以获得在maxdelay秒内分析最新行，会丢弃在规定时间内的无法发送的数据&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;options&lt;/td&gt;
+&lt;td&gt;日志轮询、切割方式（4.0+）rotate，日志轮询、切割，默认值copytruncate，先拷贝文件，然后清空日志的轮询方式，copytruncate不能与maxdelay一起使用，如使用此参数，maxdelay必须为0或者未指定[size=12.0000pt]&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;例：监控zabbix_server的日志&lt;/p&gt;
+&lt;p&gt;创建监控项，选择zabbix_server客户端（主动式）&lt;br /&gt;
+&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210811112417.png&#34;&gt;&lt;br /&gt;
+这四个就是日志监控的指标，根据需求选择合适的键值&lt;br /&gt;
+&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210811112435.png&#34;&gt;&lt;br /&gt;
+我的zabbix_server的日志路径事/usr/local/zabbix/logs/zabbix_server,后面跟的正则表达式事error，只有当出现error字段时，才会有数据，后面的参数可以不写，但是还是要写逗号的。信息类型选择文本或者是字符&lt;br /&gt;
+&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210811112453.png&#34;&gt;&lt;br /&gt;
+&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210811112513.png&#34;&gt;&lt;br /&gt;
+这样这个日志监控的监控项就已经做好了&lt;/p&gt;
+&lt;p&gt;接下来就要做的就是做触发器了&lt;/p&gt;
+&lt;p&gt;触发器中监控项选择刚才创建的监控项&lt;br /&gt;
+&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210811112632.png&#34;&gt;&lt;br /&gt;
+功能选择diff()，结果选择等于1&lt;br /&gt;
+&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210811112651.png&#34;&gt;&lt;br /&gt;
+迭代选择无，这样再次匹配的话，告警就不会恢复&lt;br /&gt;
+&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210811112717.png&#34;&gt;&lt;br /&gt;
+测试，往zabbix_server.log文件内写入error，测试是否会报警&lt;/p&gt;
+&lt;h2 id=&#34;如果zabbix用户对日志没有读取权限则会提示权限拒绝导致数据获取失败&#34;&gt;如果zabbix用户对日志没有读取权限，则会提示权限拒绝导致数据获取失败&lt;/h2&gt;
+&lt;p&gt;对于不方便设置权限的日志文件，可以使zabbix_agent采用root权限运行&lt;/p&gt;
+&lt;p&gt;在zabbix_agentd.conf文件中设置AllowRoot参数设置为1&lt;/p&gt;
+&lt;p&gt;AllowRoot=1&lt;/p&gt;
+&lt;h2 id=&#34;日志监控的数据库记录&#34;&gt;日志监控的数据库记录&lt;/h2&gt;
+&lt;p&gt;日志数据存储在history_log表中&lt;/p&gt;
+&lt;p&gt;查询日志&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;mysql&amp;gt;select * from history_log;
+&lt;/code&gt;&lt;/pre&gt;&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/210811113507/&#34;&gt;https://www.cnsre.cn/posts/210811113507/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/zabbix/&#34;&gt;https://www.cnsre.cn/tags/zabbix/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+</content:encoded>
+        <dc:creator>CNSRE</dc:creator>
+        <media:content url="http://www.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>zabbix</category>
+            
+          
+            
+              <category>日志</category>
+            
+          
+        
+        
+          
+            
+              <category>zabbix</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

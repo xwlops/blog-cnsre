@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>S3 on SRE运维博客</title>
+    <link>http://www.cnsre.cn:80/tags/s3/</link>
+    <description>Recent content in S3 on SRE运维博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Fri, 09 Apr 2021 16:41:16 +0800</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="http://www.cnsre.cn:80/tags/s3/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>利用S3fs在Amazon EC2 Linux实例上挂载S3存储桶</title>
+        <link>http://www.cnsre.cn:80/posts/210409164113/</link>
+        <pubDate>Fri, 09 Apr 2021 16:41:16 +0800</pubDate>
+        
+        <atom:modified>Wed, 10 Aug 2022 08:55:27 +0800</atom:modified>
+        <guid>http://www.cnsre.cn:80/posts/210409164113/</guid>
+        <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
+        <content:encoded>&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/210409164113/&#34;&gt;https://www.cnsre.cn/posts/210409164113/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/aws/&#34;&gt;https://www.cnsre.cn/tags/aws/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;背景介绍&#34;&gt;背景介绍&lt;/h2&gt;
+&lt;p&gt;Amazon S3是互联网存储解决方案，能让所有开发人员访问同一个具备可扩展性、可靠性、安全性和快速价廉的数据存储基础设施。Amazon S3 提供了一个简单 Web 服务接口，可用于随时在 互联网上的任何位置存储和检索任何数量的数据。开发人员可以利用Amazon提供的REST API接口，命令行接口或者支持不同语言的SDK访问S3服务。&lt;/p&gt;
+&lt;p&gt;对于原来使用本地目录访问数据的应用程序，比如使用本地磁盘或网络共享盘保存数据的应用系统，如果用户希望把数据放到S3上，则需要修改数据的访问方式，比如修改为使用AWS SDK 或CLI访问S3中存储的数据。为了让用户原来的应用系统能在不做修改的情况下直接使用Amazon S3服务，需要把S3存储桶作为目录挂载到用户服务器的本地操作系统上。常用的挂载工具有S3fs和SubCloud等。本文主要介绍如何利用S3fs将S3存储桶挂载到Amazon EC2 Linux实例上。&lt;/p&gt;
+&lt;h2 id=&#34;s3fs介绍&#34;&gt;S3fs介绍&lt;/h2&gt;
+&lt;p&gt;S3fs是基于FUSE的文件系统，允许Linux和Mac Os X 挂载S3的存储桶在本地文件系统，S3fs能够保持对象原来的格式。关于S3fs的详细介绍，请参见：https://github.com/s3fs-fuse/s3fs-fuse&lt;/p&gt;
+&lt;h2 id=&#34;利用s3fs挂载s3存储桶&#34;&gt;利用S3fs挂载S3存储桶&lt;/h2&gt;
+&lt;h3 id=&#34;准备&#34;&gt;准备&lt;/h3&gt;
+&lt;h4 id=&#34;使用拥有足够权限的iam账号登录aws控制台&#34;&gt;使用拥有足够权限的IAM账号登录AWS控制台。&lt;/h4&gt;
+&lt;h4 id=&#34;创建s3存储桶给存储桶命名如s3fs-mount-bucket如果使用已有存储桶本步骤可略过&#34;&gt;创建S3存储桶，给存储桶命名如&lt;code&gt;s3fs-mount-bucket&lt;/code&gt;（如果使用已有存储桶，本步骤可略过）。&lt;/h4&gt;
+&lt;h4 id=&#34;有该s3存储桶访问权限的-iam-用户并为该iam用户创建访问密钥&#34;&gt;有该S3存储桶访问权限的 IAM 用户，并为该IAM用户创建访问密钥。&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;关于如何创建IAM用户，请参见：http://docs.aws.amazon.com/zh_cn/IAM/latest/UserGuide/id_users_create.html#id_users_create_console&lt;/li&gt;
+&lt;li&gt;关于如何为IAM用户创建访问密钥，请参见：http://docs.aws.amazon.com/zh_cn/IAM/latest/UserGuide/id_credentials_access-keys.html&lt;/li&gt;
+&lt;li&gt;关于如何为IAM用户设置权限策略，请参见：http://docs.aws.amazon.com/zh_cn/IAM/latest/UserGuide/access_policies_create.html&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&#34;https://aws.amazon.com/cn/blogs/security/writing-iam-policies-how-to-grant-access-to-an-amazon-s3-bucket/&#34;&gt;https://aws.amazon.com/cn/blogs/security/writing-iam-policies-how-to-grant-access-to-an-amazon-s3-bucket/&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;创建并启动amazon-ec2-linux实例&#34;&gt;创建并启动Amazon EC2 Linux实例&lt;/h4&gt;
+&lt;p&gt;具体过程请参见：http://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/launching-instance.html&lt;/p&gt;
+&lt;h3 id=&#34;安装和配置s3fs&#34;&gt;安装和配置S3fs&lt;/h3&gt;
+&lt;h4 id=&#34;安装s3f&#34;&gt;安装s3f&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;安装必要的软件包&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo yum install automake fuse fuse-devel gcc-c++ git libcurl-devel libxml2-devel make openssl-devel
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;下载，编译并安装s3fs&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git clone https://github.com/s3fs-fuse/s3fs-fuse.git
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; s3fs-fuse
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;./autogen.sh
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;./configure
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;make
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo make install
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;检查s3fs是否安装成功&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;ec2-user@ip-172-31-23-148 s3fs-fuse&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;$ s3fs
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;s3fs: missing BUCKET argument.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Usage: s3fs BUCKET:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;PATH&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; MOUNTPOINT &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;OPTION&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;ec2-user@ip-172-31-23-148 ~&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;$ which s3fs
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/usr/local/bin/s3fs
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;创建iam用户访问密钥文件&#34;&gt;创建IAM用户访问密钥文件&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;IAM用户访问密钥内容可以写入当前用户默认密钥文件比如&lt;code&gt;/home/ec2-user/.passwd-s3fs&lt;/code&gt;或者用户自己创建的文件。&lt;/li&gt;
+&lt;li&gt;命令格式：&lt;code&gt;echo [IAM用户访问密钥ID]:[ IAM用户访问密钥] &amp;gt;[密钥文件名]&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;命令举例：下面的例子将在当前用户默认路径创建密钥文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; AKIAIOEO4E2VOHLxxxxx:2LXBboddEpRLmWl48i3+b4ziwPL3bJ4vxxxxxxxx &amp;gt; /home/ec2-user/.passwd-s3fs
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;em&gt;&lt;strong&gt;请注意&lt;/strong&gt;&lt;/em&gt;：访问海外AWS S3服务和中国 S3服务使用的是不同的IAM账号，对应不同的密钥。&lt;/p&gt;
+&lt;h4 id=&#34;设置密钥文件只能够被当前用户访问&#34;&gt;设置密钥文件只能够被当前用户访问&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;命令格式：chmod 600  [密钥文件名]&lt;/li&gt;
+&lt;li&gt;命令举例：下面的例子将设置密钥文件只能被当前用户访问&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;chmod &lt;span class=&#34;m&#34;&gt;600&lt;/span&gt; /home/ec2-user/.passwd-s3fs
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;手动挂载s3存储桶&#34;&gt;手动挂载S3存储桶&lt;/h3&gt;
+&lt;p&gt;S3fs挂载存储桶使用的命令是s3fs&lt;/p&gt;
+&lt;p&gt;s3fs的命令格式是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;s3fs BUCKET MOUNTPOINT [OPTION]…&lt;/li&gt;
+&lt;li&gt;s3fs [S3存储桶名] [本地目录名] [OPTION]&lt;/li&gt;
+&lt;li&gt;OPTION是可选项，格式是 –o &amp;lt;option_name&amp;gt;=&amp;lt;option_value&amp;gt;，常用的options有：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名称&lt;/th&gt;
+&lt;th&gt;含义&lt;/th&gt;
+&lt;th&gt;缺省值&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;passwd_file&lt;/td&gt;
+&lt;td&gt;指定挂载的密钥文件&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;connect_timeout&lt;/td&gt;
+&lt;td&gt;设置超时连接等待的时间，单位秒&lt;/td&gt;
+&lt;td&gt;300&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;url&lt;/td&gt;
+&lt;td&gt;设置访问s3的url&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;http://s3.amazonaws.com&#34;&gt;http://s3.amazonaws.com&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;endpoint&lt;/td&gt;
+&lt;td&gt;设置s3存储桶的endpoint&lt;/td&gt;
+&lt;td&gt;us-east-1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;allow_other&lt;/td&gt;
+&lt;td&gt;设置allow_other允许所有用户访问挂载点目录，设置这个选项需要在 /etc/fuse.conf 文件添加user_allow_other选项&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;手动挂载AWS海外区域S3存储桶&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;命令格式：&lt;code&gt;s3fs [S3存储桶名] [本地目录名] -o passwd_file=[密钥文件名] -o endpoint=[区域名]&lt;/code&gt;&lt;br /&gt;
+命令举例：下面的例子将名为&lt;code&gt;s3fs-mount-bucket&lt;/code&gt;的新加坡区域S3存储桶挂载到指定的本地目录&lt;code&gt;/home/ec2-user/s3mnt&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;s3fs s3fs-mount-bucket /home/ec2-user/s3mnt -o &lt;span class=&#34;nv&#34;&gt;passwd_file&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/home/ec2-user/.passwd-s3fs -o &lt;span class=&#34;nv&#34;&gt;endpoint&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;ap-northeast-1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;手动挂载AWS中国北京区域S3存储桶&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;命令格式：&lt;code&gt;s3fs [S3存储桶名] [本地目录名] -o passwd_file=[密钥文件名] -o url=http://s3.cn-north-1.amazonaws.com.cn -o endpoint=cn-north-1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;命令举例：下面的例子将名为&lt;code&gt;s3fs-mount-bucket&lt;/code&gt;的北京区域S3存储桶挂载到本地目录&lt;code&gt;/home/ec2-user/s3mnt&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;s3fs s3fs-mount-bucket /home/ec2-user/s3mnt -o &lt;span class=&#34;nv&#34;&gt;passwd_file&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/home/ec2-user/.passwd-s3fs -o &lt;span class=&#34;nv&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;http://s3.cn-north-1.amazonaws.com.cn -o &lt;span class=&#34;nv&#34;&gt;endpoint&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;cn-north-1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;检查挂载结果&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;挂载操作执行结束后，可以使用Linux &lt;code&gt;df&lt;/code&gt;命令查看挂载是否成功。出现类似下面256T的s3fs文件系统即表示挂载成功。用户就可以进入本地挂载目录去访问存储在S3存储桶中的对象。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;ec2-user@ip-172-31-23-148 ~&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;$ df -h
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;文件系统        容量  已用  可用 已用% 挂载点
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;devtmpfs        488M   56K  488M    1% /dev
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;tmpfs           498M     &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  498M    0% /dev/shm
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/xvda1      7.8G  1.2G  6.6G   15% /
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;s3fs            256T     &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  256T    0% /home/ec2-user/s3mnt
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;ec2-user@ip-172-31-23-148 ~&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;$ &lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; /home/ec2-user/s3mnt
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;ec2-user@ip-172-31-23-148 s3mnt&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;$ ls -l
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;总用量 &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;-rw-rw-r-- &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; ec2-user ec2-user &lt;span class=&#34;m&#34;&gt;19&lt;/span&gt; 10月 &lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; 07:13 a.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;ec2-user@ip-172-31-23-148 s3mnt&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;$
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;卸载挂载的S3存储桶&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果不再需要通过挂载方式访问S3存储桶，可以使用Linux “umount”命令卸载&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;ec2-user@ip-172-31-23-148 ~&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;$ sudo umount /home/ec2-user/s3mnt
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;ec2-user@ip-172-31-23-148 ~&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;$ df -h
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;文件系统        容量  已用  可用 已用% 挂载点
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;devtmpfs        488M   56K  488M    1% /dev
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;tmpfs           498M     &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  498M    0% /dev/shm
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/xvda1      7.8G  1.2G  6.6G   15% /
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;调试&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;如果遇到手动挂载不成功的问题，请尝试在执行的命令后面添加下面的参数，并检查输出日志中的错误提示信息：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;命令格式：[完整的s3fs挂载命令] -d -d -f -o f2 -o curldbg&lt;/li&gt;
+&lt;li&gt;命令举例：下面的例子试图将名为&lt;code&gt;s3fs-mount-bucket&lt;/code&gt;的S3存储桶挂载到指定的本地目录&lt;code&gt;/home/ec2-user/s3mnt&lt;/code&gt;下，并输出挂载过程详细调试日志。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;ec2-user@ip-172-31-23-148 ~&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;$ s3fs s3fs-mount-bucket /home/ec2-user/s3mnt -o &lt;span class=&#34;nv&#34;&gt;passwd_file&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/home/ec2-user/.passwd-s3fs -o &lt;span class=&#34;nv&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;http://s3.cn-north-1.amazonaws.com.cn -o &lt;span class=&#34;nv&#34;&gt;endpoint&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;cn-north-1 -d -d -f -o f2 -o curldbg
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;CRT&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; s3fs.cpp:set_s3fs_log_level&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;254&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;: change debug level from &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;CRT&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; to &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;INF&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;CRT&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; s3fs.cpp:set_s3fs_log_level&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;254&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;: change debug level from &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;INF&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; to &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;DBG&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;INF&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;     s3fs.cpp:set_moutpoint_attribute&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;4196&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;: PROC&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;uid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;500, &lt;span class=&#34;nv&#34;&gt;gid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;500&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; - MountPoint&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;uid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;500, &lt;span class=&#34;nv&#34;&gt;gid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;500, &lt;span class=&#34;nv&#34;&gt;mode&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;40775&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;FUSE library version: 2.9.4
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;nullpath_ok: &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;nopath: &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;utime_omit_ok: &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;设置开机自动挂载s3存储桶&#34;&gt;设置开机自动挂载S3存储桶&lt;/h3&gt;
+&lt;h4 id=&#34;创建全局iam用户访问密钥文件&#34;&gt;创建全局IAM用户访问密钥文件&lt;/h4&gt;
+&lt;p&gt;切换Linux系统用户账号到&lt;code&gt;root&lt;/code&gt;用户，把IAM用户访问密钥内容写入/etc/passwd-s3fs文件中，并限制该文件的访问权限。&lt;code&gt;/etc/passwd-s3fs&lt;/code&gt;文件是s3fs保存IAM用户访问密钥的全局默认路径。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;请注意&lt;/strong&gt;：访问海外AWS S3服务和中国 S3服务使用的是不同的IAM账号，对应不同的密钥。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo su
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; AKIAIOEO4E2VOHLxxxxx:2LXBboddEpRLmWl48i3+b4ziwPL3bJ4vxxxxxxxx &amp;gt; /etc/passwd-s3fs
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;chmod &lt;span class=&#34;m&#34;&gt;600&lt;/span&gt; /etc/passwd-s3fs
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;修改etcfstab文件&#34;&gt;修改/etc/fstab文件&lt;/h4&gt;
+&lt;p&gt;编辑/etc/fstab文件，添加后面的自动挂载命令。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;vi /etc/fstab
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;自动挂载海外区域S3存储桶&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;命令格式：&lt;code&gt;s3fs#[S3存储桶名] [本地目录名] fuse _netdev,allow_other,endpoint=[区域名] 0 0&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;命令举例：添加下面的语句到/etc/fstab后，Linux系统启动后将自动把名为&lt;code&gt;s3fs-mount-bucket&lt;/code&gt;的新加坡区域S3存储桶挂载到本地目录&lt;code&gt;/home/ec2-user/s3mnt&lt;/code&gt;，并允许其它操作系统用户(非root用户)访问。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/usr/local/bin/s3fs#s3fs-mount-bucket /home/ec2-user/s3mnt fuse _netdev,allow_other,endpoint&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;ap-northeast-1 &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;自动挂载中国北京区域S3存储桶&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;命令格式：&lt;code&gt;s3fs#[S3存储桶名] [本地目录名] fuse allow_other,url=http://s3.cn-north-1.amazonaws.com.cn,endpoint=cn-north-1 0  0&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;命令举例：添加下面的语句到&lt;code&gt;/etc/fsta&lt;/code&gt;b后，Linux系统启动将自动把名为&lt;code&gt;s3fs-mount-bucket&lt;/code&gt;的北京区域S3存储桶挂载到本地目录&lt;code&gt;/home/ec2-user/s3mnt&lt;/code&gt;下，并允许其它操作系统用户(非root用户)访问。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/usr/local/bin/s3fs#s3fs-mount-bucket /home/ec2-user/s3mnt fuse allow_other,url&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;http://s3.cn-north-1.amazonaws.com.cn,endpoint&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;cn-north-1 &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;局限性&#34;&gt;局限性&lt;/h2&gt;
+&lt;p&gt;利用S3fs可以方便的把S3存储桶挂载在用户本地操作系统目录中，但是由于S3fs实际上是依托于Amazon S3服务提供的目录访问接口，所以不能简单的把S3fs挂载的目录和本地操作系统目录等同使用。用户使用S3f3挂载S3存储桶和直接访问S3服务有类似的使用场景。适用于对不同大小文件对象的一次保存（上传），多次读取（下载）。不适用于对已保存文件经常做随机修改，因为每次在本地修改并保存文件内容都会导致S3fs上传新的文件到Amazon S3去替换原来的文件。从访问性能上来说，通过操作系统目录方式间接访问Amazon S3存储服务的性能不如直接使用SDK或CLI接口访问效率高。以本地配置文件方式保存访问密钥的安全性也不如使用EC2 IAM角色方式高。&lt;/p&gt;
+&lt;p&gt;关于S3fs使用时候需要注意的更多细节，请参考下面s3fs官网内容：&lt;br /&gt;
+“Generally S3 cannot offer the same performance or semantics as a local file system. More specifically:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;random writes or appends to files require rewriting the entire file&lt;/li&gt;
+&lt;li&gt;metadata operations such as listing directories have poor performance due to network latency&lt;/li&gt;
+&lt;li&gt;eventual consistency can temporarily yield stale data&lt;/li&gt;
+&lt;li&gt;no atomic renames of files or directories&lt;/li&gt;
+&lt;li&gt;no coordination between multiple clients mounting the same bucket&lt;/li&gt;
+&lt;li&gt;no hard links ”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;通常S3不能提供与本地文件系统相同的性能或语义。进一步来说：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;随机写入或追加到文件需要重写整个文件&lt;/li&gt;
+&lt;li&gt;元数据操作比如列出目录会因为网络延迟原因导致性能较差&lt;/li&gt;
+&lt;li&gt;最终一致性设计可能临时导致过期数据&lt;/li&gt;
+&lt;li&gt;没有对文件或目录的原子重命名功能&lt;/li&gt;
+&lt;li&gt;挂载相同存储桶的多个客户端之间没有相互协调机制&lt;/li&gt;
+&lt;li&gt;不支持硬链接&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
+&lt;p&gt;利用S3fs可以把共享的Amazon S3存储桶直接挂载在用户服务器本地目录下，应用不需要做修改就可以直接使用Amazon S3存储服务，这种方式可以作为临时解决方案将传统应用快速迁移到AWS平台。&lt;/p&gt;
+&lt;p&gt;在已经提供了Amazon EFS（Elastic File System）服务的AWS区域，建议用户优先考虑使用Amazon EFS服务，因为它具有更高的性能。在目前还没有提供EFS服务的AWS区域，用户可以先暂时使用S3fs实现快速业务迁移。然后逐步调整S3数据访问实现方式，最终修改为使用AWS SDK或CLI方式高效并更加安全地访问S3存储服务。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/210409164113/&#34;&gt;https://www.cnsre.cn/posts/210409164113/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/aws/&#34;&gt;https://www.cnsre.cn/tags/aws/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+</content:encoded>
+        <dc:creator>CNSRE</dc:creator>
+        <media:content url="http://www.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>aws</category>
+            
+          
+            
+              <category>s3</category>
+            
+          
+        
+        
+          
+            
+              <category>aws</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

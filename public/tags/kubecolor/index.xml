@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Kubecolor on SRE运维博客</title>
+    <link>http://www.cnsre.cn:80/tags/kubecolor/</link>
+    <description>Recent content in Kubecolor on SRE运维博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Fri, 10 Dec 2021 09:52:58 +0800</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="http://www.cnsre.cn:80/tags/kubecolor/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>kubectl 彩色输出 -- kubecolor</title>
+        <link>http://www.cnsre.cn:80/posts/211210952578/</link>
+        <pubDate>Fri, 10 Dec 2021 09:52:58 +0800</pubDate>
+        
+        <atom:modified>Wed, 10 Aug 2022 08:55:27 +0800</atom:modified>
+        <guid>http://www.cnsre.cn:80/posts/211210952578/</guid>
+        <description>作者：SRE运维博客 博客地址： https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/211210952578/ 相关话题：http</description>
+        <content:encoded>&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址： &lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn/&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/211210952578/&#34;&gt;https://www.cnsre.cn/posts/211210952578/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/kubernetes/&#34;&gt;https://www.cnsre.cn/tags/kubernetes/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;kubecolor-是什么&#34;&gt;kubecolor 是什么？&lt;/h2&gt;
+&lt;p&gt;kubecolor 为您的&lt;code&gt;kubectl&lt;/code&gt;命令输出着色，不执行任何其他操作。kubecolor 在内部调用&lt;code&gt;kubectl&lt;/code&gt;command 并尝试对输出进行着色，以便你可以使用 kubecolor 作为 kubectl 的完整替代方案。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/dty1er/kubecolor&#34;&gt;kubecolor项目地址&lt;/a&gt;&lt;/p&gt;
+&lt;script async src=&#34;https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4855142804875926&#34;
+     crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+&lt;p&gt;&lt;ins class=&#34;adsbygoogle&#34;
+style=&#34;display:block; text-align:center;&#34;
+data-ad-layout=&#34;in-article&#34;
+data-ad-format=&#34;fluid&#34;
+data-ad-client=&#34;ca-pub-4855142804875926&#34;
+data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
+&lt;script&gt;
+     (adsbygoogle = window.adsbygoogle || []).push({});
+&lt;/script&gt;
+&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
+&lt;h3 id=&#34;通过-github-发布下载&#34;&gt;通过 GitHub 发布下载&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git clone https://github.com/dty1er/kubecolor.git
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;通过-go-命令手动构建&#34;&gt;通过 go 命令手动构建&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;cd kubecolor/
+go build -o kubecolor cmd/kubecolor/main.go
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;构建后，得到一个 &lt;code&gt;kubecolor&lt;/code&gt; 的文件&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|自动化运维|kubectl彩色输出kubecolor&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/image-20211210133943373.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;设置默认-kubectl-使用-kubecolor&#34;&gt;设置默认 kubectl 使用 kubecolor&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;echo &amp;#34;alias kubectl=&amp;#39;/root/kubecolor/kubecolor&amp;#34; &amp;gt;&amp;gt; ~/.bashrc
+# 使配置生效
+source .bashrc
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;效果展示&#34;&gt;效果展示&lt;/h2&gt;
+&lt;p&gt;kubectl get pods&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|自动化运维|kubectl彩色输出kubecolor&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211210135030.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;kubectl describe&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|自动化运维|kubectl彩色输出kubecolor&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211210135213.png&#34;&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址： &lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn/&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/211210952578/&#34;&gt;https://www.cnsre.cn/posts/211210952578/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/kubernetes/&#34;&gt;https://www.cnsre.cn/tags/kubernetes/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+</content:encoded>
+        <dc:creator>CNSRE</dc:creator>
+        <media:content url="http://www.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/kubernetes.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>kubernetes</category>
+            
+          
+            
+              <category>kubecolor</category>
+            
+          
+        
+        
+          
+            
+              <category>kubernetes</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

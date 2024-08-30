@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Vnc on SRE运维博客</title>
+    <link>http://www.cnsre.cn:80/tags/vnc/</link>
+    <description>Recent content in Vnc on SRE运维博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Mon, 08 Nov 2021 08:48:06 +0800</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="http://www.cnsre.cn:80/tags/vnc/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>kvm 安装 windows 虚拟机</title>
+        <link>http://www.cnsre.cn:80/posts/211108848062/</link>
+        <pubDate>Mon, 08 Nov 2021 08:48:06 +0800</pubDate>
+        
+        <atom:modified>Wed, 10 Aug 2022 08:55:27 +0800</atom:modified>
+        <guid>http://www.cnsre.cn:80/posts/211108848062/</guid>
+        <description>作者：SRE运维博客 博客地址： https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/211108848062/ 相关话题：http</description>
+        <content:encoded>&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址： &lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn/&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/211108848062/&#34;&gt;https://www.cnsre.cn/posts/211108848062/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/kvm/&#34;&gt;https://www.cnsre.cn/tags/kvm/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;安装前准备&#34;&gt;安装前准备&lt;/h2&gt;
+&lt;h3 id=&#34;验证cpu是否支持kvm&#34;&gt;验证CPU是否支持KVM&lt;/h3&gt;
+&lt;p&gt;如果结果中有vmx（Intel）或svm(AMD)字样，就说明CPU的支持的。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;egrep &lt;span class=&#34;s1&#34;&gt;&amp;#39;(vmx|svm)&amp;#39;&lt;/span&gt; /proc/cpuinfo
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|自动化运维|kvm安装windows虚拟机|kvm安装windows虚拟机找不到硬盘|kvm安装windows虚拟机找不到网卡|kvm安装windows虚拟机报错|kvm安装widnows2012&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211105090238.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;关闭selinux&#34;&gt;关闭SELinux&lt;/h3&gt;
+&lt;p&gt;将&lt;code&gt; /etc/sysconfig/selinux&lt;/code&gt; 中的 &lt;code&gt;SELinux=enforcing&lt;/code&gt; 修改为 &lt;code&gt;SELinux=disabled &lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|自动化运维|kvm安装windows虚拟机|kvm安装windows虚拟机找不到硬盘|kvm安装windows虚拟机找不到网卡|kvm安装windows虚拟机报错|kvm安装widnows2012&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211105090349.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;安装一些最基本的服务&#34;&gt;安装一些最基本的服务&lt;/h3&gt;
+&lt;p&gt;可选项，因为我是刚安装好的CentOS，所以为了下面方便点，先把一些必要的工具安装下&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;yum install epel-release net-tools vim unzip zip wget ftp -y
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|自动化运维|kvm安装windows虚拟机|kvm安装windows虚拟机找不到硬盘|kvm安装windows虚拟机找不到网卡|kvm安装windows虚拟机报错|kvm安装widnows2012&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211105090503.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;安装kvm及其依赖项&#34;&gt;安装KVM及其依赖项&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;yum install qemu-kvm libvirt virt-install bridge-utils -y
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|自动化运维|kvm安装windows虚拟机|kvm安装windows虚拟机找不到硬盘|kvm安装windows虚拟机找不到网卡|kvm安装windows虚拟机报错|kvm安装widnows2012&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211105090531.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;验证安装结果&#34;&gt;验证安装结果&lt;/h3&gt;
+&lt;p&gt;下图说明已经成功安装了&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;lsmod &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; grep kvm
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|自动化运维|kvm安装windows虚拟机|kvm安装windows虚拟机找不到硬盘|kvm安装windows虚拟机找不到网卡|kvm安装windows虚拟机报错|kvm安装widnows2012&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211105090603.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;开启kvm服务&#34;&gt;开启kvm服务&lt;/h3&gt;
+&lt;p&gt;并且设置其开机自动启动&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;systemctl start libvirtd systemctl &lt;span class=&#34;nb&#34;&gt;enable&lt;/span&gt; libvirtd
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;查看状态操作结果&#34;&gt;查看状态操作结果&lt;/h3&gt;
+&lt;p&gt;如下图所示，说明运行情况良好&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;systemctl status libvirtd
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|自动化运维|kvm安装windows虚拟机|kvm安装windows虚拟机找不到硬盘|kvm安装windows虚拟机找不到网卡|kvm安装windows虚拟机报错|kvm安装widnows2012&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211105090659.png&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;systemctl is-enabled libvirtd
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|自动化运维|kvm安装windows虚拟机|kvm安装windows虚拟机找不到硬盘|kvm安装windows虚拟机找不到网卡|kvm安装windows虚拟机报错|kvm安装widnows2012&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211105090721.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;配置网桥模式&#34;&gt;配置网桥模式&lt;/h3&gt;
+&lt;p&gt;先将 &lt;code&gt;/etc/sysconfig/network-scripts/&lt;/code&gt; 目录下的网卡配置文件备份一份&lt;/p&gt;
+&lt;h4 id=&#34;创建-ifcfg-br0-文件&#34;&gt;创建 ifcfg-br0 文件&lt;/h4&gt;
+&lt;p&gt;创建的 &lt;code&gt;br0&lt;/code&gt;文件的IP地址要和物理网卡的IP地址一致，命令 &lt;code&gt;ipconfig&lt;/code&gt; 查看物理网卡将不会显示&lt;code&gt;IP&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;内容如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;root@bogon ~&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;*# vim /etc/sysconfig/network-scripts/ifcfg-br0*
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;DEVICE&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;br0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;BOOTPROTO&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;none
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;DEFROUTE&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;yes
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;ONBOOT&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;yes
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;TYPE&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;Bridge
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;IPV4_FAILURE_FATAL&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;yes
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;IPADDR&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;192.168.1.130
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;NETMASK&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;255.255.255.0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;GATEWAY&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;192.168.1.254
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;DNS1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;221.6.4.66
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;DELAY&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;USERCE&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;no
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;修改原网卡配置&#34;&gt;修改原网卡配置&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;vim /etc/sysconfig/network-scripts/ifcfg-eno1s
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;TYPE&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Ethernet&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;PROXY_METHOD&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;none&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;BROWSER_ONLY&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;no&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;BOOTPROTO&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;static&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;DEFROUTE&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;yes&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;IPV4_FAILURE_FATAL&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;YES&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;IPV6INIT&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;yes&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;IPV6_AUTOCONF&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;yes&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;IPV6_DEFROUTE&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;yes&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;IPV6_FAILURE_FATAL&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;no&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;IPV6_ADDR_GEN_MODE&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;stable-privacy&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;NAME&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;eno1&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;UUID&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;bb40d726-8d67-4187-90c3-eb61e1b42d61&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;DEVICE&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;eno1&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;ONBOOT&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;yes&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;IPADDR&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;192.168.1.130&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;NETAMSK&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;255.255.255.0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;GATEWAY&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;192.168.1.254&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;DNS1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;221.6.4.66&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;IPV6_PRIVACY&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;no&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;BRIDGE&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;br0
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;重启网络服务&#34;&gt;重启网络服务&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;systemctl restart network
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;使用 &lt;code&gt;ifconfig&lt;/code&gt; 验证操作结果,多了一块网卡 &lt;code&gt;br0&lt;/code&gt; ，现在访问宿主机 使用 &lt;code&gt;192.168.1.130&lt;/code&gt; 就可以了。&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|自动化运维|kvm安装windows虚拟机|kvm安装windows虚拟机找不到硬盘|kvm安装windows虚拟机找不到网卡|kvm安装windows虚拟机报错|kvm安装widnows2012&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211105100408.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;script async src=&amp;ldquo;&lt;a href=&#34;https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4855142804875926\&#34;&#34;&gt;https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4855142804875926&#34;&lt;/a&gt;&lt;br /&gt;
+crossorigin=&amp;ldquo;anonymous&amp;rdquo;&amp;gt;&lt;/script&gt;&lt;br /&gt;
+&lt;ins class=&#34;adsbygoogle&#34;
+style=&#34;display:block; text-align:center;&#34;
+data-ad-layout=&#34;in-article&#34;
+data-ad-format=&#34;fluid&#34;
+data-ad-client=&#34;ca-pub-4855142804875926&#34;
+data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
+&lt;script&gt;
+   (adsbygoogle = window.adsbygoogle || []).push({});
+&lt;/script&gt;
+&lt;h2 id=&#34;安装虚拟机&#34;&gt;安装虚拟机&lt;/h2&gt;
+&lt;h3 id=&#34;准备操作系统安装镜像文件&#34;&gt;准备操作系统安装镜像文件&lt;/h3&gt;
+&lt;p&gt;在本文中将使用和宿主环境一样的 &lt;code&gt;CentOS7.2&lt;/code&gt;，把该文件放到 &lt;code&gt;/home/iso&lt;/code&gt; 目录下&lt;/p&gt;
+&lt;p&gt;挂载U盘&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;63
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;64
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;65
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;66
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;67
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;68
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;69
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;70
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;71
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;72
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;73
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;74
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;75
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;76
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;77
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;78
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;79
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;80
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;81
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;82
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;83
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;84
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;85
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;86
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;87
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;88
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;89
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;90
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;91
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;92
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;93
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;94
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;95
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;root@nkgtsv01 ~&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;# fdisk -l&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;WARNING: fdisk GPT support is currently new, and therefore in an experimental phase. Use at your own discretion.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;磁盘 /dev/sda：2995.0 GB, &lt;span class=&#34;m&#34;&gt;2994995200000&lt;/span&gt; 字节，5849600000 个扇区
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;Units&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; 扇区 of &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; * &lt;span class=&#34;nv&#34;&gt;512&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;512&lt;/span&gt; bytes
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;扇区大小&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;逻辑/物理&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;：512 字节 / &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; 字节
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;I/O 大小&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;最小/最佳&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;：4096 字节 / &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; 字节
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;磁盘标签类型：gpt
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Disk identifier: 434CB2EB-C42E-4B9D-A76B-B759709EC159
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#         Start          End    Size  Type            Name&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;         &lt;span class=&#34;m&#34;&gt;2048&lt;/span&gt;       &lt;span class=&#34;m&#34;&gt;206847&lt;/span&gt;    100M  EFI System      EFI System Partition
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;       &lt;span class=&#34;m&#34;&gt;206848&lt;/span&gt;       &lt;span class=&#34;m&#34;&gt;616447&lt;/span&gt;    200M  Microsoft basic
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt;       &lt;span class=&#34;m&#34;&gt;616448&lt;/span&gt;   &lt;span class=&#34;m&#34;&gt;5849597951&lt;/span&gt;    2.7T  Linux LVM
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;磁盘 /dev/mapper/centos-root：214.7 GB, &lt;span class=&#34;m&#34;&gt;214748364800&lt;/span&gt; 字节，419430400 个扇区
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;Units&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; 扇区 of &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; * &lt;span class=&#34;nv&#34;&gt;512&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;512&lt;/span&gt; bytes
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;扇区大小&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;逻辑/物理&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;：512 字节 / &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; 字节
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;I/O 大小&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;最小/最佳&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;：4096 字节 / &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; 字节
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;磁盘 /dev/mapper/centos-swap：17.2 GB, &lt;span class=&#34;m&#34;&gt;17179869184&lt;/span&gt; 字节，33554432 个扇区
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;Units&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; 扇区 of &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; * &lt;span class=&#34;nv&#34;&gt;512&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;512&lt;/span&gt; bytes
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;扇区大小&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;逻辑/物理&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;：512 字节 / &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; 字节
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;I/O 大小&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;最小/最佳&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;：4096 字节 / &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; 字节
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;磁盘 /dev/mapper/centos-home：322.1 GB, &lt;span class=&#34;m&#34;&gt;322122547200&lt;/span&gt; 字节，629145600 个扇区
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;Units&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; 扇区 of &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; * &lt;span class=&#34;nv&#34;&gt;512&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;512&lt;/span&gt; bytes
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;扇区大小&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;逻辑/物理&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;：512 字节 / &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; 字节
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;I/O 大小&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;最小/最佳&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;：4096 字节 / &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; 字节
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;磁盘 /dev/mapper/centos-tmp：107.4 GB, &lt;span class=&#34;m&#34;&gt;107374182400&lt;/span&gt; 字节，209715200 个扇区
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;Units&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; 扇区 of &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; * &lt;span class=&#34;nv&#34;&gt;512&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;512&lt;/span&gt; bytes
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;扇区大小&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;逻辑/物理&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;：512 字节 / &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; 字节
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;I/O 大小&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;最小/最佳&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;：4096 字节 / &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; 字节
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;磁盘 /dev/mapper/centos-data：2333.2 GB, &lt;span class=&#34;m&#34;&gt;2333249372160&lt;/span&gt; 字节，4557127680 个扇区
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;Units&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; 扇区 of &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; * &lt;span class=&#34;nv&#34;&gt;512&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;512&lt;/span&gt; bytes
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;扇区大小&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;逻辑/物理&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;：512 字节 / &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; 字节
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;I/O 大小&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;最小/最佳&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;：4096 字节 / &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; 字节
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;磁盘 /dev/sdb：31.0 GB, &lt;span class=&#34;m&#34;&gt;31004295168&lt;/span&gt; 字节，60555264 个扇区
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;Units&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; 扇区 of &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; * &lt;span class=&#34;nv&#34;&gt;512&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;512&lt;/span&gt; bytes
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;扇区大小&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;逻辑/物理&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;：512 字节 / &lt;span class=&#34;m&#34;&gt;512&lt;/span&gt; 字节
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;I/O 大小&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;最小/最佳&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;：512 字节 / &lt;span class=&#34;m&#34;&gt;512&lt;/span&gt; 字节
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;磁盘标签类型：dos
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;磁盘标识符：0xcad4ebea            需要挂载的硬盘
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   设备 Boot      Start         End      Blocks   Id  System
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sdb4   *         &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;60555263&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;30277504&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;7&lt;/span&gt;  HPFS/NTFS/exFAT
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;root@nkgtsv01 ~&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;# mkdir -p /mnt/udisk&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;root@nkgtsv01 ~&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;# ls&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;anaconda-ks.cfg
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;root@nkgtsv01 ~&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;# ls /mnt/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;udisk  usb
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;root@nkgtsv01 ~&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;# mount -t ntfs-3g /dev/sdb4 /mnt/udisk/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mount: 未知的文件系统类型“ntfs-3g”
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;root@nkgtsv01 ~&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;# yum list *ntfs*&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;已加载插件：fastestmirror
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Loading mirror speeds from cached hostfile
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; * base: ftp.sjtu.edu.cn
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; * epel: mirrors.ustc.edu.cn
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; * extras: ftp.sjtu.edu.cn
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; * updates: ftp.sjtu.edu.cn
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;可安装的软件包
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ntfs-3g.x86_64                              2:2017.3.23-1.el7                        epel
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ntfs-3g-devel.x86_64                        2:2017.3.23-1.el7                        epel
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ntfsprogs.x86_64                            2:2017.3.23-1.el7                        epel
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;已安装:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  ntfs-3g.x86_64 2:2017.3.23-1.el7
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;完毕！
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;root@nkgtsv01 ~&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;#yum install ntfs-3g.x86_64 -y&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;root@nkgtsv01 ~&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;# mount -t ntfs-3g /dev/sdb4 /mnt/udisk/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;The disk contains an unclean file system &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0, 0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;The file system wasn&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;t safely closed on Windows. Fixing.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;root@nkgtsv01 ~&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;#&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;root@nkgtsv01 ~&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;# ls /mnt/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;udisk  usb
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;root@nkgtsv01 ~&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;# ls /mnt/udisk/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;CentOS-7.2-x86_64-DVD-1611.iso  CentOS-7-x86_64-DVD-1708.iso  maven_storey2.zip
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;root@bogon data&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;# mkdir -p /data/iso&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;root@bogon data&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;# ls&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;iso  kvm-bak  network
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;root@nkgtsv01 ~&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;# mount  -o loop /mnt/udisk/CentOS-7-x86_64-DVD-1708.iso /data/iso/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mount: /dev/loop0 写保护，将以只读方式挂载
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|自动化运维|kvm安装windows虚拟机|kvm安装windows虚拟机找不到硬盘|kvm安装windows虚拟机找不到网卡|kvm安装windows虚拟机报错|kvm安装widnows2012&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211105091434.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;创建虚拟机文件存放的目录&#34;&gt;创建虚拟机文件存放的目录&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mkdir -p /data/kvm-images
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;alert alert-warning&#34; role=&#34;alert&#34; data-dir=&#34;ltr&#34;&gt;&lt;p&gt;⚠️ 注意&lt;/p&gt;
+&lt;h3 id=&#34;关于virtio-win驱动&#34;&gt;关于virtio-win驱动&lt;/h3&gt;&lt;/div&gt;
+&lt;p&gt;virtio-win驱动主要用于kvm里的 windows虚拟机。virtio-win提供yum源安装rpm包，virtio驱动默认会安装在/usr/share/virtio-win目录中，可共享于kvm里的windows虚拟机。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo wget https://fedorapeople.org/groups/virt/virtio-win/virtio-win.repo -O /etc/yum.repos.d/virtio-win.repo
+# 添加repo
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|自动化运维|kvm安装windows虚拟机|kvm安装windows虚拟机找不到硬盘|kvm安装windows虚拟机找不到网卡|kvm安装windows虚拟机报错|kvm安装widnows2012&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211108094829.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;该repo文件提供两个不同的仓库：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;virtio-win-stable&lt;br /&gt;
+默认，该仓库的版本和RHEL版本关联在一起发布，意味着得到了非常多的测试，很稳定。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;virtio-win-latest&lt;br /&gt;
+该仓库提供最新的build版本，这些版本可能有各种问题，用户需自己承担风险。这个仓库默认是disable的。如果你想从稳定版更新到最新版，可以使用如下命令：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo yum --enablerepo&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;virtio-win-latest update virtio-win
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|自动化运维|kvm安装windows虚拟机|kvm安装windows虚拟机找不到硬盘|kvm安装windows虚拟机找不到网卡|kvm安装windows虚拟机报错|kvm安装widnows2012&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211108094848.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;安装完成后的文件会存放在/user/share，内容如下：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;/usr/share/virtio-win/*.iso: ISO镜像，包含所有驱动，详细内容后面会描述
+/usr/share/virtio-win/*.vfd: 用于Windows XP下的VFD软驱镜像
+/usr/share/virtio-win/drivers: 从VFD软驱镜像中提取的文件
+/usr/share/guest-agent/*.msi: QEMU Guest Agent 32bit 和 64bit 安装包
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;其中ISO镜像内容为:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;NetKVM/: Virtio网络驱动
+viostor/: Virtio块驱动
+vioscsi/: Virtio SCSI驱动
+viorng/: Virtio RNG驱动
+vioser/: Virtio串口驱动
+Balloon/: Virtio 内存气球驱动
+qxl/: 用于Windows 7及之前版本的QXL显卡驱动. (virtio-win-0.1.103-1和之后版本会创建)
+qxldod/: 用于Windows 8及之后版本的QXL显卡驱动. (virtio-win-0.1.103-2和之后版本会创建)
+pvpanic/: QEMU pvpanic 设备驱动 (virtio-win-0.1.103-2和之后版本会创建)
+guest-agent/: QEMU Guest Agent 32bit 和 64bit 安装包
+qemupciserial/: QEMU PCI 串口设备驱动
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;或者你也可以通过一下方获取&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso&#34;&gt;稳定版virtio-win iso&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win_x86.vfd&#34;&gt;稳定版virtio-win x86 floppy&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win_amd64.vfd&#34;&gt;稳定版virtio-win amd64 floppy&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/latest-virtio/virtio-win.iso&#34;&gt;最新版virtio-win iso&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/latest-virtio/virtio-win_x86.vfd&#34;&gt;最新版virtio-win x86 floppy&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/latest-virtio/virtio-win_amd64.vfd&#34;&gt;最新版virtio-win amd64 floppy&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/latest-qemu-ga/&#34;&gt;最新版qemu-ga files&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/&#34;&gt;全部下载目录&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://fedorapeople.org/groups/virt/virtio-win/CHANGELOG&#34;&gt;变更日志&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;使用-virt-install-创建虚拟机&#34;&gt;使用 virt-install 创建虚拟机&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;root@bogon data&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;# virt-install --virt-type kvm --name=njvm2k8 --ram=1024 --vcpus=1 --os-type=windows --accelerate --cdrom=/home/kvm_data/iso/cn_windows_server_2008_r2_617396.iso --disk path=/usr/share/virtio-win/virtio-win.iso,device=cdrom --disk path=/home/kvm_data/img/njvm2k8.qcow2,bus=virtio --network bridge=br0 --graphics vnc,listen=0.0.0.0,password=123456,port=5920 --noautoconsole&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;WARNING  无法连接到图形控制台：没有安装 virt-viewer。请安装 &lt;span class=&#34;s1&#34;&gt;&amp;#39;virt-viewer&amp;#39;&lt;/span&gt; 软件包。
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;WARNING  没有控制台用于启动客户机，默认为 --wait -1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;开始安装......
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;正在分配 &lt;span class=&#34;s1&#34;&gt;&amp;#39;njvm2k8.img&amp;#39;&lt;/span&gt;                                   &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; GB  00:00:00
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;正在删除磁盘 &lt;span class=&#34;s1&#34;&gt;&amp;#39;njvm2k8.img&amp;#39;&lt;/span&gt;                                &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; B  00:00:00
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;域安装失败，您可以运行下列命令重启您的域：
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;virsh start virsh --connect qemu:///system start njvm2k8&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;否则请重新开始安装
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;不要理会里面提示的错误，接着往下走&lt;/p&gt;
+&lt;p&gt;命令含义&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;virt-install 
+--name=客户机名称  
+--ram 内存（1024）1G 
+--vcpus= cpu1 
+--os-type= 客户机系统类型  
+--os-variant= win2k8 
+--disk path= 客户机文件存放路径 ,
+size=客户机硬盘大小200 
+--accelerate 
+--cdrom  （镜像文件路径） 
+--vnc --vncport=vnc远程端口 5910 
+--network bridge=网卡桥接 br0,model=virtio 
+--noautoconsole
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;打开防火墙上的5910端口&#34;&gt;打开防火墙上的5910端口&lt;/h3&gt;
+&lt;p&gt;因为 &lt;code&gt;VNC&lt;/code&gt;  使用的端口默认是 &lt;code&gt;5910&lt;/code&gt; 所以需要打开防火墙， 防火墙若关闭请忽略&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; firewall-cmd --zone&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;public --add-port&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;5910/tcp --permanent              
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|自动化运维|kvm安装windows虚拟机|kvm安装windows虚拟机找不到硬盘|kvm安装windows虚拟机找不到网卡|kvm安装windows虚拟机报错|kvm安装widnows2012&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211108090913.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;查看打开新创建的虚拟机&#34;&gt;查看打开新创建的虚拟机&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;virsh list --all
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;virsh start njvm2k8-win
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;使用vnc链接虚拟机&#34;&gt;使用VNC链接虚拟机&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.realvnc.com/download/file/viewer.files/VNC-Viewer-6.21.920-Windows.exe&#34;&gt;vncviewer下载地址&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|自动化运维|kvm安装windows虚拟机|kvm安装windows虚拟机找不到硬盘|kvm安装windows虚拟机找不到网卡|kvm安装windows虚拟机报错|kvm安装widnows2012&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211108095815.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;使用VNC输入宿主机IP地址 加上端口号 输入虚拟机名字然后打开&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|自动化运维|kvm安装windows虚拟机|kvm安装windows虚拟机找不到硬盘|kvm安装windows虚拟机找不到网卡|kvm安装windows虚拟机报错|kvm安装widnows2012&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211108095826.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|自动化运维|kvm安装windows虚拟机|kvm安装windows虚拟机找不到硬盘|kvm安装windows虚拟机找不到网卡|kvm安装windows虚拟机报错|kvm安装widnows2012&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211108095846.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|自动化运维|kvm安装windows虚拟机|kvm安装windows虚拟机找不到硬盘|kvm安装windows虚拟机找不到网卡|kvm安装windows虚拟机报错|kvm安装widnows2012&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211108095851.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|自动化运维|kvm安装windows虚拟机|kvm安装windows虚拟机找不到硬盘|kvm安装windows虚拟机找不到网卡|kvm安装windows虚拟机报错|kvm安装widnows2012&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211108095900.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|自动化运维|kvm安装windows虚拟机|kvm安装windows虚拟机找不到硬盘|kvm安装windows虚拟机找不到网卡|kvm安装windows虚拟机报错|kvm安装widnows2012&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211108095907.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|自动化运维|kvm安装windows虚拟机|kvm安装windows虚拟机找不到硬盘|kvm安装windows虚拟机找不到网卡|kvm安装windows虚拟机报错|kvm安装widnows2012&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211108095914.png&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;alert alert-warning&#34; role=&#34;alert&#34; data-dir=&#34;ltr&#34;&gt;&lt;p&gt;⚠️ 注意&lt;/p&gt;
+&lt;h3 id=&#34;安装的时候找不到硬盘&#34;&gt;安装的时候找不到硬盘&lt;/h3&gt;&lt;/div&gt;
+&lt;p&gt;如果再安装的时候找不到硬盘，请执行一下操作&lt;/p&gt;
+&lt;h4 id=&#34;挂载win镜像&#34;&gt;挂载win镜像&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;virsh change-media njvm2k8  hdb /usr/share/virtio-win/virtio-win.iso    
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|自动化运维|kvm安装windows虚拟机|kvm安装windows虚拟机找不到硬盘|kvm安装windows虚拟机找不到网卡|kvm安装windows虚拟机报错|kvm安装widnows2012&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211108100050.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|自动化运维|kvm安装windows虚拟机|kvm安装windows虚拟机找不到硬盘|kvm安装windows虚拟机找不到网卡|kvm安装windows虚拟机报错|kvm安装widnows2012&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211108100221.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|自动化运维|kvm安装windows虚拟机|kvm安装windows虚拟机找不到硬盘|kvm安装windows虚拟机找不到网卡|kvm安装windows虚拟机报错|kvm安装widnows2012&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211108100224.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|自动化运维|kvm安装windows虚拟机|kvm安装windows虚拟机找不到硬盘|kvm安装windows虚拟机找不到网卡|kvm安装windows虚拟机报错|kvm安装widnows2012&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211108100229.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;然后取消挂载的镜像 把系统镜像 从新挂载到系统    进行分区 安装系统&lt;/p&gt;
+&lt;h2 id=&#34;安装完毕重启虚拟机&#34;&gt;安装完毕重启虚拟机&lt;/h2&gt;
+&lt;p&gt;安装完会重启windows虚拟机&lt;/p&gt;
+&lt;p&gt;我们查看状态  然后启动虚拟机&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|自动化运维|kvm安装windows虚拟机|kvm安装windows虚拟机找不到硬盘|kvm安装windows虚拟机找不到网卡|kvm安装windows虚拟机报错|kvm安装widnows2012&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211108100325.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|自动化运维|kvm安装windows虚拟机|kvm安装windows虚拟机找不到硬盘|kvm安装windows虚拟机找不到网卡|kvm安装windows虚拟机报错|kvm安装widnows2012&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211108100353.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;等待安装完成&lt;/p&gt;
+&lt;p&gt;启动之后设置密码 我们就进入了新的windows 操作系统&lt;/p&gt;
+&lt;p&gt;用vnc链接&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|自动化运维|kvm安装windows虚拟机|kvm安装windows虚拟机找不到硬盘|kvm安装windows虚拟机找不到网卡|kvm安装windows虚拟机报错|kvm安装widnows2012&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211108100407.png&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;alert alert-warning&#34; role=&#34;alert&#34; data-dir=&#34;ltr&#34;&gt;⚠️ 注意&lt;br /&gt;
+挂载软驱 （硬盘驱动 网卡驱动等）注释：网卡驱动要在系统中装好之后挂载 不然装系统的时候会提示找不到光盘镜像&lt;/div&gt;
+&lt;p&gt;在宿主机中执行命令&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;virsh change-media njvm2k8  hdb /usr/share/virtio-win/virtio-win.iso 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;VMTools工具安装完成后,使用如下命令卸载掉挂载的VMTools工具:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;a.如果是Linux虚拟机,执行如下命令卸载VMTools工具:
+
+virsh change-media 【虚拟机ID】 --eject 【vmtools-linux.iso文件全路径】
+
+b.如果是Windows虚拟机,执行如下命令卸载VMTools工具:
+
+virsh change-media 【虚拟机ID】 --eject 【vmtools-windows.iso文件全路径】
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;挂载驱镜像文件到njvm2k8主机上&lt;/p&gt;
+&lt;p&gt;用vnc链接&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;sre运维|Linux运维|自动化运维|kvm安装windows虚拟机|kvm安装windows虚拟机找不到硬盘|kvm安装windows虚拟机找不到网卡|kvm安装windows虚拟机报错|kvm安装widnows2012&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211108100512.png&#34;&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址： &lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn/&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/211108848062/&#34;&gt;https://www.cnsre.cn/posts/211108848062/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/kvm/&#34;&gt;https://www.cnsre.cn/tags/kvm/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+</content:encoded>
+        <dc:creator>CNSRE</dc:creator>
+        <media:content url="http://www.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/kvm.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>kvm</category>
+            
+          
+            
+              <category>vnc</category>
+            
+          
+        
+        
+          
+            
+              <category>kvm</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

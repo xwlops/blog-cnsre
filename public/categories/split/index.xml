@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Split on SRE运维博客</title>
+    <link>http://www.cnsre.cn:80/categories/split/</link>
+    <description>Recent content in Split on SRE运维博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Wed, 01 Dec 2021 09:55:42 +0800</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="http://www.cnsre.cn:80/categories/split/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>Linux 大文件分割合并</title>
+        <link>http://www.cnsre.cn:80/posts/211201955418/</link>
+        <pubDate>Wed, 01 Dec 2021 09:55:42 +0800</pubDate>
+        
+        <atom:modified>Wed, 10 Aug 2022 08:55:27 +0800</atom:modified>
+        <guid>http://www.cnsre.cn:80/posts/211201955418/</guid>
+        <description>作者：SRE运维博客 博客地址： https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/211201955418/ 相关话题：http</description>
+        <content:encoded>&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址： &lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn/&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/211201955418/&#34;&gt;https://www.cnsre.cn/posts/211201955418/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/split/&#34;&gt;https://www.cnsre.cn/tags/split/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;1-分割文件&#34;&gt;1. 分割文件&lt;/h2&gt;
+&lt;p&gt;文件分割可以使用&lt;code&gt;split&lt;/code&gt;命令，该即支持文本文件分割，又支持二进制文件分割；而合并文件可以使用&lt;code&gt;cat&lt;/code&gt;命令。&lt;/p&gt;
+&lt;h3 id=&#34;11-文本文件分割&#34;&gt;1.1 文本文件分割&lt;/h3&gt;
+&lt;p&gt;分割文本文件时，可以按文件大小分割，也可以按文本行数分割。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;按文件大小分割&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;按文件大小分割文件时，需要以&lt;code&gt;-C&lt;/code&gt;参数指定分割后的文件大小：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ split -C 100M large_file.txt stxt
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如上所示，我们将大文件&lt;code&gt;large_file.txt&lt;/code&gt;按&lt;code&gt;100M&lt;/code&gt;大小进行分割，并指定了分割后文件前缀&lt;code&gt;stxt&lt;/code&gt;；当不指定前缀时，&lt;code&gt;split&lt;/code&gt;会自动对分割文件进行命名，一般会以&lt;code&gt;x&lt;/code&gt;开头。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;按行分割&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;文本文件还可以以行为单位进行分割，以行数进行分割时会忽略文件大小，并以&lt;code&gt;-l&lt;/code&gt;参数指定分割后文件的行数：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ split -l 1000 large_file.txt stxt
+&lt;/code&gt;&lt;/pre&gt;&lt;script async src=&#34;https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4855142804875926&#34;
+     crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+&lt;p&gt;&lt;ins class=&#34;adsbygoogle&#34;
+style=&#34;display:block; text-align:center;&#34;
+data-ad-layout=&#34;in-article&#34;
+data-ad-format=&#34;fluid&#34;
+data-ad-client=&#34;ca-pub-4855142804875926&#34;
+data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
+&lt;script&gt;
+     (adsbygoogle = window.adsbygoogle || []).push({});
+&lt;/script&gt;
+&lt;h3 id=&#34;12-二进制文件分割&#34;&gt;1.2 二进制文件分割&lt;/h3&gt;
+&lt;p&gt;二进制文件分割类似于按大小分割文本文件，不同的是以&lt;code&gt;-b&lt;/code&gt;参数来指定分割后的文件大小：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ split -b 100M data.bak sdata
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;2-文件合并&#34;&gt;2. 文件合并&lt;/h2&gt;
+&lt;p&gt;文件合并使用&lt;code&gt;cat&lt;/code&gt;命令，上面几种方式分割的文件都可以使用&lt;code&gt;cat&lt;/code&gt;命令合并。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;cat&lt;/code&gt;命令合并分割文件：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ cat stxt* &amp;gt; new_file.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;3-命令格式&#34;&gt;3. 命令格式&lt;/h2&gt;
+&lt;h3 id=&#34;31-split命令说明&#34;&gt;3.1 &lt;code&gt;split&lt;/code&gt;命令说明&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;split&lt;/code&gt;命令格式如下：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;split [选项]... [要切割的文件 [输出文件前缀]]
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;命令参数&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;-a, --suffix-length=N   使用长度为 N 的后缀 (默认 2)
+-b, --bytes=SIZE        设置输出文件的大小。支持单位：m,k
+-C, --line-bytes=SIZE   设置输出文件的最大行数。与 -b 类似，但会尽量维持每行的完整性
+-d, --numeric-suffixes  使用数字后缀代替字母
+-l, --lines=NUMBER      设备输出文件的行数
+    --help     显示版本信息
+    --version  输出版本信息
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;32-cat命令说明&#34;&gt;3.2 &lt;code&gt;cat&lt;/code&gt;命令说明&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;cat&lt;/code&gt;命令的常见使用场景有：&lt;/p&gt;
+&lt;p&gt;显示文件内容：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ cat filename
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;创建一个空文件：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ cat &amp;gt; filename
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;文件合并：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ cat file1 file2 &amp;gt; file
+&lt;/code&gt;&lt;/pre&gt;&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址： &lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn/&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/211201955418/&#34;&gt;https://www.cnsre.cn/posts/211201955418/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/split/&#34;&gt;https://www.cnsre.cn/tags/split/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+</content:encoded>
+        <dc:creator>CNSRE</dc:creator>
+        <media:content url="http://www.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/linux.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>split</category>
+            
+          
+        
+        
+          
+            
+              <category>split</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

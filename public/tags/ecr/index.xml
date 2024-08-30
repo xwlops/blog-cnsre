@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Ecr on SRE运维博客</title>
+    <link>http://www.cnsre.cn:80/tags/ecr/</link>
+    <description>Recent content in Ecr on SRE运维博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Mon, 06 Dec 2021 09:44:18 +0800</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="http://www.cnsre.cn:80/tags/ecr/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>AWS私有仓库ECR推送拉取镜像</title>
+        <link>http://www.cnsre.cn:80/posts/211206944174/</link>
+        <pubDate>Mon, 06 Dec 2021 09:44:18 +0800</pubDate>
+        
+        <atom:modified>Wed, 10 Aug 2022 08:55:27 +0800</atom:modified>
+        <guid>http://www.cnsre.cn:80/posts/211206944174/</guid>
+        <description>作者：SRE运维博客 博客地址： https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/211206944174/ 相关话题：http</description>
+        <content:encoded>&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址： &lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn/&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/211206944174/&#34;&gt;https://www.cnsre.cn/posts/211206944174/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/aws/&#34;&gt;https://www.cnsre.cn/tags/aws/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;什么是-amazon-elastic-container-registryecr&#34;&gt;什么是 Amazon Elastic Container Registry（ECR）？&lt;/h2&gt;
+&lt;p&gt;Amazon Elastic Container Registry (Amazon ECR) 是 Amazon 托管容器映像注册表服务，它安全、可扩展且可靠。Amazon ECR 支持私有存储库，其具有使用 Amazon IAM 的基于资源的权限。这样，指定用户或 Amazon EC2 实例可以访问您的容器存储库和映像。您可以使用首选 CLI 推送、提取和管理 Docker 映像、Open Container Itistry (OCI) 映像和 OCI 兼容构件。&lt;/p&gt;
+&lt;script async src=&#34;https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4855142804875926&#34;
+     crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+&lt;p&gt;&lt;ins class=&#34;adsbygoogle&#34;
+style=&#34;display:block; text-align:center;&#34;
+data-ad-layout=&#34;in-article&#34;
+data-ad-format=&#34;fluid&#34;
+data-ad-client=&#34;ca-pub-4855142804875926&#34;
+data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
+&lt;script&gt;
+     (adsbygoogle = window.adsbygoogle || []).push({});
+&lt;/script&gt;
+&lt;h2 id=&#34;amazon-ecr-的功能&#34;&gt;Amazon ECR 的功能&lt;/h2&gt;
+&lt;p&gt;Amazon ECR 提供以下功能：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;生命周期策略有助于管理存储库中映像的生命周期。您可以定义导致清理未使用映像的规则。您可以在将规则应用到存储库之前对其进行测试。有关更多信息，请参阅 &lt;a href=&#34;https://docs.amazonaws.cn/AmazonECR/latest/userguide/LifecyclePolicies.html&#34;&gt;生命周期策略&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;映像扫描有助于识别容器映像中的软件漏洞。每个存储库都可以配置为&lt;strong&gt;在推送时扫描&lt;/strong&gt;。这可确保扫描推送到存储库的每个新映像。然后，您可以检索映像扫描的结果。有关更多信息，请参阅 &lt;a href=&#34;https://docs.amazonaws.cn/AmazonECR/latest/userguide/image-scanning.html&#34;&gt;映像扫描&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;跨区域和跨账户复制使您可以更轻松地将映像放置在需要的位置。它配置为注册表设置，并基于每个区域。有关更多信息，请参阅 &lt;a href=&#34;https://docs.amazonaws.cn/AmazonECR/latest/userguide/registry-settings.html&#34;&gt;私有注册表设置&lt;/a&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;推送-docker-映像到-amazon-ecr-存储库&#34;&gt;推送 Docker 映像到 Amazon ECR 存储库&lt;/h2&gt;
+&lt;p&gt;我们可以使用 &lt;strong&gt;docker push&lt;/strong&gt; 命令将容器映像推送到 Amazon ECR 存储库。Amazon ECR 还支持创建和推送用于多架构映像的 Docker 清单列表。清单列表中引用的每个映像都必须已经被推送到我们的存储库。&lt;/p&gt;
+&lt;h3 id=&#34;在推送映像之前amazon-ecr-存储库必须存在&#34;&gt;在推送映像之前，Amazon ECR 存储库必须存在。&lt;/h3&gt;
+&lt;p&gt;向要向其推送映像的 Amazon ECR 注册表验证 Docker 客户端的身份。必须针对每个注册表获得授权令牌，令牌有效期为 12 小时。&lt;/p&gt;
+&lt;p&gt;要对 Amazon ECR 注册表验证 Docker，请运行 &lt;strong&gt;aws ecr get-login-password&lt;/strong&gt; 命令。将身份验证令牌传递给 &lt;strong&gt;docker login&lt;/strong&gt; 命令时，将值 &lt;code&gt;AWS&lt;/code&gt; 用作用户名，并指定要对其进行身份验证的 Amazon ECR 注册表 URI。如果对多个注册表进行身份验证，则必须针对每个注册表重复该命令。&lt;/p&gt;
+&lt;div class=&#34;notices info&#34; data-title=&#34;注意&#34;&gt;
+  如果收到错误，请安装或更新到最新版本的 Amazon CLI。有关更多信息，请参阅 &lt;em&gt;Amazon Command Line Interface 用户指南&lt;/em&gt;中的&lt;a href=&#34;https://docs.amazonaws.cn/cli/latest/userguide/install-cliv2.html&#34;&gt;安装 Amazon Command Line Interface&lt;/a&gt;。
+&lt;/div&gt;
+&lt;h3 id=&#34;检索身份验证令牌并向注册表验证-docker-客户端身份&#34;&gt;检索身份验证令牌并向注册表验证 Docker 客户端身份。&lt;/h3&gt;
+&lt;p&gt;使用 亚马逊云科技 CLI:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;aws ecr get-login-password --region cn-north-1 | docker login --username AWS --password-stdin 12345678.dkr.ecr.cn-north-1.amazonaws.com.cn
+&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;notices info&#34; data-title=&#34;注意&#34;&gt;
+  如果您在使用 亚马逊云科技 CLI 时遇到错误，请确保您已安装最新版本的 亚马逊云科技 CLI 和 Docker。
+&lt;/div&gt;
+&lt;h3 id=&#34;构建-docker-映像&#34;&gt;构建 Docker 映像&lt;/h3&gt;
+&lt;p&gt;如果您已生成映像，则可跳过此步骤:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;docker build -t cnsre-test .
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;标记映像&#34;&gt;标记映像&lt;/h3&gt;
+&lt;p&gt;生成完成后，标记您的映像，以便将映像推送到此存储库:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;docker tag cnsre-test:latest 12345678.dkr.ecr.cn-north-1.amazonaws.com.cn/cnsre-test:latest
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;推送镜像&#34;&gt;推送镜像&lt;/h3&gt;
+&lt;p&gt;运行以下命令将此映像推送到新创建的 亚马逊云科技 存储库:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;docker push 12345678.dkr.ecr.cn-north-1.amazonaws.com.cn/cnsre-test:latest
+&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;notices info&#34; data-title=&#34;注意&#34;&gt;
+  出现 &lt;code&gt;Head https://registry-1.docker.io/v2/library/node/manifests/14-alpine &lt;/code&gt;的解决方法
+&lt;/div&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;vim /etc/docker/daemon.json 
+&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# 添加国内的镜像 阿里云镜像 
+{ &amp;#34;registry-mirrors&amp;#34;:[&amp;#34;https://6kx4zyno.mirror.aliyuncs.com&amp;#34;] }
+# 或者中科院镜像
+&amp;#34;registry-mirrors&amp;#34;:[&amp;#34;https://docker.mirrors.ustc.edu.cn&amp;#34;] }
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;重启Docker&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;systemctl daemon-reload 
+systemctl restart docker
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;拉取镜像&#34;&gt;拉取镜像&lt;/h2&gt;
+&lt;p&gt;使用 &lt;strong&gt;docker pull&lt;/strong&gt; 命令提取映像。映像名称格式应为 &lt;code&gt;registry/repository[:tag]&lt;/code&gt; 以便按标签拉取，或为 &lt;code&gt;registry/repository[@digest]&lt;/code&gt; 以便按摘要拉取。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;docker pull 12345678.dkr.ecr.cn-north-1.amazonaws.com.cn/cnsre-test:latest
+&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;notices info&#34; data-title=&#34;注意&#34;&gt;
+  如果您收到 &lt;code&gt;repository-url not found: does not exist or no pull access&lt;/code&gt; 错误，您可能需要向 Amazon ECR 验证您的 Docker 客户端。有关更多信息，请参阅 &lt;a href=&#34;https://docs.amazonaws.cn/AmazonECR/latest/userguide/registry_auth.html&#34;&gt;私有注册表身份验证&lt;/a&gt;。
+&lt;/div&gt;
+&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址： &lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn/&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/211206944174/&#34;&gt;https://www.cnsre.cn/posts/211206944174/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/aws/&#34;&gt;https://www.cnsre.cn/tags/aws/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+</content:encoded>
+        <dc:creator>CNSRE</dc:creator>
+        <media:content url="http://www.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>aws</category>
+            
+          
+            
+              <category>ecr</category>
+            
+          
+            
+              <category>docker</category>
+            
+          
+        
+        
+          
+            
+              <category>aws</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Ec2 on SRE运维博客</title>
+    <link>http://www.cnsre.cn:80/tags/ec2/</link>
+    <description>Recent content in Ec2 on SRE运维博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Mon, 17 May 2021 13:44:58 +0800</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="http://www.cnsre.cn:80/tags/ec2/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>AWS扩容EC2实例根空间</title>
+        <link>http://www.cnsre.cn:80/posts/210517344530/</link>
+        <pubDate>Mon, 17 May 2021 13:44:58 +0800</pubDate>
+        
+        <atom:modified>Wed, 10 Aug 2022 08:55:27 +0800</atom:modified>
+        <guid>http://www.cnsre.cn:80/posts/210517344530/</guid>
+        <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
+        <content:encoded>&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/210517344530/&#34;&gt;https://www.cnsre.cn/posts/210517344530/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/zabbix/&#34;&gt;https://www.cnsre.cn/tags/zabbix/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;aws-端操作&#34;&gt;aws 端操作&lt;/h2&gt;
+&lt;h3 id=&#34;先在ec2-实例中选中磁盘-然后打开跟设备&#34;&gt;先在EC2 实例中选中磁盘 然后打开跟设备&lt;/h3&gt;
+&lt;p&gt;&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210517144350.png&#34;&gt;&lt;br /&gt;
+修改大小后保存&lt;br /&gt;
+&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210517144411.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;ec2-端操作&#34;&gt;ec2 端操作&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;lsblk&lt;/code&gt; 查看当前设备的磁盘编号&lt;br /&gt;
+&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210517144443.png&#34;&gt;&lt;br /&gt;
+&lt;code&gt;df -T -H&lt;/code&gt; 查看扩容前的空间大小并确定磁盘格式&lt;br /&gt;
+&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210517144504.png&#34;&gt;&lt;br /&gt;
+&lt;code&gt;growpart /dev/nvme0n1 1&lt;/code&gt; 把扩容的空间挂载到磁盘上&lt;br /&gt;
+&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210517144521.png&#34;&gt;&lt;br /&gt;
+&lt;strong&gt;centos7执行划分空间命令&lt;/strong&gt;&lt;br /&gt;
+&lt;code&gt;sudo xfs_growfs -d /&lt;/code&gt;  把空闲的空间划分至 /&lt;br /&gt;
+&lt;strong&gt;centos6执行划分空间命令&lt;/strong&gt;&lt;br /&gt;
+&lt;code&gt;resize2fs /dev/nvme0n1p1&lt;/code&gt;&lt;br /&gt;
+&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210517144805.png&#34;&gt;&lt;br /&gt;
+&lt;code&gt;df -h&lt;/code&gt; 查看验证&lt;br /&gt;
+&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210517144836.png&#34;&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/210517344530/&#34;&gt;https://www.cnsre.cn/posts/210517344530/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/zabbix/&#34;&gt;https://www.cnsre.cn/tags/zabbix/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+</content:encoded>
+        <dc:creator>CNSRE</dc:creator>
+        <media:content url="http://www.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>ec2</category>
+            
+          
+            
+              <category>aws</category>
+            
+          
+        
+        
+          
+            
+              <category>aws</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

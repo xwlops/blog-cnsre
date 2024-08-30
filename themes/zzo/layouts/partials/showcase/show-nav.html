@@ -1,0 +1,13 @@
+{{ $current := . }}
+<nav class="showcase__nav">
+  </a>
+  {{ range (.Site.GetPage "section" .Type).Pages }}
+    {{ $active := false }}
+    {{ $active = or $active (eq .Name $current.Title) }}
+    {{ $active = or $active (eq (lower .Permalink) (lower $current.Title)) }}
+    {{ $active = or $active (eq (lower .Permalink) (lower $current.Type)) }}
+    <a href="{{ .Permalink }}" >
+      {{ i18n (lower .Title) | default .Title }}
+    </a>
+  {{ end }}
+</nav>

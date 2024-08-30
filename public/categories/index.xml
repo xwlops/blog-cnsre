@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Categories on SRE运维博客</title>
+    <link>http://www.cnsre.cn:80/categories/</link>
+    <description>Recent content in Categories on SRE运维博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Fri, 08 Dec 2023 09:44:11 +0800</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="http://www.cnsre.cn:80/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>阿里云</title>
+        <link>http://www.cnsre.cn:80/categories/%E9%98%BF%E9%87%8C%E4%BA%91/</link>
+        <pubDate>Fri, 08 Dec 2023 09:44:11 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/%E9%98%BF%E9%87%8C%E4%BA%91/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Aws</title>
+        <link>http://www.cnsre.cn:80/categories/aws/</link>
+        <pubDate>Sat, 06 May 2023 14:25:09 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/aws/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Cloudwatch</title>
+        <link>http://www.cnsre.cn:80/categories/cloudwatch/</link>
+        <pubDate>Sat, 06 May 2023 14:25:09 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/cloudwatch/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Lambda</title>
+        <link>http://www.cnsre.cn:80/categories/lambda/</link>
+        <pubDate>Sat, 06 May 2023 14:25:09 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/lambda/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Python</title>
+        <link>http://www.cnsre.cn:80/categories/python/</link>
+        <pubDate>Sat, 06 May 2023 14:25:09 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/python/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Sns</title>
+        <link>http://www.cnsre.cn:80/categories/sns/</link>
+        <pubDate>Sat, 06 May 2023 14:25:09 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/sns/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>K8s</title>
+        <link>http://www.cnsre.cn:80/categories/k8s/</link>
+        <pubDate>Wed, 07 Dec 2022 11:16:00 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/k8s/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>故障集</title>
+        <link>http://www.cnsre.cn:80/categories/%E6%95%85%E9%9A%9C%E9%9B%86/</link>
+        <pubDate>Wed, 07 Dec 2022 11:16:00 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/%E6%95%85%E9%9A%9C%E9%9B%86/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Efs</title>
+        <link>http://www.cnsre.cn:80/categories/efs/</link>
+        <pubDate>Tue, 25 Jan 2022 14:50:14 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/efs/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Eks</title>
+        <link>http://www.cnsre.cn:80/categories/eks/</link>
+        <pubDate>Tue, 25 Jan 2022 14:50:14 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/eks/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Kubernetes</title>
+        <link>http://www.cnsre.cn:80/categories/kubernetes/</link>
+        <pubDate>Mon, 10 Jan 2022 08:50:57 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/kubernetes/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>安全漏洞</title>
+        <link>http://www.cnsre.cn:80/categories/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/</link>
+        <pubDate>Sun, 12 Dec 2021 12:10:00 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Split</title>
+        <link>http://www.cnsre.cn:80/categories/split/</link>
+        <pubDate>Wed, 01 Dec 2021 09:55:42 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/split/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Ingress</title>
+        <link>http://www.cnsre.cn:80/categories/ingress/</link>
+        <pubDate>Fri, 26 Nov 2021 10:03:07 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/ingress/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Traefik</title>
+        <link>http://www.cnsre.cn:80/categories/traefik/</link>
+        <pubDate>Fri, 26 Nov 2021 10:03:07 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/traefik/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Zabbix</title>
+        <link>http://www.cnsre.cn:80/categories/zabbix/</link>
+        <pubDate>Wed, 24 Nov 2021 09:53:03 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/zabbix/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Shell</title>
+        <link>http://www.cnsre.cn:80/categories/shell/</link>
+        <pubDate>Mon, 22 Nov 2021 08:46:49 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/shell/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>K3s</title>
+        <link>http://www.cnsre.cn:80/categories/k3s/</link>
+        <pubDate>Fri, 19 Nov 2021 11:32:53 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/k3s/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Wireguard</title>
+        <link>http://www.cnsre.cn:80/categories/wireguard/</link>
+        <pubDate>Fri, 19 Nov 2021 11:32:53 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/wireguard/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Kvm</title>
+        <link>http://www.cnsre.cn:80/categories/kvm/</link>
+        <pubDate>Wed, 17 Nov 2021 09:37:18 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/kvm/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Nginx</title>
+        <link>http://www.cnsre.cn:80/categories/nginx/</link>
+        <pubDate>Thu, 30 Sep 2021 10:10:17 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/nginx/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Journal</title>
+        <link>http://www.cnsre.cn:80/categories/journal/</link>
+        <pubDate>Tue, 28 Sep 2021 09:57:08 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/journal/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Docker</title>
+        <link>http://www.cnsre.cn:80/categories/docker/</link>
+        <pubDate>Fri, 24 Sep 2021 09:25:54 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/docker/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Ubuntu</title>
+        <link>http://www.cnsre.cn:80/categories/ubuntu/</link>
+        <pubDate>Wed, 15 Sep 2021 11:54:43 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/ubuntu/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Openvpn</title>
+        <link>http://www.cnsre.cn:80/categories/openvpn/</link>
+        <pubDate>Mon, 13 Sep 2021 09:32:52 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/openvpn/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Jenkins</title>
+        <link>http://www.cnsre.cn:80/categories/jenkins/</link>
+        <pubDate>Fri, 10 Sep 2021 10:30:08 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/jenkins/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Prometheus</title>
+        <link>http://www.cnsre.cn:80/categories/prometheus/</link>
+        <pubDate>Mon, 21 Jun 2021 15:50:41 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/prometheus/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Grafana</title>
+        <link>http://www.cnsre.cn:80/categories/grafana/</link>
+        <pubDate>Mon, 26 Apr 2021 09:36:12 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/grafana/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Garfana</title>
+        <link>http://www.cnsre.cn:80/categories/garfana/</link>
+        <pubDate>Fri, 23 Apr 2021 14:05:31 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/garfana/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Redis</title>
+        <link>http://www.cnsre.cn:80/categories/redis/</link>
+        <pubDate>Mon, 12 Apr 2021 15:08:56 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/redis/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Blog</title>
+        <link>http://www.cnsre.cn:80/categories/blog/</link>
+        <pubDate>Fri, 02 Apr 2021 14:02:28 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/blog/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Kafka</title>
+        <link>http://www.cnsre.cn:80/categories/kafka/</link>
+        <pubDate>Tue, 30 Mar 2021 13:57:19 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/kafka/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Elk</title>
+        <link>http://www.cnsre.cn:80/categories/elk/</link>
+        <pubDate>Thu, 25 Mar 2021 13:55:24 +0800</pubDate>
+        
+        
+        <guid>http://www.cnsre.cn:80/categories/elk/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

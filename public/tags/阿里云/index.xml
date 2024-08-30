@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>阿里云 on SRE运维博客</title>
+    <link>http://www.cnsre.cn:80/tags/%E9%98%BF%E9%87%8C%E4%BA%91/</link>
+    <description>Recent content in 阿里云 on SRE运维博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Fri, 08 Dec 2023 09:44:11 +0800</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="http://www.cnsre.cn:80/tags/%E9%98%BF%E9%87%8C%E4%BA%91/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>阿里云申请发布社区镜像权限</title>
+        <link>http://www.cnsre.cn:80/posts/231208094411/</link>
+        <pubDate>Fri, 08 Dec 2023 09:44:11 +0800</pubDate>
+        
+        <atom:modified>Fri, 08 Dec 2023 16:24:01 +0800</atom:modified>
+        <guid>http://www.cnsre.cn:80/posts/231208094411/</guid>
+        <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/23</description>
+        <content:encoded>&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn/&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/231208094411/&#34;&gt;https://www.cnsre.cn/posts/231208094411/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/%E9%98%BF%E9%87%8C%E4%BA%91/&#34;&gt;https://www.cnsre.cn/tags/阿里云/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;申请前须知&#34;&gt;申请前须知&lt;/h2&gt;
+&lt;p&gt;社区镜像前，请先了解以下注意事项：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;只有通过企业认证的才可以申请使用社区镜像发布功能。&lt;/li&gt;
+&lt;li&gt;加密镜像不允许发布为社区镜像。&lt;/li&gt;
+&lt;li&gt;社区镜像完全公开，在镜像所属地域下，所有的阿里云账号均可使用。&lt;/li&gt;
+&lt;li&gt;社区镜像不支持共享、导出与复制。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;申请流程&#34;&gt;申请流程&lt;/h2&gt;
+&lt;h3 id=&#34;申请企业认证&#34;&gt;申请企业认证&lt;/h3&gt;
+&lt;p&gt;因为只有通过企业认证的用户才有权限申请发布社区镜像，所以要先进行社区认证。&lt;/p&gt;
+&lt;p&gt;本文主要以申请社区镜像发布权限为主，不再介绍企业认证方法。 没有社区认证的用户可以参考链接 &lt;a href=&#34;https://help.aliyun.com/zh/pnp/l6821168?spm=5176.22414175.sslink.1.638a753bYT0ivM&#34;&gt;阿里云企业认证&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;创建自定义镜像&#34;&gt;创建自定义镜像&lt;/h4&gt;
+&lt;p&gt;在申请发布社区镜像之前，首先要把镜像制作好。&lt;/p&gt;
+&lt;p&gt;发布社区镜像的镜像来源主要有控制台创建自定义镜像、OpenAPI、镜像构建Image Builder、Packer等。本地以控制台创建自动以镜像为例。&lt;/p&gt;
+&lt;p&gt;登录到控制台，按照下图进行操作。进行镜像的制作。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/2023120844888ddfc1a4d26edbf045e43d31f12b.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;点击创建自定义镜像后，出现如下界面&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/202312083bd445f982d598735b4356054af7b21e.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;点击创建后，需要等待一段时间。创建时间主要看磁盘和数据量的大小决定的。&lt;/p&gt;
+&lt;h4 id=&#34;收集镜像信息&#34;&gt;收集镜像信息&lt;/h4&gt;
+&lt;p&gt;创建完自动以镜像后，需要收集一些镜像的信息，以备申请权限时使用。&lt;/p&gt;
+&lt;p&gt;具体信息如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;**镜像名称：**Wrodpress&lt;/li&gt;
+&lt;li&gt;**操作系统及版本：**CentOS 7.9 64位 UEFI版&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;镜像大小：&lt;/strong&gt; 40GB&lt;/li&gt;
+&lt;li&gt;**应用场景：**发布的社区镜像将应用于CloudIaC模板中,用来创建对应的云服务。后续还会推出更多应用和镜像。&lt;/li&gt;
+&lt;li&gt;**如何引流、用户群：**通过官网CloudIaC模板引流使用社区镜像。主要用户群是学生和高校。&lt;/li&gt;
+&lt;li&gt;**计划发布、更新：**在多个地域发布社区镜像,并长期更新维护。&lt;/li&gt;
+&lt;li&gt;**镜像制作方式：**通过控制台创建自定义镜像的方式制作镜像。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;提交工单申请权限&#34;&gt;提交工单申请权限&lt;/h4&gt;
+&lt;p&gt;准备完以上信息后，就可以提工单申请了。我这边也给大家准备了申请话术供大家参考：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;尊敬的阿里云支持团队，
+
+我云霁科技的账户管理员雪文龙，我代表杭州云霁科技有限公司。
+我们近期开发了一款基于CentOS 7.9 定制了WordPress的系统镜像，经过内部测试和优化，我们相信这个镜像对阿里云社区的用户会有很大的价值。
+为了分享我们的工作，并让更多的用户受益，我们希望能够将这个自定义系统镜像发布到阿里云社区镜像中。在此，我们诚恳地申请获得发布镜像的权限。
+以下是有关我们自定义系统镜像的一些基本信息：
+1. 发布者认证名称： Yunjikeji Ampere Computing
+2. 镜像名称：Wrodpress
+3. 操作系统及版本：CentOS 7.9 64位 UEFI版
+4. 镜像大小： 40GB
+5. 应用场景：发布的社区镜像将应用于CloudIaC模板中,用来创建对应的云服务。后续还会推出更多应用和镜像。
+6. 如何引流、用户群：通过官网CloudIaC模板引流使用社区镜像。主要用户群是学生和高校。 
+7. 计划发布、更新：在多个地域发布社区镜像,并长期更新维护。
+8. 镜像制作方式：通过控制台创建自定义镜像的方式制作镜像。
+
+我们相信这个系统镜像将为阿里云社区的用户提供更丰富的选择，并有助于推动云计算社区的发展。
+我们理解阿里云社区对镜像的质量和安全性有严格的要求，因此我们已经采取了一系列措施来确保我们的镜像符合最高标准。
+在此，我们真诚地期待能够得到您的支持和批准，以便我们的系统镜像能够为更多的用户服务。
+谢谢您的时间和考虑。
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;针对提交工单申请权限的一些疑问：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;提交工单申请权限审核的时间是多久?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;申请权限的审核时间没有的到具体的回复。不过在催工单的情况下，我是从申请到得到权限用了24个小时。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;提交工单申请权限审核的流程是什么?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;申请权限的流程。准备申请发布镜像的材料 &amp;ndash; 提交申请工单 &amp;ndash; 审核团队核对提交申请材料 &amp;ndash; 补充申请材料（如果需要）&amp;ndash; 审核镜像 &amp;ndash; 开通权限。&lt;strong&gt;因为没有公布具体的审核流程，但是从沟通上我猜想可以这样去理解&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;有没有一些快捷的方式可以尽快通过审核？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;有的。值得一提的是，在我后续申请到了权限以后，我也可以发布没有进行审核的镜像发布到社区镜像中。所以大家在申请社区镜像权限的时候，可以选择申请一个尽量符合规则标准的镜像去申请。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;发布社区镜像&#34;&gt;发布社区镜像&lt;/h2&gt;
+&lt;p&gt;经历24小时的来回拉扯。得到了回复 &lt;code&gt;您好 : 后台已经审核完毕，您在配置发布镜像看下呢。&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;拿到权限。发布测试。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;进入镜像功能页面。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;登录&lt;a href=&#34;https://ecs.console.aliyun.com&#34;&gt;ECS管理控制台&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;在左侧导航栏，选择&lt;strong&gt;实例与镜像&lt;/strong&gt; &amp;gt; &lt;strong&gt;镜像&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;在顶部菜单栏左上角处，选择地域。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在&lt;strong&gt;自定义镜像&lt;/strong&gt;页签，找到待发布为社区镜像的可用自定义镜像，然后在&lt;strong&gt;操作&lt;/strong&gt;列选择&lt;code&gt;...&lt;/code&gt; &amp;gt;&lt;strong&gt;发布为社区镜像&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在&lt;strong&gt;发布为社区镜像&lt;/strong&gt;对话框，完成社区镜像的发布。&lt;/p&gt;
+&lt;p&gt;发布成功后，您可以在&lt;strong&gt;镜像&lt;/strong&gt;页面，单击&lt;strong&gt;社区镜像&lt;/strong&gt;页签，查看已发布的社区镜像信息。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20231208babd3eb9fc8963eab9f77adce6b6dd9e.png&#34;&gt;&lt;/p&gt;
+&lt;script async src=&#34;https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4855142804875926&#34;
+     crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+&lt;p&gt;&lt;ins class=&#34;adsbygoogle&#34;
+style=&#34;display:block; text-align:center;&#34;
+data-ad-layout=&#34;in-article&#34;
+data-ad-format=&#34;fluid&#34;
+data-ad-client=&#34;ca-pub-4855142804875926&#34;
+data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
+&lt;script&gt;
+     (adsbygoogle = window.adsbygoogle || []).push({});
+&lt;/script&gt;
+&lt;h2 id=&#34;相关问答&#34;&gt;相关问答&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;提交工单申请权限审核的时间是多久?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;申请权限的审核时间没有的到具体的回复。不过在催工单的情况下，我是从申请到得到权限用了24个小时。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;提交工单申请权限审核的流程是什么?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;申请权限的流程。准备申请发布镜像的材料 &amp;ndash; 提交申请工单 &amp;ndash; 审核团队核对提交申请材料 &amp;ndash; 补充申请材料（如果需要）&amp;ndash; 审核镜像 &amp;ndash; 开通权限。&lt;strong&gt;因为没有公布具体的审核流程，但是从沟通上我猜想可以这样去理解&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;有没有一些快捷的方式可以尽快通过审核？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;有的。值得一提的是，在我后续申请到了权限以后，我也可以发布没有进行审核的镜像发布到社区镜像中。所以大家在申请社区镜像权限的时候，可以选择申请一个尽量符合规则标准的镜像去申请。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;参考链接&#34;&gt;参考链接&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://help.aliyun.com/zh/ecs/user-guide/overview-12&#34;&gt;https://help.aliyun.com/zh/ecs/user-guide/overview-12&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://help.aliyun.com/zh/pnp/l6821168?spm=5176.22414175.sslink.1.638a753bYT0ivM&#34;&gt;https://help.aliyun.com/zh/pnp/l6821168?spm=5176.22414175.sslink.1.638a753bYT0ivM&lt;/a&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn/&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/231208094411/&#34;&gt;https://www.cnsre.cn/posts/postsid/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/%E9%98%BF%E9%87%8C%E4%BA%91/&#34;&gt;https://www.cnsre.cn/tags/阿里云/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+</content:encoded>
+        <dc:creator>CNSRE</dc:creator>
+        <media:content url="http://www.cnsre.cn:80/https://img.alicdn.com/tfs/TB13DzOjXP7gK0jSZFjXXc5aXXa-212-48.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>阿里云</category>
+            
+          
+        
+        
+          
+            
+              <category>阿里云</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

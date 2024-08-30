@@ -1,0 +1,64 @@
+baseURL = "https://www.cnsre.cn"
+title = "SRE运维博客是一个专注于SRE、DevOps、自动化运维、Kubernetes、Docker的个人运维博客。博客主要有系统运维、脚本编程、监控、devops等内容，本站涵盖系统运维、自动化运维、监控、脚本、容器、运维经验、云计算、虚拟化等内容。"
+theme = "zzo"
+
+defaultContentLanguage = "zh"
+defaultContentLanguageInSubdir = false
+hasCJKLanguage = true
+
+summaryLength = 70
+buildFuture = true
+
+# 页脚版权声明
+# copyright = "&copy;{year}, All Rights Reserved"
+timeout = 10000
+enableEmoji = true
+paginate = 13
+rssLimit = 100
+
+enableGitInfo = true
+googleAnalytics = "G-0157NSMP95"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      hardWraps = true
+      unsafe = true
+      xHTML = true
+  [markup.highlight]
+    codeFences = true
+    lineNos = true
+    lineNumbersInTable = true
+    noClasses = false
+  [markup.tableOfContents]
+    endLevel = 4
+    ordered = false
+    startLevel = 2
+
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[outputFormats]
+  [outputFormats.SearchIndex]
+    mediaType = "application/json"
+    baseName = "index"
+    isPlainText = true
+    notAlternative = true
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+  series = "series"
+
+[Waline]
+    enable = true
+    ServerURL = "https://waline-cnsre.vercel.app/"
+    Placeholder = "ヾﾉ≧∀≦)o来评论啊!"  #留言框占位提示文字
+    Avatar = "mp"
+    Meta = ["nick", "mail", "link"]
+    PageSize = 10
+    Lang = "zh-CN"
+    Highlight = true
+    AvatarCDN = "https://cdn.v2ex.com/gravatar/"  #waline的评论头像可以使用某种样式也可以使用cdn，这里用v2ex的cdn
+    RequiredFields = ["nick", "mail"]

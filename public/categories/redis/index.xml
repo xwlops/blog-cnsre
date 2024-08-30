@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Redis on SRE运维博客</title>
+    <link>http://www.cnsre.cn:80/categories/redis/</link>
+    <description>Recent content in Redis on SRE运维博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Mon, 12 Apr 2021 15:08:56 +0800</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="http://www.cnsre.cn:80/categories/redis/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>Linux Redis 单机版安装与配置</title>
+        <link>http://www.cnsre.cn:80/posts/210412150856/</link>
+        <pubDate>Mon, 12 Apr 2021 15:08:56 +0800</pubDate>
+        
+        <atom:modified>Wed, 10 Aug 2022 08:55:27 +0800</atom:modified>
+        <guid>http://www.cnsre.cn:80/posts/210412150856/</guid>
+        <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
+        <content:encoded>&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/210412150856/&#34;&gt;https://www.cnsre.cn/posts/210412150856/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/redis/&#34;&gt;https://www.cnsre.cn/tags/redis/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;p&gt;Linux下Redis单机版安装与配置&lt;/p&gt;
+&lt;h1 id=&#34;下载安装包并解压&#34;&gt;下载安装包并解压&lt;/h1&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;cd /usr/local
+wget http://download.redis.io/releases/redis-4.0.6.tar.gz
+tar -zxvf redis-4.0.6.tar.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;按照依赖环境&#34;&gt;按照依赖环境&lt;/h1&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;yum install gcc-c++ -y
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;稍微慢点需要等一小会儿&lt;/p&gt;
+&lt;h1 id=&#34;编译安装&#34;&gt;编译安装&lt;/h1&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;cd redis-4.0.6
+make MALLOC=libcmake install
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;为redis添加环境变量&#34;&gt;为Redis添加环境变量&lt;/h1&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;vim /etc/profile
+
+PATH=$PATH:$HOME/bin:/usr/local/redis-4.0.6/src          # 添加src目录路径到这里
+export PATH
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;拷贝配置文件到etc目录下&#34;&gt;拷贝配置文件到/etc目录下&lt;/h1&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;cp /usr/local/redis-4.0.6/redis.conf /etc/redis.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;配置redis&#34;&gt;配置Redis&lt;/h1&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;vim /etc/redis.conf 
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;修改以后台方式运行&#34;&gt;修改以后台方式运行&lt;/h1&gt;
+&lt;p&gt;&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210308143610.png&#34;&gt;&lt;br /&gt;
+开启密码访问&lt;br /&gt;
+&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210308143636.png&#34;&gt;&lt;br /&gt;
+开启远程访问&lt;br /&gt;
+&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210308143721.png&#34;&gt;&lt;br /&gt;
+&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210308143741.png&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;执行启动脚本&#34;&gt;执行启动脚本&lt;/h1&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;./redis-server  /etc/redis.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;登录redis&#34;&gt;登录Redis&lt;/h1&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;redis-cli -h 127.0.0.1 -p 6379 -a bsh@123
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;停止服务&#34;&gt;停止服务&lt;/h1&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;127.0.0.1:6379&amp;gt; shutdown
+&lt;/code&gt;&lt;/pre&gt;&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/210412150856/&#34;&gt;https://www.cnsre.cn/posts/210412150856/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/redis/&#34;&gt;https://www.cnsre.cn/tags/redis/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+</content:encoded>
+        <dc:creator>CNSRE</dc:creator>
+        <media:content url="http://www.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/linux.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>redis</category>
+            
+          
+        
+        
+          
+            
+              <category>redis</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

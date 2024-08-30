@@ -1,0 +1,119 @@
+description:
+draft: false
+#true 为隐藏文章 false展示
+#hideToc: false
+#如 true 则会隐藏目录
+#enableToc: true
+#如 true 则会生成目录
+#enableTocContent: true
+#如 true 则会生成目录内容
+#pinned: true  
+#固定文章
+#weight: 10000
+#文章排序权重
+password: 
+#文章密码
+keywords:
+#关键词
+- 
+author: CNSRE    
+#作者
+authorEmoji: ✍
+tags:
+- 标签
+categories:
+- 类型
+#series:
+#- 系列
+image: https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/kubernetes.png
+---
+
+---
+> 作者：[SRE运维博客](https://www.cnsre.cn/)
+> 博客地址：[https://www.cnsre.cn/](https://www.cnsre.cn/) 
+> 文章地址：[https://www.cnsre.cn/posts/postsid/](https://www.cnsre.cn/posts/postsid/)
+> 相关话题：[https://www.cnsre.cn/tags/标签/](https://www.cnsre.cn/tags/标签/)
+---
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4855142804875926"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-4855142804875926"
+     data-ad-slot="5670838583"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+---
+> 作者：[SRE运维博客](https://www.cnsre.cn/)
+> 博客地址：[https://www.cnsre.cn/](https://www.cnsre.cn/) 
+> 文章地址：[https://www.cnsre.cn/posts/postsid/](https://www.cnsre.cn/posts/postsid/)
+> 相关话题：[https://www.cnsre.cn/tags/标签/](https://www.cnsre.cn/tags/标签/)
+---
+
+AI写作模板
+
+为题为《使用 Lambda 函数将 CloudWatch Log 中的日志归档到 S3 桶中》的博客文章制定一份全面的中文 Markdown 提纲，
+包括至少15-20个引人入胜的标题和副标题，这些标题和副标题详细、相互排斥、集体详尽，涵盖整个主题。以总结和相关的常见问题和参考资料结束。
+提供一个引人入胜的标题，而不是写文章本身。
+
+我要你担任内容作家 非常精通 SEO 作家 中文流利。现在请你用中文根据上述的提纲写一篇 至少2500 字以上的 100% 独特、SEO 优化、人工撰写的文章。
+用你自己的话写文章，而不是从其他来源复制和粘贴。在创建内容时考虑困惑和突发性，确保两者的高水平而不失去特异性或背景。
+对于文章的标题,这也很重要,我需要你在文章中能够体现出标题和副标题（包括H1、H2、H3、H4标题）
+使用吸引读者的详尽段落。以人类写作的对话风格写作（使用非正式语气，使用人称代词，保持简单，吸引读者，使用主动语态，保持简短，使用反问句，并结合类比和隐喻）。
+
+``` shell
+```
+
+{{< notice success “这是成功的通知类型” >}}
+success, info, warning, error
+success text
+{{< /notice >}}
+
+{{< notice info "这是通知的信息类型" >}}  
+success, info, warning, error
+success text
+{{< /notice >}}
+
+**彩色告警文本框**
+
+{{< alert theme="warning" dir="ltr" >}} 
+⚠️ warning, success, info, danger
+***this is a text***
+{{< /alert >}}
+
+
+{{< alert theme="warning" dir="ltr" >}} 
+warning, success, info, danger
+***this is a text***
+{{< /alert >}}
+
+{{< alert theme="success" dir="ltr" >}} 
+warning, success, info, danger
+***this is a text***
+{{< /alert >}}
+
+{{< alert theme="danger" dir="ltr" >}} 
+warning, success, info, danger
+***this is a text***
+{{< /alert >}}
+
+
+{{< tabs 内容1 内容2 >}}
+{{< tab >}}
+### 内容1
+```shell
+Hello SRE运维博客!
+```
+{{< /tab >}}
+{{< tab >}}
+### 内容2
+```shell
+Hello SRE运维博客!
+```
+{{< /tab >}}
+{{< /tabs >}}

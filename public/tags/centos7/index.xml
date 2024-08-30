@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Centos7 on SRE运维博客</title>
+    <link>http://www.cnsre.cn:80/tags/centos7/</link>
+    <description>Recent content in Centos7 on SRE运维博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Fri, 12 Mar 2021 12:54:11 +0800</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="http://www.cnsre.cn:80/tags/centos7/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>AWS修改EC2实例时间</title>
+        <link>http://www.cnsre.cn:80/posts/210312112259/</link>
+        <pubDate>Fri, 12 Mar 2021 12:54:11 +0800</pubDate>
+        
+        <atom:modified>Sat, 26 Mar 2022 17:58:25 +0800</atom:modified>
+        <guid>http://www.cnsre.cn:80/posts/210312112259/</guid>
+        <description>解决aws ec2的centos7设置时区无效 解决办法 1 yum upgrade tzdata -y 原因分析 1 zdump -v /usr/share/zoneinfo/Asia/Shanghai 我们会发现时区是固定不变的,无论我们通过修改 localtime 还是通过 timedatectl 修改,</description>
+        <content:encoded>&lt;h1 id=&#34;解决aws-ec2的centos7设置时区无效&#34;&gt;解决aws ec2的centos7设置时区无效&lt;/h1&gt;
+&lt;h2 id=&#34;解决办法&#34;&gt;解决办法&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;yum upgrade tzdata -y
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;原因分析&#34;&gt;原因分析&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;zdump -v /usr/share/zoneinfo/Asia/Shanghai
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;我们会发现时区是固定不变的,无论我们通过修改 localtime 还是通过 timedatectl 修改,都无效.&lt;br /&gt;
+经过一番搜索,我发现是由于 tzdata 数据库老旧导致,升级即可解决.&lt;/p&gt;
+&lt;p&gt;另外也可以通过 TZ 环境变量来设置,这是操作系统默认支持的方式.&lt;/p&gt;
+&lt;h2 id=&#34;设置时区&#34;&gt;设置时区&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;timedatectl set-timezone Asia/Shanghai
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;或者&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;致谢&#34;&gt;致谢&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.linuxquestions.org/questions/centos-111/centos7-invalid-offset-for-utc-for-sweden-says-utc-00-a-4175623431/&#34;&gt;https://www.linuxquestions.org/questions/centos-111/centos7-invalid-offset-for-utc-for-sweden-says-utc-00-a-4175623431/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.cnsre.cn/posts/210312112259/&#34;&gt;文章链接&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&#34;https://www.cnsre.cn/posts/210312112259/&#34;&gt;https://www.cnsre.cn/posts/210312112259/&lt;/a&gt;&lt;/p&gt;
+</content:encoded>
+        <dc:creator>CNSRE</dc:creator>
+        <media:content url="http://www.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>aws</category>
+            
+          
+            
+              <category>centos7</category>
+            
+          
+            
+              <category>设置时区</category>
+            
+          
+            
+              <category>故障集</category>
+            
+          
+        
+        
+          
+            
+              <category>aws</category>
+            
+          
+            
+              <category>故障集</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

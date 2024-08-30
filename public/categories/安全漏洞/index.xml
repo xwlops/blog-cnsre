@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>安全漏洞 on SRE运维博客</title>
+    <link>http://www.cnsre.cn:80/categories/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/</link>
+    <description>Recent content in 安全漏洞 on SRE运维博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Sun, 12 Dec 2021 12:10:00 +0800</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="http://www.cnsre.cn:80/categories/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>Log4j 漏洞修复检测 附检测工具</title>
+        <link>http://www.cnsre.cn:80/posts/211213210004/</link>
+        <pubDate>Sun, 12 Dec 2021 12:10:00 +0800</pubDate>
+        
+        <atom:modified>Sat, 26 Mar 2022 17:58:25 +0800</atom:modified>
+        <guid>http://www.cnsre.cn:80/posts/211213210004/</guid>
+        <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/21</description>
+        <content:encoded>&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn/&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/211213210004/&#34;&gt;https://www.cnsre.cn/posts/211213210004/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/log4j/&#34;&gt;https://www.cnsre.cn/tags/log4j/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;p&gt;近日的Log4j2，可是非常的火啊，我也是加班加点把补丁给打上了次安心。Apache Log4j2存在远程代码执行漏洞，经验证，该漏洞允许攻击者在目标服务器上执行任意代码，可导致服务器被黑客控制。&lt;strong&gt;由于Apache Log4j 2应用较为广泛，建议使用该组件的用户尽快采取安全措施。&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;影响范围&#34;&gt;影响范围&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;漏洞影响版本&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;2.0 &amp;lt;= Apache Log4j 2 &amp;lt;= log4j-2.15.0-rc1&lt;/p&gt;
+&lt;h2 id=&#34;漏洞描述&#34;&gt;漏洞描述&lt;/h2&gt;
+&lt;p&gt;Apache Log4j 2是一个基于Java的日志记录工具，是对 Log4j 的升级。近日安恒信息应急响应中心监测到Apache Log4j 2存在远程代码执行漏洞，攻击者可通过构造恶意请求利用该漏洞实现在目标服务器上执行任意代码。&lt;/p&gt;
+&lt;script async src=&#34;https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4855142804875926&#34;
+     crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+&lt;p&gt;&lt;ins class=&#34;adsbygoogle&#34;
+style=&#34;display:block; text-align:center;&#34;
+data-ad-layout=&#34;in-article&#34;
+data-ad-format=&#34;fluid&#34;
+data-ad-client=&#34;ca-pub-4855142804875926&#34;
+data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
+&lt;script&gt;
+     (adsbygoogle = window.adsbygoogle || []).push({});
+&lt;/script&gt;
+&lt;h2 id=&#34;漏洞修复&#34;&gt;漏洞修复&lt;/h2&gt;
+&lt;p&gt;由于Log4j2 作为日志记录基础第三方库，被大量Java框架及应用使用，只要用到 Log4j2 进行日志输出且日志内容能被攻击者部分可控，即可能会受到漏洞攻击影响。因此，该漏洞也同时影响全球大量通用应用及组件，例如 ：&lt;br /&gt;
+Apache Struts2、Apache Solr、Apache Druid、Apache Flink、Apache Flume、Apache Dubbo、Apache Kafka、Spring-boot-starter-log4j2、ElasticSearch、Redis、Logstash等&lt;br /&gt;
+建议及时检查并升级所有使用了 Log4j 组件的系统或应用。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;紧急：&lt;/strong&gt; 目前漏洞POC已被公开，官方已发布安全版本，建议使用该组件的用户尽快采取安全措施。&lt;/p&gt;
+&lt;h3 id=&#34;临时性缓解措施&#34;&gt;临时性缓解措施：&lt;/h3&gt;
+&lt;p&gt;1、在 jvm 参数中添加 -Dlog4j2.formatMsgNoLookups=true&lt;br /&gt;
+2、系统环境变量中将LOG4J_FORMAT_MSG_NO_LOOKUPS 设置为 true&lt;br /&gt;
+3、创建 log4j2.component.properties 文件，文件中增加配置 log4j2.formatMsgNoLookups=true&lt;br /&gt;
+4、若相关用户暂时无法进行升级操作，也可通过禁止Log4j中SocketServer类所启用的socket端对公网开放来进行防护&lt;br /&gt;
+5、禁止安装log4j的服务器访问外网，并在边界对dnslog相关域名访问进行检测。部分公共dnslog平台如下&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ceye.io
+dnslog.link
+dnslog.cn
+dnslog.io
+tu4.org
+awvsscan119.autoverify.cn
+burpcollaborator.net
+s0x.cn
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;彻底修复漏洞&#34;&gt;彻底修复漏洞：&lt;/h3&gt;
+&lt;p&gt;建议您在升级前做好数据备份工作，避免出现意外&lt;br /&gt;
+研发代码修复：升级到官方提供的 log4j-2.15.0-rc2 版本&lt;br /&gt;
+&lt;a href=&#34;https://github.com/apache/logging-log4j2/releases/tag/log4j-2.15.1-rc1&#34;&gt;https://github.com/apache/logging-log4j2/releases/tag/log4j-2.15.1-rc1&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;漏洞检测工具&#34;&gt;漏洞检测工具&lt;/h2&gt;
+&lt;p&gt;检测工具下载地址 &lt;a href=&#34;https://pan.cnsre.cn/d/Package/Linux/360log4j2.zip&#34;&gt;https://pan.cnsre.cn/d/Package/Linux/360log4j2.zip&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;漏洞检测&#34;&gt;漏洞检测&lt;/h2&gt;
+&lt;h3 id=&#34;浏览器被动式扫描检测方案&#34;&gt;&lt;strong&gt;浏览器被动式扫描检测方案&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;原理&lt;br /&gt;
+工程师可设置该代理通过浏览器被动扫描目标，查看 DNS Log 检测是否存在 log4j 漏洞。&lt;/li&gt;
+&lt;li&gt;使用方法&lt;br /&gt;
+1.浏览器或操作系统配置 HTTP/HTTPS 代理：219.141.219.69:18080&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/16393697562701639369756263.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;2.浏览器或操作系统将下列证书添加到信任名单：附件sqli-hunter.pem&lt;/p&gt;
+&lt;p&gt;3.使用浏览器正常进行目标浏览，当结束扫描后，在http://219.141.219.69:18000/ 下检查是否存在以目标域名为名的 txt 文件，如 http://219.141.219.69/360.cn.txt&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/16393698004091639369800402.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;4.若存在，则说明目标网站存在漏洞，细节如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/16393698443671639369844351.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;可看到完整 HTTP 请求细节，params参数为存在 log4j 注入漏洞的参数&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;使用限制&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;主机外网 IP 无法访问 360 IP，请不要使用该代理扫描 360&lt;/li&gt;
+&lt;li&gt;目前只能检测 POST body 中的参数&lt;/li&gt;
+&lt;li&gt;不允许任何恶意攻击&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;本地扫描常规检测方案&#34;&gt;&lt;strong&gt;本地扫描常规检测方案&lt;/strong&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;下载本地检测工具&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;扫描源码：./log4j-discoverer &amp;ndash;src&amp;quot;源码目录&amp;quot;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;扫描jar包：./log4j-discoverer&amp;ndash;jar &amp;ldquo;jar包文件&amp;rdquo;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;扫描系统进程：./log4j-discoverer –scan&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;log4j漏洞补丁方案&#34;&gt;&lt;strong&gt;Log4j漏洞补丁方案&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;如果检测到相关漏洞的应用或组件，建议立即对该应用或组件进行打补丁修复， Log4j补丁方案如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;工具原理&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/16393698896231639369889617.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Hook前受到log4j jndi注入攻击&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/16393698736681639369873662.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;执行 java -jar PatchLog4j.jar&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/16393699127551639369912750.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;打入补丁后 log4j不再处理JNDI逻辑直接将JNDI字符串输出&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/16393699249691639369924966.png&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;工具来源【360政企安服高攻实验室】&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn/&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/211213210004/&#34;&gt;https://www.cnsre.cn/posts/211213210004/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/log4j/&#34;&gt;https://www.cnsre.cn/tags/log4j/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+</content:encoded>
+        <dc:creator>CNSRE</dc:creator>
+        <media:content url="http://www.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>安全</category>
+            
+          
+            
+              <category>log4j</category>
+            
+          
+        
+        
+          
+            
+              <category>安全漏洞</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

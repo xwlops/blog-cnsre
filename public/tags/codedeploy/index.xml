@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Codedeploy on SRE运维博客</title>
+    <link>http://www.cnsre.cn:80/tags/codedeploy/</link>
+    <description>Recent content in Codedeploy on SRE运维博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Wed, 10 Mar 2021 13:49:58 +0800</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="http://www.cnsre.cn:80/tags/codedeploy/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>jenkins AWS CodeDeploy不停机部署</title>
+        <link>http://www.cnsre.cn:80/posts/210310131550/</link>
+        <pubDate>Wed, 10 Mar 2021 13:49:58 +0800</pubDate>
+        
+        <atom:modified>Tue, 29 Mar 2022 09:04:28 +0800</atom:modified>
+        <guid>http://www.cnsre.cn:80/posts/210310131550/</guid>
+        <description>此项目的特点是把Jenkins与CodeDeploy相结合做的CICD做的蓝绿发布，CI与CD 是分开的，CI构建完以后以BuildNumbe</description>
+        <content:encoded>&lt;p&gt;此项目的特点是把Jenkins与CodeDeploy相结合做的CICD做的蓝绿发布，CI与CD 是分开的，CI构建完以后以BuildNumber的形式把war包存至AWS的S3桶中。同时在java项目上把java代码与配置文件分离，这样的话我们就可以war包+ 配置文件的形式把项目发布至测试、预生产、生产等环境。在CD发布的过程中CodeDeploy中用到的是 CodeDeployDefault.OneAtATime 如果有一台发布以后健康检查失败，则停止发布另外一台，并吧该台设备从ALB 中剔除。&lt;br /&gt;
+&lt;strong&gt;jenkins发布流程如下图&lt;/strong&gt;&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223140018.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;环境准备&#34;&gt;环境准备&lt;/h2&gt;
+&lt;h2 id=&#34;aws-准备&#34;&gt;AWS 准备&lt;/h2&gt;
+&lt;h3 id=&#34;创建-iam-角色&#34;&gt;创建 IAM 角色&lt;/h3&gt;
+&lt;p&gt;我这边给到jenkins 角色的权限是 CodeDeploy 和S3 的所有权限&lt;br /&gt;
+&lt;strong&gt;JenkinsCodeDeployProject&lt;/strong&gt;&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223140255.png&#34;&gt;&lt;br /&gt;
+&lt;strong&gt;IAM json&lt;/strong&gt;&lt;br /&gt;
+
+&lt;div id=&#34;c33b8f9eff63fcd1&#34; class=&#34;tab&#34;&gt;
+  &lt;div class=&#34;tab__links&#34;&gt;
+    
+      &lt;button class=&#34;tab__link&#34; aria-label=&#34;Tab link&#34;&gt;CodeDeploy&lt;/button&gt;
+    
+      &lt;button class=&#34;tab__link&#34; aria-label=&#34;Tab link&#34;&gt;S3&lt;/button&gt;
+    
+  &lt;/div&gt;
+  
+ 
+&lt;div id=&#34;38d3467f2f5a9d99&#34; class=&#34;tab__content&#34;&gt;
+  &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;#34;Version&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;2012-10-17&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;#34;Statement&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;#34;Effect&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Allow&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;#34;Action&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;s2&#34;&gt;&amp;#34;codedeploy:*&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;s2&#34;&gt;&amp;#34;s3:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;#34;Resource&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;ad983472473e0b8c&#34; class=&#34;tab__content&#34;&gt;
+  &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;#34;Version&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;2012-10-17&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;#34;Statement&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;#34;Effect&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Allow&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;#34;Action&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;s2&#34;&gt;&amp;#34;codedeploy:*&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;s2&#34;&gt;&amp;#34;s3:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;#34;Resource&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;script&gt;
+  &#39;use strict&#39;;
+
+  var containerId = JSON.parse(&#34;\&#34;c33b8f9eff63fcd1\&#34;&#34;);
+  var containerElem = document.getElementById(containerId);
+  var tabLinks = null;
+  var tabContents = null;
+  var ids = [];
+
+  if (containerElem) {
+    tabLinks = containerElem.querySelectorAll(&#39;.tab__link&#39;);
+    tabContents = containerElem.querySelectorAll(&#39;.tab__content&#39;);
+  }
+
+  for (var i = 0; i &lt; tabContents.length; i++) {
+    ids = ids.concat(tabContents[i].getAttribute(&#39;id&#39;));
+    tabContents[i].style.display = &#39;none&#39;;
+
+    if (0 === parseInt(i, 10) &amp;&amp; !tabContents[i].classList.contains(&#39;active&#39;)) {
+      tabContents[i].classList.add(&#39;active&#39;);
+    }
+  }
+
+  for (var i = 0; i &lt; tabLinks.length; i++) {
+    tabLinks[i].setAttribute(&#39;id&#39;, ids[i]);
+
+    if (0 === parseInt(i, 10) &amp;&amp; !tabLinks[i].classList.contains(&#39;active&#39;)) {
+      tabLinks[i].classList.add(&#39;active&#39;);
+    } else {
+      tabLinks[i].classList.remove(&#39;active&#39;);
+    }
+  }
+
+  if (tabContents.length &gt; 0) {
+    tabContents[0].style.display = &#39;block&#39;;
+  }
+&lt;/script&gt;&lt;/p&gt;
+&lt;h3 id=&#34;创建ec2实例&#34;&gt;创建EC2实例&lt;/h3&gt;
+&lt;p&gt;准备一台EC2 需要IAM要拥有CodeDeploy和S3权限的角色 也就是我们创建的IAM角色&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223141851.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;linux-准备&#34;&gt;Linux 准备&lt;/h2&gt;
+&lt;p&gt;安装jenkins、jdk、maven、aws-cli、git&lt;br /&gt;
+以上环境安装不做详细说明，&lt;/p&gt;
+&lt;h3 id=&#34;mvn-安装&#34;&gt;mvn 安装&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-SHELL&#34; data-lang=&#34;SHELL&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; /home/bsh/tools
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;wget https://mirrors.cnnic.cn/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz --no-check-certificate
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;tar  -zxvf apache-maven-3.6.3-bin.tar.gz 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mv apache-maven-3.6.3 /usr/local/maven
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ln -s /usr/local/maven/bin/mvn  /usr/bin/mvn
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;vim /etc/profile
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#最后加入以下内容&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;###################mvn########################&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;MAVEN_HOME&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/usr/local/maven
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;PATH&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$MAVEN_HOME&lt;/span&gt;/bin:&lt;span class=&#34;nv&#34;&gt;$PATH&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;source&lt;/span&gt; /etc/profile
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;vim /home/bsh/tools/maven/apache-maven/src/conf/settings.xml
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#找到mirrors 修改为以下内容&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &amp;lt;mirrors&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &amp;lt;mirror&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &amp;lt;id&amp;gt;alimaven&amp;lt;/id&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &amp;lt;mirrorOf&amp;gt;aliyun maven&amp;lt;/mirrorOf&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &amp;lt;name&amp;gt;Human Readable Name &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; this Mirror.&amp;lt;/name&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &amp;lt;url&amp;gt;http://maven.aliyun.com/nexus/content/groups/public/&amp;lt;/url&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &amp;lt;/mirror&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &amp;lt;/mirrors&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mvn -version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;jenkinsjdk安装&#34;&gt;jenkins、jdk安装&lt;/h3&gt;
+&lt;p&gt;安装可参考&lt;br /&gt;
+&lt;a href=&#34;https://www.cnblogs.com/xuewenlong/p/12914876.html&#34;&gt;https://www.cnblogs.com/xuewenlong/p/12914876.html&lt;/a&gt;&lt;br /&gt;
+aws-cli 可参考&lt;br /&gt;
+&lt;a href=&#34;https://amazonaws-china.com/cn/cli/&#34;&gt;https://amazonaws-china.com/cn/cli/&lt;/a&gt;&lt;br /&gt;
+jenkins 最新安装包&lt;br /&gt;
+&lt;a href=&#34;https://mirrors.tuna.tsinghua.edu.cn/jenkins/war-stable/latest/jenkins.war&#34;&gt;https://mirrors.tuna.tsinghua.edu.cn/jenkins/war-stable/latest/jenkins.war&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;jenkins-插件准备&#34;&gt;jenkins 插件准备&lt;/h2&gt;
+&lt;p&gt;安装插件的过程不再细说&lt;br /&gt;
+Artifact Manager on S3&lt;br /&gt;
+&lt;a href=&#34;https://plugins.jenkins.io/aws-global-configuration/&#34;&gt;AWS Global Configuration&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&#34;https://plugins.jenkins.io/blueocean-bitbucket-pipeline/&#34;&gt;Bitbucket Pipeline for Blue Ocean&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&#34;https://plugins.jenkins.io/copyartifact/&#34;&gt;Copy Artifact Plugin&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&#34;https://plugins.jenkins.io/next-build-number/&#34;&gt;Next Build Number Plugin&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;jenkins设置&#34;&gt;Jenkins设置&lt;/h2&gt;
+&lt;p&gt;在插件安装完以后在部署项目之前我们需要做一些设置&lt;/p&gt;
+&lt;h3 id=&#34;bitbucket-设置&#34;&gt;Bitbucket 设置&lt;/h3&gt;
+&lt;p&gt;点击系统设置&amp;ndash;打开系统配置&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223142532.png&#34;&gt;&lt;br /&gt;
+然后找到 Bitbucket 端点&amp;ndash; 添加 Bitbucket server&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223142547.png&#34;&gt;&lt;br /&gt;
+按需填写&amp;ndash; 然后点击管理hooks&amp;ndash;点击添加 按需写入自己的Bitbucket 账号密码&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223142612.png&#34;&gt;&lt;br /&gt;
+最后保存&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223142625.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;aws-s3-设置&#34;&gt;AWS S3 设置&lt;/h3&gt;
+&lt;p&gt;点击系统设置&amp;ndash;打开系统配置&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223142711.png&#34;&gt;&lt;br /&gt;
+找到 Artifact Management for Builds&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223142738.png&#34;&gt;&lt;br /&gt;
+选择Amazon S3 然后保存&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223142748.png&#34;&gt;&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223142758.png&#34;&gt;&lt;br /&gt;
+分别填写S3桶名称和桶下边的文件&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223142813.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;创建一个新的ci-job&#34;&gt;创建一个新的CI JOB&lt;/h2&gt;
+&lt;h3 id=&#34;新创建一个自由风格的job&#34;&gt;新创建一个自由风格的JOB&lt;/h3&gt;
+&lt;p&gt;&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223142839.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;源码管理&#34;&gt;源码管理&lt;/h3&gt;
+&lt;p&gt;按需填入 URL&lt;br /&gt;
+选择 Bitbucket的账号密码&lt;br /&gt;
+写入分支&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223142859.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;构建环境&#34;&gt;构建环境&lt;/h3&gt;
+&lt;p&gt;构建前删除工作空间&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223142920.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;构建&#34;&gt;构建&lt;/h3&gt;
+&lt;p&gt;选择执行shell&lt;br /&gt;
+写入jdk以及mvn的变量&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-SHELL&#34; data-lang=&#34;SHELL&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;PATH&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/home/bsh/tools/jdk1.8.0_221/bin:&lt;span class=&#34;nv&#34;&gt;$PATH&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;PATH&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/usr/local/maven/bin:&lt;span class=&#34;nv&#34;&gt;$PATH&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mvn clean package -DskipTests
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223142956.png&#34;&gt;&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223143007.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;构建后的操作&#34;&gt;构建后的操作&lt;/h3&gt;
+&lt;p&gt;构建后归档war包&lt;br /&gt;
+这一步也就是把war包存至S3桶中的一步&lt;br /&gt;
+点击增加构建后操作步骤&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223143029.png&#34;&gt;&lt;br /&gt;
+选择归档成品&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223143047.png&#34;&gt;&lt;br /&gt;
+填入之前配置S3桶中下的目录以及文件名称&lt;br /&gt;
+最后等于war包存在了S3的&lt;br /&gt;
+&lt;code&gt;S3: /xxxxxx-xxxxx-xxxx/JenkinsCodeDeployProject/xxxx-CI-Artifact/1/artifacts/target/xxxxxxx.war&lt;/code&gt;&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223143151.png&#34;&gt;&lt;br /&gt;
+最后可别忘记点击保存了 哈哈哈&lt;/p&gt;
+&lt;h2 id=&#34;测试ci构建java工程&#34;&gt;测试CI构建java工程&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Started by user xuewenlong
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Running as SYSTEM
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Building in workspace /root/.jenkins/workspace/Backend-CI-test
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;WS-CLEANUP&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Deleting project workspace...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;WS-CLEANUP&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Deferred wipeout is used...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;The recommended git tool is: NONE
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;过程略
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;INFO&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; ------------------------------------------------------------------------
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;INFO&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; BUILD SUCCESS
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;INFO&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; ------------------------------------------------------------------------
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;INFO&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Total time:  19.375 s
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;INFO&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Finished at: 2020-09-01T09:03:27Z
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;INFO&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; ------------------------------------------------------------------------
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Archiving artifacts
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Uploaded &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; artifact&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;s&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; to https://cnsre.cn.s3.cn-north-1.amazonaws.com.cn/JenkinsCodeDeployProject/Backend-CI-test/13/artifacts/
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Recording fingerprints
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Finished: SUCCESS
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;最后可以看到是已经构建完成并且把war包存放在了S3中&lt;/p&gt;
+&lt;h3 id=&#34;登录aws-s3-查看验证war包&#34;&gt;登录AWS S3 查看验证war包&lt;/h3&gt;
+&lt;p&gt;&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223143325.png&#34;&gt;&lt;br /&gt;
+这样的话可以看到是已经完成了CI 打包归档至S3桶中。&lt;/p&gt;
+&lt;h2 id=&#34;创建一个新的cd-job&#34;&gt;创建一个新的CD JOB&lt;/h2&gt;
+&lt;h3 id=&#34;bitbucket中创建脚本配置文件等&#34;&gt;Bitbucket中创建脚本配置文件等&lt;/h3&gt;
+&lt;p&gt;在创建CD JOB 之前 我们需要在Bitbucket中创建一些脚本配置文件等&lt;br /&gt;
+以xxx为例目录结构如下&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# tree  configuration-file-cicd/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;configuration-file-cicd/                     &lt;span class=&#34;c1&#34;&gt;#Bitbucket文件夹&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;├── xxx                                      &lt;span class=&#34;c1&#34;&gt;#以项目划分Bitbucket文件夹&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│   ├── application-xxx-pilot.properties     &lt;span class=&#34;c1&#34;&gt;#xxx预生产配置文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│   ├── application-xxx-prod.properties      &lt;span class=&#34;c1&#34;&gt;#xxx生产配置文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│   ├── application-xxx-qa.properties        &lt;span class=&#34;c1&#34;&gt;#xxx测试配置文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│   ├── appspec.yml                          &lt;span class=&#34;c1&#34;&gt;#CodeDeploy 配置文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│   └── scripts                              &lt;span class=&#34;c1&#34;&gt;#CodeDeploy调用的脚本文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│       ├── apparchive.sh
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│       └── starttomcat.sh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;具体内容展示&lt;br /&gt;
+配置文件不再展示&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-SHELL&#34; data-lang=&#34;SHELL&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# cat appspec.yml &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;version: 0.0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;os: linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;files:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  - source: xxx.war
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    destination: /home/bsh/tools/apache-tomcat-8.5.23/webapps
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  - source: application-backend.properties
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    destination: /home/bsh/tools/apache-tomcat-8.5.23/webapps
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hooks:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  BeforeInstall:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    - location: scripts/apparchive.sh
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  ApplicationStart:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    - location: scripts/starttomcat.sh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;root@ip-10-0-20-89 scripts&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;# cat apparchive.sh &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#!/bin/bash&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mv -f /home/bsh/tools/apache-tomcat-8.5.23/webapps/bshrexxxcipes.war /home/bsh/backup/tomcatback/xxx.war.old
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mv -f /home/bsh/tools/apache-tomcat-8.5.23/webapps/application-xxx.properties /home/bsh/backup/tomcatback/application-xxx.properties.old
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-SHELL&#34; data-lang=&#34;SHELL&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# cat starttomcat.sh &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#!/bin/bash -x&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo systemctl restart tomcat 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;aws-codedeploy-配置&#34;&gt;AWS CodeDeploy 配置&lt;/h3&gt;
+&lt;p&gt;在AWS 中找到CodeDeploy 服务&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223143624.png&#34;&gt;&lt;br /&gt;
+选择创建应用程序&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223143639.png&#34;&gt;&lt;br /&gt;
+写入应用程序名称，和EC2/本地 点击创建应用程序&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223143707.png&#34;&gt;&lt;br /&gt;
+选择刚才创建的应用程序 点击部署组 选择创建部署组&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223143727.png&#34;&gt;&lt;br /&gt;
+依次填入相关信息。这个是要在jenkins中用到的&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223143744.png&#34;&gt;&lt;br /&gt;
+选择我们一开始创建的IAM 角色&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223143758.png&#34;&gt;&lt;br /&gt;
+部署类型选择就地（这边的蓝绿部署的话要用到自动扩展这个对于目前我们的业务来说比较浪费设备）&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223143813.png&#34;&gt;&lt;br /&gt;
+选择需要发布的EC2&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223143827.png&#34;&gt;&lt;br /&gt;
+部署方式为一台一台发布&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223143840.png&#34;&gt;&lt;br /&gt;
+启用负载均衡，发布好一台后做健康检查，如果健康检查不通过则发布停止。&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223143902.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;创建自由风格的cd-job&#34;&gt;创建自由风格的CD JOB&lt;/h3&gt;
+&lt;p&gt;&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223143916.png&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;general&#34;&gt;General&lt;/h4&gt;
+&lt;p&gt;选择 参数化构建过程、然后依次填入一下内容&lt;br /&gt;
+BuildNumber 是CI构建时的构建数字&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223143939.png&#34;&gt;&lt;br /&gt;
+PackageName 为你的war包名称&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223143952.png&#34;&gt;&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223144001.png&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;源码管理-1&#34;&gt;源码管理&lt;/h4&gt;
+&lt;p&gt;选择GIT，这里的URL是java项目配置文件的地址 选择配置文件所在的分支我这边是存放在dev分支&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223144034.png&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;构建环境-1&#34;&gt;构建环境&lt;/h4&gt;
+&lt;p&gt;构建前删除工作空间&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223144053.png&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;构建-1&#34;&gt;构建&lt;/h4&gt;
+&lt;p&gt;选择执行shell&lt;br /&gt;
+使用aws cli 命令把S3中的war包拿下来&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-SHELL&#34; data-lang=&#34;SHELL&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#从S3桶中拿取war包&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;aws s3 cp s3://cnsre.cn/JenkinsCodeDeployProject/Backend-CI-Artifact/&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;BuildNumber&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;/artifacts/target/&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;PackageName&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt; backend/ --region cn-north-1 --no-progress
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#记录使用&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;JOB_NAME&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;BUILD_NUMBER&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;-Test&amp;#34;&lt;/span&gt; &amp;gt; backend/versionfile
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#配置文件重命名&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cp backend/application-backend-prod.properties backend/application-backend.properties
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223144153.png&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;构建后操作&#34;&gt;构建后操作&lt;/h4&gt;
+&lt;p&gt;依次填入CodeDeploy以及S3的配置信息&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223144224.png&#34;&gt;&lt;br /&gt;
+到现在jenkins CD 已经配置完成 接下来测试下吧&lt;/p&gt;
+&lt;h3 id=&#34;测试cd发布java工&#34;&gt;测试CD发布java工&lt;/h3&gt;
+&lt;p&gt;查看上次CI构建成功的war包&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223144259.png&#34;&gt;&lt;br /&gt;
+选择需要发布的BuildNumber 以及填写java 工程的war包名称 然后点击开始构建&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210223144317.png&#34;&gt;&lt;br /&gt;
+因为在codedeploy 中选择的是一台一台发布，并且启用的负载均衡 所以这个发布的时间会比较长，一般在10分钟以上，但是这种方式也是比较适合生产环境的，因为这样的方式是不停机部署的方式。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-SHELL&#34; data-lang=&#34;SHELL&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;控制台输出
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Started by user SRE
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Running as SYSTEM
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Building in workspace /root/.jenkins/workspace/Backend-CD-Prod
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;WS-CLEANUP&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Deleting project workspace...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;WS-CLEANUP&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Deferred wipeout is used...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;过程略
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Uploading zip to s3:/XXXXX/JenkinsCodeDeployProject/Backend-CD-Prod/PROD/#5-Backend-CD-Prod-5-Test.zip
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Registering revision &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; application &lt;span class=&#34;s1&#34;&gt;&amp;#39;BackendCICD&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Creating deployment with revision at &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;RevisionType: S3,S3Location: &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;Bucket: cnsre.cn,Key: JenkinsCodeDeployProject/Backend-CD-Prod/PROD/#5-Backend-CD-Prod-5-Test.zip,BundleType: zip,ETag: 5eb4e102812cc69f9c73084b06fdcfb1&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;,&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Finished: SUCCESS
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;验证cd部署java工程&#34;&gt;验证CD部署java工程&lt;/h2&gt;
+&lt;p&gt;最好的验证方法就是登录服务器查看一下&lt;br /&gt;
+我这边就不做验证了&lt;br /&gt;
+截止到此 jenkins 配合AWS codedeploy 的不停机发布已经完成。&lt;br /&gt;
+&lt;a href=&#34;https://www.cnsre.cn/posts/210310131550/&#34;&gt;文章链接&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&#34;https://www.cnsre.cn/posts/210310131550/&#34;&gt;https://www.cnsre.cn/posts/210310131550/&lt;/a&gt;&lt;/p&gt;
+</content:encoded>
+        <dc:creator>CNSRE</dc:creator>
+        <media:content url="http://www.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>jenkins</category>
+            
+          
+            
+              <category>aws</category>
+            
+          
+            
+              <category>codedeploy</category>
+            
+          
+        
+        
+          
+            
+              <category>jenkins</category>
+            
+          
+            
+              <category>aws</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Oracle on SRE运维博客</title>
+    <link>http://www.cnsre.cn:80/tags/oracle/</link>
+    <description>Recent content in Oracle on SRE运维博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Sat, 09 Oct 2021 11:15:57 +0800</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="http://www.cnsre.cn:80/tags/oracle/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>zabbix 监控 oracle 数据库</title>
+        <link>http://www.cnsre.cn:80/posts/211009115571/</link>
+        <pubDate>Sat, 09 Oct 2021 11:15:57 +0800</pubDate>
+        
+        <atom:modified>Wed, 10 Aug 2022 08:55:27 +0800</atom:modified>
+        <guid>http://www.cnsre.cn:80/posts/211009115571/</guid>
+        <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/211</description>
+        <content:encoded>&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/211009115571/&#34;&gt;https://www.cnsre.cn/posts/211009115571/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/zabbix/&#34;&gt;https://www.cnsre.cn/tags/zabbix/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
+&lt;p&gt;​    Orabbix 是设计用来为 zabbix 监控 &lt;a href=&#34;http://lib.csdn.net/base/oracle&#34;&gt;Oracle&lt;/a&gt; &lt;a href=&#34;http://lib.csdn.net/base/mysql&#34;&gt;数据库&lt;/a&gt;的插件，它提供多层次的监控，包括可用性和服务器性能指标。&lt;/p&gt;
+&lt;p&gt;​    它提供了从众多 &lt;a href=&#34;http://lib.csdn.net/base/oracle&#34;&gt;oracle&lt;/a&gt; 实例采集数据的有效机制，进而提供此信息的监控和性能指标。然后，您可以利用的 zabbix 的报告功能为收集的所有数据，并提供分析。目前的发行版中包含了一组预先定义的模板，包括从初始部署警报和图形功能。然而，这些可以进行微调，以满足您的需求和数据/监控要求&lt;/p&gt;
+&lt;h3 id=&#34;环境介绍&#34;&gt;&lt;strong&gt;环境介绍&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;系统环境：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;linux Centos 7.4&lt;/p&gt;
+&lt;p&gt;3.10.0-693.21.1.el7.x86_64&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;zabbix版本&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;zabbix 3.4.7&lt;/p&gt;
+&lt;h3 id=&#34;orabbix-监控什么&#34;&gt;&lt;strong&gt;Orabbix 监控什么？&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;数据库版本&lt;/p&gt;
+&lt;p&gt;归档日志与生产趋势分析&lt;/p&gt;
+&lt;p&gt;触发器，表/过程等命中率&lt;/p&gt;
+&lt;p&gt;逻辑 I/O 性能&lt;/p&gt;
+&lt;p&gt;物理 I/O 性能&lt;/p&gt;
+&lt;p&gt;PGA&lt;/p&gt;
+&lt;p&gt;SGA&lt;/p&gt;
+&lt;p&gt;共享池&lt;/p&gt;
+&lt;p&gt;Sessions&lt;/p&gt;
+&lt;p&gt;数据库大小&lt;/p&gt;
+&lt;p&gt;表空间&lt;/p&gt;
+&lt;h2 id=&#34;安装配置&#34;&gt;安装配置&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;zabbix server 端操作&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;orabbix插件的下载&#34;&gt;Orabbix插件的下载&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.smartmarmot.com/product/orabbix/download/&#34;&gt;http://www.smartmarmot.com/product/orabbix/download/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;安装-orabbix&#34;&gt;安装 orabbix&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;创建目录&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mkdir  -p /opt/orabbix
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mv orabbix-1.2.3.zip /opt/orabbix
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt;  /opt/orabbix
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;yum安装unzip&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;yum install unzip -y
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 解压oeabbix&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;unzip orabbix-1.2.3.zip
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;创建orabbix备份&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;cp conf/config.props.sample conf/config.props
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;启动程序拷贝至/etx/init.d/&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;cp init.d/orabbix  /etc/init.d/
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;分配权限&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;chmod  +x /etc/init.d/orabbix
+chmod  +x /opt/orabbix/run.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;安装jdk&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;yum install java -y
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;创建数据库账号&#34;&gt;创建数据库账号&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;## oracle 服务器端操作 ##&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;登录 oracle 命令行&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;su&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;oracle&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;       &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;切换到&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;oracle&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;用户&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sqlplus&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;nolog&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;不连接任何数据库&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;conn&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;as&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sysdba&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;   &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;用&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sysdba&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;登陆&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;或者&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;conn&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;用户名&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;密码&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;select&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;instance_name&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;from&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;v$instance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;查看实例&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;首先我们需要在被监控的Oracle上面创建一个账号，用于zabbix的数据获取，在oracle的sqlplus里面执行&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;CREATE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;USER&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ZABBIX&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;IDENTIFIED&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;BY&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;zabbix&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;DEFAULT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TABLESPACE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;SYSTEM&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;TEMPORARY&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TABLESPACE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TEMP&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PROFILE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;DEFAULT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ACCOUNT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;UNLOCK&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;；&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;赋予角色权限&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;GRANT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;CONNECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;TO&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ZABBIX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;GRANT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;RESOURCE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;TO&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ZABBIX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;ALTER&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;USER&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ZABBIX&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;DEFAULT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;ROLE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;ALL&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;赋予系统权限&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;GRANT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;ANY&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;TABLE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;TO&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ZABBIX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;GRANT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;CREATE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;SESSION&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;TO&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ZABBIX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;GRANT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;ANY&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;DICTIONARY&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;TO&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ZABBIX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;GRANT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;UNLIMITED&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TABLESPACE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;TO&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ZABBIX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;GRANT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;ANY&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;DICTIONARY&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;TO&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ZABBIX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;如果我们的数据库是Oracle 11g，我们还需要执行下面的语句&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注释：官方文档是需要执行这个语句的，测试没有执行也一样可以用，目前没有发现问题（可参考）&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;exec dbms_network_acl_admin.create_acl(acl =&amp;gt; &amp;#39;resolve.xml&amp;#39;,description =&amp;gt; &amp;#39;resolve acl&amp;#39;, principal =&amp;gt;&amp;#39;ZABBIX&amp;#39;, is_grant =&amp;gt; true, privilege =&amp;gt; &amp;#39;resolve&amp;#39;);
+
+exec dbms_network_acl_admin.assign_acl(acl =&amp;gt; &amp;#39;resolve.xml&amp;#39;, host =&amp;gt;&amp;#39;*&amp;#39;);
+
+commit;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;参考官网文档&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.smartmarmot.com/wiki/index.php/Orabbix&#34;&gt;http://www.smartmarmot.com/wiki/index.php/Orabbix&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;编辑刚刚生成的configprops文件&#34;&gt;编辑刚刚生成的config.props文件&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;zabbix server 端操作&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-conf&#34; data-lang=&#34;conf&#34;&gt;vi  /opt/orabbix/conf/config.props
+
+** 修改后内容如下 **
+
+#comma separed list of Zabbix servers
+
+ZabbixServerList=ZabbixServer
+
+ZabbixServer.Address=192.168.2.145    **#zabbix server IP地址**
+
+ZabbixServer.Port=10051                        **#端口**
+
+ZabbixServer2.Address=IP_ADDRESS_OF_ZABBIX_SERVER
+
+ZabbixServer2.Port=PORT_OF_ZABBIX_SERVER
+
+#pidFile
+
+OrabbixDaemon.PidFile=./logs/orabbix.pid
+
+#frequency of item&amp;#39;s refresh
+
+OrabbixDaemon.Sleep=300
+
+#MaxThreadNumber should be &amp;gt;= than the number of your databases
+
+OrabbixDaemon.MaxThreadNumber=100
+
+#put here your databases in a comma separated list
+
+DatabaseList=192.168.2.142     **# 名称与该机在 zabbix 中监控的主机名称保持一致**
+
+#Configuration of Connection pool
+
+#if not specified Orabbis is going to use default values (hardcoded)
+
+#Maximum number of active connection inside pool
+
+DatabaseList.MaxActive=10
+
+#The maximum number of milliseconds that the pool will wait 
+
+#(when there are no available connections) for a connection to be returned 
+
+#before throwing an exception, or &amp;lt;= 0 to wait indefinitely. 
+
+DatabaseList.MaxWait=100
+
+DatabaseList.MaxIdle=1
+
+#define here your connection string for each database
+
+192.168.2.142.Url=jdbc:oracle:thin:@192.168.2.142:1521:orcl    **# 需要 jdk 环境，因为这里是通过 JDBC 连接的，**
+
+​                                                                                                     **#orcl   为数据库实例名称**
+
+192.168.2.142.User=ZABBIX            **# 用来监控 oracle 数据库的用户名和密码，需要在 oracle 中创建并赋予一定的权限**
+
+192.168.2.142.Password=ZABBIX
+
+#Those values are optionals if not specified Orabbix is going to use the general values
+
+192.168.2.142.MaxActive=10
+
+192.168.2.142.MaxWait=100
+
+192.168.2.142.MaxIdle=1
+
+192.168.2.142.QueryListFile=./conf/query.props
+
+#DB2.Url=jdbc:oracle:thin:@server2.domain.example.com:&amp;lt;LISTENER_PORT&amp;gt;:DB2
+
+#DB2.User=zabbix
+
+#DB2.Password=zabbix_password
+
+#DB2.QueryListFile=./conf/query.props
+
+#DB3.Url=jdbc:oracle:thin:@server3.domain.example.com:&amp;lt;LISTENER_PORT&amp;gt;:DB3
+
+#DB3.User=zabbix
+
+#DB3.Password=zabbix_password
+
+#DB3.QueryListFile=./conf/query.props
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;——————分—————————割—————————线————————&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;**注：**以上端口号为与&lt;code&gt;Zabbix Server&lt;/code&gt;通讯的端口，我这里是将&lt;code&gt;Orabbix&lt;/code&gt;与&lt;code&gt;Zabbix server&lt;/code&gt; 装在同一台机器上的，如果不在同一台机器，那装&lt;code&gt;Orabbix&lt;/code&gt;的机器需要先装&lt;code&gt;Zabbix Agent&lt;/code&gt;，否则数据将无法传送到&lt;code&gt;Zabbix Server&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ZabbixServerList&lt;/code&gt;：可以设置多个，用&amp;quot;,&amp;ldquo;进行分割；&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;DatabaseList&lt;/code&gt;：可以设置多个被监控的&lt;code&gt;Oracle&lt;/code&gt;数据库服务器，用&amp;rdquo;,&amp;ldquo;进行分割，该名称要和&lt;code&gt;zabbix server&lt;/code&gt;界面中的&lt;code&gt;Host name&lt;/code&gt;保持一致，该配置文件中后续所引用的设定都以该名称为准。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;关于 JDBC 可参考&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; Oracle     =    jdbc:oracle:thin:@&amp;lt;host&amp;gt;:&amp;lt;LISTENER_PORT&amp;gt;:&amp;lt;instance&amp;gt;
+
+ PostgreSQL  =    jdbc:postgresql://&amp;lt;host&amp;gt;:&amp;lt;port&amp;gt;/&amp;lt;database&amp;gt;
+
+ MS Sql Server =    jdbc:jtds:sqlserver://&amp;lt;host&amp;gt;:&amp;lt;port&amp;gt;/&amp;lt;instancename&amp;gt;
+
+ [MySQL](http://lib.csdn.net/base/mysql) Server =    jdbc:[mysql](http://lib.csdn.net/base/mysql)://[host:port],[host:port].../[database]
+
+ DB2      =    jdbc:db2://&amp;lt;servername&amp;gt;:&amp;lt;port&amp;gt;/&amp;lt;installation&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;启动服务&#34;&gt;启动服务&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;/etc/init.d/orabbix     start
+# 或
+systemctl  start   orabbix
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211009110332.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211009110347.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;配置zabbix添加监控&#34;&gt;&lt;strong&gt;配置zabbix添加监控&lt;/strong&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;zabbix-web-端操作&#34;&gt;&lt;strong&gt;zabbix web 端操作&lt;/strong&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;导入模板&#34;&gt;导入模板&lt;/h3&gt;
+&lt;p&gt;模板在&lt;code&gt;/opt/orabbix/template/&lt;/code&gt; 目录下面，全部导入&lt;code&gt;zabbix web&lt;/code&gt; 即可&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211009110359.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;添加主机&#34;&gt;添加主机&lt;/h3&gt;
+&lt;p&gt;主机名称必须要和配至文件中的&lt;code&gt;databaseLst&lt;/code&gt; 中的名称一致&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211009110414.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;添加oracle-模板&#34;&gt;添加oracle 模板&lt;/h3&gt;
+&lt;p&gt;&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211009110435.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;验证&#34;&gt;验证&lt;/h3&gt;
+&lt;p&gt;&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211009110452.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211009110500.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211009110509.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211009110516.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211009110522.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211009110528.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211009110535.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211009110544.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;监控库的大小&#34;&gt;监控库的大小&lt;/h2&gt;
+&lt;h3 id=&#34;配置-queryprops&#34;&gt;配置 query.props&lt;/h3&gt;
+&lt;p&gt;默认按照上面的步骤就差不多了，但是你导入模板之后就会发现监控项目不全，如dbsize及dbfilesize这些类目，orabbix默认情况下未开启数据库大小，需要配置query.props&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;cp  /opt/orabbix/conf/query.props  /opt/orabbix/conf/query.props.bak
+
+vi /opt/orabbix/conf/query.props
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在QueryList=类目下增加dbfilesize,dbsize，如图所示&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211009110601.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;然后在该文件的末尾添加&#34;&gt;然后在该文件的末尾添加&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;dbfilesize.Query=select to_char(sum(bytes/1024/1024/10), &amp;#39;FM99999999999999990&amp;#39;) retvalue from dba_data_files
+
+dbsize.Query=SELECT to_char(sum(  NVL(a.bytes/1024/1024/10 - NVL(f.bytes/1024/1024/10, 0), 0)), &amp;#39;FM99999999999999990&amp;#39;) retvalue \
+
+FROM sys.dba_tablespaces d, \
+
+(select tablespace_name, sum(bytes) bytes from dba_data_files group by tablespace_name) a, \
+
+(select tablespace_name, sum(bytes) bytes from dba_free_space group by tablespace_name) f \
+
+WHERE d.tablespace_name = a.tablespace_name(+) AND d.tablespace_name = f.tablespace_name(+) \
+
+AND NOT (d.extent_management like &amp;#39;LOCAL&amp;#39; AND d.contents like &amp;#39;TEMPORARY&amp;#39;)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;用以定义查询dbfilesize,dbsize的SQL语句&lt;/p&gt;
+&lt;p&gt;添加内容如图所示&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注释：语句过长的话要用 \ 来分隔&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211009110621.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这个时候就可以启动orabbix服务了&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;systemctl restart orabbix
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;检查服务ps aux |grep orabbix|wc -l 如果等于2就说明启动那个成功了&lt;/p&gt;
+&lt;p&gt;查看日志看是否有报错&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;/opt/orabbix/logs/orabbix.log
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211009110632.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211009110641.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;表空间监控的优化&#34;&gt;表空间监控的优化&lt;/h2&gt;
+&lt;h3 id=&#34;自定义sql检查&#34;&gt;自定义SQL检查&lt;/h3&gt;
+&lt;p&gt;Orabbix提供了表空间的监控，监控项对应的SQL:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;vi /opt/orabbix/conf/query.props
+
+tbl_space.Query=SELECT * FROM ( \
+
+select &amp;#39;- Tablespace -&amp;gt;&amp;#39;,t.tablespace_name ktablespace, \
+
+&amp;#39;- Type-&amp;gt;&amp;#39;,substr(t.contents, 1, 1) tipo, \
+
+&amp;#39;- Used(MB)-&amp;gt;&amp;#39;,trunc((d.tbs_size-nvl(s.free_space, 0))/1024/1024) ktbs_em_uso, \
+
+&amp;#39;- ActualSize(MB)-&amp;gt;&amp;#39;,trunc(d.tbs_size/1024/1024) ktbs_size, \
+
+&amp;#39;- MaxSize(MB)-&amp;gt;&amp;#39;,trunc(d.tbs_maxsize/1024/1024) ktbs_maxsize, \
+
+&amp;#39;- FreeSpace(MB)-&amp;gt;&amp;#39;,trunc(nvl(s.free_space, 0)/1024/1024) kfree_space, \
+
+&amp;#39;- Space-&amp;gt;&amp;#39;,trunc((d.tbs_maxsize - d.tbs_size + nvl(s.free_space, 0))/1024/1024) kspace, \
+
+&amp;#39;- Perc-&amp;gt;&amp;#39;,decode(d.tbs_maxsize, 0, 0, trunc((d.tbs_size-nvl(s.free_space, 0))*100/d.tbs_maxsize)) kperc \
+
+from \
+
+( select SUM(bytes) tbs_size, \
+
+SUM(decode(sign(maxbytes - bytes), -1, bytes, maxbytes)) tbs_maxsize, tablespace_name tablespace \
+
+from ( select nvl(bytes, 0) bytes, nvl(maxbytes, 0) maxbytes, tablespace_name \
+
+from dba_data_files \
+
+union all \
+
+select nvl(bytes, 0) bytes, nvl(maxbytes, 0) maxbytes, tablespace_name \
+
+from dba_temp_files \
+
+) \
+
+group by tablespace_name \
+
+) d, \
+
+( select SUM(bytes) free_space, \
+
+tablespace_name tablespace \
+
+from dba_free_space \
+
+group by tablespace_name \
+
+) s, \
+
+dba_tablespaces t \
+
+where t.tablespace_name = d.tablespace(+) and \
+
+t.tablespace_name = s.tablespace(+) \
+
+order by 8) \
+
+where kperc &amp;gt; 93 \
+
+and tipo &amp;lt;&amp;gt;&amp;#39;T&amp;#39; \
+
+and tipo &amp;lt;&amp;gt;&amp;#39;U&amp;#39;
+
+tbl_space.NoDataFound=none
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211009110714.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这个SQL会返回93%满的表空间信息，而对应这个监控项，orabbix也定义了触发器，因为监控项的返回值是文本，而没有满足条件的记录时返回字符串“none“，所以监控项对应的触发器会检查返回值开头是不是none，如果不是，就报警，这样，用户除了收到预警信息，还能从返回值的具体值中看到具体时哪个表空间快满了。&lt;/p&gt;
+&lt;p&gt;当然，大部分时间监控项会返回none，所以我们无法画出正常未满的表空间的空间占用时间曲线。只有超过93%慢时，我们才知道具体的占用情况。&lt;/p&gt;
+&lt;h3 id=&#34;测试&#34;&gt;测试&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;把值调为5的触发效果&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211009110722.png&#34;&gt;&lt;br /&gt;
+&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20211009110729.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;参考文档&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.cnblogs.com/dujiaxiaoK/p/7719049.html&#34;&gt;https://www.cnblogs.com/dujiaxiaoK/p/7719049.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/frank0521/article/details/7469457&#34;&gt;https://blog.csdn.net/frank0521/article/details/7469457&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.zhimengzhe.com/shujuku/other/182171.html&#34;&gt;http://www.zhimengzhe.com/shujuku/other/182171.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;官方文档&lt;br /&gt;
+&lt;a href=&#34;http://www.smartmarmot.com/wiki/index.php/Orabbix&#34;&gt;http://www.smartmarmot.com/wiki/index.php/Orabbix&lt;/a&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/211009115571/&#34;&gt;https://www.cnsre.cn/posts/211009115571/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/zabbix/&#34;&gt;https://www.cnsre.cn/tags/zabbix/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+</content:encoded>
+        <dc:creator>CNSRE</dc:creator>
+        <media:content url="http://www.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>zabbix</category>
+            
+          
+            
+              <category>oracle</category>
+            
+          
+        
+        
+          
+            
+              <category>zabbix</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

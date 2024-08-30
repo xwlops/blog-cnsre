@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Cloud-Init on SRE运维博客</title>
+    <link>http://www.cnsre.cn:80/tags/cloud-init/</link>
+    <description>Recent content in Cloud-Init on SRE运维博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Thu, 11 Mar 2021 11:08:23 +0800</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="http://www.cnsre.cn:80/tags/cloud-init/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>AWS使用快照创建实例启动失败</title>
+        <link>http://www.cnsre.cn:80/posts/210311132723/</link>
+        <pubDate>Thu, 11 Mar 2021 11:08:23 +0800</pubDate>
+        
+        <atom:modified>Sat, 26 Mar 2022 17:58:25 +0800</atom:modified>
+        <guid>http://www.cnsre.cn:80/posts/210311132723/</guid>
+        <description>AWS使用快照创建实例启动失败 问题描述 因业务需求，需要将A集群复制一份到B集群，当做预生产环境使用。但是在AWS使用快照的方式创建EC2实例</description>
+        <content:encoded>&lt;h1 id=&#34;aws使用快照创建实例启动失败&#34;&gt;AWS使用快照创建实例启动失败&lt;/h1&gt;
+&lt;h2 id=&#34;问题描述&#34;&gt;问题描述&lt;/h2&gt;
+&lt;p&gt; 因业务需求，需要将A集群复制一份到B集群，当做预生产环境使用。但是在AWS使用快照的方式创建EC2实例的时候无法正常启动,通过获取AWS EC2截图能够看到已经到了登录界面。&lt;br /&gt;
+&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210329162258.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;分析过程&#34;&gt;分析过程&lt;/h2&gt;
+&lt;p&gt; 在发现问题后尝试使用&lt;code&gt;SSM&lt;/code&gt;登录，但是却无法登录进系统内部。后再停止实例运行，然后在运行实例，依然无法启动。&lt;br /&gt;
+为了排查是&lt;code&gt;VPC&lt;/code&gt;的问题，还是实例镜像的问题。使用另外一台服务器的镜像启动，但是依然无效。最后在待实例进入 &lt;code&gt;running&lt;/code&gt; 状态后，依次选择 &lt;code&gt;Actions&lt;/code&gt;、&lt;code&gt;Instance Settings&lt;/code&gt;、&lt;code&gt;Get System Log&lt;/code&gt;通过获取系统日志发现了一些问题。&lt;br /&gt;
+&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210329162211.png&#34;&gt;&lt;br /&gt;
+ 后来在通过查看服务器的&lt;code&gt;pyhton&lt;/code&gt;版本的时候发现&lt;br /&gt;
+&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210329162334.png&#34;&gt;&lt;br /&gt;
+到这里，基本上能确定是&lt;code&gt;python&lt;/code&gt;版本的问题了。&lt;br /&gt;
+最后通过分析排查发现是因为环境配置所导致。&lt;br /&gt;
+Linux 系统默认的&lt;code&gt;python2.7&lt;/code&gt;被修改为了&lt;code&gt;python3.6.8&lt;/code&gt; 快照的恢复使用的应用是&lt;code&gt;Cloud-init&lt;/code&gt;，&lt;code&gt;could-init&lt;/code&gt;调用的是&lt;code&gt;python&lt;/code&gt; 也就是系统默认的&lt;code&gt;python2.7&lt;/code&gt;的版本 也就导致&lt;code&gt;cloud-init&lt;/code&gt;调用了&lt;code&gt;python3.6.8&lt;/code&gt;的版本。从而导入配置失败。&lt;br /&gt;
+关于&lt;code&gt;cloud-init&lt;/code&gt;可参考 &lt;a href=&#34;https://xixiliguo.github.io/post/cloud-init-1/&#34;&gt;https://xixiliguo.github.io/post/cloud-init-1/&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;解决方法&#34;&gt;解决方法&lt;/h2&gt;
+&lt;p&gt;在&lt;code&gt;/usr/bin/cloud-init&lt;/code&gt;中修改&lt;code&gt;#!/usr/bin/python&lt;/code&gt;为 &lt;code&gt;#!/usr/bin/python2.7&lt;/code&gt;然后手动创建快照。在用创建的快照从新启动一台新的实例来。&lt;/p&gt;
+&lt;h2 id=&#34;最后&#34;&gt;最后&lt;/h2&gt;
+&lt;p&gt;为了能够更好的解决这个问题。后来通过实际测试，&lt;code&gt;centos7&lt;/code&gt;系统中默认使用的&lt;code&gt;python&lt;/code&gt;版本为&lt;code&gt;python2.7&lt;/code&gt;，我们通过使用&lt;code&gt;yum&lt;/code&gt;安装，是不会覆盖掉系统的python版本。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;yum install python3 -y 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python --version
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Python 2.7.x
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;所以建议，系统中同时存在两个&lt;code&gt;python&lt;/code&gt;版本，您使用&lt;code&gt;yum&lt;/code&gt; 安装&lt;code&gt;python3&lt;/code&gt;这样不会覆盖系统的&lt;code&gt;python&lt;/code&gt;版本，在您不想使用系统&lt;code&gt;python2.7.x&lt;/code&gt; 而使用&lt;code&gt;python3&lt;/code&gt;时，您直接在相应应用指明使用python的版本即可。&lt;br /&gt;
+如果将&lt;code&gt;Centos7&lt;/code&gt;中系统默认的&lt;code&gt;python&lt;/code&gt;版本修改为&lt;code&gt;python3&lt;/code&gt;时，这个可能会遇到各种各样的问题。&lt;br /&gt;
+不过&lt;code&gt;python2.7&lt;/code&gt; 已经停止维护了，如果不想使用&lt;code&gt;python2.7&lt;/code&gt;，目前可能只能通过升级系统的方式来解决这个问题，&lt;code&gt;centos8&lt;/code&gt;和&lt;code&gt;redhat8&lt;/code&gt;系统默认使用的&lt;code&gt;python&lt;/code&gt;版本都是&lt;code&gt;python3&lt;/code&gt;&lt;br /&gt;
+&lt;a href=&#34;https://www.cnsre.cn/posts/210311132723/&#34;&gt;文章链接&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&#34;https://www.cnsre.cn/posts/210311132723/&#34;&gt;https://www.cnsre.cn/posts/210311132723/&lt;/a&gt;&lt;/p&gt;
+</content:encoded>
+        <dc:creator>CNSRE</dc:creator>
+        <media:content url="http://www.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>aws</category>
+            
+          
+            
+              <category>cloud-init</category>
+            
+          
+            
+              <category>故障集</category>
+            
+          
+        
+        
+          
+            
+              <category>故障集</category>
+            
+          
+            
+              <category>aws</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

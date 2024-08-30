@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Blog on SRE运维博客</title>
+    <link>http://www.cnsre.cn:80/tags/blog/</link>
+    <description>Recent content in Blog on SRE运维博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Tue, 16 Mar 2021 10:03:54 +0800</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="http://www.cnsre.cn:80/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>markdown的基本用法</title>
+        <link>http://www.cnsre.cn:80/posts/210316100350/</link>
+        <pubDate>Tue, 16 Mar 2021 10:03:54 +0800</pubDate>
+        
+        <atom:modified>Sat, 26 Mar 2022 17:58:25 +0800</atom:modified>
+        <guid>http://www.cnsre.cn:80/posts/210316100350/</guid>
+        <description>markdown的基本用法 快速上手markdown语法，本文会演示一些常用的markdown语法。保证你看完之后能够快速上手。 标题 在需要设置</description>
+        <content:encoded>&lt;h1 id=&#34;markdown的基本用法&#34;&gt;markdown的基本用法&lt;/h1&gt;
+&lt;p&gt;快速上手markdown语法，本文会演示一些常用的markdown语法。保证你看完之后能够快速上手。&lt;/p&gt;
+&lt;h2 id=&#34;标题&#34;&gt;标题&lt;/h2&gt;
+&lt;p&gt;在需要设置标题的文字前面加#来形成标题。在#结束的时候添加空格和标题 分开，最多支持六级标题。下面是实例。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# 一级标题
+## 二级标题
+### 三级标题
+#### 四级标题
+##### 五级标题
+###### 六级标题
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;示例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;一级标题&#34;&gt;一级标题&lt;/h1&gt;
+&lt;h2 id=&#34;二级标题&#34;&gt;二级标题&lt;/h2&gt;
+&lt;h3 id=&#34;三级标题&#34;&gt;三级标题&lt;/h3&gt;
+&lt;h4 id=&#34;四级标题&#34;&gt;四级标题&lt;/h4&gt;
+&lt;h5 id=&#34;五级标题&#34;&gt;五级标题&lt;/h5&gt;
+&lt;h6 id=&#34;六级标题&#34;&gt;六级标题&lt;/h6&gt;
+&lt;h2 id=&#34;字体&#34;&gt;字体&lt;/h2&gt;
+&lt;p&gt;字体的用法主要有斜体，加粗，斜体加粗，加删除线&lt;/p&gt;
+&lt;h3 id=&#34;加粗&#34;&gt;加粗&lt;/h3&gt;
+&lt;p&gt;前后两个*将文字包裹起来&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;示例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;**这是加粗的文字**
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;这是加粗的文字&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;斜体&#34;&gt;斜体&lt;/h3&gt;
+&lt;p&gt;前后一个*将文字包裹起来&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;示例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;*这是斜体的文字*
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;这是斜体的文字&lt;/em&gt;&lt;/p&gt;
+&lt;h3 id=&#34;斜体加粗&#34;&gt;斜体加粗&lt;/h3&gt;
+&lt;p&gt;前后三个*将文字包裹起来&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;示例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;***这是斜体加粗的文字***
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;&lt;strong&gt;这是斜体加粗的文字&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;h3 id=&#34;删除线&#34;&gt;删除线&lt;/h3&gt;
+&lt;p&gt;添加删除线&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;示例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;~~这是添加删除线的文字~~
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;del&gt;这是添加删除线的文字&lt;/del&gt;&lt;/p&gt;
+&lt;h2 id=&#34;引用&#34;&gt;引用&lt;/h2&gt;
+&lt;p&gt;在引用的文字前加&amp;gt;即可。引用也可以嵌套，如加两个&amp;raquo;三个&amp;raquo;&amp;gt;,可以一直嵌套下去，只需要继续添加&amp;gt;即可&lt;/p&gt;
+&lt;h3 id=&#34;不加嵌套的引用&#34;&gt;不加嵌套的引用&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;示例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;gt;引用1
+&amp;gt;引用2
+&amp;gt;引用3
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;引用1&lt;br /&gt;
+引用2&lt;br /&gt;
+引用3&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;添加嵌套的引用&#34;&gt;添加嵌套的引用&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;示例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;gt;引用1
+&amp;gt;&amp;gt;引用2
+&amp;gt;&amp;gt;&amp;gt; 引用3
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;引用1&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;引用2&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;引用3&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;为上下文添加分割线&#34;&gt;为上下文添加分割线&lt;/h2&gt;
+&lt;div class=&#34;alert alert-warning&#34; role=&#34;alert&#34; data-dir=&#34;ltr&#34;&gt;需要注意的是至少需要三个同样的符号以上&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;以下几种都可以&lt;/li&gt;
+&lt;li&gt;示例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;---
+----
+***
+*****
+&lt;/code&gt;&lt;/pre&gt;&lt;hr /&gt;
+&lt;hr /&gt;
+&lt;hr /&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;图片&#34;&gt;图片&lt;/h2&gt;
+&lt;p&gt;图片标题就是显示在图片下面的文字，相当于对图片内容的解释，也可以不加。&lt;br /&gt;
+图片描述，当鼠标移到图片上时显示的内容。title可加可不加，不是所有的编辑器都支持&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;示例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;![cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控](https://cdn.jsdelivr.net/gh/zops/ImagesHosting/cnsre/20210421130359.png)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;cnsre运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cdn.jsdelivr.net/gh/zops/ImagesHosting/cnsre/20210421130359.png&#34; title=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控|&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;超链接&#34;&gt;超链接&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;示例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[SRE运维博客](https://cnsre.cn)
+行内链接[SRE](https://cnsre.cn)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;a href=&#34;https://cnsre.cn&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+行内链接&lt;a href=&#34;https://cnsre.cn&#34;&gt;SRE运维博客&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;代码&#34;&gt;代码&lt;/h2&gt;
+&lt;p&gt;markdown语法很好的支持嵌入代码和代码块，极大方便了程序员写作和记笔记&lt;/p&gt;
+&lt;h3 id=&#34;代码块&#34;&gt;代码块&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;示例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;这是`代码块`
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这是&lt;code&gt;代码块&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;单窗口代码&#34;&gt;单窗口代码&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;示例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;```&lt;br /&gt;
+hello SRE运维博客&lt;br /&gt;
+```&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;hello SRE运维博客
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;多窗口代码块&#34;&gt;多窗口代码块&lt;/h3&gt;
+&lt;div class=&#34;alert alert-warning&#34; role=&#34;alert&#34; data-dir=&#34;ltr&#34;&gt;！注意&lt;br /&gt;
+次格式仅适用于本博客&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;示例&lt;br /&gt;
+{{&amp;lt; codes python shell&amp;gt;}}&lt;br /&gt;
+{{&amp;lt;code&amp;gt;}}&lt;br /&gt;
+``` python&lt;br /&gt;
+#!/usr/bin/env python&lt;br /&gt;
+#coding=utf-8&lt;br /&gt;
+print &amp;ldquo;hello SRE运维博客&amp;rdquo;&lt;br /&gt;
+```&lt;br /&gt;
+{{&amp;lt;/code&amp;gt;}}&lt;br /&gt;
+{{&amp;lt;code&amp;gt;}}&lt;br /&gt;
+``` shell&lt;br /&gt;
+#!/bin/bash&lt;br /&gt;
+echo &amp;ldquo;hello SRE运维博客&amp;rdquo;&lt;br /&gt;
+```&lt;br /&gt;
+{{&amp;lt;/code&amp;gt;}}&lt;br /&gt;
+{{&amp;lt;/codes&amp;gt;}}&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div id=&#34;fda116ec40662497&#34; class=&#34;codetab&#34;&gt;
+  &lt;div class=&#34;codetab__links&#34;&gt;
+    
+      &lt;button class=&#34;codetab__link&#34; aria-label=&#34;Tab link&#34;&gt;python&lt;/button&gt;
+    
+      &lt;button class=&#34;codetab__link&#34; aria-label=&#34;Tab link&#34;&gt;shell&lt;/button&gt;
+    
+  &lt;/div&gt;
+  
+ 
+&lt;div id=&#34;a8ee6281787cf96e&#34; class=&#34;codetab__content&#34;&gt;
+  &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;ch&#34;&gt;#!/usr/bin/env python&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#coding=utf-8&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;hello SRE运维博客&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;722d7849f25224c4&#34; class=&#34;codetab__content&#34;&gt;
+  &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#!/bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;hello SRE运维博客&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;script&gt;
+  &#39;use strict&#39;;
+
+  var containerId = JSON.parse(&#34;\&#34;fda116ec40662497\&#34;&#34;);
+  var containerElem = document.getElementById(containerId);
+  var codetabLinks = null;
+  var codetabContents = null;
+  var ids = [];
+
+  if (containerElem) {
+    codetabLinks = containerElem.querySelectorAll(&#39;.codetab__link&#39;);
+    codetabContents = containerElem.querySelectorAll(&#39;.codetab__content&#39;);
+  }
+
+  for (var i = 0; i &lt; codetabContents.length; i++) {
+    ids = ids.concat(codetabContents[i].getAttribute(&#39;id&#39;));
+    codetabContents[i].style.display = &#39;none&#39;;
+
+    if (0 === parseInt(i, 10) &amp;&amp; !codetabContents[i].classList.contains(&#39;active&#39;)) {
+      codetabContents[i].classList.add(&#39;active&#39;);
+    }
+  }
+
+  for (var i = 0; i &lt; codetabLinks.length; i++) {
+    codetabLinks[i].setAttribute(&#39;id&#39;, ids[i]);
+
+    if (0 === parseInt(i, 10) &amp;&amp; !codetabLinks[i].classList.contains(&#39;active&#39;)) {
+      codetabLinks[i].classList.add(&#39;active&#39;);
+    } else {
+      codetabLinks[i].classList.remove(&#39;active&#39;);
+    }
+  }
+
+  if (codetabContents.length &gt; 0) {
+    codetabContents[0].style.display = &#39;block&#39;;
+  }
+&lt;/script&gt;
+&lt;h3 id=&#34;多窗口代码2&#34;&gt;多窗口代码2&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;示例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;{{&amp;lt; tabs 内容1 内容2 内容3 &amp;gt;}}&lt;br /&gt;
+{{&amp;lt; tab &amp;gt;}}&lt;br /&gt;
+### 内容1&lt;br /&gt;
+```shell&lt;br /&gt;
+Hello SRE运维博客!&lt;br /&gt;
+```&lt;br /&gt;
+⚠️内容描述&lt;br /&gt;
+{{&amp;lt; /tab &amp;gt;}}&lt;br /&gt;
+{{&amp;lt; tab &amp;gt;}}&lt;br /&gt;
+### 内容2&lt;br /&gt;
+```shell&lt;br /&gt;
+Hello SRE运维博客!&lt;br /&gt;
+```&lt;br /&gt;
+{{&amp;lt; /tab &amp;gt;}}&lt;br /&gt;
+{{&amp;lt; tab &amp;gt;}}&lt;br /&gt;
+### 内容3&lt;br /&gt;
+```shell&lt;br /&gt;
+Hello SRE运维博客!&lt;br /&gt;
+```&lt;br /&gt;
+{{&amp;lt; /tab &amp;gt;}}&lt;br /&gt;
+{{&amp;lt; /tabs &amp;gt;}}&lt;/p&gt;
+
+&lt;div id=&#34;9ee809fcea2bf15a&#34; class=&#34;tab&#34;&gt;
+  &lt;div class=&#34;tab__links&#34;&gt;
+    
+      &lt;button class=&#34;tab__link&#34; aria-label=&#34;Tab link&#34;&gt;内容1&lt;/button&gt;
+    
+      &lt;button class=&#34;tab__link&#34; aria-label=&#34;Tab link&#34;&gt;内容2&lt;/button&gt;
+    
+      &lt;button class=&#34;tab__link&#34; aria-label=&#34;Tab link&#34;&gt;内容3&lt;/button&gt;
+    
+  &lt;/div&gt;
+  
+
+&lt;div id=&#34;76d9aebaed7071d9&#34; class=&#34;tab__content&#34;&gt;
+  &lt;h3 id=&#34;内容1&#34;&gt;内容1&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Hello SRE运维博客!
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;⚠️内容描述&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;dc31a03be9798cd6&#34; class=&#34;tab__content&#34;&gt;
+  &lt;h3 id=&#34;内容2&#34;&gt;内容2&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Hello SRE运维博客!
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;682fe98f68c51d05&#34; class=&#34;tab__content&#34;&gt;
+  &lt;h3 id=&#34;内容3&#34;&gt;内容3&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Hello SRE运维博客!
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;script&gt;
+  &#39;use strict&#39;;
+
+  var containerId = JSON.parse(&#34;\&#34;9ee809fcea2bf15a\&#34;&#34;);
+  var containerElem = document.getElementById(containerId);
+  var tabLinks = null;
+  var tabContents = null;
+  var ids = [];
+
+  if (containerElem) {
+    tabLinks = containerElem.querySelectorAll(&#39;.tab__link&#39;);
+    tabContents = containerElem.querySelectorAll(&#39;.tab__content&#39;);
+  }
+
+  for (var i = 0; i &lt; tabContents.length; i++) {
+    ids = ids.concat(tabContents[i].getAttribute(&#39;id&#39;));
+    tabContents[i].style.display = &#39;none&#39;;
+
+    if (0 === parseInt(i, 10) &amp;&amp; !tabContents[i].classList.contains(&#39;active&#39;)) {
+      tabContents[i].classList.add(&#39;active&#39;);
+    }
+  }
+
+  for (var i = 0; i &lt; tabLinks.length; i++) {
+    tabLinks[i].setAttribute(&#39;id&#39;, ids[i]);
+
+    if (0 === parseInt(i, 10) &amp;&amp; !tabLinks[i].classList.contains(&#39;active&#39;)) {
+      tabLinks[i].classList.add(&#39;active&#39;);
+    } else {
+      tabLinks[i].classList.remove(&#39;active&#39;);
+    }
+  }
+
+  if (tabContents.length &gt; 0) {
+    tabContents[0].style.display = &#39;block&#39;;
+  }
+&lt;/script&gt;
+&lt;h3 id=&#34;内容折叠&#34;&gt;内容折叠&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;示例&lt;br /&gt;
+{{&amp;lt; expand &amp;ldquo;点击查看&amp;rdquo; &amp;gt;}}&lt;br /&gt;
+#### 标题&lt;br /&gt;
+内容&lt;br /&gt;
+{{&amp;lt; /expand &amp;gt;}}&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;{{&amp;lt; expand &amp;ldquo;点击查看 2&amp;rdquo; &amp;gt;}}&lt;br /&gt;
+#### 标题2&lt;br /&gt;
+``` shell&lt;br /&gt;
+Hello SRE运维博客!&lt;br /&gt;
+```&lt;br /&gt;
+{{&amp;lt; /expand &amp;gt;}}&lt;/p&gt;
+&lt;p&gt;&lt;div class=&#34;expand&#34;&gt;
+  &lt;button type=&#34;button&#34; class=&#34;expand__button&#34; aria-label=&#34;Expand Button&#34;&gt;
+    &lt;span class=&#34;expand-icon expand-icon__right&#34;&gt;
+        &lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34;&gt;&lt;path fill=&#34;currentColor&#34; d=&#34;M9.29 15.88L13.17 12 9.29 8.12c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0l4.59 4.59c.39.39.39 1.02 0 1.41L10.7 17.3c-.39.39-1.02.39-1.41 0-.38-.39-.39-1.03 0-1.42z&#34;/&gt;&lt;/svg&gt;
+    &lt;/span&gt;
+    点击查看
+  &lt;/button&gt;
+  &lt;div class=&#34;expand__content&#34;&gt;
+    &lt;h4 id=&#34;标题&#34;&gt;标题&lt;/h4&gt;
+&lt;p&gt;内容&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;&lt;br /&gt;
+&lt;div class=&#34;expand&#34;&gt;
+  &lt;button type=&#34;button&#34; class=&#34;expand__button&#34; aria-label=&#34;Expand Button&#34;&gt;
+    &lt;span class=&#34;expand-icon expand-icon__right&#34;&gt;
+        &lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34;&gt;&lt;path fill=&#34;currentColor&#34; d=&#34;M9.29 15.88L13.17 12 9.29 8.12c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0l4.59 4.59c.39.39.39 1.02 0 1.41L10.7 17.3c-.39.39-1.02.39-1.41 0-.38-.39-.39-1.03 0-1.42z&#34;/&gt;&lt;/svg&gt;
+    &lt;/span&gt;
+    点击查看 2
+  &lt;/button&gt;
+  &lt;div class=&#34;expand__content&#34;&gt;
+    &lt;h4 id=&#34;标题2&#34;&gt;标题2&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Hello SRE运维博客!
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;&lt;/p&gt;
+&lt;h2 id=&#34;列表&#34;&gt;列表&lt;/h2&gt;
+&lt;h3 id=&#34;无序列表&#34;&gt;无序列表&lt;/h3&gt;
+&lt;p&gt;无序列表用 - + * 任何一种都可以，注意文字前加空格&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;示例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;* 列表1
+* 列表2
+* 列表3
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;列表1&lt;/li&gt;
+&lt;li&gt;列表2&lt;/li&gt;
+&lt;li&gt;列表3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;有序列表&#34;&gt;有序列表&lt;/h3&gt;
+&lt;div class=&#34;alert alert-warning&#34; role=&#34;alert&#34; data-dir=&#34;ltr&#34;&gt;数字加点，注意文字前加空格&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;示例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 列表1
+2. 列表2
+3. 列表3
+&lt;/code&gt;&lt;/pre&gt;&lt;ol&gt;
+&lt;li&gt;列表1&lt;/li&gt;
+&lt;li&gt;列表2&lt;/li&gt;
+&lt;li&gt;列表3&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;图标&#34;&gt;图标&lt;/h2&gt;
+&lt;p&gt;文档引用&lt;code&gt;libraries: &amp;quot;mermaid&amp;quot;&lt;/code&gt;可以用饼图&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-mermaid&#34; data-lang=&#34;mermaid&#34;&gt;pie
+&amp;#34;python&amp;#34; : 20
+&amp;#34;shell&amp;#34; : 10
+&amp;#34;go&amp;#34; : 70 
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;表格&#34;&gt;表格&lt;/h2&gt;
+&lt;p&gt;文字默认居左&lt;br /&gt;
+-两边加：表示文字居中&lt;br /&gt;
+-右边加：表示文字居右&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;示例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;表头|表头|表头
+---|:--:|---:
+内容|内容|内容
+内容|内容|内容
+&lt;/code&gt;&lt;/pre&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;表头&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;表头&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;表头&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;内容&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;内容&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;内容&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;内容&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;内容&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;内容&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;表格换行:加&lt;code&gt;&amp;lt;br&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;示例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;表头|表头|表头
+---|:--:|---:
+内容|内容 &amp;lt;br&amp;gt; 内容|内容
+内容|内容|内容
+&lt;/code&gt;&lt;/pre&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;表头&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;表头&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;表头&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;内容&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;内容 &lt;br&gt; 内容&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;内容&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;内容&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;内容&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;内容&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;反斜杠&#34;&gt;反斜杠&lt;/h2&gt;
+&lt;p&gt;用\来实现转义字符的效果&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;示例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;\\ 反斜线
+\` 反引号
+\* 星号
+\_ 底线
+\{ 左花括号
+\} 右花括号
+\[ 左方括号
+\] 右方括号
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;\ 反斜线&lt;br /&gt;
+` 反引号&lt;br /&gt;
+* 星号&lt;br /&gt;
+_ 底线&lt;br /&gt;
+{ 左花括号&lt;br /&gt;
+} 右花括号&lt;br /&gt;
+[ 左方括号&lt;br /&gt;
+] 右方括号&lt;/p&gt;
+&lt;h2 id=&#34;自动链接&#34;&gt;自动链接&lt;/h2&gt;
+&lt;p&gt;自动链接只要是用尖括号包起来，就会自动被转成链接。一般网址的链接文字就和链接地址一样。&lt;br /&gt;
+另外一种添加描述的链接示例如下，不显示链接地址&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;示例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;https://zops.github.io&amp;gt;
+// 添加描述的链接
+[Zops](https://zops.github.io &amp;#34;超链接title&amp;#34;)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;a href=&#34;https://zops.github.io&#34;&gt;https://zops.github.io&lt;/a&gt;&lt;br /&gt;
+添加描述的链接&lt;br /&gt;
+&lt;a href=&#34;https://zops.github.io&#34; title=&#34;超链接title&#34;&gt;Zops&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;警告通知&#34;&gt;警告通知&lt;/h2&gt;
+&lt;div class=&#34;notices warning&#34; data-title=&#34;注意&#34;&gt;
+  次格式只适合本博客
+&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;实例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;{{&amp;lt; notice success &amp;ldquo;这是成功的通知类型&amp;rdquo; &amp;gt;}}&lt;br /&gt;
+success, info, warning, error&lt;br /&gt;
+success text&lt;br /&gt;
+{{&amp;lt; /notice &amp;gt;}}&lt;/p&gt;
+&lt;h3 id=&#34;成功类型通知&#34;&gt;成功类型通知&lt;/h3&gt;
+&lt;div class=&#34;notices success&#34; data-title=&#34;这是成功的通知类型&#34;&gt;
+  success, info, warning, error&lt;br /&gt;
+success text
+&lt;/div&gt;
+&lt;h3 id=&#34;信息类型通知&#34;&gt;信息类型通知&lt;/h3&gt;
+&lt;div class=&#34;notices info&#34; data-title=&#34;这是通知的信息类型&#34;&gt;
+  success, info, warning, error&lt;br /&gt;
+success text
+&lt;/div&gt;
+&lt;h3 id=&#34;告警类型通知&#34;&gt;告警类型通知&lt;/h3&gt;
+&lt;div class=&#34;notices warning&#34; data-title=&#34;这是警告类型的通知&#34;&gt;
+  success, info, warning, error&lt;br /&gt;
+success text
+&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;示例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;{{&amp;lt; notice error &amp;ldquo;这是通知的错误类型&amp;rdquo; &amp;gt;}}&lt;br /&gt;
+success, info, warning, error&lt;br /&gt;
+success text&lt;br /&gt;
+{{&amp;lt; /notice &amp;gt;}}&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;这是通知的错误类型&lt;/strong&gt;&lt;br /&gt;
+&lt;div class=&#34;notices error&#34; data-title=&#34;这是通知的错误类型&#34;&gt;
+  success, info, warning, error&lt;br /&gt;
+success text
+&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;彩色告警文本框&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;alert alert-warning&#34; role=&#34;alert&#34; data-dir=&#34;ltr&#34;&gt;warning, success, info, danger&lt;br /&gt;
+&lt;em&gt;&lt;strong&gt;this is a text&lt;/strong&gt;&lt;/em&gt;&lt;/div&gt;
+&lt;div class=&#34;alert alert-success&#34; role=&#34;alert&#34; data-dir=&#34;ltr&#34;&gt;warning, success, info, danger&lt;br /&gt;
+&lt;em&gt;&lt;strong&gt;this is a text&lt;/strong&gt;&lt;/em&gt;&lt;/div&gt;
+&lt;p&gt;&lt;div class=&#34;alert alert-danger&#34; role=&#34;alert&#34; data-dir=&#34;ltr&#34;&gt;warning, success, info, danger&lt;br /&gt;
+&lt;em&gt;&lt;strong&gt;this is a text&lt;/strong&gt;&lt;/em&gt;&lt;/div&gt;&lt;br /&gt;
+&lt;a href=&#34;https://www.cnsre.cn/posts/210316100350/&#34;&gt;文章链接&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&#34;https://www.cnsre.cn/posts/210316100350/&#34;&gt;https://www.cnsre.cn/posts/210316100350/&lt;/a&gt;&lt;/p&gt;
+</content:encoded>
+        <dc:creator>CNSRE</dc:creator>
+        <media:content url="http://www.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/markdown.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>markdown</category>
+            
+          
+            
+              <category>blog</category>
+            
+          
+        
+        
+          
+            
+              <category>blog</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

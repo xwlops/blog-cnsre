@@ -1,0 +1,300 @@
+logoText = "SRE运维"
+logoType = "short" # long, short
+# 用于搜索引擎优化
+description = "SRE运维博客是一个专注于SRE、Linux运维、DevOps、自动化运维、Kubernetes、Docker的个人运维博客。博客主要有系统运维、脚本编程、监控、devops等内容，本站涵盖系统运维、自动化运维、监控、脚本、容器、运维经验、云计算、虚拟化等内容。"
+custom_css = []
+custom_js = []
+#useFaviconGenerator = true # https://www.favicon-generator.org/
+#网站标题图标
+
+meta_image = "/images/whoami/avatar.jpg"
+themecolor = ""
+# 网站主题选项
+themeOptions = ["light", "dark", "hacker", "solarized", "kimbie"]
+# 隐藏不想出现在主页的
+notAllowedTypesInHome = ["contact", "talks", "about", "showcase", "publication", "presentation", "resume"]
+# 隐藏不想出现在侧边栏的
+notAllowedTypesInHomeSidebar = ["about", "archive", "showcase", "publication", "presentation", "resume"]
+# 隐藏不想出现在归档的
+notAllowedTypesInArchive = ["about", "talks", "showcase", "publication", "presentation", "resume"]
+# 隐藏不想出现在RSS的
+notAllowedTypesInHomeFeed = ["about", "archive", "contact", "talks", "showcase", "publication", "presentation", "resume", "gallery"]
+# 视口大小
+viewportSize = "widest" # widest, wider, wide, normal, narrow
+# 启用Ui动画
+enableUiAnimation = true
+# 如果为 true，则在浏览器中禁用 javascript 时，博客内容将被隐藏。
+hideSingleContentsWhenJSDisabled = false
+# 启用制定
+enablePinnedPosts = true
+# 隐藏数量较少的标签
+minItemsToShowInTagCloud = 2 # Minimum items to show in tag cloud
+
+# 应用栏
+# 导航栏搜索图标
+enableAppbarSearchIcon = true
+# 导航栏语言图标
+enableAppbarLangIcon = false
+
+# header
+# 主页标题内容类型
+homeHeaderType = "text" # text, img, slide, typewriter
+# 主页副标题标题
+hideHomeHeaderWhenMobile = false
+
+# 移动端菜单
+showMobileMenuTerms = ["tags", "categories", "series", "showcase", "pan"]
+
+# body
+# 文章路径
+enableBreadcrumb = false
+enablePhotoSwipe = true
+# 启动搜索
+enableSearch = true
+# 启动搜索内容高亮
+enableSearchHighlight = true
+# 返回顶部
+enableGoToTop = true
+# 文章下方名片
+enableWhoami = true
+# 内容形状
+summaryShape = "classic" # card, classic, compact
+# 搜索结果位置
+searchResultPosition = "main" # side, main
+# 归档组按日期
+archiveGroupByDate = "2006-01" # "2006-01": group by month, "2006": group by year
+# 每页归档文章数
+archivePaginate = 20
+# 分页按钮
+paginateWindow = 1
+talksPaginate = 5
+talksGroupByDate = "2006"
+pubPaginate = 20
+writtenTimeIcon = "📅"
+modifiedTimeIcon = "📝"
+readingTimeIcon = "☕"
+authorIcon = "✍"
+pagePvIcon = "👀"
+pinIcon = "📌"
+tagIcon = "🏷️"
+publicationIcon = "📚"
+typeIcon = "🎯"
+
+# whoami
+myname = ""
+email = ""
+whoami = '''一位只会重启的运维'''
+bioImageUrl = "/images/whoami/avatar.jpg"
+useGravatar = false
+location = "NanJing"
+organization = "SRE(System Reboot Engineer)"
+link = "https://www.cnsre.cn"
+
+# sidebar
+enableBio = true
+enableBioImage = true
+enableSidebar = true
+enableSidebarTags = true
+enableSidebarSeries = true
+enableSidebarCategories = true
+enableHomeSidebarTitles = true
+enableListSidebarTitles = true
+enableToc = true
+hideToc = false
+tocFolding = true
+tocPosition = "outer" # inner, outer
+enableTocSwitch = true
+itemsPerCategory = 5
+# 侧边栏位置
+sidebarPosition = "right"
+tocLevels = ["h1", "h2", "h3", "h4"]
+enableSidebarPostsByOrder = true
+# 字体
+#custom_css = "css/font.css"
+# footer
+showPoweredBy = true
+showFeedLinks = true
+#启用社交信息
+showSocialLinks = true
+enableLangChange = false
+# 启用主题改变
+enableThemeChange = true
+
+# service
+# googleTagManager = "GTM-5Q2K2FQ" #GTM-XXXXXX
+# 百度统计
+baiduAnalytics = "4ef3ed813a875becb612a0ec42b7ce17"
+# 页面访问统计
+enableBusuanzi = true
+busuanziSiteUV = true
+busuanziSitePV = true
+busuanziPagePV = true
+
+# rss
+updatePeriod = "daily" # Possible values: 'hourly', 'daily', 'weekly', 'monthly', or 'yearly'.
+updateFrequency = "daily"
+fullContents = true
+
+# comment
+enableComment = true
+disqus_shortname = ""
+commento = false
+
+[telegram]
+  enable = true
+  siteId = "123"
+  dataLimit = 5
+
+[gitment]          # Gitment is a comment system based on GitHub issues. see https://github.com/imsun/gitment
+  owner = ""              # Your GitHub ID
+  repo = ""               # The repo to store comments
+  clientId = ""           # Your client ID
+  clientSecret = ""       # Your client secret
+
+[utterances]       # https://utteranc.es/
+  owner = ""              # Your GitHub ID
+  repo = ""               # The repo to store comments
+
+[gitalk]           # Gitalk is a comment system based on GitHub issues. see https://github.com/gitalk/gitalk
+  owner = ""              # Your GitHub ID
+  repo = ""               # The repo to store comments
+  clientId = ""           # Your client ID
+  clientSecret = ""       # Your client secret
+
+# Valine.
+# You can get your appid and appkey from https://leancloud.cn
+# more info please open https://valine.js.org
+[valine]
+  enable = false
+  appId = 'nJCMDGMCp8kmARfb7IGvOrMG-gzGzoHsz'
+  appKey = 'nFW51U8wuElFirDGg5OK9UAm'
+  notify = true  # mail notifier , https://github.com/xCss/Valine/wiki
+  verify = false # Verification code
+  avatar = 'wavatar'
+  placeholder = '''📢 快来发表你的看法吧~
+📢 填写邮箱可以接收回复通知~
+💬 评论和回复支持markdown~
+
+'''
+  visitor = false
+
+[Waline]
+    enable = true
+    ServerURL = "https://waline-cnsre.vercel.app/"
+    placeholder = '''📢 快来发表你的看法吧~
+📢 填写邮箱可以接收回复通知~
+💬 评论和回复支持markdown~
+'''
+    Avatar = "mp"
+    Meta = ["nick", "mail", "link"]
+    PageSize = 10
+    Lang = "zh-CN"
+    Highlight = true
+    AvatarCDN = "https://cdn.v2ex.com/gravatar/"  #waline的评论头像可以使用某种样式也可以使用cdn，这里用v2ex的cdn
+    RequiredFields = ["nick", "mail"]
+
+
+
+[changyan]
+  #changyanAppid = "cyveTr27K"        # Changyan app id             # 畅言
+  #changyanAppkey = "803d95907d800e2c7889f291b4c7fc1a"       # Changyan app key
+
+[livere]
+  #livereUID = "MTAyMC81MjM2Ny8yODg0NQ=="            # LiveRe UID                  # 来必力
+
+# Isso: https://posativ.org/isso/
+[isso]
+  enable = false
+  scriptSrc = "" # "https://isso.example.com/js/embed.min.js"
+  dataAttrs = "" # "data-isso='https://isso.example.com' data-isso-require-author='true'"
+
+[socialOptions]
+  email = ""
+  phone = ""
+  facebook = ""
+  twitter = ""
+  github = ""
+  stack-overflow = ""
+  instagram = ""
+  google-plus = ""
+  youtube = ""
+  medium = ""
+  tumblr = ""
+  linkedin = ""
+  pinterest = ""
+  stack-exchange = ""
+  telegram = ""
+  steam = ""
+  weibo = ""
+  douban = ""
+  csdn = ""
+  gitlab = ""
+  mastodon = ""
+  jianshu = ""
+  zhihu = ""
+  signal = ""
+  whatsapp = ""
+  matrix = ""
+  xmpp = ""
+  dev-to = ""
+  gitea = ""
+  google-scholar = ""
+
+
+[donationOptions]
+  enable = true
+  alipay = "https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/202112231117918.png" 
+  wechat = "https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/202112231117786.png"
+  paypal = ""
+  patreon = ""
+
+# possible share name: ["facebook","twitter", "reddit", "linkedin", "tumblr", "weibo", "douban", "line", "pocket", "feedly", "hatena", "pinterest", "delicious", "google"]
+#[[share]]
+#  name = ""
+
+#页脚链接
+[[footerLinks]]
+  name = "+友情链接"
+  link = "https://www.cnsre.cn/comment/"
+[[footerLinks]]
+  name = "Alliot’s blog"
+  link = "https://www.iots.vip/"
+[[footerLinks]]
+  name = "运维小弟"
+  link = "https://srebro.cn" 
+[[footerLinks]]
+  name = "小z博客"  
+  link = "https://www.xiaoz.me/"
+[[footerLinks]]
+  name = "小柒博客"  
+  link = "https://www.yangxingzhen.com"
+[[footerLinks]]
+  name = "九思学舍"  
+  link = "https://www.asfor.cn/"
+[[footerLinks]]
+  name = "无缺博客"  
+  link = "https://www.wuquejs.cn"
+[[footerLinks]]
+  name = "kubernetes技术栈"  
+  link = "https://www.k8stech.net/"
+[[footerLinks]]
+  name = "运维开发故事"  
+  link = "https://www.devopstory.cn/"
+[[footerLinks]]
+  name = "云原生运维圈"  
+  link = "https://www.kubesre.com"
+[[footerLinks]]
+  name = "UNIXSRE"  
+  link = "https://unixsre.com/"
+#[[footerLinks]]
+#  name = "ayunw运维博客"  
+#  link = "https://sre.ayunw.cn/"
+#[[footerLinks]]
+#  name = "小王总博客吧"  
+#  link = "https://www.scczz.com"
+[[footerLinks]]
+  name = "任我乐"  
+  link = "https://renwole.com/"
+[[footerLinks]]
+  name = "JaromeJiang"  
+  link = "https://blog.jiangliuhong.top/"

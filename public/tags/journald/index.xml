@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Journald on SRE运维博客</title>
+    <link>http://www.cnsre.cn:80/tags/journald/</link>
+    <description>Recent content in Journald on SRE运维博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Thu, 01 Apr 2021 14:01:04 +0800</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="http://www.cnsre.cn:80/tags/journald/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>Systemd Journald占用资源过多</title>
+        <link>http://www.cnsre.cn:80/posts/210401140104/</link>
+        <pubDate>Thu, 01 Apr 2021 14:01:04 +0800</pubDate>
+        
+        <atom:modified>Wed, 10 Aug 2022 08:55:27 +0800</atom:modified>
+        <guid>http://www.cnsre.cn:80/posts/210401140104/</guid>
+        <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
+        <content:encoded>&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/210401140104/&#34;&gt;https://www.cnsre.cn/posts/210401140104/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/%E6%95%85%E9%9A%9C%E9%9B%86/&#34;&gt;https://www.cnsre.cn/tags/故障集/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h1 id=&#34;systemd-journald占用资源过多&#34;&gt;Systemd Journald占用资源过多&lt;/h1&gt;
+&lt;h3 id=&#34;journald占用过多磁盘空间&#34;&gt;journald占用过多磁盘空间&lt;/h3&gt;
+&lt;h4 id=&#34;方法一&#34;&gt;方法一&lt;/h4&gt;
+&lt;p&gt;检查当前journal使用磁盘量&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;journalctl --disk-usage
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;清理方法可以采用按照日期清理，或者按照允许保留的容量清理，只保存2天的日志，最大500M&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;journalctl --vacuum-time=2d
+journalctl --vacuum-size=500M
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;要启用日志限制持久化配置，可以修改&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;vim /etc/systemd/journald.conf
+SystemMaxUse=16M
+ForwardToSyslog=no
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;重启&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;systemctl restart systemd-journald.service
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;检查journal是否运行正常以及日志文件是否完整无损坏&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;journalctl --verify
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;方法二&#34;&gt;方法二&lt;/h4&gt;
+&lt;p&gt;丢弃日志&lt;br /&gt;
+把Storage改为none&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;vim /etc/systemd/journald.conf
+Storage=none 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;重启生效&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;systemctl restart systemd-journald
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;journaldconf参数详解&#34;&gt;journald.conf参数详解&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[Journal]
+#日志存储到磁盘
+Storage=persistent 
+#压缩日志
+Compress=yes 
+#为日志添加序列号
+Seal=yes 
+#每个用户分别记录日志
+SplitMode=uid 
+#日志同步到磁盘的间隔，高级别的日志，如：CRIT、ALERT、EMERG 三种总是实时同步
+SyncIntervalSec=1m 
+
+#即制日志的最大流量，此处指 30s 内最多记录 100000 条日志，超出的将被丢弃
+RateLimitInterval=30s 
+#与 RateLimitInterval 配合使用
+RateLimitBurst=100000
+
+#限制全部日志文件加在一起最多可以占用多少空间，默认值是10%空间与4G空间两者中的较小者
+SystemMaxUse=64G 
+#默认值是15%空间与4G空间两者中的较大者
+SystemKeepFree=1G 
+
+#单个日志文件的大小限制，超过此限制将触发滚动保存
+SystemMaxFileSize=128M 
+
+#日志滚动的最大时间间隔，若不设置则完全以大小限制为准
+MaxFileSec=1day
+#日志最大保留时间，超过时限的旧日志将被删除
+MaxRetentionSec=100year 
+
+#是否转发符合条件的日志记录到本机的其它日志管理系统，如：rsyslog
+ForwardToSyslog=yes 
+ForwardToKMsg=no
+#是否转发符合条件的日志到所有登陆用户的终端
+ForwardToWall=yes 
+MaxLevelStore=debug 
+MaxLevelSyslog=err 
+MaxLevelWall=emerg 
+ForwardToConsole=no 
+#TTYPath=/dev/console
+#MaxLevelConsole=info
+#MaxLevelKMsg=notice
+&lt;/code&gt;&lt;/pre&gt;&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/210401140104/&#34;&gt;https://www.cnsre.cn/posts/210401140104/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/%E6%95%85%E9%9A%9C%E9%9B%86/&#34;&gt;https://www.cnsre.cn/tags/故障集/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+</content:encoded>
+        <dc:creator>CNSRE</dc:creator>
+        <media:content url="http://www.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>journald</category>
+            
+          
+            
+              <category>故障集</category>
+            
+          
+        
+        
+          
+            
+              <category>故障集</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

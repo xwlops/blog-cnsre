@@ -1,0 +1,16 @@
+version: '2.4'
+services:
+  cnsre-blog-nginx:
+    image: __IMAGE__
+    container_name: cnsre-blog-nginx
+    restart: always
+    ports:
+      - 8088:80
+    logging:
+      driver: "journald"
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - /opt/website/logs:/var/log/nginx
+    ulimits:
+      core: 0

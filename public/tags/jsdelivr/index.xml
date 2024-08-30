@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Jsdelivr on SRE运维博客</title>
+    <link>http://www.cnsre.cn:80/tags/jsdelivr/</link>
+    <description>Recent content in Jsdelivr on SRE运维博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Fri, 02 Apr 2021 14:02:28 +0800</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="http://www.cnsre.cn:80/tags/jsdelivr/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>使用github&#43;jsdelivr搭建免费稳定的个人图床</title>
+        <link>http://www.cnsre.cn:80/posts/210402140228/</link>
+        <pubDate>Fri, 02 Apr 2021 14:02:28 +0800</pubDate>
+        
+        <atom:modified>Wed, 10 Aug 2022 08:55:27 +0800</atom:modified>
+        <guid>http://www.cnsre.cn:80/posts/210402140228/</guid>
+        <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
+        <content:encoded>&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/210402140228/&#34;&gt;https://www.cnsre.cn/posts/210402140228/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/%E5%9B%BE%E5%BA%8A/&#34;&gt;https://www.cnsre.cn/tags/图床/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h1 id=&#34;使用githubjsdelivr搭建稳定的免费个人图床&#34;&gt;使用github+jsdelivr搭建稳定的免费个人图床&amp;quot;&lt;/h1&gt;
+&lt;p&gt;&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210107123302.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;介绍&#34;&gt;介绍&lt;/h2&gt;
+&lt;p&gt;想搭建个人博客，但是对比了几家图床，觉得要不是不稳定，要不就是不支持https要不就是收费，想获取免费图床？跟我来吧。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;为了避免各位朋友再次踩坑我将我使用过的图床列出来&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;七牛云
+&lt;ul&gt;
+&lt;li&gt;注册认证后有10G永久免费空间，每月10G国内和10G国外流量。&lt;/li&gt;
+&lt;li&gt;有免费ssl证书，但https流量收费。&lt;/li&gt;
+&lt;li&gt;七牛云30天后会回收测试域名，需要绑定已备案的域名。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;又拍云
+&lt;ul&gt;
+&lt;li&gt;注册认证后有10G永久免费空间，每月15G的HTTP和HTTPS流量&lt;/li&gt;
+&lt;li&gt;提供两款可以免费续期的SSL证书&lt;/li&gt;
+&lt;li&gt;需要在网站底部添加又拍云logo及官网链接&lt;/li&gt;
+&lt;li&gt;默认测试域名为http，想要用https需要绑定自己的已备案域名。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;SM.MS
+&lt;ul&gt;
+&lt;li&gt;永久存储免注册。&lt;/li&gt;
+&lt;li&gt;图片链接支持https。&lt;/li&gt;
+&lt;li&gt;国内访问速度缓慢。&lt;/li&gt;
+&lt;li&gt;每个图片最大5M，每次最多上传10张。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;腾讯、阿里等云。
+&lt;ul&gt;
+&lt;li&gt;一开始免费（免费试用6个月）&lt;/li&gt;
+&lt;li&gt;时间、流量、空间大小均有限制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;小众图床厂商
+&lt;ul&gt;
+&lt;li&gt;担心跑路啊&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;经过上边的对比和踩坑之后，最后还是决定免费获取一个稳定、免费、访问快速的图床。&lt;br /&gt;
+使用&lt;code&gt;Github&lt;/code&gt;+&lt;code&gt;jsdelivr&lt;/code&gt;利用&lt;code&gt;Github&lt;/code&gt;的免费和&lt;code&gt;jsdelivr&lt;/code&gt;的&lt;code&gt;CND&lt;/code&gt;加速访问。在加上开源项目 &lt;code&gt;PicGo&lt;/code&gt;工具一键上传，简直了。稳定性方面&lt;code&gt;Github&lt;/code&gt;和&lt;code&gt;jsdelivr&lt;/code&gt;都是大厂，不用担心跑路的问题，更不用担心容量和速度的问题。所以，免费获取开始。&lt;/p&gt;
+&lt;h2 id=&#34;新建github仓库&#34;&gt;新建GitHub仓库&lt;/h2&gt;
+&lt;p&gt;登录（没有账号就注册）GitHub，新建一个仓库。&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210107112646.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;创建token&#34;&gt;创建token&lt;/h2&gt;
+&lt;p&gt;在主页依次选择&lt;code&gt;Settings&lt;/code&gt;-&lt;code&gt;Developer settings&lt;/code&gt;-&lt;code&gt;Personal access tokens&lt;/code&gt;-&lt;code&gt;Generate new token&lt;/code&gt;，填写好描述，勾选&lt;code&gt;repo&lt;/code&gt;，然后点击&lt;code&gt;Generate token&lt;/code&gt;生成一个Token，注意Token只会显示一次&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210107112603.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;配置picgo&#34;&gt;配置PicGo&lt;/h2&gt;
+&lt;p&gt;前往下载 &lt;a href=&#34;https://github.com/Molunerfinn/picgo/releases&#34;&gt;PicGo&lt;/a&gt;，安装好后开始配置图床。&lt;br /&gt;
+安装不在演示，直接配置。&lt;br /&gt;
+&lt;img alt=&#34;SRE运维博客|Linux系统运维|自动化运维|云计算|运维监控&#34; src=&#34;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210107113102.png&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;设定仓库名：按照&lt;code&gt;用户名/ 图床仓库名&lt;/code&gt;的格式填写&lt;/li&gt;
+&lt;li&gt;设定分支名：&lt;code&gt;master&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;设定&lt;code&gt;Token&lt;/code&gt;：粘贴之前生成的&lt;code&gt;Token&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;指定存储路径：填写想要储存的路径，如&lt;code&gt;zops/&lt;/code&gt;，这样就会在仓库下创建一个名为 &lt;code&gt;zops&lt;/code&gt;的文件夹，图片将会储存在此文件夹中&lt;/li&gt;
+&lt;li&gt;设定自定义域名：它的作用是，在图片上传后，&lt;code&gt;PicGo&lt;/code&gt;会按照 &lt;code&gt;自定义域名+储存路径+上传的图片名&lt;/code&gt; 的方式生成访问链接，放到粘贴板上。&lt;br /&gt;
+因为我们要使用 jsDelivr 加速访问，所以可以设置为&lt;code&gt;https://cdn.jsdelivr.net/gh/用户名/图床仓库名 &lt;/code&gt;，上传完毕后，我们就可以通过&lt;code&gt;https://cdn.jsdelivr.net/gh/用户名/图床仓库名/图片路径&lt;/code&gt;加速访问我们的图片了，比如：&lt;code&gt;https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210107112646.png&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;picgo更多功能&#34;&gt;PicGo更多功能&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;PicGo&lt;/code&gt;是一个开源的工具设置好后，能够一键上传复制&lt;code&gt;URL&lt;/code&gt;、&lt;code&gt;html&lt;/code&gt;、&lt;code&gt;markdown&lt;/code&gt;、&lt;code&gt;UBB&lt;/code&gt;等连接甚至可以自定义连接。此外&lt;code&gt;PicGo&lt;/code&gt;还有相册功能，可以对已上传的图片进行删除，修改链接等快捷操作，&lt;code&gt;PicGo&lt;/code&gt;还可以生成不同格式的链接、支持批量上传、快捷键上传、自定义链接格式、上传前重命名等，更多功能自己去探索吧！&lt;/p&gt;
+&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/210402140228/&#34;&gt;https://www.cnsre.cn/posts/210402140228/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/%E5%9B%BE%E5%BA%8A/&#34;&gt;https://www.cnsre.cn/tags/图床/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+</content:encoded>
+        <dc:creator>CNSRE</dc:creator>
+        <media:content url="http://www.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210107123017.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>图床</category>
+            
+          
+            
+              <category>jsdelivr</category>
+            
+          
+            
+              <category>github</category>
+            
+          
+            
+              <category>图床</category>
+            
+          
+        
+        
+          
+            
+              <category>blog</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>
