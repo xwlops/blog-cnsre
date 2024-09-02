@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Eks on SRE运维博客</title>
-    <link>https://test.cnsre.cn:80/categories/eks/</link>
+    <link>https://www.cnsre.cn/categories/eks/</link>
     <description>Recent content in Eks on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
@@ -15,7 +15,7 @@
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
-        <atom:link href="https://test.cnsre.cn:80/categories/eks/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.cnsre.cn/categories/eks/index.xml" rel="self" type="application/rss+xml" />
     
     
     
@@ -23,11 +23,11 @@
       
       <item>
         <title>eks使用efs dynamic provisioning 创建非root容器提示 Operation not permitted</title>
-        <link>https://test.cnsre.cn:80/posts/220125450139/</link>
+        <link>https://www.cnsre.cn/posts/220125450139/</link>
         <pubDate>Tue, 25 Jan 2022 14:50:14 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/220125450139/</guid>
+        <guid>https://www.cnsre.cn/posts/220125450139/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/22</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -465,7 +465,7 @@ pod配置清单：&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -503,11 +503,11 @@ pod配置清单：&lt;/p&gt;
       
       <item>
         <title>Amazon EKS 中 EFS 持久性存储</title>
-        <link>https://test.cnsre.cn:80/posts/220110850573/</link>
+        <link>https://www.cnsre.cn/posts/220110850573/</link>
         <pubDate>Mon, 10 Jan 2022 08:50:57 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/220110850573/</guid>
+        <guid>https://www.cnsre.cn/posts/220110850573/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/22</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -1013,7 +1013,7 @@ Tue Mar 23 14:29:31 UTC 2021
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/kubernetes.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/kubernetes.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -1059,11 +1059,11 @@ Tue Mar 23 14:29:31 UTC 2021
       
       <item>
         <title>如何彻底删除EKS中一直卡在Terminating的Namespace</title>
-        <link>https://test.cnsre.cn:80/posts/220107906441/</link>
+        <link>https://www.cnsre.cn/posts/220107906441/</link>
         <pubDate>Fri, 07 Jan 2022 09:06:44 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/220107906441/</guid>
+        <guid>https://www.cnsre.cn/posts/220107906441/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/22</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -1863,7 +1863,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/kubernetes.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/kubernetes.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -1901,11 +1901,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>AWS eks绑定alb 使用aws-load-balancer-controller(Ingress Controller)提供服务</title>
-        <link>https://test.cnsre.cn:80/posts/211217431135/</link>
+        <link>https://www.cnsre.cn/posts/211217431135/</link>
         <pubDate>Fri, 17 Dec 2021 14:31:13 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/211217431135/</guid>
+        <guid>https://www.cnsre.cn/posts/211217431135/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/21</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -2527,7 +2527,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -2573,11 +2573,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>AWS  EKS 添加IAM用户角色</title>
-        <link>https://test.cnsre.cn:80/posts/211203931498/</link>
+        <link>https://www.cnsre.cn/posts/211203931498/</link>
         <pubDate>Fri, 03 Dec 2021 09:31:50 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/211203931498/</guid>
+        <guid>https://www.cnsre.cn/posts/211203931498/</guid>
         <description>作者：SRE运维博客 博客地址： https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/211203931498/ 相关话题：http</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -2926,7 +2926,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         

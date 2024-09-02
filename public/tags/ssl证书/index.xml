@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Ssl证书 on SRE运维博客</title>
-    <link>https://test.cnsre.cn:80/tags/ssl%E8%AF%81%E4%B9%A6/</link>
+    <link>https://www.cnsre.cn/tags/ssl%E8%AF%81%E4%B9%A6/</link>
     <description>Recent content in Ssl证书 on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
@@ -15,7 +15,7 @@
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
-        <atom:link href="https://test.cnsre.cn:80/tags/ssl%E8%AF%81%E4%B9%A6/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.cnsre.cn/tags/ssl%E8%AF%81%E4%B9%A6/index.xml" rel="self" type="application/rss+xml" />
     
     
     
@@ -23,11 +23,11 @@
       
       <item>
         <title>证书链证书过期问题</title>
-        <link>https://test.cnsre.cn:80/posts/210414131058/</link>
+        <link>https://www.cnsre.cn/posts/210414131058/</link>
         <pubDate>Wed, 14 Apr 2021 13:10:58 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/210414131058/</guid>
+        <guid>https://www.cnsre.cn/posts/210414131058/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -125,7 +125,7 @@
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -155,11 +155,11 @@
       
       <item>
         <title>zabbix 监控域名证书到期时间</title>
-        <link>https://test.cnsre.cn:80/posts/210406154942/</link>
+        <link>https://www.cnsre.cn/posts/210406154942/</link>
         <pubDate>Tue, 06 Apr 2021 15:49:43 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/210406154942/</guid>
+        <guid>https://www.cnsre.cn/posts/210406154942/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -299,7 +299,7 @@
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         

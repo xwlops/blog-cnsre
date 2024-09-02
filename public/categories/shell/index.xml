@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Shell on SRE运维博客</title>
-    <link>https://test.cnsre.cn:80/categories/shell/</link>
+    <link>https://www.cnsre.cn/categories/shell/</link>
     <description>Recent content in Shell on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
@@ -15,7 +15,7 @@
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
-        <atom:link href="https://test.cnsre.cn:80/categories/shell/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.cnsre.cn/categories/shell/index.xml" rel="self" type="application/rss+xml" />
     
     
     
@@ -23,11 +23,11 @@
       
       <item>
         <title>10个 shell 常用脚本</title>
-        <link>https://test.cnsre.cn:80/posts/211122846494/</link>
+        <link>https://www.cnsre.cn/posts/211122846494/</link>
         <pubDate>Mon, 22 Nov 2021 08:46:49 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/211122846494/</guid>
+        <guid>https://www.cnsre.cn/posts/211122846494/</guid>
         <description>作者：SRE运维博客 博客地址： https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/211122846494/ 相关话题：http</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -564,7 +564,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/shell.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/shell.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -586,11 +586,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>一键安装java、tomcat脚本</title>
-        <link>https://test.cnsre.cn:80/posts/211112839379/</link>
+        <link>https://www.cnsre.cn/posts/211112839379/</link>
         <pubDate>Fri, 12 Nov 2021 08:39:38 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/211112839379/</guid>
+        <guid>https://www.cnsre.cn/posts/211112839379/</guid>
         <description>作者：SRE运维博客 博客地址： https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/211112839379/ 相关话题：http</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -898,7 +898,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/shell.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/shell.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -920,11 +920,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>shell常用命令</title>
-        <link>https://test.cnsre.cn:80/posts/210531132227/</link>
+        <link>https://www.cnsre.cn/posts/210531132227/</link>
         <pubDate>Mon, 31 May 2021 11:32:23 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/210531132227/</guid>
+        <guid>https://www.cnsre.cn/posts/210531132227/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -2807,7 +2807,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/shell.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/shell.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -2829,11 +2829,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>zabbix监控TCP状态</title>
-        <link>https://test.cnsre.cn:80/posts/210425130327/</link>
+        <link>https://www.cnsre.cn/posts/210425130327/</link>
         <pubDate>Sun, 25 Apr 2021 13:03:27 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/210425130327/</guid>
+        <guid>https://www.cnsre.cn/posts/210425130327/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -3245,7 +3245,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -3275,11 +3275,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>Shell 开发跳板机功能脚本</title>
-        <link>https://test.cnsre.cn:80/posts/210421130319/</link>
+        <link>https://www.cnsre.cn/posts/210421130319/</link>
         <pubDate>Wed, 21 Apr 2021 13:03:19 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/210421130319/</guid>
+        <guid>https://www.cnsre.cn/posts/210421130319/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -3763,7 +3763,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/shell.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/shell.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -3789,11 +3789,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>微信、钉钉验证登录服务器</title>
-        <link>https://test.cnsre.cn:80/posts/210419130919/</link>
+        <link>https://www.cnsre.cn/posts/210419130919/</link>
         <pubDate>Mon, 19 Apr 2021 13:09:22 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/210419130919/</guid>
+        <guid>https://www.cnsre.cn/posts/210419130919/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -4158,7 +4158,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/shell.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/shell.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -4180,11 +4180,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>数据库备份脚本</title>
-        <link>https://test.cnsre.cn:80/posts/210324144832/</link>
+        <link>https://www.cnsre.cn/posts/210324144832/</link>
         <pubDate>Wed, 24 Mar 2021 14:48:35 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/210324144832/</guid>
+        <guid>https://www.cnsre.cn/posts/210324144832/</guid>
         <description>数据库备份脚本 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63</description>
         <content:encoded>&lt;h1 id=&#34;数据库备份脚本&#34;&gt;数据库备份脚本&lt;/h1&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -4323,7 +4323,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;a href=&#34;https://www.cnsre.cn/posts/210324144832/&#34;&gt;https://www.cnsre.cn/posts/210324144832/&lt;/a&gt;&lt;/p&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/shell.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/shell.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -4345,11 +4345,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>系统巡检脚本合集</title>
-        <link>https://test.cnsre.cn:80/posts/210317132104/</link>
+        <link>https://www.cnsre.cn/posts/210317132104/</link>
         <pubDate>Wed, 17 Mar 2021 13:21:08 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/210317132104/</guid>
+        <guid>https://www.cnsre.cn/posts/210317132104/</guid>
         <description>Linux系统巡检脚本 点击查看内容 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53</description>
         <content:encoded>&lt;h2 id=&#34;linux系统巡检脚本&#34;&gt;Linux系统巡检脚本&lt;/h2&gt;
 &lt;div class=&#34;expand&#34;&gt;
@@ -5855,7 +5855,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;a href=&#34;https://www.cnsre.cn/posts/210317132104/&#34;&gt;https://www.cnsre.cn/posts/210317132104/&lt;/a&gt;&lt;/p&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/shell.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/shell.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         

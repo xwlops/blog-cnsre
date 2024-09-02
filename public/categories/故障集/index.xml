@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>故障集 on SRE运维博客</title>
-    <link>https://test.cnsre.cn:80/categories/%E6%95%85%E9%9A%9C%E9%9B%86/</link>
+    <link>https://www.cnsre.cn/categories/%E6%95%85%E9%9A%9C%E9%9B%86/</link>
     <description>Recent content in 故障集 on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
@@ -15,7 +15,7 @@
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
-        <atom:link href="https://test.cnsre.cn:80/categories/%E6%95%85%E9%9A%9C%E9%9B%86/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.cnsre.cn/categories/%E6%95%85%E9%9A%9C%E9%9B%86/index.xml" rel="self" type="application/rss+xml" />
     
     
     
@@ -23,11 +23,11 @@
       
       <item>
         <title>k3s 证书过期修改</title>
-        <link>https://test.cnsre.cn:80/posts/221207116004/</link>
+        <link>https://www.cnsre.cn/posts/221207116004/</link>
         <pubDate>Wed, 07 Dec 2022 11:16:00 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/221207116004/</guid>
+        <guid>https://www.cnsre.cn/posts/221207116004/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/22</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -114,7 +114,7 @@ k3s-master   Ready      control-plane,master   370d   v1.21.5+k3s2
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/k3s.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/k3s.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -144,11 +144,11 @@ k3s-master   Ready      control-plane,master   370d   v1.21.5+k3s2
       
       <item>
         <title>eks使用efs dynamic provisioning 创建非root容器提示 Operation not permitted</title>
-        <link>https://test.cnsre.cn:80/posts/220125450139/</link>
+        <link>https://www.cnsre.cn/posts/220125450139/</link>
         <pubDate>Tue, 25 Jan 2022 14:50:14 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/220125450139/</guid>
+        <guid>https://www.cnsre.cn/posts/220125450139/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/22</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -586,7 +586,7 @@ pod配置清单：&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -624,11 +624,11 @@ pod配置清单：&lt;/p&gt;
       
       <item>
         <title>如何彻底删除EKS中一直卡在Terminating的Namespace</title>
-        <link>https://test.cnsre.cn:80/posts/220107906441/</link>
+        <link>https://www.cnsre.cn/posts/220107906441/</link>
         <pubDate>Fri, 07 Jan 2022 09:06:44 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/220107906441/</guid>
+        <guid>https://www.cnsre.cn/posts/220107906441/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/22</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -1428,7 +1428,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/kubernetes.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/kubernetes.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -1466,11 +1466,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>zabbix-agent执行脚本提示：Permission denied</title>
-        <link>https://test.cnsre.cn:80/posts/211124953028/</link>
+        <link>https://www.cnsre.cn/posts/211124953028/</link>
         <pubDate>Wed, 24 Nov 2021 09:53:03 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/211124953028/</guid>
+        <guid>https://www.cnsre.cn/posts/211124953028/</guid>
         <description>作者：SRE运维博客 博客地址： https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/211124953028/ 相关话题：http</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -1527,7 +1527,7 @@ esac
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -1557,11 +1557,11 @@ esac
       
       <item>
         <title>删除文件后 df 查看磁盘空间并没有释放</title>
-        <link>https://test.cnsre.cn:80/posts/211029955133/</link>
+        <link>https://www.cnsre.cn/posts/211029955133/</link>
         <pubDate>Fri, 29 Oct 2021 09:55:13 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/211029955133/</guid>
+        <guid>https://www.cnsre.cn/posts/211029955133/</guid>
         <description>作者：SRE运维博客 博客地址： https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/211029955133/ 相关话题：http</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -1607,7 +1607,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -1629,11 +1629,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>大于2T硬盘安装 Redhat 系统</title>
-        <link>https://test.cnsre.cn:80/posts/211027957506/</link>
+        <link>https://www.cnsre.cn/posts/211027957506/</link>
         <pubDate>Wed, 27 Oct 2021 09:57:50 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/211027957506/</guid>
+        <guid>https://www.cnsre.cn/posts/211027957506/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/211</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -1707,7 +1707,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -1729,11 +1729,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>journal log日志的问题</title>
-        <link>https://test.cnsre.cn:80/posts/210928957081/</link>
+        <link>https://www.cnsre.cn/posts/210928957081/</link>
         <pubDate>Tue, 28 Sep 2021 09:57:08 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/210928957081/</guid>
+        <guid>https://www.cnsre.cn/posts/210928957081/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -1941,7 +1941,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -1971,11 +1971,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>记一次 Ubuntu 内核升级故障处理</title>
-        <link>https://test.cnsre.cn:80/posts/210915154434/</link>
+        <link>https://www.cnsre.cn/posts/210915154434/</link>
         <pubDate>Wed, 15 Sep 2021 11:54:43 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/210915154434/</guid>
+        <guid>https://www.cnsre.cn/posts/210915154434/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -2140,7 +2140,7 @@ LABEL=cloudimg-rootfs   /        ext4   defaults,discard        0 0
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -2178,11 +2178,11 @@ LABEL=cloudimg-rootfs   /        ext4   defaults,discard        0 0
       
       <item>
         <title>Jenkins 使用 Docker 构建报错</title>
-        <link>https://test.cnsre.cn:80/posts/210910030083/</link>
+        <link>https://www.cnsre.cn/posts/210910030083/</link>
         <pubDate>Fri, 10 Sep 2021 10:30:08 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/210910030083/</guid>
+        <guid>https://www.cnsre.cn/posts/210910030083/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -2265,7 +2265,7 @@ LABEL=cloudimg-rootfs   /        ext4   defaults,discard        0 0
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -2299,11 +2299,11 @@ LABEL=cloudimg-rootfs   /        ext4   defaults,discard        0 0
       
       <item>
         <title>kubernetes 使用 PCV 创建 pod 报错 persistentvolume-controller  waiting for a volume to be created</title>
-        <link>https://test.cnsre.cn:80/posts/210906949577/</link>
+        <link>https://www.cnsre.cn/posts/210906949577/</link>
         <pubDate>Mon, 06 Sep 2021 09:49:57 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/210906949577/</guid>
+        <guid>https://www.cnsre.cn/posts/210906949577/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -2369,7 +2369,7 @@ LABEL=cloudimg-rootfs   /        ext4   defaults,discard        0 0
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/kubernetes.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/kubernetes.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -2395,11 +2395,11 @@ LABEL=cloudimg-rootfs   /        ext4   defaults,discard        0 0
       
       <item>
         <title>AWS EC2 实例 SSH 无法登录故障</title>
-        <link>https://test.cnsre.cn:80/posts/210823049577/</link>
+        <link>https://www.cnsre.cn/posts/210823049577/</link>
         <pubDate>Mon, 23 Aug 2021 10:49:58 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/210823049577/</guid>
+        <guid>https://www.cnsre.cn/posts/210823049577/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -2480,7 +2480,7 @@ Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -2502,11 +2502,11 @@ Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
       
       <item>
         <title>kubernetes 常见故障以及解决方法</title>
-        <link>https://test.cnsre.cn:80/posts/210819955387/</link>
+        <link>https://www.cnsre.cn/posts/210819955387/</link>
         <pubDate>Thu, 19 Aug 2021 09:55:38 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/210819955387/</guid>
+        <guid>https://www.cnsre.cn/posts/210819955387/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -2878,7 +2878,7 @@ k8s-master节点，重新安装插件即可。&lt;/li&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/kubernetes.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/kubernetes.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -2904,11 +2904,11 @@ k8s-master节点，重新安装插件即可。&lt;/li&gt;
       
       <item>
         <title>Grafana插件地图Worldmap不显示</title>
-        <link>https://test.cnsre.cn:80/posts/210426026121/</link>
+        <link>https://www.cnsre.cn/posts/210426026121/</link>
         <pubDate>Mon, 26 Apr 2021 09:36:12 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/210426026121/</guid>
+        <guid>https://www.cnsre.cn/posts/210426026121/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -3004,7 +3004,7 @@ k8s-master节点，重新安装插件即可。&lt;/li&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/grafana.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/grafana.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -3034,11 +3034,11 @@ k8s-master节点，重新安装插件即可。&lt;/li&gt;
       
       <item>
         <title>证书链证书过期问题</title>
-        <link>https://test.cnsre.cn:80/posts/210414131058/</link>
+        <link>https://www.cnsre.cn/posts/210414131058/</link>
         <pubDate>Wed, 14 Apr 2021 13:10:58 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/210414131058/</guid>
+        <guid>https://www.cnsre.cn/posts/210414131058/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -3136,7 +3136,7 @@ k8s-master节点，重新安装插件即可。&lt;/li&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -3166,11 +3166,11 @@ k8s-master节点，重新安装插件即可。&lt;/li&gt;
       
       <item>
         <title>数据库CPU 100%处理记录</title>
-        <link>https://test.cnsre.cn:80/posts/210413131020/</link>
+        <link>https://www.cnsre.cn/posts/210413131020/</link>
         <pubDate>Tue, 13 Apr 2021 13:10:21 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/210413131020/</guid>
+        <guid>https://www.cnsre.cn/posts/210413131020/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -3317,7 +3317,7 @@ Empty set
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -3347,11 +3347,11 @@ Empty set
       
       <item>
         <title>Zabbix历史数据处理</title>
-        <link>https://test.cnsre.cn:80/posts/210408131033/</link>
+        <link>https://www.cnsre.cn/posts/210408131033/</link>
         <pubDate>Thu, 08 Apr 2021 13:10:34 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/210408131033/</guid>
+        <guid>https://www.cnsre.cn/posts/210408131033/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -3449,7 +3449,7 @@ optimize table events;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -3479,11 +3479,11 @@ optimize table events;
       
       <item>
         <title>Systemd Journald占用资源过多</title>
-        <link>https://test.cnsre.cn:80/posts/210401140104/</link>
+        <link>https://www.cnsre.cn/posts/210401140104/</link>
         <pubDate>Thu, 01 Apr 2021 14:01:04 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/210401140104/</guid>
+        <guid>https://www.cnsre.cn/posts/210401140104/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -3569,7 +3569,7 @@ ForwardToConsole=no
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -3595,11 +3595,11 @@ ForwardToConsole=no
       
       <item>
         <title>AWS创建Redis集群模式遇到的问题</title>
-        <link>https://test.cnsre.cn:80/posts/210331125739/</link>
+        <link>https://www.cnsre.cn/posts/210331125739/</link>
         <pubDate>Wed, 31 Mar 2021 12:57:39 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/210331125739/</guid>
+        <guid>https://www.cnsre.cn/posts/210331125739/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -3643,7 +3643,7 @@ redis设置&lt;br /&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -3677,11 +3677,11 @@ redis设置&lt;br /&gt;
       
       <item>
         <title>Jenkins 构建JOB失败</title>
-        <link>https://test.cnsre.cn:80/posts/210329141238/</link>
+        <link>https://www.cnsre.cn/posts/210329141238/</link>
         <pubDate>Mon, 29 Mar 2021 14:12:38 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/210329141238/</guid>
+        <guid>https://www.cnsre.cn/posts/210329141238/</guid>
         <description>Jenkins 构建JOB失败 问题描述 同事在使用Jenkins打包项目的时候报错 error:index-pack died of signal 15 fatal: index-pack failed 出现这个问题，初步怀疑是拉取代码超时，为了验证这个问题，我</description>
         <content:encoded>&lt;h1 id=&#34;jenkins-构建job失败&#34;&gt;Jenkins 构建JOB失败&lt;/h1&gt;
 &lt;h2 id=&#34;问题描述&#34;&gt;问题描述&lt;/h2&gt;
@@ -3725,7 +3725,7 @@ fatal: index-pack failed
 &lt;a href=&#34;https://www.cnsre.cn/posts/210329141238/&#34;&gt;https://www.cnsre.cn/posts/210329141238/&lt;/a&gt;&lt;/p&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -3755,11 +3755,11 @@ fatal: index-pack failed
       
       <item>
         <title>AWS修改EC2实例时间</title>
-        <link>https://test.cnsre.cn:80/posts/210312112259/</link>
+        <link>https://www.cnsre.cn/posts/210312112259/</link>
         <pubDate>Fri, 12 Mar 2021 12:54:11 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/210312112259/</guid>
+        <guid>https://www.cnsre.cn/posts/210312112259/</guid>
         <description>解决aws ec2的centos7设置时区无效 解决办法 1 yum upgrade tzdata -y 原因分析 1 zdump -v /usr/share/zoneinfo/Asia/Shanghai 我们会发现时区是固定不变的,无论我们通过修改 localtime 还是通过 timedatectl 修改,</description>
         <content:encoded>&lt;h1 id=&#34;解决aws-ec2的centos7设置时区无效&#34;&gt;解决aws ec2的centos7设置时区无效&lt;/h1&gt;
 &lt;h2 id=&#34;解决办法&#34;&gt;解决办法&lt;/h2&gt;
@@ -3807,7 +3807,7 @@ fatal: index-pack failed
 &lt;a href=&#34;https://www.cnsre.cn/posts/210312112259/&#34;&gt;https://www.cnsre.cn/posts/210312112259/&lt;/a&gt;&lt;/p&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -3845,11 +3845,11 @@ fatal: index-pack failed
       
       <item>
         <title>AWS使用快照创建实例启动失败</title>
-        <link>https://test.cnsre.cn:80/posts/210311132723/</link>
+        <link>https://www.cnsre.cn/posts/210311132723/</link>
         <pubDate>Thu, 11 Mar 2021 11:08:23 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://test.cnsre.cn:80/posts/210311132723/</guid>
+        <guid>https://www.cnsre.cn/posts/210311132723/</guid>
         <description>AWS使用快照创建实例启动失败 问题描述 因业务需求，需要将A集群复制一份到B集群，当做预生产环境使用。但是在AWS使用快照的方式创建EC2实例</description>
         <content:encoded>&lt;h1 id=&#34;aws使用快照创建实例启动失败&#34;&gt;AWS使用快照创建实例启动失败&lt;/h1&gt;
 &lt;h2 id=&#34;问题描述&#34;&gt;问题描述&lt;/h2&gt;
@@ -3888,7 +3888,7 @@ Linux 系统默认的&lt;code&gt;python2.7&lt;/code&gt;被修改为了&lt;code&g
 &lt;a href=&#34;https://www.cnsre.cn/posts/210311132723/&#34;&gt;https://www.cnsre.cn/posts/210311132723/&lt;/a&gt;&lt;/p&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
