@@ -21,3 +21,27 @@
 
   </div>
 {{ end }}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // 修改 UV 和 PV 的前缀
+    function addPrefix(elementId, prefix) {
+      var element = document.getElementById(elementId);
+      if (element) {
+        var observer = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type === 'childList' && element.textContent.trim() !== '...') {
+              element.textContent = prefix + element.textContent.trim();
+              observer.disconnect(); // 停止监听
+            }
+          });
+        });
+        observer.observe(element, { childList: true });
+      }
+    }
+
+    // 添加前缀到 UV 和 PV
+    addPrefix('busuanzi_value_site_uv', '1');
+    addPrefix('busuanzi_value_site_pv', '1');
+  });
+</script>
