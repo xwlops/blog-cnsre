@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Cloud-Init on SRE运维博客</title>
-    <link>http://localhost:1313/tags/cloud-init/</link>
+    <link>https://test.cnsre.cn:80/tags/cloud-init/</link>
     <description>Recent content in Cloud-Init on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
@@ -15,7 +15,7 @@
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
-        <atom:link href="http://localhost:1313/tags/cloud-init/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://test.cnsre.cn:80/tags/cloud-init/index.xml" rel="self" type="application/rss+xml" />
     
     
     
@@ -23,11 +23,11 @@
       
       <item>
         <title>AWS使用快照创建实例启动失败</title>
-        <link>http://localhost:1313/posts/210311132723/</link>
+        <link>https://test.cnsre.cn:80/posts/210311132723/</link>
         <pubDate>Thu, 11 Mar 2021 11:08:23 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>http://localhost:1313/posts/210311132723/</guid>
+        <guid>https://test.cnsre.cn:80/posts/210311132723/</guid>
         <description>AWS使用快照创建实例启动失败 问题描述 因业务需求，需要将A集群复制一份到B集群，当做预生产环境使用。但是在AWS使用快照的方式创建EC2实例</description>
         <content:encoded>&lt;h1 id=&#34;aws使用快照创建实例启动失败&#34;&gt;AWS使用快照创建实例启动失败&lt;/h1&gt;
 &lt;h2 id=&#34;问题描述&#34;&gt;问题描述&lt;/h2&gt;
@@ -66,7 +66,7 @@ Linux 系统默认的&lt;code&gt;python2.7&lt;/code&gt;被修改为了&lt;code&g
 &lt;a href=&#34;https://www.cnsre.cn/posts/210311132723/&#34;&gt;https://www.cnsre.cn/posts/210311132723/&lt;/a&gt;&lt;/p&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://test.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
