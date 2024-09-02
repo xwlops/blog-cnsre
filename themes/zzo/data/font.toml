@@ -1,6 +1,11 @@
 title_font = "\"Montserrat\", sans-serif"
-content_font = "\"Muli\", sans-serif"
+#content_font = "\"Muli\", sans-serif"
 # content_font = "\"Merriweather\", serif"
 # content_font = "\"Source Sans Pro\", sans-serif"
 # content_font = "\"League Gothic\", sans-serif"
-cursive_font = "\"Courgette\", cursive"
+#cursive_font = "\"Courgette\", cursive"
+
+#title_font = "'Noto Sans SC', sans-serif"
+content_font = "'Noto Sans SC', sans-serif"
+cursive_font = "'Noto Sans SC', sans-serif"
+# 修改字体，需要在themes/zzo/layouts/partials/head/custom-head.html 中添加代码
