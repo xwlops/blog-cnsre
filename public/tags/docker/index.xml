@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Docker on SRE运维博客</title>
-    <link>http://www.cnsre.cn:80/tags/docker/</link>
+    <link>http://localhost:1313/tags/docker/</link>
     <description>Recent content in Docker on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
@@ -15,7 +15,7 @@
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
-        <atom:link href="http://www.cnsre.cn:80/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://localhost:1313/tags/docker/index.xml" rel="self" type="application/rss+xml" />
     
     
     
@@ -23,11 +23,11 @@
       
       <item>
         <title>AWS私有仓库ECR推送拉取镜像</title>
-        <link>http://www.cnsre.cn:80/posts/211206944174/</link>
+        <link>http://localhost:1313/posts/211206944174/</link>
         <pubDate>Mon, 06 Dec 2021 09:44:18 +0800</pubDate>
         
-        <atom:modified>Wed, 10 Aug 2022 08:55:27 +0800</atom:modified>
-        <guid>http://www.cnsre.cn:80/posts/211206944174/</guid>
+        <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
+        <guid>http://localhost:1313/posts/211206944174/</guid>
         <description>作者：SRE运维博客 博客地址： https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/211206944174/ 相关话题：http</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -107,7 +107,7 @@ systemctl restart docker
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="http://www.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -137,11 +137,11 @@ systemctl restart docker
       
       <item>
         <title>国外镜像拉取到docker hub</title>
-        <link>http://www.cnsre.cn:80/posts/210924925541/</link>
+        <link>http://localhost:1313/posts/210924925541/</link>
         <pubDate>Fri, 24 Sep 2021 09:25:54 +0800</pubDate>
         
-        <atom:modified>Wed, 10 Aug 2022 08:55:27 +0800</atom:modified>
-        <guid>http://www.cnsre.cn:80/posts/210924925541/</guid>
+        <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
+        <guid>http://localhost:1313/posts/210924925541/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -189,7 +189,7 @@ docker pull cnsre/ingress-nginx-controller:v1.0.0
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="http://www.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/kubernetes.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/kubernetes.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -219,11 +219,11 @@ docker pull cnsre/ingress-nginx-controller:v1.0.0
       
       <item>
         <title>Jenkins 使用 Docker 构建报错</title>
-        <link>http://www.cnsre.cn:80/posts/210910030083/</link>
+        <link>http://localhost:1313/posts/210910030083/</link>
         <pubDate>Fri, 10 Sep 2021 10:30:08 +0800</pubDate>
         
-        <atom:modified>Wed, 10 Aug 2022 08:55:27 +0800</atom:modified>
-        <guid>http://www.cnsre.cn:80/posts/210910030083/</guid>
+        <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
+        <guid>http://localhost:1313/posts/210910030083/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -306,7 +306,7 @@ docker pull cnsre/ingress-nginx-controller:v1.0.0
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="http://www.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -340,11 +340,11 @@ docker pull cnsre/ingress-nginx-controller:v1.0.0
       
       <item>
         <title>使用Docker构建JenkinsCICD自动发布</title>
-        <link>http://www.cnsre.cn:80/posts/210419172129/</link>
+        <link>http://localhost:1313/posts/210419172129/</link>
         <pubDate>Mon, 19 Apr 2021 17:21:29 +0800</pubDate>
         
-        <atom:modified>Wed, 10 Aug 2022 08:55:27 +0800</atom:modified>
-        <guid>http://www.cnsre.cn:80/posts/210419172129/</guid>
+        <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
+        <guid>http://localhost:1313/posts/210419172129/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -629,7 +629,7 @@ docker push $REPOSITORY
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="http://www.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/docker.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/docker.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         

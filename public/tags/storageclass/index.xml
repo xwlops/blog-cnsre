@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Storageclass on SRE运维博客</title>
-    <link>http://www.cnsre.cn:80/tags/storageclass/</link>
+    <link>http://localhost:1313/tags/storageclass/</link>
     <description>Recent content in Storageclass on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
@@ -15,7 +15,7 @@
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
-        <atom:link href="http://www.cnsre.cn:80/tags/storageclass/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://localhost:1313/tags/storageclass/index.xml" rel="self" type="application/rss+xml" />
     
     
     
@@ -23,11 +23,11 @@
       
       <item>
         <title>Kubernetes 持久化数据存储 StorageClass</title>
-        <link>http://www.cnsre.cn:80/posts/210908023010/</link>
+        <link>http://localhost:1313/posts/210908023010/</link>
         <pubDate>Wed, 08 Sep 2021 10:23:01 +0800</pubDate>
         
-        <atom:modified>Wed, 10 Aug 2022 08:55:27 +0800</atom:modified>
-        <guid>http://www.cnsre.cn:80/posts/210908023010/</guid>
+        <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
+        <guid>http://localhost:1313/posts/210908023010/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -614,7 +614,7 @@ provisioner 必须和上面得 Deployment 的 YAML 文件中 PROVISIONER_NAME �
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="http://www.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/kubernetes.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/kubernetes.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         

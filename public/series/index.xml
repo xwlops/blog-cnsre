@@ -7,14 +7,14 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Series on SRE运维博客</title>
-    <link>http://www.cnsre.cn:80/series/</link>
+    <link>http://localhost:1313/series/</link>
     <description>Recent content in Series on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
-        <atom:link href="http://www.cnsre.cn:80/series/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://localhost:1313/series/index.xml" rel="self" type="application/rss+xml" />
     
     
     

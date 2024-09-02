@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Alb on SRE运维博客</title>
-    <link>http://www.cnsre.cn:80/tags/alb/</link>
+    <link>http://localhost:1313/tags/alb/</link>
     <description>Recent content in Alb on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
@@ -15,7 +15,7 @@
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
-        <atom:link href="http://www.cnsre.cn:80/tags/alb/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://localhost:1313/tags/alb/index.xml" rel="self" type="application/rss+xml" />
     
     
     
@@ -23,11 +23,11 @@
       
       <item>
         <title>AWS eks绑定alb 使用aws-load-balancer-controller(Ingress Controller)提供服务</title>
-        <link>http://www.cnsre.cn:80/posts/211217431135/</link>
+        <link>http://localhost:1313/posts/211217431135/</link>
         <pubDate>Fri, 17 Dec 2021 14:31:13 +0800</pubDate>
         
-        <atom:modified>Sat, 26 Mar 2022 18:08:14 +0800</atom:modified>
-        <guid>http://www.cnsre.cn:80/posts/211217431135/</guid>
+        <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
+        <guid>http://localhost:1313/posts/211217431135/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/21</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -649,7 +649,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="http://www.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -695,11 +695,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>AWS使用ALB负载均衡遇到的问题</title>
-        <link>http://www.cnsre.cn:80/posts/210514620165/</link>
+        <link>http://localhost:1313/posts/210514620165/</link>
         <pubDate>Fri, 14 May 2021 16:20:35 +0800</pubDate>
         
-        <atom:modified>Wed, 10 Aug 2022 08:55:27 +0800</atom:modified>
-        <guid>http://www.cnsre.cn:80/posts/210514620165/</guid>
+        <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
+        <guid>http://localhost:1313/posts/210514620165/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -731,7 +731,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="http://www.cnsre.cn:80/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
