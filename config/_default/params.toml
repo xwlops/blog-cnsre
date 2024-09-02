@@ -20,7 +20,7 @@ notAllowedTypesInArchive = ["about", "talks", "showcase", "publication", "presen
 # 隐藏不想出现在RSS的
 notAllowedTypesInHomeFeed = ["about", "archive", "contact", "talks", "showcase", "publication", "presentation", "resume", "gallery"]
 # 视口大小
-viewportSize = "widest" # widest, wider, wide, normal, narrow
+viewportSize = "normal" # widest, wider, wide, normal, narrow
 # 启用Ui动画
 enableUiAnimation = true
 # 如果为 true，则在浏览器中禁用 javascript 时，博客内容将被隐藏。

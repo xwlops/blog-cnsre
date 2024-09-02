@@ -18,7 +18,6 @@ $grid_max: $grid_max_width + $grid_max_unit;
 
 .wrapper {
   margin: 0 auto;
-  width: 70% !important;
   position: relative;
 
   @include justify-content(center);
