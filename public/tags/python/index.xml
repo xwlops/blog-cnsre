@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Python on SRE运维博客</title>
-    <link>http://localhost:1313/tags/python/</link>
+    <link>https://www.cnsre.cn/tags/python/</link>
     <description>Recent content in Python on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
@@ -15,7 +15,7 @@
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
-        <atom:link href="http://localhost:1313/tags/python/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.cnsre.cn/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
     
     
@@ -23,11 +23,11 @@
       
       <item>
         <title>如何使用 Lambda 自动添加CloudWatch所有实例磁盘告警及 SNS 通知</title>
-        <link>http://localhost:1313/posts/230506425079/</link>
+        <link>https://www.cnsre.cn/posts/230506425079/</link>
         <pubDate>Sat, 06 May 2023 14:25:09 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>http://localhost:1313/posts/230506425079/</guid>
+        <guid>https://www.cnsre.cn/posts/230506425079/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/23</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -286,7 +286,7 @@ A3: 查看CloudWatch中原本磁盘的指标名称，并修改Lambda函数代码
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/lambda.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/lambda.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -340,11 +340,11 @@ A3: 查看CloudWatch中原本磁盘的指标名称，并修改Lambda函数代码
       
       <item>
         <title>Lambda函数检查S3文件夹是否存在</title>
-        <link>http://localhost:1313/posts/230410659053/</link>
+        <link>https://www.cnsre.cn/posts/230410659053/</link>
         <pubDate>Mon, 10 Apr 2023 16:59:07 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>http://localhost:1313/posts/230410659053/</guid>
+        <guid>https://www.cnsre.cn/posts/230410659053/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/23</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -485,7 +485,7 @@ if len(subfolders) &amp;gt; 0:
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/lambda.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/lambda.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         

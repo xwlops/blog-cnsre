@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>K3s on SRE运维博客</title>
-    <link>http://localhost:1313/tags/k3s/</link>
+    <link>https://www.cnsre.cn/tags/k3s/</link>
     <description>Recent content in K3s on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
@@ -15,7 +15,7 @@
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
-        <atom:link href="http://localhost:1313/tags/k3s/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.cnsre.cn/tags/k3s/index.xml" rel="self" type="application/rss+xml" />
     
     
     
@@ -23,11 +23,11 @@
       
       <item>
         <title>多云搭建 K3S 集群</title>
-        <link>http://localhost:1313/posts/211119132529/</link>
+        <link>https://www.cnsre.cn/posts/211119132529/</link>
         <pubDate>Fri, 19 Nov 2021 11:32:53 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>http://localhost:1313/posts/211119132529/</guid>
+        <guid>https://www.cnsre.cn/posts/211119132529/</guid>
         <description>作者：SRE运维博客 博客地址： https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/211119132529/ 相关话题：http</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -855,7 +855,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/k3s.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/k3s.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -893,11 +893,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>k3s 证书过期修改</title>
-        <link>http://localhost:1313/posts/221207116004/</link>
+        <link>https://www.cnsre.cn/posts/221207116004/</link>
         <pubDate>Wed, 07 Dec 2022 11:16:00 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>http://localhost:1313/posts/221207116004/</guid>
+        <guid>https://www.cnsre.cn/posts/221207116004/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/22</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -984,7 +984,7 @@ k3s-master   Ready      control-plane,master   370d   v1.21.5+k3s2
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/k3s.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/k3s.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -1014,11 +1014,11 @@ k3s-master   Ready      control-plane,master   370d   v1.21.5+k3s2
       
       <item>
         <title>k3s 卸载 traefik</title>
-        <link>http://localhost:1313/posts/211126003074/</link>
+        <link>https://www.cnsre.cn/posts/211126003074/</link>
         <pubDate>Fri, 26 Nov 2021 10:03:07 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>http://localhost:1313/posts/211126003074/</guid>
+        <guid>https://www.cnsre.cn/posts/211126003074/</guid>
         <description>作者：SRE运维博客 博客地址： https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/211126003074/ 相关话题：http</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -1085,7 +1085,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/k3s.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/k3s.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -1115,11 +1115,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>k3s单机版安装部署 附一键安装脚本</title>
-        <link>http://localhost:1313/posts/211109907029/</link>
+        <link>https://www.cnsre.cn/posts/211109907029/</link>
         <pubDate>Tue, 09 Nov 2021 09:07:03 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>http://localhost:1313/posts/211109907029/</guid>
+        <guid>https://www.cnsre.cn/posts/211109907029/</guid>
         <description>作者：SRE运维博客 博客地址： https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/211109907029/ 相关话题：http</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -1583,7 +1583,7 @@ K3s 默认将使用 &lt;code&gt;containerd&lt;/code&gt; 作为容器环境，请
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/k3s.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/k3s.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
