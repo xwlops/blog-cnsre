@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>240906085714 – SRE运维博客</title>
+    <title>实现Kubernetes跨Namespace Service访问的最佳实践 – SRE运维博客</title>
     
 
 
@@ -1323,7 +1323,7 @@
 
 
     
-<meta name="description" content="" />
+<meta name="description" content="本文介绍了如何在Kubernetes集群中，使用Service名称实现跨命名空间（namespace）间的Pod互相通信。通过具体示例和详细步骤，展示了如何配置和使用ExternalName类型的Service来解决命名空间间的通信问题，从而避免Service IP变动导致的通信中断。" />
 
 <meta name="keywords" content="Kubernetes,跨Namespace通信,Service名称解析,ExternalName类型,Kubernetes运维">
 
@@ -1331,7 +1331,7 @@
 <meta name="keywords" content="kubernetes">
 
 <meta name="created" content="2024-09-06T08:57:14&#43;0800">
-<meta name="modified" content="2024-09-06T09:07:23&#43;0800">
+<meta name="modified" content="2024-09-06T09:34:56&#43;0800">
 <meta property="article:published_time" content="2024-09-06T08:57:14&#43;0800">
 
 <meta name="author" content="CNSRE">
@@ -1339,18 +1339,18 @@
 
 
 <meta property="og:site_name" content="SRE运维博客">
-<meta property="og:title" content="240906085714">
+<meta property="og:title" content="实现Kubernetes跨Namespace Service访问的最佳实践">
 <meta property="og:url" content="https://www.cnsre.cn/posts/240906085714/">
 <meta property="og:type" content="article">
-<meta property="og:description" content="">
+<meta property="og:description" content="本文介绍了如何在Kubernetes集群中，使用Service名称实现跨命名空间（namespace）间的Pod互相通信。通过具体示例和详细步骤，展示了如何配置和使用ExternalName类型的Service来解决命名空间间的通信问题，从而避免Service IP变动导致的通信中断。">
 
   
     <meta property="og:image" content="https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/kubernetes.png">
     <meta property="og:image:url" content="https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/kubernetes.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:app:name:iphone" content="SRE运维博客">
-    <meta property="twitter:title" content="240906085714">
-    <meta property="twitter:description" content="">
+    <meta property="twitter:title" content="实现Kubernetes跨Namespace Service访问的最佳实践">
+    <meta property="twitter:description" content="本文介绍了如何在Kubernetes集群中，使用Service名称实现跨命名空间（namespace）间的Pod互相通信。通过具体示例和详细步骤，展示了如何配置和使用ExternalName类型的Service来解决命名空间间的通信问题，从而避免Service IP变动导致的通信中断。">
   
 
 <meta name="generator" content="Hugo 0.123.8">
@@ -1376,11 +1376,11 @@
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "headline": "240906085714",
+    "headline": "实现Kubernetes跨Namespace Service访问的最佳实践",
     "datePublished": "2024-09-06T08:57:14+08:00",
-    "dateModified": "2024-09-06T09:07:23+08:00",
+    "dateModified": "2024-09-06T09:34:56+08:00",
     "url" : "https://www.cnsre.cn/posts/240906085714/",
-    "description": "作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/24",
+    "description": "本文介绍了如何在Kubernetes集群中，使用Service名称实现跨命名空间（namespace）间的Pod互相通信。通过具体示例和详细步骤，展示了如何配置和使用ExternalName类型的Service来解决命名空间间的通信问题，从而避免Service IP变动导致的通信中断。",
     "keywords": ["kubernetes"],
     "image" : "https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/kubernetes.png",
     "author": {
@@ -1750,7 +1750,7 @@ if (!doNotTrack) {
   <div class="single ">
     <div class="single__nojs">请启用 Javascript 以查看内容</div>
     <script>document.querySelector('.single').classList.remove('hide'); document.querySelector('.single__nojs').classList.add('hide');</script>
-    <h2 class="single__title" data-ani="true">240906085714</h2>
+    <h2 class="single__title" data-ani="true">实现Kubernetes跨Namespace Service访问的最佳实践</h2>
     <h3 class="single__subtitle"></h3>
     <div class="single__meta">
       
