@@ -56,7 +56,7 @@ hugo new posts/my-post.md
 ### 构建静态网站
 
 ```bash
-hugo -D
+hugo -b https://www.cnsre.cn
 ```
 
 静态网站文件将生成在 `/public` 目录。
