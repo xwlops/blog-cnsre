@@ -14,4 +14,6 @@ LANG=en_US.UTF-8
 
 GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 /opt/homebrew/bin/hugo -b https://www.cnsre.cn
+git add .
+git commit -m "build"
 git push origin "$GIT_BRANCH"
