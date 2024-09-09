@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Pvc on SRE运维博客</title>
-    <link>https://www.cnsre.cn/tags/pvc/</link>
+    <link>https://blog-cnsre.pages.dev/tags/pvc/</link>
     <description>Recent content in Pvc on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
@@ -15,7 +15,7 @@
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
-        <atom:link href="https://www.cnsre.cn/tags/pvc/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://blog-cnsre.pages.dev/tags/pvc/index.xml" rel="self" type="application/rss+xml" />
     
     
     
@@ -23,11 +23,11 @@
       
       <item>
         <title>kubernetes 使用 PV 和 PVC 管理数据存储</title>
-        <link>https://www.cnsre.cn/posts/210903021487/</link>
+        <link>https://blog-cnsre.pages.dev/posts/210903021487/</link>
         <pubDate>Fri, 03 Sep 2021 10:21:49 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/210903021487/</guid>
+        <guid>https://blog-cnsre.pages.dev/posts/210903021487/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -438,7 +438,7 @@ K8S 提供了一种可以动态分配的工作机制，可以自动创建 PV，�
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/kubernetes.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://blog-cnsre.pages.dev/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/kubernetes.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         

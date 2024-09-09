@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Zabbix on SRE运维博客</title>
-    <link>https://www.cnsre.cn/tags/zabbix/</link>
+    <link>https://blog-cnsre.pages.dev/tags/zabbix/</link>
     <description>Recent content in Zabbix on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
@@ -15,7 +15,7 @@
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
-        <atom:link href="https://www.cnsre.cn/tags/zabbix/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://blog-cnsre.pages.dev/tags/zabbix/index.xml" rel="self" type="application/rss+xml" />
     
     
     
@@ -23,11 +23,11 @@
       
       <item>
         <title>zabbix-agent执行脚本提示：Permission denied</title>
-        <link>https://www.cnsre.cn/posts/211124953028/</link>
+        <link>https://blog-cnsre.pages.dev/posts/211124953028/</link>
         <pubDate>Wed, 24 Nov 2021 09:53:03 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/211124953028/</guid>
+        <guid>https://blog-cnsre.pages.dev/posts/211124953028/</guid>
         <description>作者：SRE运维博客 博客地址： https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/211124953028/ 相关话题：http</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -84,7 +84,7 @@ esac
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://blog-cnsre.pages.dev/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -114,11 +114,11 @@ esac
       
       <item>
         <title>zabbix 监控 aws rds 数据库</title>
-        <link>https://www.cnsre.cn/posts/211103006342/</link>
+        <link>https://blog-cnsre.pages.dev/posts/211103006342/</link>
         <pubDate>Wed, 03 Nov 2021 10:06:34 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/211103006342/</guid>
+        <guid>https://blog-cnsre.pages.dev/posts/211103006342/</guid>
         <description>作者：SRE运维博客 博客地址： https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/211103006342/ 相关话题：http</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -207,7 +207,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://blog-cnsre.pages.dev/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -233,11 +233,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>zabbix 使用 web 监控功能监控 url</title>
-        <link>https://www.cnsre.cn/posts/211101950005/</link>
+        <link>https://blog-cnsre.pages.dev/posts/211101950005/</link>
         <pubDate>Mon, 01 Nov 2021 09:50:00 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/211101950005/</guid>
+        <guid>https://blog-cnsre.pages.dev/posts/211101950005/</guid>
         <description>作者：SRE运维博客 博客地址： https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/211101950005/ 相关话题：http</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -319,7 +319,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://blog-cnsre.pages.dev/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -341,11 +341,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>zabbix 通过 agent 监控进程、端口</title>
-        <link>https://www.cnsre.cn/posts/211025912047/</link>
+        <link>https://blog-cnsre.pages.dev/posts/211025912047/</link>
         <pubDate>Mon, 25 Oct 2021 09:12:05 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/211025912047/</guid>
+        <guid>https://blog-cnsre.pages.dev/posts/211025912047/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/211</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -441,7 +441,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://blog-cnsre.pages.dev/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -463,11 +463,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>zabbix自定义监控磁盘分区</title>
-        <link>https://www.cnsre.cn/posts/211021950307/</link>
+        <link>https://blog-cnsre.pages.dev/posts/211021950307/</link>
         <pubDate>Thu, 21 Oct 2021 09:50:31 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/211021950307/</guid>
+        <guid>https://blog-cnsre.pages.dev/posts/211021950307/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/211</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -524,7 +524,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://blog-cnsre.pages.dev/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -546,11 +546,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>zabbix 监控 oracle 数据库</title>
-        <link>https://www.cnsre.cn/posts/211009115571/</link>
+        <link>https://blog-cnsre.pages.dev/posts/211009115571/</link>
         <pubDate>Sat, 09 Oct 2021 11:15:57 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/211009115571/</guid>
+        <guid>https://blog-cnsre.pages.dev/posts/211009115571/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/211</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -985,7 +985,7 @@ tbl_space.NoDataFound=none
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://blog-cnsre.pages.dev/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -1011,11 +1011,11 @@ tbl_space.NoDataFound=none
       
       <item>
         <title>LNMP 方式部署 zabbix 5.0</title>
-        <link>https://www.cnsre.cn/posts/210824854115/</link>
+        <link>https://blog-cnsre.pages.dev/posts/210824854115/</link>
         <pubDate>Tue, 24 Aug 2021 08:54:12 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/210824854115/</guid>
+        <guid>https://blog-cnsre.pages.dev/posts/210824854115/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -1727,7 +1727,7 @@ Zabbix 5.0是具有5年官方支持的LTS（长期支持）版本。它结合了
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://blog-cnsre.pages.dev/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -1753,11 +1753,11 @@ Zabbix 5.0是具有5年官方支持的LTS（长期支持）版本。它结合了
       
       <item>
         <title>Zabbix 监控日志</title>
-        <link>https://www.cnsre.cn/posts/210811113507/</link>
+        <link>https://blog-cnsre.pages.dev/posts/210811113507/</link>
         <pubDate>Wed, 11 Aug 2021 11:13:53 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/210811113507/</guid>
+        <guid>https://blog-cnsre.pages.dev/posts/210811113507/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -1888,7 +1888,7 @@ Zabbix 5.0是具有5年官方支持的LTS（长期支持）版本。它结合了
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://blog-cnsre.pages.dev/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -1914,11 +1914,11 @@ Zabbix 5.0是具有5年官方支持的LTS（长期支持）版本。它结合了
       
       <item>
         <title>zabbix告警推送至个人微信</title>
-        <link>https://www.cnsre.cn/posts/210518420293/</link>
+        <link>https://blog-cnsre.pages.dev/posts/210518420293/</link>
         <pubDate>Tue, 18 May 2021 14:20:32 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/210518420293/</guid>
+        <guid>https://blog-cnsre.pages.dev/posts/210518420293/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -2094,7 +2094,7 @@ Zabbix 5.0是具有5年官方支持的LTS（长期支持）版本。它结合了
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://blog-cnsre.pages.dev/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -2120,11 +2120,11 @@ Zabbix 5.0是具有5年官方支持的LTS（长期支持）版本。它结合了
       
       <item>
         <title>ubuntu zabbix无法启动</title>
-        <link>https://www.cnsre.cn/posts/210513036112/</link>
+        <link>https://blog-cnsre.pages.dev/posts/210513036112/</link>
         <pubDate>Thu, 13 May 2021 10:36:19 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/210513036112/</guid>
+        <guid>https://blog-cnsre.pages.dev/posts/210513036112/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -2157,7 +2157,7 @@ Zabbix 5.0是具有5年官方支持的LTS（长期支持）版本。它结合了
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://blog-cnsre.pages.dev/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -2183,11 +2183,11 @@ Zabbix 5.0是具有5年官方支持的LTS（长期支持）版本。它结合了
       
       <item>
         <title>LNMP安装zabbix4.4</title>
-        <link>https://www.cnsre.cn/posts/210510512134/</link>
+        <link>https://blog-cnsre.pages.dev/posts/210510512134/</link>
         <pubDate>Mon, 10 May 2021 15:12:14 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/210510512134/</guid>
+        <guid>https://blog-cnsre.pages.dev/posts/210510512134/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -2678,7 +2678,7 @@ php 5.4.16
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://blog-cnsre.pages.dev/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -2700,11 +2700,11 @@ php 5.4.16
       
       <item>
         <title>zabbix监控TCP状态</title>
-        <link>https://www.cnsre.cn/posts/210425130327/</link>
+        <link>https://blog-cnsre.pages.dev/posts/210425130327/</link>
         <pubDate>Sun, 25 Apr 2021 13:03:27 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/210425130327/</guid>
+        <guid>https://blog-cnsre.pages.dev/posts/210425130327/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -3116,7 +3116,7 @@ php 5.4.16
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://blog-cnsre.pages.dev/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -3146,11 +3146,11 @@ php 5.4.16
       
       <item>
         <title>Zabbix历史数据处理</title>
-        <link>https://www.cnsre.cn/posts/210408131033/</link>
+        <link>https://blog-cnsre.pages.dev/posts/210408131033/</link>
         <pubDate>Thu, 08 Apr 2021 13:10:34 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/210408131033/</guid>
+        <guid>https://blog-cnsre.pages.dev/posts/210408131033/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -3248,7 +3248,7 @@ optimize table events;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://blog-cnsre.pages.dev/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -3278,11 +3278,11 @@ optimize table events;
       
       <item>
         <title>zabbix 监控域名证书到期时间</title>
-        <link>https://www.cnsre.cn/posts/210406154942/</link>
+        <link>https://blog-cnsre.pages.dev/posts/210406154942/</link>
         <pubDate>Tue, 06 Apr 2021 15:49:43 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/210406154942/</guid>
+        <guid>https://blog-cnsre.pages.dev/posts/210406154942/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -3422,7 +3422,7 @@ optimize table events;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://blog-cnsre.pages.dev/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -3448,11 +3448,11 @@ optimize table events;
       
       <item>
         <title>zabbix 批量安装 自动注册</title>
-        <link>https://www.cnsre.cn/posts/210406132721/</link>
+        <link>https://blog-cnsre.pages.dev/posts/210406132721/</link>
         <pubDate>Tue, 06 Apr 2021 13:27:22 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/210406132721/</guid>
+        <guid>https://blog-cnsre.pages.dev/posts/210406132721/</guid>
         <description>作者：SRE运维博客 博客地址： https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/210406132721/ 相关话题：http</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -3665,7 +3665,7 @@ zabbix-agent：16台 Linux 7.x设备&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://blog-cnsre.pages.dev/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -3687,11 +3687,11 @@ zabbix-agent：16台 Linux 7.x设备&lt;/p&gt;
       
       <item>
         <title>编译安装Zabbix4.2</title>
-        <link>https://www.cnsre.cn/posts/210318130718/</link>
+        <link>https://blog-cnsre.pages.dev/posts/210318130718/</link>
         <pubDate>Thu, 18 Mar 2021 13:07:18 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/210318130718/</guid>
+        <guid>https://blog-cnsre.pages.dev/posts/210318130718/</guid>
         <description>编译安装zabbix4 在AWS 的EC2上安装zabbix。因为aws 不支持第三方源，所以只能通过编译的形式安装。 所需环境 1 2 3 4 5 Server CentOS Linux release 7.6.1810</description>
         <content:encoded>&lt;h1 id=&#34;编译安装zabbix4&#34;&gt;编译安装zabbix4&lt;/h1&gt;
 &lt;p&gt;在AWS 的EC2上安装zabbix。因为aws 不支持第三方源，所以只能通过编译的形式安装。&lt;/p&gt;
@@ -3979,7 +3979,7 @@ zabbix-agent：16台 Linux 7.x设备&lt;/p&gt;
 &lt;a href=&#34;https://www.cnsre.cn/posts/210318130718/&#34;&gt;https://www.cnsre.cn/posts/210318130718/&lt;/a&gt;&lt;/p&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://blog-cnsre.pages.dev/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -4001,11 +4001,11 @@ zabbix-agent：16台 Linux 7.x设备&lt;/p&gt;
       
       <item>
         <title>Zabbix 系统到底应该怎样优化？</title>
-        <link>https://www.cnsre.cn/posts/210303161655/</link>
+        <link>https://blog-cnsre.pages.dev/posts/210303161655/</link>
         <pubDate>Wed, 03 Mar 2021 16:16:56 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/210303161655/</guid>
+        <guid>https://blog-cnsre.pages.dev/posts/210303161655/</guid>
         <description>本文链接 https://www.cnsre.cn/posts/210303161655/ Zabbix架构 在讲Zabbix优化之前，先来看看Zabbix Server 的逻辑架构图： 对于上图中，架构组件的描述： Zabbix进程 Self</description>
         <content:encoded>&lt;p&gt;&lt;a href=&#34;https://www.cnsre.cn/posts/210303161655/&#34;&gt;本文链接&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&#34;https://www.cnsre.cn/posts/210303161655/&#34;&gt;https://www.cnsre.cn/posts/210303161655/&lt;/a&gt;&lt;/p&gt;
@@ -4303,7 +4303,7 @@ VMwareCacheSize=64M
 &lt;/ul&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://blog-cnsre.pages.dev/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Fargate on SRE运维博客</title>
+    <link>https://blog-cnsre.pages.dev/categories/fargate/</link>
+    <description>Recent content in Fargate on SRE运维博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Mon, 09 Sep 2024 09:28:27 +0800</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="https://blog-cnsre.pages.dev/categories/fargate/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>如何解决 Amazon EKS 中 Fargate 无法访问公网的问题</title>
+        <link>https://blog-cnsre.pages.dev/posts/240909092827/</link>
+        <pubDate>Mon, 09 Sep 2024 09:28:27 +0800</pubDate>
+        
+        <atom:modified>Mon, 09 Sep 2024 09:44:28 +0800</atom:modified>
+        <guid>https://blog-cnsre.pages.dev/posts/240909092827/</guid>
+        <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/24</description>
+        <content:encoded>&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn/&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/240909092827/&#34;&gt;https://www.cnsre.cn/posts/240909092827/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/eks/&#34;&gt;https://www.cnsre.cn/tags/eks/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h1 id=&#34;如何解决-amazon-eks-中-fargate-无法访问公网的问题&#34;&gt;如何解决 Amazon EKS 中 Fargate 无法访问公网的问题&lt;/h1&gt;
+&lt;h2 id=&#34;背景介绍&#34;&gt;背景介绍&lt;/h2&gt;
+&lt;p&gt;在使用 EKS + Fargate 创建服务的测试过程中，遇到了 Fargate 中的 Pod 无法访问公网的问题。该案例中，Fargate 和 EC2 实例使用了相同的子网配置，然而 Fargate Pod 无法访问公网，而 EC2 Pod 可以正常访问。本文将深入分析该问题的原因，并提供相应的解决方案。&lt;/p&gt;
+&lt;h2 id=&#34;案例描述&#34;&gt;案例描述&lt;/h2&gt;
+&lt;p&gt;我们在 AWS 环境中配置了一个 EKS 集群，其中既包含 EC2 节点的 Pod，也包含 Fargate 节点的 Pod。EC2 节点的 Pod 可以正常访问公网，但 Fargate 节点的 Pod 却出现了无法解析域名、访问超时的情况。&lt;/p&gt;
+&lt;h3 id=&#34;关键问题&#34;&gt;关键问题&lt;/h3&gt;
+&lt;p&gt;在我们尝试使用 Fargate Pod 访问公网时，使用 &lt;code&gt;kubectl exec&lt;/code&gt; 进入 Fargate Pod 后，尝试执行 &lt;code&gt;apt-get update&lt;/code&gt; 以更新系统包，但出现了如下错误：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;0% &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Connecting to archive.ubuntu.com&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Connecting to security.ubuntu.com&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; ^C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这表明 Fargate Pod 无法访问外部网络，而 EC2 节点的 Pod 则可以正常执行命令、连接公网。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;分析与调查&#34;&gt;分析与调查&lt;/h2&gt;
+&lt;p&gt;经过 AWS 技术支持的深入分析，问题的根源在于 &lt;strong&gt;安全组配置&lt;/strong&gt;。Fargate 使用的 Pod 默认通过 CoreDNS 解析域名，当我们使用 &lt;code&gt;dig&lt;/code&gt; 命令解析域名时，返回了超时错误。这说明 Fargate Pod 的 DNS 请求未能正确处理。&lt;/p&gt;
+&lt;p&gt;在检查我们的 EC2 节点时，发现该节点的安全组仅放行了来自 Fargate 的 TCP 请求。然而，DNS 请求通常使用 UDP 协议，因此在 Fargate Pod 尝试进行 DNS 解析时，由于安全组未放行 UDP 流量，导致了超时。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;解决方案&#34;&gt;解决方案&lt;/h2&gt;
+&lt;p&gt;为了解决这一问题，AWS 技术支持建议修改 &lt;strong&gt;EC2 节点的安全组配置&lt;/strong&gt;。通过放行来自 &lt;strong&gt;集群安全组&lt;/strong&gt; 的所有流量，包括 TCP 和 UDP 请求，确保 Fargate Pod 能够正常进行 DNS 解析和公网访问。&lt;/p&gt;
+&lt;h3 id=&#34;步骤如下&#34;&gt;步骤如下：&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;登录 AWS 控制台&lt;/strong&gt;，进入 EC2 管理页面。&lt;/li&gt;
+&lt;li&gt;选择对应的 EC2 实例，并查看其附加的安全组。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;修改安全组规则&lt;/strong&gt;，确保放行来自 Fargate 的所有流量，特别是 &lt;strong&gt;UDP 53 端口&lt;/strong&gt;，用于 DNS 请求。&lt;/li&gt;
+&lt;li&gt;保存更改后，重新测试 Fargate Pod 的公网访问能力。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;结果验证&#34;&gt;结果验证&lt;/h2&gt;
+&lt;p&gt;在修改安全组后，我们的 Fargate Pod 可以正常访问公网，使用 &lt;code&gt;apt-get update&lt;/code&gt; 命令成功连接到外部源。这说明问题已彻底解决。&lt;/p&gt;
+&lt;h3 id=&#34;fargate-pod-成功连接公网输出&#34;&gt;Fargate Pod 成功连接公网输出&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;root@awslinux-fargate-pod:/# apt-get update
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Hit:1 http://archive.ubuntu.com/ubuntu focal InRelease
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Get:2 http://security.ubuntu.com/ubuntu focal-security InRelease &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;114&lt;/span&gt; kB&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Fetched &lt;span class=&#34;m&#34;&gt;114&lt;/span&gt; kB in 1s &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;150&lt;/span&gt; kB/s&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Reading package lists... Done
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;通过这些配置修改，Fargate Pod 的网络访问问题得到了彻底解决，我们的生产环境也恢复了正常运行。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;常见问题与预防&#34;&gt;常见问题与预防&lt;/h2&gt;
+&lt;h3 id=&#34;为什么-fargate-和-ec2-的网络行为不同&#34;&gt;为什么 Fargate 和 EC2 的网络行为不同？&lt;/h3&gt;
+&lt;p&gt;Fargate 和 EC2 节点虽然可以共享同一个子网，但它们在网络层面的实现存在差异。Fargate 使用 AWS 提供的托管网络，因此其默认行为与 EC2 节点有所不同。在配置安全组时，特别需要注意两者的网络规则是否兼容。&lt;/p&gt;
+&lt;h3 id=&#34;如何避免类似问题&#34;&gt;如何避免类似问题？&lt;/h3&gt;
+&lt;p&gt;为了避免类似的网络问题，建议在配置 EKS 集群时，仔细检查所有节点（包括 Fargate 和 EC2）的 &lt;strong&gt;安全组配置&lt;/strong&gt; 和 &lt;strong&gt;网络规则&lt;/strong&gt;。确保放行集群内部所需的所有流量，尤其是 &lt;strong&gt;UDP 53 端口&lt;/strong&gt;，以支持 DNS 请求的正常运行。&lt;/p&gt;
+&lt;div class=&#34;alert alert-warning&#34; role=&#34;alert&#34; data-dir=&#34;ltr&#34;&gt;注意：&lt;br /&gt;
+为了能够保证Fargate 和EC2 node 的通信，尽量打通集群安全组，和 EC2 node 的安全组的通讯问题。即 EC2 node 安全组全部放行可以访问集群安全组，集群安全组全部放行可以访问EC2 node。&lt;/div&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;结论&#34;&gt;结论&lt;/h2&gt;
+&lt;p&gt;通过本文，我们深入探讨了 Amazon EKS 环境中 Fargate Pod 无法访问公网的问题及其解决方案。这一问题主要是由于 &lt;strong&gt;安全组未放行 UDP 流量&lt;/strong&gt; 导致的，通过适当的安全组配置调整，问题得以顺利解决。如果您在使用 AWS EKS 时遇到类似的网络问题，建议从安全组配置入手，确保所有必要的流量得到了正确放行。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn/&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/240909092827/&#34;&gt;https://www.cnsre.cn/posts/240909092827/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/eks/&#34;&gt;https://www.cnsre.cn/tags/eks/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+</content:encoded>
+        <dc:creator>CNSRE</dc:creator>
+        <media:content url="https://blog-cnsre.pages.dev/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/kubernetes.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>fargate</category>
+            
+          
+            
+              <category>eks</category>
+            
+          
+            
+              <category>aws</category>
+            
+          
+            
+              <category>kubernetes</category>
+            
+          
+        
+        
+          
+            
+              <category>fargate</category>
+            
+          
+            
+              <category>eks</category>
+            
+          
+            
+              <category>aws</category>
+            
+          
+            
+              <category>kubernetes</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>
