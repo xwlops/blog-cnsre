@@ -13,7 +13,5 @@ LANG=en_US.UTF-8
 
 
 GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-rm -rf public
-hugo
-git commit -m "build site"
+/opt/homebrew/bin/hugo -b https://www.cnsre.cn
 git push origin "$GIT_BRANCH"
