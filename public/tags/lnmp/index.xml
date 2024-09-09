@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Lnmp on SRE运维博客</title>
-    <link>https://blog-cnsre.pages.dev/tags/lnmp/</link>
+    <link>https://www.cnsre.cn/tags/lnmp/</link>
     <description>Recent content in Lnmp on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
@@ -15,7 +15,7 @@
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
-        <atom:link href="https://blog-cnsre.pages.dev/tags/lnmp/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.cnsre.cn/tags/lnmp/index.xml" rel="self" type="application/rss+xml" />
     
     
     
@@ -23,11 +23,11 @@
       
       <item>
         <title>LNMP 方式部署 zabbix 5.0</title>
-        <link>https://blog-cnsre.pages.dev/posts/210824854115/</link>
+        <link>https://www.cnsre.cn/posts/210824854115/</link>
         <pubDate>Tue, 24 Aug 2021 08:54:12 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://blog-cnsre.pages.dev/posts/210824854115/</guid>
+        <guid>https://www.cnsre.cn/posts/210824854115/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -739,7 +739,7 @@ Zabbix 5.0是具有5年官方支持的LTS（长期支持）版本。它结合了
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://blog-cnsre.pages.dev/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         

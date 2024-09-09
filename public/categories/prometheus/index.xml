@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Prometheus on SRE运维博客</title>
-    <link>https://blog-cnsre.pages.dev/categories/prometheus/</link>
+    <link>https://www.cnsre.cn/categories/prometheus/</link>
     <description>Recent content in Prometheus on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
@@ -15,7 +15,7 @@
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
-        <atom:link href="https://blog-cnsre.pages.dev/categories/prometheus/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.cnsre.cn/categories/prometheus/index.xml" rel="self" type="application/rss+xml" />
     
     
     
@@ -23,11 +23,11 @@
       
       <item>
         <title>Kubernetes 1.19 安装 Prometheus-Oprator</title>
-        <link>https://blog-cnsre.pages.dev/posts/210621550392/</link>
+        <link>https://www.cnsre.cn/posts/210621550392/</link>
         <pubDate>Mon, 21 Jun 2021 15:50:41 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://blog-cnsre.pages.dev/posts/210621550392/</guid>
+        <guid>https://www.cnsre.cn/posts/210621550392/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -1684,7 +1684,7 @@ Kubernetes 版本： v1.19.5&lt;br /&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://blog-cnsre.pages.dev/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/prometheus.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/prometheus.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -1714,11 +1714,11 @@ Kubernetes 版本： v1.19.5&lt;br /&gt;
       
       <item>
         <title>Prometheus介绍</title>
-        <link>https://blog-cnsre.pages.dev/posts/210326133909/</link>
+        <link>https://www.cnsre.cn/posts/210326133909/</link>
         <pubDate>Fri, 26 Mar 2021 13:39:13 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://blog-cnsre.pages.dev/posts/210326133909/</guid>
+        <guid>https://www.cnsre.cn/posts/210326133909/</guid>
         <description>Prometheus介绍 Prometheus 简介 Prometheus 起初是 SoundCloud 创建的一个开源系统监控报警工具。自其 2012 年开创以来，众多公司、组织都采用了 Prometheus，该项目</description>
         <content:encoded>&lt;h1 id=&#34;prometheus介绍&#34;&gt;Prometheus介绍&lt;/h1&gt;
 &lt;h2 id=&#34;prometheus-简介&#34;&gt;Prometheus 简介&lt;/h2&gt;
@@ -1854,7 +1854,7 @@ Kubernetes 版本： v1.19.5&lt;br /&gt;
 &lt;a href=&#34;https://www.cnsre.cn/posts/210326133909/&#34;&gt;https://www.cnsre.cn/posts/210326133909/&lt;/a&gt;&lt;/p&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://blog-cnsre.pages.dev/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/prometheus.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/prometheus.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         

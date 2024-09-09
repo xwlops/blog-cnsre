@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Elk on SRE运维博客</title>
-    <link>https://blog-cnsre.pages.dev/tags/elk/</link>
+    <link>https://www.cnsre.cn/tags/elk/</link>
     <description>Recent content in Elk on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
@@ -15,7 +15,7 @@
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
-        <atom:link href="https://blog-cnsre.pages.dev/tags/elk/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.cnsre.cn/tags/elk/index.xml" rel="self" type="application/rss+xml" />
     
     
     
@@ -23,11 +23,11 @@
       
       <item>
         <title>生产ELFK 7.X集群搭建</title>
-        <link>https://blog-cnsre.pages.dev/posts/210325135520/</link>
+        <link>https://www.cnsre.cn/posts/210325135520/</link>
         <pubDate>Thu, 25 Mar 2021 13:55:24 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://blog-cnsre.pages.dev/posts/210325135520/</guid>
+        <guid>https://www.cnsre.cn/posts/210325135520/</guid>
         <description>ELK+kafka+filebeat搭建生产ELFK集群 ELK 架构介绍 集群服务版本 服务 版本 java 1.8.0_221 elasticsearch 7.10.1 filebeat 7.10.1 kibana 7.10.1 logstash 7.10.1 cerebro 0.9.2-1 kafka 2.12-2.3.0 zookeeper 3.5.6 服务器环境说明 IP地址</description>
         <content:encoded>&lt;h1 id=&#34;elkkafkafilebeat搭建生产elfk集群&#34;&gt;ELK+kafka+filebeat搭建生产ELFK集群&lt;/h1&gt;
 &lt;h2 id=&#34;elk-架构介绍&#34;&gt;ELK 架构介绍&lt;/h2&gt;
@@ -1938,7 +1938,7 @@ chown elasticsearch.elasticsearch /etc/elasticsearch/elastic*
 &lt;a href=&#34;https://www.cnsre.cn/posts/210325135520/&#34;&gt;https://www.cnsre.cn/posts/210325135520/&lt;/a&gt;&lt;/p&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://blog-cnsre.pages.dev/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/elk.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/elk.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         

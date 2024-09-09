@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Kvm on SRE运维博客</title>
-    <link>https://blog-cnsre.pages.dev/tags/kvm/</link>
+    <link>https://www.cnsre.cn/tags/kvm/</link>
     <description>Recent content in Kvm on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
@@ -15,7 +15,7 @@
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
-        <atom:link href="https://blog-cnsre.pages.dev/tags/kvm/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.cnsre.cn/tags/kvm/index.xml" rel="self" type="application/rss+xml" />
     
     
     
@@ -23,11 +23,11 @@
       
       <item>
         <title>快速搭建 kvm web 管理工具 WebVirtMgr</title>
-        <link>https://blog-cnsre.pages.dev/posts/211117937177/</link>
+        <link>https://www.cnsre.cn/posts/211117937177/</link>
         <pubDate>Wed, 17 Nov 2021 09:37:18 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://blog-cnsre.pages.dev/posts/211117937177/</guid>
+        <guid>https://www.cnsre.cn/posts/211117937177/</guid>
         <description>作者：SRE运维博客 博客地址： https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/211117937177/ 相关话题：http</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -745,7 +745,7 @@ webvirtcloud具体文档请查看 &lt;a href=&#34;https://github.com/retspen/web
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://blog-cnsre.pages.dev/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/kvm.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/kvm.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -767,11 +767,11 @@ webvirtcloud具体文档请查看 &lt;a href=&#34;https://github.com/retspen/web
       
       <item>
         <title>kvm简单使用</title>
-        <link>https://blog-cnsre.pages.dev/posts/211115903260/</link>
+        <link>https://www.cnsre.cn/posts/211115903260/</link>
         <pubDate>Mon, 15 Nov 2021 09:03:26 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://blog-cnsre.pages.dev/posts/211115903260/</guid>
+        <guid>https://www.cnsre.cn/posts/211115903260/</guid>
         <description>作者：SRE运维博客 博客地址： https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/211115903260/ 相关话题：http</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -1245,7 +1245,7 @@ virsh attach-interface njvm01  --type network --source default --config
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://blog-cnsre.pages.dev/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/kvm.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/kvm.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -1267,11 +1267,11 @@ virsh attach-interface njvm01  --type network --source default --config
       
       <item>
         <title>kvm 安装 windows 虚拟机</title>
-        <link>https://blog-cnsre.pages.dev/posts/211108848062/</link>
+        <link>https://www.cnsre.cn/posts/211108848062/</link>
         <pubDate>Mon, 08 Nov 2021 08:48:06 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://blog-cnsre.pages.dev/posts/211108848062/</guid>
+        <guid>https://www.cnsre.cn/posts/211108848062/</guid>
         <description>作者：SRE运维博客 博客地址： https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/211108848062/ 相关话题：http</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -1867,7 +1867,7 @@ virsh change-media 【虚拟机ID】 --eject 【vmtools-windows.iso文件全路�
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://blog-cnsre.pages.dev/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/kvm.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/kvm.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -1893,11 +1893,11 @@ virsh change-media 【虚拟机ID】 --eject 【vmtools-windows.iso文件全路�
       
       <item>
         <title>Centos7搭建 KVM 命令行安装虚拟机</title>
-        <link>https://blog-cnsre.pages.dev/posts/211105852095/</link>
+        <link>https://www.cnsre.cn/posts/211105852095/</link>
         <pubDate>Fri, 05 Nov 2021 08:52:09 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://blog-cnsre.pages.dev/posts/211105852095/</guid>
+        <guid>https://www.cnsre.cn/posts/211105852095/</guid>
         <description>作者：SRE运维博客 博客地址： https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/211105852095/ 相关话题：http</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -2298,7 +2298,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://blog-cnsre.pages.dev/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/kvm.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/kvm.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
