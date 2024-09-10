@@ -11,7 +11,7 @@
     <description>Recent content in Tags on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Mon, 09 Sep 2024 09:28:27 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 10 Sep 2024 11:35:26 +0800</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
@@ -24,10 +24,28 @@
       <item>
         <title>Aws</title>
         <link>https://www.cnsre.cn/tags/aws/</link>
-        <pubDate>Mon, 09 Sep 2024 09:28:27 +0800</pubDate>
+        <pubDate>Tue, 10 Sep 2024 11:35:26 +0800</pubDate>
         
         
         <guid>https://www.cnsre.cn/tags/aws/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Waf</title>
+        <link>https://www.cnsre.cn/tags/waf/</link>
+        <pubDate>Tue, 10 Sep 2024 11:35:26 +0800</pubDate>
+        
+        
+        <guid>https://www.cnsre.cn/tags/waf/</guid>
         <description></description>
         <content:encoded></content:encoded>
         

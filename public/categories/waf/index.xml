@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Waf on SRE运维博客</title>
+    <link>https://www.cnsre.cn/categories/waf/</link>
+    <description>Recent content in Waf on SRE运维博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Tue, 10 Sep 2024 11:35:26 +0800</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="https://www.cnsre.cn/categories/waf/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>如何在 AWS WAF 中为固定 URI 请求设置例外？ </title>
+        <link>https://www.cnsre.cn/posts/240910113525/</link>
+        <pubDate>Tue, 10 Sep 2024 11:35:26 +0800</pubDate>
+        
+        <atom:modified>Tue, 10 Sep 2024 11:42:22 +0800</atom:modified>
+        <guid>https://www.cnsre.cn/posts/240910113525/</guid>
+        <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/24</description>
+        <content:encoded>&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn/&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/240910113525/&#34;&gt;https://www.cnsre.cn/posts/240910113525/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/aws/&#34;&gt;https://www.cnsre.cn/tags/aws/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h1 id=&#34;如何通过-aws-waf-自定义规则处理固定-uri-请求例外&#34;&gt;如何通过 AWS WAF 自定义规则处理固定 URI 请求例外&lt;/h1&gt;
+&lt;p&gt;当我们在配置 AWS WAF（Web 应用程序防火墙）时，托管规则组能够保护我们的应用程序免受常见的安全威胁，如跨站脚本 (XSS) 和 SQL 注入 (SQLi)。但是，有时我们可能会遇到一些特殊需求，像是在特定的 URI 上允许某些请求通过，而不受这些托管规则的影响。那么，如何为固定 URI 添加请求例外呢？本文将为我们详细介绍如何通过自定义规则来实现这一需求。&lt;/p&gt;
+&lt;h2 id=&#34;什么是-aws-waf-托管规则组&#34;&gt;什么是 AWS WAF 托管规则组？&lt;/h2&gt;
+&lt;p&gt;AWS WAF 提供了一系列托管规则组，旨在帮助开发者快速应对常见的 Web 应用程序攻击，例如 XSS 和 SQLi。托管规则组的优势在于它们由 AWS 安全团队不断维护和更新，确保规则始终能应对最新的安全威胁。&lt;/p&gt;
+&lt;p&gt;不过，在某些情况下，默认的托管规则组可能会拦截一些合法请求。比如，当我们有一个上传图片的页面时，XSS 或 SQLi 规则组可能会误判请求内容，导致上传失败。这时，我们就需要为特定的 URI 设置例外。&lt;/p&gt;
+&lt;h2 id=&#34;如何为特定-uri-添加例外&#34;&gt;如何为特定 URI 添加例外？&lt;/h2&gt;
+&lt;p&gt;为特定 URI 添加例外有多种方法，以下是其中的几个常用方式：&lt;/p&gt;
+&lt;h3 id=&#34;1-使用自定义规则&#34;&gt;1. 使用自定义规则&lt;/h3&gt;
+&lt;p&gt;在托管规则组之前添加自定义规则是最直接的一种方式。我们可以创建一个自定义规则，允许这些特殊的 URI 通过，并将这个自定义规则放在托管规则组的前面。这样，当 WAF 检测到请求匹配自定义规则时，它将跳过后续规则的检查。&lt;/p&gt;
+&lt;p&gt;但是，这种方式有一个缺点：在匹配到自定义规则后，所有的托管规则都不再对该请求进行检查。这意味着，除了添加例外 URI 的规则外，其他任何与该 URI 相关的安全检查也会被跳过。&lt;/p&gt;
+&lt;h3 id=&#34;2-使用-scope-down-statement&#34;&gt;2. 使用 Scope-down Statement&lt;/h3&gt;
+&lt;p&gt;另一种更灵活的方法是使用托管规则组中的 &lt;strong&gt;Scope-down Statement&lt;/strong&gt;。这个选项允许我们缩小托管规则组的作用范围，从而仅在请求不匹配某些条件时（如特定 URI）执行规则检查。&lt;/p&gt;
+&lt;h4 id=&#34;操作步骤&#34;&gt;操作步骤：&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;选择需要修改的托管规则组，例如 &lt;strong&gt;AWSManagedRulesCommonRuleSet&lt;/strong&gt; 或 &lt;strong&gt;AWSManagedRulesSQLiRuleSet&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;点击编辑规则组，并启用 &lt;strong&gt;Scope-down Statement&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;设置匹配条件：选择 &lt;strong&gt;URI Path&lt;/strong&gt;，并设置匹配方式，例如完全匹配、部分匹配或正则表达式匹配。&lt;/li&gt;
+&lt;li&gt;输入我们希望例外的 URI，例如 &lt;code&gt;/picture/&lt;/code&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这样配置后，WAF 将只在请求的 URI 不匹配该字符串时才执行托管规则组的检查，从而为特定的 URI 添加例外。&lt;/p&gt;
+&lt;h3 id=&#34;3-仅计数规则-count-mode&#34;&gt;3. 仅计数规则 (Count Mode)&lt;/h3&gt;
+&lt;p&gt;如果我们希望暂时观察某些规则的效果，而不希望立即拦截请求，可以将某些规则设置为仅计数模式。具体操作是将托管规则组中的相关规则（如 &lt;strong&gt;CrossSiteScripting_BODY&lt;/strong&gt; 或 &lt;strong&gt;SQLi_BODY&lt;/strong&gt;）的动作改为 &lt;strong&gt;Count&lt;/strong&gt;。这样，即使这些规则匹配到了请求，WAF 也只会记录日志而不拦截请求。&lt;/p&gt;
+&lt;p&gt;之后，我们可以根据日志中的信息创建自定义规则，确保只有特定的 URI 会绕过这些规则，而不影响其他安全检查。&lt;/p&gt;
+&lt;h2 id=&#34;示例操作&#34;&gt;示例操作&lt;/h2&gt;
+&lt;p&gt;为了帮助我们更好地理解，以下是一个使用 Scope-down Statement 来为固定 URI 添加例外的配置示例。&lt;/p&gt;
+&lt;p&gt;假设我们希望为 &lt;code&gt;/picture/&lt;/code&gt; 路径添加 XSS 和 SQLi 规则的例外，具体步骤如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;进入 AWS WAF 控制台，选择我们要修改的托管规则组，例如 &lt;strong&gt;AWSManagedRulesCommonRuleSet&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;点击编辑该规则组，找到 &lt;strong&gt;Scope-down Statement&lt;/strong&gt; 选项，并启用它。&lt;/li&gt;
+&lt;li&gt;选择 &lt;strong&gt;URI Path&lt;/strong&gt;，并设置匹配方式为 &lt;strong&gt;Exactly matches string&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;在 &lt;strong&gt;Search string&lt;/strong&gt; 中输入 &lt;code&gt;/picture/&lt;/code&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;配置完成后，我们可以通过以下命令来验证效果：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 测试URI例外&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl -X POST https://test-waf.cnsre.cn/picture/ -F &lt;span class=&#34;s2&#34;&gt;&amp;#34;user=&amp;#39;&amp;lt;script&amp;gt;&amp;lt;alert&amp;gt;Hello&amp;gt;&amp;lt;/alert&amp;gt;&amp;lt;/script&amp;gt;&amp;#39;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 测试其他URI被拦截&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl -X POST https://test-waf.cnsre.cn/picture1 -F &lt;span class=&#34;s2&#34;&gt;&amp;#34;user=&amp;#39;&amp;lt;script&amp;gt;&amp;lt;alert&amp;gt;Hello&amp;gt;&amp;lt;/alert&amp;gt;&amp;lt;/script&amp;gt;&amp;#39;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;在这个例子中，WAF 将放行 &lt;code&gt;/picture/&lt;/code&gt; 请求，而对 &lt;code&gt;/picture1&lt;/code&gt; 进行拦截。&lt;/p&gt;
+&lt;h2 id=&#34;结论&#34;&gt;结论&lt;/h2&gt;
+&lt;p&gt;通过自定义规则和 Scope-down Statement，我们可以为 AWS WAF 托管规则组添加灵活的例外处理，确保关键的业务流程不会受到不必要的影响，同时保持应用程序的安全性。&lt;/p&gt;
+&lt;script async src=&#34;https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4855142804875926&#34;
+     crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+&lt;p&gt;&lt;ins class=&#34;adsbygoogle&#34;
+style=&#34;display:block; text-align:center;&#34;
+data-ad-layout=&#34;in-article&#34;
+data-ad-format=&#34;fluid&#34;
+data-ad-client=&#34;ca-pub-4855142804875926&#34;
+data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
+&lt;script&gt;
+     (adsbygoogle = window.adsbygoogle || []).push({});
+&lt;/script&gt;
+&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
+博客地址：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;https://www.cnsre.cn/&lt;/a&gt;&lt;br /&gt;
+文章地址：&lt;a href=&#34;https://www.cnsre.cn/posts/240910113525/&#34;&gt;https://www.cnsre.cn/posts/240910113525/&lt;/a&gt;&lt;br /&gt;
+相关话题：&lt;a href=&#34;https://www.cnsre.cn/tags/aws/&#34;&gt;https://www.cnsre.cn/tags/aws/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+</content:encoded>
+        <dc:creator>CNSRE</dc:creator>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        
+        
+          
+            
+              <category>waf</category>
+            
+          
+            
+              <category>aws</category>
+            
+          
+        
+        
+          
+            
+              <category>waf</category>
+            
+          
+            
+              <category>aws</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>
