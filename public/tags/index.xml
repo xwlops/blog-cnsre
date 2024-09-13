@@ -11,7 +11,7 @@
     <description>Recent content in Tags on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Tue, 10 Sep 2024 11:35:26 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 14 Sep 2024 10:24:25 +0800</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
@@ -20,6 +20,96 @@
     
     
 
+      
+      <item>
+        <title>Lambda</title>
+        <link>https://www.cnsre.cn/tags/lambda/</link>
+        <pubDate>Sat, 14 Sep 2024 10:24:25 +0800</pubDate>
+        
+        
+        <guid>https://www.cnsre.cn/tags/lambda/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Mysql</title>
+        <link>https://www.cnsre.cn/tags/mysql/</link>
+        <pubDate>Sat, 14 Sep 2024 10:24:25 +0800</pubDate>
+        
+        
+        <guid>https://www.cnsre.cn/tags/mysql/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>数据库</title>
+        <link>https://www.cnsre.cn/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+        <pubDate>Sat, 14 Sep 2024 10:24:25 +0800</pubDate>
+        
+        
+        <guid>https://www.cnsre.cn/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Aurora</title>
+        <link>https://www.cnsre.cn/tags/aurora/</link>
+        <pubDate>Fri, 13 Sep 2024 10:24:10 +0800</pubDate>
+        
+        
+        <guid>https://www.cnsre.cn/tags/aurora/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Rds</title>
+        <link>https://www.cnsre.cn/tags/rds/</link>
+        <pubDate>Fri, 13 Sep 2024 10:24:10 +0800</pubDate>
+        
+        
+        <guid>https://www.cnsre.cn/tags/rds/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
       
       <item>
         <title>Aws</title>
@@ -136,24 +226,6 @@
         
         
         <guid>https://www.cnsre.cn/tags/cloudwatch/</guid>
-        <description></description>
-        <content:encoded></content:encoded>
-        
-        
-        
-        
-        
-        
-        
-      </item>
-      
-      <item>
-        <title>Lambda</title>
-        <link>https://www.cnsre.cn/tags/lambda/</link>
-        <pubDate>Sat, 06 May 2023 14:25:09 +0800</pubDate>
-        
-        
-        <guid>https://www.cnsre.cn/tags/lambda/</guid>
         <description></description>
         <content:encoded></content:encoded>
         
@@ -946,24 +1018,6 @@
         
         
         <guid>https://www.cnsre.cn/tags/ssl%E8%AF%81%E4%B9%A6/</guid>
-        <description></description>
-        <content:encoded></content:encoded>
-        
-        
-        
-        
-        
-        
-        
-      </item>
-      
-      <item>
-        <title>Mysql</title>
-        <link>https://www.cnsre.cn/tags/mysql/</link>
-        <pubDate>Tue, 13 Apr 2021 13:10:21 +0800</pubDate>
-        
-        
-        <guid>https://www.cnsre.cn/tags/mysql/</guid>
         <description></description>
         <content:encoded></content:encoded>
         

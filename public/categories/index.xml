@@ -11,7 +11,7 @@
     <description>Recent content in Categories on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Tue, 10 Sep 2024 11:35:26 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 14 Sep 2024 10:24:25 +0800</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
@@ -24,10 +24,46 @@
       <item>
         <title>Aws</title>
         <link>https://www.cnsre.cn/categories/aws/</link>
-        <pubDate>Tue, 10 Sep 2024 11:35:26 +0800</pubDate>
+        <pubDate>Sat, 14 Sep 2024 10:24:25 +0800</pubDate>
         
         
         <guid>https://www.cnsre.cn/categories/aws/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Lambda</title>
+        <link>https://www.cnsre.cn/categories/lambda/</link>
+        <pubDate>Sat, 14 Sep 2024 10:24:25 +0800</pubDate>
+        
+        
+        <guid>https://www.cnsre.cn/categories/lambda/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Aurora</title>
+        <link>https://www.cnsre.cn/categories/aurora/</link>
+        <pubDate>Fri, 13 Sep 2024 10:24:10 +0800</pubDate>
+        
+        
+        <guid>https://www.cnsre.cn/categories/aurora/</guid>
         <description></description>
         <content:encoded></content:encoded>
         
@@ -136,24 +172,6 @@
         
         
         <guid>https://www.cnsre.cn/categories/cloudwatch/</guid>
-        <description></description>
-        <content:encoded></content:encoded>
-        
-        
-        
-        
-        
-        
-        
-      </item>
-      
-      <item>
-        <title>Lambda</title>
-        <link>https://www.cnsre.cn/categories/lambda/</link>
-        <pubDate>Sat, 06 May 2023 14:25:09 +0800</pubDate>
-        
-        
-        <guid>https://www.cnsre.cn/categories/lambda/</guid>
         <description></description>
         <content:encoded></content:encoded>
         
