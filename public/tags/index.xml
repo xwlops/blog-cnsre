@@ -11,7 +11,7 @@
     <description>Recent content in Tags on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Sat, 14 Sep 2024 10:24:25 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 17 Sep 2024 10:33:52 +0800</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
@@ -20,6 +20,42 @@
     
     
 
+      
+      <item>
+        <title>Aws</title>
+        <link>https://www.cnsre.cn/tags/aws/</link>
+        <pubDate>Tue, 17 Sep 2024 10:33:52 +0800</pubDate>
+        
+        
+        <guid>https://www.cnsre.cn/tags/aws/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Ssm</title>
+        <link>https://www.cnsre.cn/tags/ssm/</link>
+        <pubDate>Tue, 17 Sep 2024 10:33:52 +0800</pubDate>
+        
+        
+        <guid>https://www.cnsre.cn/tags/ssm/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
       
       <item>
         <title>Lambda</title>
@@ -100,24 +136,6 @@
         
         
         <guid>https://www.cnsre.cn/tags/rds/</guid>
-        <description></description>
-        <content:encoded></content:encoded>
-        
-        
-        
-        
-        
-        
-        
-      </item>
-      
-      <item>
-        <title>Aws</title>
-        <link>https://www.cnsre.cn/tags/aws/</link>
-        <pubDate>Tue, 10 Sep 2024 11:35:26 +0800</pubDate>
-        
-        
-        <guid>https://www.cnsre.cn/tags/aws/</guid>
         <description></description>
         <content:encoded></content:encoded>
         
@@ -262,24 +280,6 @@
         
         
         <guid>https://www.cnsre.cn/tags/sns/</guid>
-        <description></description>
-        <content:encoded></content:encoded>
-        
-        
-        
-        
-        
-        
-        
-      </item>
-      
-      <item>
-        <title>Ssm</title>
-        <link>https://www.cnsre.cn/tags/ssm/</link>
-        <pubDate>Sun, 29 Jan 2023 11:26:15 +0800</pubDate>
-        
-        
-        <guid>https://www.cnsre.cn/tags/ssm/</guid>
         <description></description>
         <content:encoded></content:encoded>
         

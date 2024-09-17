@@ -11,7 +11,7 @@
     <description>Recent content in Categories on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Sat, 14 Sep 2024 10:24:25 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 17 Sep 2024 10:33:52 +0800</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
@@ -24,10 +24,28 @@
       <item>
         <title>Aws</title>
         <link>https://www.cnsre.cn/categories/aws/</link>
-        <pubDate>Sat, 14 Sep 2024 10:24:25 +0800</pubDate>
+        <pubDate>Tue, 17 Sep 2024 10:33:52 +0800</pubDate>
         
         
         <guid>https://www.cnsre.cn/categories/aws/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Ssm</title>
+        <link>https://www.cnsre.cn/categories/ssm/</link>
+        <pubDate>Tue, 17 Sep 2024 10:33:52 +0800</pubDate>
+        
+        
+        <guid>https://www.cnsre.cn/categories/ssm/</guid>
         <description></description>
         <content:encoded></content:encoded>
         
