@@ -275,9 +275,6 @@ commento = false
   name = "无缺博客"  
   link = "https://www.wuquejs.cn"
 [[footerLinks]]
-  name = "kubernetes技术栈"  
-  link = "https://www.k8stech.net/"
-[[footerLinks]]
   name = "运维开发故事"  
   link = "https://www.devopstory.cn/"
 [[footerLinks]]
@@ -286,12 +283,6 @@ commento = false
 [[footerLinks]]
   name = "UNIXSRE"  
   link = "https://unixsre.com/"
-#[[footerLinks]]
-#  name = "ayunw运维博客"  
-#  link = "https://sre.ayunw.cn/"
-#[[footerLinks]]
-#  name = "小王总博客吧"  
-#  link = "https://www.scczz.com"
 [[footerLinks]]
   name = "任我乐"  
   link = "https://renwole.com/"
