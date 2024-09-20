@@ -1331,7 +1331,7 @@
 <meta name="keywords" content="aws,sns,s3">
 
 <meta name="created" content="2024-09-20T16:35:24&#43;0800">
-<meta name="modified" content="2024-09-20T16:35:24&#43;0800">
+<meta name="modified" content="2024-09-20T16:57:52&#43;0800">
 <meta property="article:published_time" content="2024-09-20T16:35:24&#43;0800">
 
 <meta name="author" content="CNSRE">
@@ -1378,7 +1378,7 @@
     "@type": "WebPage",
     "headline": "使用 AWS Lambda 和 SNS 监控 S3 存储桶中的文件夹",
     "datePublished": "2024-09-20T16:35:24+08:00",
-    "dateModified": "2024-09-20T16:35:24+08:00",
+    "dateModified": "2024-09-20T16:57:52+08:00",
     "url" : "https://www.cnsre.cn/posts/240920163523/",
     "description": "本文将介绍如何使用 AWS Lambda 函数结合 Amazon S3 和 Amazon SNS（简单通知服务）来监控 S3 存储桶中的特定文件夹，并在发现异常时发送通知。",
     "keywords": ["aws","sns","s3"],
@@ -1968,10 +1968,17 @@ if (!doNotTrack) {
 </li>
 <li>
 <p><strong>初始化 SNS 客户端</strong></p>
-<pre tabindex="0"><code>python
-sns = boto3.client(&#39;sns&#39;)
-topic_arn = &#39;arn:aws-cn:sns:cn-north-1:1234567890:s3-logs-monitoring&#39;
-</code></pre><ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">sns</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;sns&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">topic_arn</span> <span class="o">=</span> <span class="s1">&#39;arn:aws-cn:sns:cn-north-1:1234567890:s3-logs-monitoring&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>指定 SNS 主题的 ARN，用于发送通知。</li>
 </ul>
 </li>
