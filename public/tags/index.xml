@@ -11,7 +11,7 @@
     <description>Recent content in Tags on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Tue, 17 Sep 2024 10:33:52 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 20 Sep 2024 16:35:24 +0800</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
@@ -24,10 +24,46 @@
       <item>
         <title>Aws</title>
         <link>https://www.cnsre.cn/tags/aws/</link>
-        <pubDate>Tue, 17 Sep 2024 10:33:52 +0800</pubDate>
+        <pubDate>Fri, 20 Sep 2024 16:35:24 +0800</pubDate>
         
         
         <guid>https://www.cnsre.cn/tags/aws/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>S3</title>
+        <link>https://www.cnsre.cn/tags/s3/</link>
+        <pubDate>Fri, 20 Sep 2024 16:35:24 +0800</pubDate>
+        
+        
+        <guid>https://www.cnsre.cn/tags/s3/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Sns</title>
+        <link>https://www.cnsre.cn/tags/sns/</link>
+        <pubDate>Fri, 20 Sep 2024 16:35:24 +0800</pubDate>
+        
+        
+        <guid>https://www.cnsre.cn/tags/sns/</guid>
         <description></description>
         <content:encoded></content:encoded>
         
@@ -262,24 +298,6 @@
         
         
         <guid>https://www.cnsre.cn/tags/python/</guid>
-        <description></description>
-        <content:encoded></content:encoded>
-        
-        
-        
-        
-        
-        
-        
-      </item>
-      
-      <item>
-        <title>Sns</title>
-        <link>https://www.cnsre.cn/tags/sns/</link>
-        <pubDate>Sat, 06 May 2023 14:25:09 +0800</pubDate>
-        
-        
-        <guid>https://www.cnsre.cn/tags/sns/</guid>
         <description></description>
         <content:encoded></content:encoded>
         
@@ -1036,24 +1054,6 @@
         
         
         <guid>https://www.cnsre.cn/tags/redis/</guid>
-        <description></description>
-        <content:encoded></content:encoded>
-        
-        
-        
-        
-        
-        
-        
-      </item>
-      
-      <item>
-        <title>S3</title>
-        <link>https://www.cnsre.cn/tags/s3/</link>
-        <pubDate>Fri, 09 Apr 2021 16:41:16 +0800</pubDate>
-        
-        
-        <guid>https://www.cnsre.cn/tags/s3/</guid>
         <description></description>
         <content:encoded></content:encoded>
         

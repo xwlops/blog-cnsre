@@ -6,13 +6,31 @@
     <lastmod>2024-09-07T10:45:36+08:00</lastmod>
   </url><url>
     <loc>https://www.cnsre.cn/tags/aws/</loc>
-    <lastmod>2024-09-18T08:44:58+08:00</lastmod>
+    <lastmod>2024-09-20T16:35:24+08:00</lastmod>
   </url><url>
     <loc>https://www.cnsre.cn/categories/aws/</loc>
-    <lastmod>2024-09-18T08:44:58+08:00</lastmod>
+    <lastmod>2024-09-20T16:35:24+08:00</lastmod>
   </url><url>
     <loc>https://www.cnsre.cn/categories/</loc>
-    <lastmod>2024-09-18T08:44:58+08:00</lastmod>
+    <lastmod>2024-09-20T16:35:24+08:00</lastmod>
+  </url><url>
+    <loc>https://www.cnsre.cn/categories/lambda/</loc>
+    <lastmod>2024-09-20T16:35:24+08:00</lastmod>
+  </url><url>
+    <loc>https://www.cnsre.cn/tags/s3/</loc>
+    <lastmod>2024-09-20T16:35:24+08:00</lastmod>
+  </url><url>
+    <loc>https://www.cnsre.cn/categories/s3/</loc>
+    <lastmod>2024-09-20T16:35:24+08:00</lastmod>
+  </url><url>
+    <loc>https://www.cnsre.cn/tags/sns/</loc>
+    <lastmod>2024-09-20T16:35:24+08:00</lastmod>
+  </url><url>
+    <loc>https://www.cnsre.cn/tags/</loc>
+    <lastmod>2024-09-20T16:35:24+08:00</lastmod>
+  </url><url>
+    <loc>https://www.cnsre.cn/posts/240920163523/</loc>
+    <lastmod>2024-09-20T16:35:24+08:00</lastmod>
   </url><url>
     <loc>https://www.cnsre.cn/tags/ssm/</loc>
     <lastmod>2024-09-18T08:44:58+08:00</lastmod>
@@ -20,16 +38,10 @@
     <loc>https://www.cnsre.cn/categories/ssm/</loc>
     <lastmod>2024-09-18T08:44:58+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/</loc>
-    <lastmod>2024-09-18T08:44:58+08:00</lastmod>
-  </url><url>
     <loc>https://www.cnsre.cn/posts/240917103351/</loc>
     <lastmod>2024-09-18T08:44:58+08:00</lastmod>
   </url><url>
     <loc>https://www.cnsre.cn/tags/lambda/</loc>
-    <lastmod>2024-09-13T10:43:13+08:00</lastmod>
-  </url><url>
-    <loc>https://www.cnsre.cn/categories/lambda/</loc>
     <lastmod>2024-09-13T10:43:13+08:00</lastmod>
   </url><url>
     <loc>https://www.cnsre.cn/tags/mysql/</loc>
@@ -105,9 +117,6 @@
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
     <loc>https://www.cnsre.cn/categories/python/</loc>
-    <lastmod>2024-08-30T18:16:52+08:00</lastmod>
-  </url><url>
-    <loc>https://www.cnsre.cn/tags/sns/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
     <loc>https://www.cnsre.cn/categories/sns/</loc>
@@ -528,9 +537,6 @@
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
     <loc>https://www.cnsre.cn/categories/redis/</loc>
-    <lastmod>2024-08-30T18:16:52+08:00</lastmod>
-  </url><url>
-    <loc>https://www.cnsre.cn/tags/s3/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
     <loc>https://www.cnsre.cn/posts/210409164113/</loc>
