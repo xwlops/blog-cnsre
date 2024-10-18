@@ -11,7 +11,7 @@
     <description>Recent content in Tags on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Fri, 20 Sep 2024 16:35:24 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 18 Oct 2024 09:13:02 +0800</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
@@ -24,10 +24,46 @@
       <item>
         <title>Aws</title>
         <link>https://www.cnsre.cn/tags/aws/</link>
-        <pubDate>Fri, 20 Sep 2024 16:35:24 +0800</pubDate>
+        <pubDate>Fri, 18 Oct 2024 09:13:02 +0800</pubDate>
         
         
         <guid>https://www.cnsre.cn/tags/aws/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>AWS Athena</title>
+        <link>https://www.cnsre.cn/tags/aws-athena/</link>
+        <pubDate>Fri, 18 Oct 2024 09:13:02 +0800</pubDate>
+        
+        
+        <guid>https://www.cnsre.cn/tags/aws-athena/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>CloudTrail</title>
+        <link>https://www.cnsre.cn/tags/cloudtrail/</link>
+        <pubDate>Fri, 18 Oct 2024 09:13:02 +0800</pubDate>
+        
+        
+        <guid>https://www.cnsre.cn/tags/cloudtrail/</guid>
         <description></description>
         <content:encoded></content:encoded>
         
