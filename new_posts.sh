@@ -70,7 +70,7 @@ authorEmoji: ✍
 tags:
 - $formatted_tags
 categories:
-  - 类型
+- 类型
 # series:
 # - 系列
 image: https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/kubernetes.png
