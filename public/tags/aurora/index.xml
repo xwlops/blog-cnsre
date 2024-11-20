@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Aurora on SRE运维博客</title>
-    <link>https://www.cnsre.cn/tags/aurora/</link>
+    <link>http://localhost:1313/tags/aurora/</link>
     <description>Recent content in Aurora on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
@@ -15,7 +15,7 @@
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
-        <atom:link href="https://www.cnsre.cn/tags/aurora/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://localhost:1313/tags/aurora/index.xml" rel="self" type="application/rss+xml" />
     
     
     
@@ -23,11 +23,11 @@
       
       <item>
         <title>深入探索 Aurora MySQL 配置及使用 掌握关键参数与高可用性架构</title>
-        <link>https://www.cnsre.cn/posts/240913102410/</link>
+        <link>http://localhost:1313/posts/240913102410/</link>
         <pubDate>Fri, 13 Sep 2024 10:24:10 +0800</pubDate>
         
         <atom:modified>Fri, 13 Sep 2024 10:35:36 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/240913102410/</guid>
+        <guid>http://localhost:1313/posts/240913102410/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/24</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -105,7 +105,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         

@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Kafka on SRE运维博客</title>
-    <link>https://www.cnsre.cn/categories/kafka/</link>
+    <link>http://localhost:1313/categories/kafka/</link>
     <description>Recent content in Kafka on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
@@ -15,7 +15,7 @@
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
-        <atom:link href="https://www.cnsre.cn/categories/kafka/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://localhost:1313/categories/kafka/index.xml" rel="self" type="application/rss+xml" />
     
     
     
@@ -23,11 +23,11 @@
       
       <item>
         <title>Kafka内外网访问</title>
-        <link>https://www.cnsre.cn/posts/210330135719/</link>
+        <link>http://localhost:1313/posts/210330135719/</link>
         <pubDate>Tue, 30 Mar 2021 13:57:19 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/210330135719/</guid>
+        <guid>http://localhost:1313/posts/210330135719/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -152,7 +152,7 @@ inter.broker.listener.name=INTERNAL
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210203111840.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/20210203111840.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         

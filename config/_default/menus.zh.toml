@@ -20,7 +20,7 @@
 [[main]]
   identifier = "chat"
   name = "👨‍💻 ChatGPT"
-  url = "https://ai.cnsre.cn/"
+  url = "/chatgpt/"
   weight = 6
 
 [[main]]

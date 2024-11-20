@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Aws on SRE运维博客</title>
-    <link>https://www.cnsre.cn/tags/aws/</link>
+    <link>http://localhost:1313/tags/aws/</link>
     <description>Recent content in Aws on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
@@ -15,7 +15,7 @@
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
-        <atom:link href="https://www.cnsre.cn/tags/aws/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://localhost:1313/tags/aws/index.xml" rel="self" type="application/rss+xml" />
     
     
     
@@ -23,11 +23,11 @@
       
       <item>
         <title>运维人员必备的 Mac Zsh 配置技巧</title>
-        <link>https://www.cnsre.cn/posts/241022203423/</link>
+        <link>http://localhost:1313/posts/241022203423/</link>
         <pubDate>Tue, 22 Oct 2024 20:34:35 +0800</pubDate>
         
         <atom:modified>Tue, 22 Oct 2024 20:41:54 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/241022203423/</guid>
+        <guid>http://localhost:1313/posts/241022203423/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/24</description>
         <content:encoded>&lt;blockquote&gt;
 &lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
@@ -521,7 +521,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -543,11 +543,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>如何使用 AWS Athena 查询用户对资源的创建和修改操作</title>
-        <link>https://www.cnsre.cn/posts/241018091258/</link>
+        <link>http://localhost:1313/posts/241018091258/</link>
         <pubDate>Fri, 18 Oct 2024 09:13:02 +0800</pubDate>
         
         <atom:modified>Fri, 18 Oct 2024 09:26:29 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/241018091258/</guid>
+        <guid>http://localhost:1313/posts/241018091258/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/24</description>
         <content:encoded>&lt;blockquote&gt;
 &lt;p&gt;作者：&lt;a href=&#34;https://www.cnsre.cn/&#34;&gt;SRE运维博客&lt;/a&gt;&lt;br /&gt;
@@ -822,7 +822,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -852,11 +852,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>使用 AWS Lambda 和 SNS 监控 S3 存储桶中的文件夹</title>
-        <link>https://www.cnsre.cn/posts/240920163523/</link>
+        <link>http://localhost:1313/posts/240920163523/</link>
         <pubDate>Fri, 20 Sep 2024 16:35:24 +0800</pubDate>
         
         <atom:modified>Fri, 20 Sep 2024 16:57:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/240920163523/</guid>
+        <guid>http://localhost:1313/posts/240920163523/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/24</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -1217,7 +1217,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -1255,11 +1255,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>使用IAM通过标签分配不同用户SSM会话窗口的完整指南</title>
-        <link>https://www.cnsre.cn/posts/240917103351/</link>
+        <link>http://localhost:1313/posts/240917103351/</link>
         <pubDate>Tue, 17 Sep 2024 10:33:52 +0800</pubDate>
         
         <atom:modified>Wed, 18 Sep 2024 08:44:58 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/240917103351/</guid>
+        <guid>http://localhost:1313/posts/240917103351/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/24</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -1421,7 +1421,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -1451,11 +1451,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>如何在 AWS WAF 中为固定 URI 请求设置例外？ </title>
-        <link>https://www.cnsre.cn/posts/240910113525/</link>
+        <link>http://localhost:1313/posts/240910113525/</link>
         <pubDate>Tue, 10 Sep 2024 11:35:26 +0800</pubDate>
         
         <atom:modified>Tue, 10 Sep 2024 11:42:22 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/240910113525/</guid>
+        <guid>http://localhost:1313/posts/240910113525/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/24</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -1536,7 +1536,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -1566,11 +1566,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>如何解决 Amazon EKS 中 Fargate 无法访问公网的问题</title>
-        <link>https://www.cnsre.cn/posts/240909092827/</link>
+        <link>http://localhost:1313/posts/240909092827/</link>
         <pubDate>Mon, 09 Sep 2024 09:28:27 +0800</pubDate>
         
         <atom:modified>Mon, 09 Sep 2024 09:44:28 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/240909092827/</guid>
+        <guid>http://localhost:1313/posts/240909092827/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/24</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -1652,7 +1652,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/kubernetes.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/kubernetes.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -1698,11 +1698,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>如何使用 Lambda 自动添加CloudWatch所有实例磁盘告警及 SNS 通知</title>
-        <link>https://www.cnsre.cn/posts/230506425079/</link>
+        <link>http://localhost:1313/posts/230506425079/</link>
         <pubDate>Sat, 06 May 2023 14:25:09 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/230506425079/</guid>
+        <guid>http://localhost:1313/posts/230506425079/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/23</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -1961,7 +1961,7 @@ A3: 查看CloudWatch中原本磁盘的指标名称，并修改Lambda函数代码
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/lambda.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/lambda.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -2015,11 +2015,11 @@ A3: 查看CloudWatch中原本磁盘的指标名称，并修改Lambda函数代码
       
       <item>
         <title>Lambda函数检查S3文件夹是否存在</title>
-        <link>https://www.cnsre.cn/posts/230410659053/</link>
+        <link>http://localhost:1313/posts/230410659053/</link>
         <pubDate>Mon, 10 Apr 2023 16:59:07 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/230410659053/</guid>
+        <guid>http://localhost:1313/posts/230410659053/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/23</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -2160,7 +2160,7 @@ if len(subfolders) &amp;gt; 0:
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/lambda.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/lambda.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -2198,11 +2198,11 @@ if len(subfolders) &amp;gt; 0:
       
       <item>
         <title>AWS 中的另外一种远程工具 AWS Session Manager</title>
-        <link>https://www.cnsre.cn/posts/230129126154/</link>
+        <link>http://localhost:1313/posts/230129126154/</link>
         <pubDate>Sun, 29 Jan 2023 11:26:15 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/230129126154/</guid>
+        <guid>http://localhost:1313/posts/230129126154/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/23</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -2319,7 +2319,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -2345,11 +2345,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>使用 Lambda 函数将 CloudWatch Log 中的日志归档到 S3 桶中</title>
-        <link>https://www.cnsre.cn/posts/221205544069/</link>
+        <link>http://localhost:1313/posts/221205544069/</link>
         <pubDate>Tue, 06 Dec 2022 11:48:12 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/221205544069/</guid>
+        <guid>http://localhost:1313/posts/221205544069/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/22</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -2702,7 +2702,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/lambda.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/lambda.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -2736,11 +2736,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>Amazon EKS 中 EFS 持久性存储</title>
-        <link>https://www.cnsre.cn/posts/220110850573/</link>
+        <link>http://localhost:1313/posts/220110850573/</link>
         <pubDate>Mon, 10 Jan 2022 08:50:57 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/220110850573/</guid>
+        <guid>http://localhost:1313/posts/220110850573/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/22</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -3246,7 +3246,7 @@ Tue Mar 23 14:29:31 UTC 2021
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/kubernetes.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/cnsre/kubernetes.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -3292,11 +3292,11 @@ Tue Mar 23 14:29:31 UTC 2021
       
       <item>
         <title>AWS eks绑定alb 使用aws-load-balancer-controller(Ingress Controller)提供服务</title>
-        <link>https://www.cnsre.cn/posts/211217431135/</link>
+        <link>http://localhost:1313/posts/211217431135/</link>
         <pubDate>Fri, 17 Dec 2021 14:31:13 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/211217431135/</guid>
+        <guid>http://localhost:1313/posts/211217431135/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/21</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -3918,7 +3918,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -3964,11 +3964,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>AWS私有仓库ECR推送拉取镜像</title>
-        <link>https://www.cnsre.cn/posts/211206944174/</link>
+        <link>http://localhost:1313/posts/211206944174/</link>
         <pubDate>Mon, 06 Dec 2021 09:44:18 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/211206944174/</guid>
+        <guid>http://localhost:1313/posts/211206944174/</guid>
         <description>作者：SRE运维博客 博客地址： https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/211206944174/ 相关话题：http</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -4048,7 +4048,7 @@ systemctl restart docker
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -4078,11 +4078,11 @@ systemctl restart docker
       
       <item>
         <title>AWS  EKS 添加IAM用户角色</title>
-        <link>https://www.cnsre.cn/posts/211203931498/</link>
+        <link>http://localhost:1313/posts/211203931498/</link>
         <pubDate>Fri, 03 Dec 2021 09:31:50 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/211203931498/</guid>
+        <guid>http://localhost:1313/posts/211203931498/</guid>
         <description>作者：SRE运维博客 博客地址： https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/211203931498/ 相关话题：http</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -4431,7 +4431,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -4469,11 +4469,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>zabbix 监控 aws rds 数据库</title>
-        <link>https://www.cnsre.cn/posts/211103006342/</link>
+        <link>http://localhost:1313/posts/211103006342/</link>
         <pubDate>Wed, 03 Nov 2021 10:06:34 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/211103006342/</guid>
+        <guid>http://localhost:1313/posts/211103006342/</guid>
         <description>作者：SRE运维博客 博客地址： https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/211103006342/ 相关话题：http</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -4562,7 +4562,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/zabbix.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -4588,11 +4588,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>Amazon EC2 永久修改静态 DNS</title>
-        <link>https://www.cnsre.cn/posts/211012054181/</link>
+        <link>http://localhost:1313/posts/211012054181/</link>
         <pubDate>Tue, 12 Oct 2021 10:54:18 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/211012054181/</guid>
+        <guid>http://localhost:1313/posts/211012054181/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/211</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -4879,7 +4879,7 @@ Pooja 演示了如何将重启期间保留的自定义 DNS 服务器分配给 Am
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -4901,11 +4901,11 @@ Pooja 演示了如何将重启期间保留的自定义 DNS 服务器分配给 Am
       
       <item>
         <title>记一次 Ubuntu 内核升级故障处理</title>
-        <link>https://www.cnsre.cn/posts/210915154434/</link>
+        <link>http://localhost:1313/posts/210915154434/</link>
         <pubDate>Wed, 15 Sep 2021 11:54:43 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/210915154434/</guid>
+        <guid>http://localhost:1313/posts/210915154434/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -5070,7 +5070,7 @@ LABEL=cloudimg-rootfs   /        ext4   defaults,discard        0 0
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -5108,11 +5108,11 @@ LABEL=cloudimg-rootfs   /        ext4   defaults,discard        0 0
       
       <item>
         <title>AWS EC2 实例 SSH 无法登录故障</title>
-        <link>https://www.cnsre.cn/posts/210823049577/</link>
+        <link>http://localhost:1313/posts/210823049577/</link>
         <pubDate>Mon, 23 Aug 2021 10:49:58 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/210823049577/</guid>
+        <guid>http://localhost:1313/posts/210823049577/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -5193,7 +5193,7 @@ Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -5215,11 +5215,11 @@ Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
       
       <item>
         <title>安装和配置CloudWatchAgent</title>
-        <link>https://www.cnsre.cn/posts/210531100355/</link>
+        <link>http://localhost:1313/posts/210531100355/</link>
         <pubDate>Mon, 31 May 2021 11:00:37 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/210531100355/</guid>
+        <guid>http://localhost:1313/posts/210531100355/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -5621,7 +5621,7 @@ Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -5651,11 +5651,11 @@ Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
       
       <item>
         <title>AWS扩容EC2实例根空间</title>
-        <link>https://www.cnsre.cn/posts/210517344530/</link>
+        <link>http://localhost:1313/posts/210517344530/</link>
         <pubDate>Mon, 17 May 2021 13:44:58 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/210517344530/</guid>
+        <guid>http://localhost:1313/posts/210517344530/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -5694,7 +5694,7 @@ Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -5720,11 +5720,11 @@ Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
       
       <item>
         <title>AWS使用ALB负载均衡遇到的问题</title>
-        <link>https://www.cnsre.cn/posts/210514620165/</link>
+        <link>http://localhost:1313/posts/210514620165/</link>
         <pubDate>Fri, 14 May 2021 16:20:35 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/210514620165/</guid>
+        <guid>http://localhost:1313/posts/210514620165/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -5756,7 +5756,7 @@ Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -5786,11 +5786,11 @@ Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
       
       <item>
         <title>利用S3fs在Amazon EC2 Linux实例上挂载S3存储桶</title>
-        <link>https://www.cnsre.cn/posts/210409164113/</link>
+        <link>http://localhost:1313/posts/210409164113/</link>
         <pubDate>Fri, 09 Apr 2021 16:41:16 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/210409164113/</guid>
+        <guid>http://localhost:1313/posts/210409164113/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -6189,7 +6189,7 @@ Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -6215,11 +6215,11 @@ Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
       
       <item>
         <title>AWS创建Redis集群模式遇到的问题</title>
-        <link>https://www.cnsre.cn/posts/210331125739/</link>
+        <link>http://localhost:1313/posts/210331125739/</link>
         <pubDate>Wed, 31 Mar 2021 12:57:39 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/210331125739/</guid>
+        <guid>http://localhost:1313/posts/210331125739/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn 文章地址：https://www.cnsre.cn/posts/210</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -6263,7 +6263,7 @@ redis设置&lt;br /&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -6297,11 +6297,11 @@ redis设置&lt;br /&gt;
       
       <item>
         <title>AWS EC2挂载多个磁盘</title>
-        <link>https://www.cnsre.cn/posts/210315133616/</link>
+        <link>http://localhost:1313/posts/210315133616/</link>
         <pubDate>Mon, 15 Mar 2021 13:36:16 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/210315133616/</guid>
+        <guid>http://localhost:1313/posts/210315133616/</guid>
         <description>查看磁盘空间 df -h 查看可用的卷信息 fdisk -l 看到除了/ 磁盘的另外一块磁盘/dev/nvme1n1 初始化新卷 这个地方需要注意一下， 磁盘的格式， 比如 xf</description>
         <content:encoded>&lt;h2 id=&#34;查看磁盘空间&#34;&gt;查看磁盘空间&lt;/h2&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;df -h
@@ -6327,7 +6327,7 @@ redis设置&lt;br /&gt;
 &lt;a href=&#34;https://www.cnsre.cn/posts/210315133616/&#34;&gt;https://www.cnsre.cn/posts/210315133616/&lt;/a&gt;&lt;/p&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -6349,11 +6349,11 @@ redis设置&lt;br /&gt;
       
       <item>
         <title>AWS修改EC2实例时间</title>
-        <link>https://www.cnsre.cn/posts/210312112259/</link>
+        <link>http://localhost:1313/posts/210312112259/</link>
         <pubDate>Fri, 12 Mar 2021 12:54:11 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/210312112259/</guid>
+        <guid>http://localhost:1313/posts/210312112259/</guid>
         <description>解决aws ec2的centos7设置时区无效 解决办法 1 yum upgrade tzdata -y 原因分析 1 zdump -v /usr/share/zoneinfo/Asia/Shanghai 我们会发现时区是固定不变的,无论我们通过修改 localtime 还是通过 timedatectl 修改,</description>
         <content:encoded>&lt;h1 id=&#34;解决aws-ec2的centos7设置时区无效&#34;&gt;解决aws ec2的centos7设置时区无效&lt;/h1&gt;
 &lt;h2 id=&#34;解决办法&#34;&gt;解决办法&lt;/h2&gt;
@@ -6401,7 +6401,7 @@ redis设置&lt;br /&gt;
 &lt;a href=&#34;https://www.cnsre.cn/posts/210312112259/&#34;&gt;https://www.cnsre.cn/posts/210312112259/&lt;/a&gt;&lt;/p&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -6439,11 +6439,11 @@ redis设置&lt;br /&gt;
       
       <item>
         <title>AWS使用快照创建实例启动失败</title>
-        <link>https://www.cnsre.cn/posts/210311132723/</link>
+        <link>http://localhost:1313/posts/210311132723/</link>
         <pubDate>Thu, 11 Mar 2021 11:08:23 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/210311132723/</guid>
+        <guid>http://localhost:1313/posts/210311132723/</guid>
         <description>AWS使用快照创建实例启动失败 问题描述 因业务需求，需要将A集群复制一份到B集群，当做预生产环境使用。但是在AWS使用快照的方式创建EC2实例</description>
         <content:encoded>&lt;h1 id=&#34;aws使用快照创建实例启动失败&#34;&gt;AWS使用快照创建实例启动失败&lt;/h1&gt;
 &lt;h2 id=&#34;问题描述&#34;&gt;问题描述&lt;/h2&gt;
@@ -6482,7 +6482,7 @@ Linux 系统默认的&lt;code&gt;python2.7&lt;/code&gt;被修改为了&lt;code&g
 &lt;a href=&#34;https://www.cnsre.cn/posts/210311132723/&#34;&gt;https://www.cnsre.cn/posts/210311132723/&lt;/a&gt;&lt;/p&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/bug.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -6516,11 +6516,11 @@ Linux 系统默认的&lt;code&gt;python2.7&lt;/code&gt;被修改为了&lt;code&g
       
       <item>
         <title>jenkins AWS CodeDeploy不停机部署</title>
-        <link>https://www.cnsre.cn/posts/210310131550/</link>
+        <link>http://localhost:1313/posts/210310131550/</link>
         <pubDate>Wed, 10 Mar 2021 13:49:58 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/210310131550/</guid>
+        <guid>http://localhost:1313/posts/210310131550/</guid>
         <description>此项目的特点是把Jenkins与CodeDeploy相结合做的CICD做的蓝绿发布，CI与CD 是分开的，CI构建完以后以BuildNumbe</description>
         <content:encoded>&lt;p&gt;此项目的特点是把Jenkins与CodeDeploy相结合做的CICD做的蓝绿发布，CI与CD 是分开的，CI构建完以后以BuildNumber的形式把war包存至AWS的S3桶中。同时在java项目上把java代码与配置文件分离，这样的话我们就可以war包+ 配置文件的形式把项目发布至测试、预生产、生产等环境。在CD发布的过程中CodeDeploy中用到的是 CodeDeployDefault.OneAtATime 如果有一台发布以后健康检查失败，则停止发布另外一台，并吧该台设备从ALB 中剔除。&lt;br /&gt;
 &lt;strong&gt;jenkins发布流程如下图&lt;/strong&gt;&lt;br /&gt;
@@ -7043,7 +7043,7 @@ PackageName 为你的war包名称&lt;br /&gt;
 &lt;a href=&#34;https://www.cnsre.cn/posts/210310131550/&#34;&gt;https://www.cnsre.cn/posts/210310131550/&lt;/a&gt;&lt;/p&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         

@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Showcase overview on SRE运维博客</title>
-    <link>https://www.cnsre.cn/showcase/</link>
+    <link>http://localhost:1313/showcase/</link>
     <description>Recent content in Showcase overview on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
@@ -15,7 +15,7 @@
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
-        <atom:link href="https://www.cnsre.cn/showcase/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://localhost:1313/showcase/index.xml" rel="self" type="application/rss+xml" />
     
     
     
@@ -23,11 +23,11 @@
       
       <item>
         <title></title>
-        <link>https://www.cnsre.cn/showcase/favorites/</link>
+        <link>http://localhost:1313/showcase/favorites/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/showcase/favorites/</guid>
+        <guid>http://localhost:1313/showcase/favorites/</guid>
         <description></description>
         <content:encoded></content:encoded>
         

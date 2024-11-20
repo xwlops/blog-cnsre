@@ -2,699 +2,699 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://www.cnsre.cn/posts/211119132529/</loc>
+    <loc>http://localhost:1313/posts/211119132529/</loc>
     <lastmod>2024-09-07T10:45:36+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/aws/</loc>
+    <loc>http://localhost:1313/tags/aws/</loc>
     <lastmod>2024-10-22T20:41:54+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/aws/</loc>
+    <loc>http://localhost:1313/categories/aws/</loc>
     <lastmod>2024-10-22T20:41:54+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/</loc>
+    <loc>http://localhost:1313/categories/</loc>
     <lastmod>2024-10-22T20:41:54+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/</loc>
+    <loc>http://localhost:1313/tags/</loc>
     <lastmod>2024-10-22T20:41:54+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/241022203423/</loc>
+    <loc>http://localhost:1313/posts/241022203423/</loc>
     <lastmod>2024-10-22T20:41:54+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/aws-athena/</loc>
+    <loc>http://localhost:1313/tags/aws-athena/</loc>
     <lastmod>2024-10-18T09:26:29+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/cloudtrail/</loc>
+    <loc>http://localhost:1313/tags/cloudtrail/</loc>
     <lastmod>2024-10-18T09:26:29+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/241018091258/</loc>
+    <loc>http://localhost:1313/posts/241018091258/</loc>
     <lastmod>2024-10-18T09:26:29+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/lambda/</loc>
+    <loc>http://localhost:1313/categories/lambda/</loc>
     <lastmod>2024-09-20T16:57:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/s3/</loc>
+    <loc>http://localhost:1313/tags/s3/</loc>
     <lastmod>2024-09-20T16:57:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/s3/</loc>
+    <loc>http://localhost:1313/categories/s3/</loc>
     <lastmod>2024-09-20T16:57:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/sns/</loc>
+    <loc>http://localhost:1313/tags/sns/</loc>
     <lastmod>2024-09-20T16:57:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/240920163523/</loc>
+    <loc>http://localhost:1313/posts/240920163523/</loc>
     <lastmod>2024-09-20T16:57:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/ssm/</loc>
+    <loc>http://localhost:1313/tags/ssm/</loc>
     <lastmod>2024-09-18T08:44:58+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/ssm/</loc>
+    <loc>http://localhost:1313/categories/ssm/</loc>
     <lastmod>2024-09-18T08:44:58+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/240917103351/</loc>
+    <loc>http://localhost:1313/posts/240917103351/</loc>
     <lastmod>2024-09-18T08:44:58+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/lambda/</loc>
+    <loc>http://localhost:1313/tags/lambda/</loc>
     <lastmod>2024-09-13T10:43:13+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/mysql/</loc>
+    <loc>http://localhost:1313/tags/mysql/</loc>
     <lastmod>2024-09-13T10:43:13+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/240914102425/</loc>
+    <loc>http://localhost:1313/posts/240914102425/</loc>
     <lastmod>2024-09-13T10:43:13+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <loc>http://localhost:1313/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
     <lastmod>2024-09-13T10:43:13+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/aurora/</loc>
+    <loc>http://localhost:1313/tags/aurora/</loc>
     <lastmod>2024-09-13T10:35:36+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/aurora/</loc>
+    <loc>http://localhost:1313/categories/aurora/</loc>
     <lastmod>2024-09-13T10:35:36+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/rds/</loc>
+    <loc>http://localhost:1313/tags/rds/</loc>
     <lastmod>2024-09-13T10:35:36+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/240913102410/</loc>
+    <loc>http://localhost:1313/posts/240913102410/</loc>
     <lastmod>2024-09-13T10:35:36+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/waf/</loc>
+    <loc>http://localhost:1313/tags/waf/</loc>
     <lastmod>2024-09-10T11:42:22+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/waf/</loc>
+    <loc>http://localhost:1313/categories/waf/</loc>
     <lastmod>2024-09-10T11:42:22+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/240910113525/</loc>
+    <loc>http://localhost:1313/posts/240910113525/</loc>
     <lastmod>2024-09-10T11:42:22+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/eks/</loc>
+    <loc>http://localhost:1313/tags/eks/</loc>
     <lastmod>2024-09-09T09:44:28+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/eks/</loc>
+    <loc>http://localhost:1313/categories/eks/</loc>
     <lastmod>2024-09-09T09:44:28+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/fargate/</loc>
+    <loc>http://localhost:1313/tags/fargate/</loc>
     <lastmod>2024-09-09T09:44:28+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/fargate/</loc>
+    <loc>http://localhost:1313/categories/fargate/</loc>
     <lastmod>2024-09-09T09:44:28+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/kubernetes/</loc>
+    <loc>http://localhost:1313/tags/kubernetes/</loc>
     <lastmod>2024-09-09T09:44:28+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/kubernetes/</loc>
+    <loc>http://localhost:1313/categories/kubernetes/</loc>
     <lastmod>2024-09-09T09:44:28+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/240909092827/</loc>
+    <loc>http://localhost:1313/posts/240909092827/</loc>
     <lastmod>2024-09-09T09:44:28+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/240906085714/</loc>
+    <loc>http://localhost:1313/posts/240906085714/</loc>
     <lastmod>2024-09-06T09:34:56+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/%E9%98%BF%E9%87%8C%E4%BA%91/</loc>
+    <loc>http://localhost:1313/tags/%E9%98%BF%E9%87%8C%E4%BA%91/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/%E9%98%BF%E9%87%8C%E4%BA%91/</loc>
+    <loc>http://localhost:1313/categories/%E9%98%BF%E9%87%8C%E4%BA%91/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/231208094411/</loc>
+    <loc>http://localhost:1313/posts/231208094411/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/cloudwatch/</loc>
+    <loc>http://localhost:1313/tags/cloudwatch/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/cloudwatch/</loc>
+    <loc>http://localhost:1313/categories/cloudwatch/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/python/</loc>
+    <loc>http://localhost:1313/tags/python/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/python/</loc>
+    <loc>http://localhost:1313/categories/python/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/sns/</loc>
+    <loc>http://localhost:1313/categories/sns/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/230506425079/</loc>
+    <loc>http://localhost:1313/posts/230506425079/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/230410659053/</loc>
+    <loc>http://localhost:1313/posts/230410659053/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/230129126154/</loc>
+    <loc>http://localhost:1313/posts/230129126154/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/k3s/</loc>
+    <loc>http://localhost:1313/tags/k3s/</loc>
     <lastmod>2024-09-07T10:45:36+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/221207116004/</loc>
+    <loc>http://localhost:1313/posts/221207116004/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/k8s/</loc>
+    <loc>http://localhost:1313/categories/k8s/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/%E6%95%85%E9%9A%9C%E9%9B%86/</loc>
+    <loc>http://localhost:1313/tags/%E6%95%85%E9%9A%9C%E9%9B%86/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/%E6%95%85%E9%9A%9C%E9%9B%86/</loc>
+    <loc>http://localhost:1313/categories/%E6%95%85%E9%9A%9C%E9%9B%86/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/221205544069/</loc>
+    <loc>http://localhost:1313/posts/221205544069/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/efs/</loc>
+    <loc>http://localhost:1313/tags/efs/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/efs/</loc>
+    <loc>http://localhost:1313/categories/efs/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/220125450139/</loc>
+    <loc>http://localhost:1313/posts/220125450139/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/220110850573/</loc>
+    <loc>http://localhost:1313/posts/220110850573/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/220107906441/</loc>
+    <loc>http://localhost:1313/posts/220107906441/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/alb/</loc>
+    <loc>http://localhost:1313/tags/alb/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/211217431135/</loc>
+    <loc>http://localhost:1313/posts/211217431135/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/ingress/</loc>
+    <loc>http://localhost:1313/tags/ingress/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/log4j/</loc>
+    <loc>http://localhost:1313/tags/log4j/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/211213210004/</loc>
+    <loc>http://localhost:1313/posts/211213210004/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/%E5%AE%89%E5%85%A8/</loc>
+    <loc>http://localhost:1313/tags/%E5%AE%89%E5%85%A8/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/</loc>
+    <loc>http://localhost:1313/categories/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/kubecolor/</loc>
+    <loc>http://localhost:1313/tags/kubecolor/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/211210952578/</loc>
+    <loc>http://localhost:1313/posts/211210952578/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/211208038353/</loc>
+    <loc>http://localhost:1313/posts/211208038353/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/211206944174/</loc>
+    <loc>http://localhost:1313/posts/211206944174/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/docker/</loc>
+    <loc>http://localhost:1313/tags/docker/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/ecr/</loc>
+    <loc>http://localhost:1313/tags/ecr/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/211203931498/</loc>
+    <loc>http://localhost:1313/posts/211203931498/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/211201955418/</loc>
+    <loc>http://localhost:1313/posts/211201955418/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/split/</loc>
+    <loc>http://localhost:1313/tags/split/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/split/</loc>
+    <loc>http://localhost:1313/categories/split/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/211129946481/</loc>
+    <loc>http://localhost:1313/posts/211129946481/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/taint/</loc>
+    <loc>http://localhost:1313/tags/taint/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/toleration/</loc>
+    <loc>http://localhost:1313/tags/toleration/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/ingress/</loc>
+    <loc>http://localhost:1313/categories/ingress/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/211126003074/</loc>
+    <loc>http://localhost:1313/posts/211126003074/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/traefik/</loc>
+    <loc>http://localhost:1313/tags/traefik/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/traefik/</loc>
+    <loc>http://localhost:1313/categories/traefik/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/zabbix/</loc>
+    <loc>http://localhost:1313/tags/zabbix/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/zabbix/</loc>
+    <loc>http://localhost:1313/categories/zabbix/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/211124953028/</loc>
+    <loc>http://localhost:1313/posts/211124953028/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/211122846494/</loc>
+    <loc>http://localhost:1313/posts/211122846494/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/shell/</loc>
+    <loc>http://localhost:1313/tags/shell/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/shell/</loc>
+    <loc>http://localhost:1313/categories/shell/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/k3s/</loc>
+    <loc>http://localhost:1313/categories/k3s/</loc>
     <lastmod>2024-09-07T10:45:36+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/wireguard/</loc>
+    <loc>http://localhost:1313/tags/wireguard/</loc>
     <lastmod>2024-09-07T10:45:36+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/wireguard/</loc>
+    <loc>http://localhost:1313/categories/wireguard/</loc>
     <lastmod>2024-09-07T10:45:36+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/kvm/</loc>
+    <loc>http://localhost:1313/tags/kvm/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/kvm/</loc>
+    <loc>http://localhost:1313/categories/kvm/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/211117937177/</loc>
+    <loc>http://localhost:1313/posts/211117937177/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/211115903260/</loc>
+    <loc>http://localhost:1313/posts/211115903260/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/211112839379/</loc>
+    <loc>http://localhost:1313/posts/211112839379/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/211109907029/</loc>
+    <loc>http://localhost:1313/posts/211109907029/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/211108848062/</loc>
+    <loc>http://localhost:1313/posts/211108848062/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/vnc/</loc>
+    <loc>http://localhost:1313/tags/vnc/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/211105852095/</loc>
+    <loc>http://localhost:1313/posts/211105852095/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/211103006342/</loc>
+    <loc>http://localhost:1313/posts/211103006342/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/211101950005/</loc>
+    <loc>http://localhost:1313/posts/211101950005/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/211029955133/</loc>
+    <loc>http://localhost:1313/posts/211029955133/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/211027957506/</loc>
+    <loc>http://localhost:1313/posts/211027957506/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/211025912047/</loc>
+    <loc>http://localhost:1313/posts/211025912047/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/211021950307/</loc>
+    <loc>http://localhost:1313/posts/211021950307/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/211012054181/</loc>
+    <loc>http://localhost:1313/posts/211012054181/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/oracle/</loc>
+    <loc>http://localhost:1313/tags/oracle/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/211009115571/</loc>
+    <loc>http://localhost:1313/posts/211009115571/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/nginx/</loc>
+    <loc>http://localhost:1313/tags/nginx/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/nginx/</loc>
+    <loc>http://localhost:1313/categories/nginx/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210930010174/</loc>
+    <loc>http://localhost:1313/posts/210930010174/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/websocket/</loc>
+    <loc>http://localhost:1313/tags/websocket/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/journal/</loc>
+    <loc>http://localhost:1313/tags/journal/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/journal/</loc>
+    <loc>http://localhost:1313/categories/journal/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210928957081/</loc>
+    <loc>http://localhost:1313/posts/210928957081/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/docker/</loc>
+    <loc>http://localhost:1313/categories/docker/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210924925541/</loc>
+    <loc>http://localhost:1313/posts/210924925541/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210922013357/</loc>
+    <loc>http://localhost:1313/posts/210922013357/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/metric-server/</loc>
+    <loc>http://localhost:1313/tags/metric-server/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/kube-eventer/</loc>
+    <loc>http://localhost:1313/tags/kube-eventer/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210917128049/</loc>
+    <loc>http://localhost:1313/posts/210917128049/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/ubuntu/</loc>
+    <loc>http://localhost:1313/tags/ubuntu/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/ubuntu/</loc>
+    <loc>http://localhost:1313/categories/ubuntu/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210915154434/</loc>
+    <loc>http://localhost:1313/posts/210915154434/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210913932516/</loc>
+    <loc>http://localhost:1313/posts/210913932516/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/openvpn/</loc>
+    <loc>http://localhost:1313/tags/openvpn/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/openvpn/</loc>
+    <loc>http://localhost:1313/categories/openvpn/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/jenkins/</loc>
+    <loc>http://localhost:1313/tags/jenkins/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/jenkins/</loc>
+    <loc>http://localhost:1313/categories/jenkins/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210910030083/</loc>
+    <loc>http://localhost:1313/posts/210910030083/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210908023010/</loc>
+    <loc>http://localhost:1313/posts/210908023010/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/storageclass/</loc>
+    <loc>http://localhost:1313/tags/storageclass/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210906949577/</loc>
+    <loc>http://localhost:1313/posts/210906949577/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210903021487/</loc>
+    <loc>http://localhost:1313/posts/210903021487/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/pvc/</loc>
+    <loc>http://localhost:1313/tags/pvc/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210902330007/</loc>
+    <loc>http://localhost:1313/posts/210902330007/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/lnmp/</loc>
+    <loc>http://localhost:1313/tags/lnmp/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210824854115/</loc>
+    <loc>http://localhost:1313/posts/210824854115/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210823049577/</loc>
+    <loc>http://localhost:1313/posts/210823049577/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210819955387/</loc>
+    <loc>http://localhost:1313/posts/210819955387/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210816936340/</loc>
+    <loc>http://localhost:1313/posts/210816936340/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210811113507/</loc>
+    <loc>http://localhost:1313/posts/210811113507/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/%E6%97%A5%E5%BF%97/</loc>
+    <loc>http://localhost:1313/tags/%E6%97%A5%E5%BF%97/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210810958573/</loc>
+    <loc>http://localhost:1313/posts/210810958573/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/kubeadm/</loc>
+    <loc>http://localhost:1313/tags/kubeadm/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210624108255/</loc>
+    <loc>http://localhost:1313/posts/210624108255/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210621550392/</loc>
+    <loc>http://localhost:1313/posts/210621550392/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/prometheus/</loc>
+    <loc>http://localhost:1313/tags/prometheus/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/prometheus/</loc>
+    <loc>http://localhost:1313/categories/prometheus/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210609216215/</loc>
+    <loc>http://localhost:1313/posts/210609216215/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210608607296/</loc>
+    <loc>http://localhost:1313/posts/210608607296/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/pipeline/</loc>
+    <loc>http://localhost:1313/tags/pipeline/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210603028465/</loc>
+    <loc>http://localhost:1313/posts/210603028465/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210602036084/</loc>
+    <loc>http://localhost:1313/posts/210602036084/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210531132227/</loc>
+    <loc>http://localhost:1313/posts/210531132227/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210531100355/</loc>
+    <loc>http://localhost:1313/posts/210531100355/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/pushplus/</loc>
+    <loc>http://localhost:1313/tags/pushplus/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210518420293/</loc>
+    <loc>http://localhost:1313/posts/210518420293/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210517344530/</loc>
+    <loc>http://localhost:1313/posts/210517344530/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/ec2/</loc>
+    <loc>http://localhost:1313/tags/ec2/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210514620165/</loc>
+    <loc>http://localhost:1313/posts/210514620165/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/</loc>
+    <loc>http://localhost:1313/tags/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210513036112/</loc>
+    <loc>http://localhost:1313/posts/210513036112/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210510512134/</loc>
+    <loc>http://localhost:1313/posts/210510512134/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/comment/</loc>
+    <loc>http://localhost:1313/posts/comment/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210426034157/</loc>
+    <loc>http://localhost:1313/posts/210426034157/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/grafana/</loc>
+    <loc>http://localhost:1313/tags/grafana/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/grafana/</loc>
+    <loc>http://localhost:1313/categories/grafana/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210426026121/</loc>
+    <loc>http://localhost:1313/posts/210426026121/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210425130327/</loc>
+    <loc>http://localhost:1313/posts/210425130327/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/garfana/</loc>
+    <loc>http://localhost:1313/categories/garfana/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210423140530/</loc>
+    <loc>http://localhost:1313/posts/210423140530/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210421130319/</loc>
+    <loc>http://localhost:1313/posts/210421130319/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/%E8%B7%B3%E6%9D%BF%E6%9C%BA/</loc>
+    <loc>http://localhost:1313/tags/%E8%B7%B3%E6%9D%BF%E6%9C%BA/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210419172129/</loc>
+    <loc>http://localhost:1313/posts/210419172129/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210419130919/</loc>
+    <loc>http://localhost:1313/posts/210419130919/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/ssl%E8%AF%81%E4%B9%A6/</loc>
+    <loc>http://localhost:1313/tags/ssl%E8%AF%81%E4%B9%A6/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210414131058/</loc>
+    <loc>http://localhost:1313/posts/210414131058/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210413131020/</loc>
+    <loc>http://localhost:1313/posts/210413131020/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210412150856/</loc>
+    <loc>http://localhost:1313/posts/210412150856/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/redis/</loc>
+    <loc>http://localhost:1313/tags/redis/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/redis/</loc>
+    <loc>http://localhost:1313/categories/redis/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210409164113/</loc>
+    <loc>http://localhost:1313/posts/210409164113/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210408131033/</loc>
+    <loc>http://localhost:1313/posts/210408131033/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210406154942/</loc>
+    <loc>http://localhost:1313/posts/210406154942/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210406132721/</loc>
+    <loc>http://localhost:1313/posts/210406132721/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/blog/</loc>
+    <loc>http://localhost:1313/categories/blog/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/github/</loc>
+    <loc>http://localhost:1313/tags/github/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/jsdelivr/</loc>
+    <loc>http://localhost:1313/tags/jsdelivr/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210402140228/</loc>
+    <loc>http://localhost:1313/posts/210402140228/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/%E5%9B%BE%E5%BA%8A/</loc>
+    <loc>http://localhost:1313/tags/%E5%9B%BE%E5%BA%8A/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/journald/</loc>
+    <loc>http://localhost:1313/tags/journald/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210401140104/</loc>
+    <loc>http://localhost:1313/posts/210401140104/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210331125739/</loc>
+    <loc>http://localhost:1313/posts/210331125739/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/kafka/</loc>
+    <loc>http://localhost:1313/tags/kafka/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/kafka/</loc>
+    <loc>http://localhost:1313/categories/kafka/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210330135719/</loc>
+    <loc>http://localhost:1313/posts/210330135719/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210329141238/</loc>
+    <loc>http://localhost:1313/posts/210329141238/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210326133909/</loc>
+    <loc>http://localhost:1313/posts/210326133909/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/cerebro/</loc>
+    <loc>http://localhost:1313/tags/cerebro/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/elk/</loc>
+    <loc>http://localhost:1313/tags/elk/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/categories/elk/</loc>
+    <loc>http://localhost:1313/categories/elk/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/zookeeper/</loc>
+    <loc>http://localhost:1313/tags/zookeeper/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210325135520/</loc>
+    <loc>http://localhost:1313/posts/210325135520/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210324144832/</loc>
+    <loc>http://localhost:1313/posts/210324144832/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210318130718/</loc>
+    <loc>http://localhost:1313/posts/210318130718/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/%E7%B3%BB%E7%BB%9F%E6%A3%80%E6%9F%A5/</loc>
+    <loc>http://localhost:1313/tags/%E7%B3%BB%E7%BB%9F%E6%A3%80%E6%9F%A5/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210317132104/</loc>
+    <loc>http://localhost:1313/posts/210317132104/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/blog/</loc>
+    <loc>http://localhost:1313/tags/blog/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/markdown/</loc>
+    <loc>http://localhost:1313/tags/markdown/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210316100350/</loc>
+    <loc>http://localhost:1313/posts/210316100350/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210315133616/</loc>
+    <loc>http://localhost:1313/posts/210315133616/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210312112259/</loc>
+    <loc>http://localhost:1313/posts/210312112259/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/centos7/</loc>
+    <loc>http://localhost:1313/tags/centos7/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/%E8%AE%BE%E7%BD%AE%E6%97%B6%E5%8C%BA/</loc>
+    <loc>http://localhost:1313/tags/%E8%AE%BE%E7%BD%AE%E6%97%B6%E5%8C%BA/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210311132723/</loc>
+    <loc>http://localhost:1313/posts/210311132723/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/cloud-init/</loc>
+    <loc>http://localhost:1313/tags/cloud-init/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/tags/codedeploy/</loc>
+    <loc>http://localhost:1313/tags/codedeploy/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210310131550/</loc>
+    <loc>http://localhost:1313/posts/210310131550/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/210303161655/</loc>
+    <loc>http://localhost:1313/posts/210303161655/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/comment/</loc>
+    <loc>http://localhost:1313/comment/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/showcase/</loc>
+    <loc>http://localhost:1313/showcase/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/</loc>
+    <loc>http://localhost:1313/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/showcase/favorites/</loc>
+    <loc>http://localhost:1313/showcase/favorites/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/posts/</loc>
+    <loc>http://localhost:1313/posts/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/series/</loc>
+    <loc>http://localhost:1313/series/</loc>
   </url><url>
-    <loc>https://www.cnsre.cn/presentation/</loc>
+    <loc>http://localhost:1313/presentation/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/timeline/</loc>
+    <loc>http://localhost:1313/timeline/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/about/</loc>
+    <loc>http://localhost:1313/about/</loc>
     <lastmod>2024-09-18T21:18:02+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/archive/</loc>
+    <loc>http://localhost:1313/archive/</loc>
     <lastmod>2024-08-30T18:16:52+08:00</lastmod>
   </url><url>
-    <loc>https://www.cnsre.cn/friends/</loc>
+    <loc>http://localhost:1313/friends/</loc>
     <lastmod>2024-09-18T18:50:31+08:00</lastmod>
   </url>
 </urlset>

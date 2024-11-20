@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Sns on SRE运维博客</title>
-    <link>https://www.cnsre.cn/tags/sns/</link>
+    <link>http://localhost:1313/tags/sns/</link>
     <description>Recent content in Sns on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
@@ -15,7 +15,7 @@
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
-        <atom:link href="https://www.cnsre.cn/tags/sns/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://localhost:1313/tags/sns/index.xml" rel="self" type="application/rss+xml" />
     
     
     
@@ -23,11 +23,11 @@
       
       <item>
         <title>使用 AWS Lambda 和 SNS 监控 S3 存储桶中的文件夹</title>
-        <link>https://www.cnsre.cn/posts/240920163523/</link>
+        <link>http://localhost:1313/posts/240920163523/</link>
         <pubDate>Fri, 20 Sep 2024 16:35:24 +0800</pubDate>
         
         <atom:modified>Fri, 20 Sep 2024 16:57:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/240920163523/</guid>
+        <guid>http://localhost:1313/posts/240920163523/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/24</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -388,7 +388,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
@@ -426,11 +426,11 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
       
       <item>
         <title>如何使用 Lambda 自动添加CloudWatch所有实例磁盘告警及 SNS 通知</title>
-        <link>https://www.cnsre.cn/posts/230506425079/</link>
+        <link>http://localhost:1313/posts/230506425079/</link>
         <pubDate>Sat, 06 May 2023 14:25:09 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>https://www.cnsre.cn/posts/230506425079/</guid>
+        <guid>http://localhost:1313/posts/230506425079/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/23</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -689,7 +689,7 @@ A3: 查看CloudWatch中原本磁盘的指标名称，并修改Lambda函数代码
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/lambda.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/lambda.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
