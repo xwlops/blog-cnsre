@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Waf on SRE运维博客</title>
-    <link>http://localhost:1313/tags/waf/</link>
+    <link>https://www.cnsre.cn/tags/waf/</link>
     <description>Recent content in Waf on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
@@ -15,7 +15,7 @@
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
-        <atom:link href="http://localhost:1313/tags/waf/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.cnsre.cn/tags/waf/index.xml" rel="self" type="application/rss+xml" />
     
     
     
@@ -23,11 +23,11 @@
       
       <item>
         <title>如何在 AWS WAF 中为固定 URI 请求设置例外？ </title>
-        <link>http://localhost:1313/posts/240910113525/</link>
+        <link>https://www.cnsre.cn/posts/240910113525/</link>
         <pubDate>Tue, 10 Sep 2024 11:35:26 +0800</pubDate>
         
         <atom:modified>Tue, 10 Sep 2024 11:42:22 +0800</atom:modified>
-        <guid>http://localhost:1313/posts/240910113525/</guid>
+        <guid>https://www.cnsre.cn/posts/240910113525/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/24</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -108,7 +108,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="http://localhost:1313/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://cn-north-1-image.s3.cn-north-1.amazonaws.com.cn/cnsre/logo/aws.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         

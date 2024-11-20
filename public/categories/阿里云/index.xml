@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>阿里云 on SRE运维博客</title>
-    <link>http://localhost:1313/categories/%E9%98%BF%E9%87%8C%E4%BA%91/</link>
+    <link>https://www.cnsre.cn/categories/%E9%98%BF%E9%87%8C%E4%BA%91/</link>
     <description>Recent content in 阿里云 on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
@@ -15,7 +15,7 @@
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
-        <atom:link href="http://localhost:1313/categories/%E9%98%BF%E9%87%8C%E4%BA%91/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.cnsre.cn/categories/%E9%98%BF%E9%87%8C%E4%BA%91/index.xml" rel="self" type="application/rss+xml" />
     
     
     
@@ -23,11 +23,11 @@
       
       <item>
         <title>阿里云申请发布社区镜像权限</title>
-        <link>http://localhost:1313/posts/231208094411/</link>
+        <link>https://www.cnsre.cn/posts/231208094411/</link>
         <pubDate>Fri, 08 Dec 2023 09:44:11 +0800</pubDate>
         
         <atom:modified>Fri, 30 Aug 2024 18:16:52 +0800</atom:modified>
-        <guid>http://localhost:1313/posts/231208094411/</guid>
+        <guid>https://www.cnsre.cn/posts/231208094411/</guid>
         <description>作者：SRE运维博客 博客地址：https://www.cnsre.cn/ 文章地址：https://www.cnsre.cn/posts/23</description>
         <content:encoded>&lt;hr /&gt;
 &lt;blockquote&gt;
@@ -177,7 +177,7 @@ data-ad-slot=&#34;5670838583&#34;&gt;&lt;/ins&gt;&lt;/p&gt;
 &lt;hr /&gt;
 </content:encoded>
         <dc:creator>CNSRE</dc:creator>
-        <media:content url="http://localhost:1313/https://img.alicdn.com/tfs/TB13DzOjXP7gK0jSZFjXXc5aXXa-212-48.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="https://www.cnsre.cn/https://img.alicdn.com/tfs/TB13DzOjXP7gK0jSZFjXXc5aXXa-212-48.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         
