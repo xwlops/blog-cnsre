@@ -55,7 +55,7 @@ googleAnalytics = "G-0157NSMP95"
 
 [Waline]
     enable = true
-    ServerURL = "https://waline-cnsre.vercel.app/"
+    ServerURL = "https://waline.cnsre.cn/"
     Placeholder = "ヾﾉ≧∀≦)o来评论啊!"  #留言框占位提示文字
     Avatar = "mp"
     Meta = ["nick", "mail", "link"]
