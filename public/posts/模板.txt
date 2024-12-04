@@ -5,7 +5,7 @@ draft: false
 #如 true 则会隐藏目录
 #enableToc: true
 #如 true 则会生成目录
-#enableTocContent: true
+enableTocContent: true
 #如 true 则会生成目录内容
 #pinned: true  
 #固定文章
