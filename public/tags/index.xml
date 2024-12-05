@@ -11,7 +11,7 @@
     <description>Recent content in Tags on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Wed, 04 Dec 2024 12:50:42 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 05 Dec 2024 12:37:12 +0800</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
@@ -22,12 +22,12 @@
 
       
       <item>
-        <title>Hpa</title>
-        <link>https://www.cnsre.cn/tags/hpa/</link>
-        <pubDate>Wed, 04 Dec 2024 12:50:42 +0800</pubDate>
+        <title>K8s</title>
+        <link>https://www.cnsre.cn/tags/k8s/</link>
+        <pubDate>Thu, 05 Dec 2024 12:37:12 +0800</pubDate>
         
         
-        <guid>https://www.cnsre.cn/tags/hpa/</guid>
+        <guid>https://www.cnsre.cn/tags/k8s/</guid>
         <description></description>
         <content:encoded></content:encoded>
         
@@ -40,12 +40,30 @@
       </item>
       
       <item>
-        <title>K8s</title>
-        <link>https://www.cnsre.cn/tags/k8s/</link>
+        <title>Vpa</title>
+        <link>https://www.cnsre.cn/tags/vpa/</link>
+        <pubDate>Thu, 05 Dec 2024 12:37:12 +0800</pubDate>
+        
+        
+        <guid>https://www.cnsre.cn/tags/vpa/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>Hpa</title>
+        <link>https://www.cnsre.cn/tags/hpa/</link>
         <pubDate>Wed, 04 Dec 2024 12:50:42 +0800</pubDate>
         
         
-        <guid>https://www.cnsre.cn/tags/k8s/</guid>
+        <guid>https://www.cnsre.cn/tags/hpa/</guid>
         <description></description>
         <content:encoded></content:encoded>
         

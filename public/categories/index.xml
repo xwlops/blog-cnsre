@@ -11,7 +11,7 @@
     <description>Recent content in Categories on SRE运维博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Wed, 04 Dec 2024 12:50:42 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 05 Dec 2024 12:37:12 +0800</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
@@ -20,6 +20,42 @@
     
     
 
+      
+      <item>
+        <title>Eks</title>
+        <link>https://www.cnsre.cn/categories/eks/</link>
+        <pubDate>Thu, 05 Dec 2024 12:37:12 +0800</pubDate>
+        
+        
+        <guid>https://www.cnsre.cn/categories/eks/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>K8s</title>
+        <link>https://www.cnsre.cn/categories/k8s/</link>
+        <pubDate>Thu, 05 Dec 2024 12:37:12 +0800</pubDate>
+        
+        
+        <guid>https://www.cnsre.cn/categories/k8s/</guid>
+        <description></description>
+        <content:encoded></content:encoded>
+        
+        
+        
+        
+        
+        
+        
+      </item>
       
       <item>
         <title>类型</title>
@@ -148,24 +184,6 @@
       </item>
       
       <item>
-        <title>Eks</title>
-        <link>https://www.cnsre.cn/categories/eks/</link>
-        <pubDate>Mon, 09 Sep 2024 09:28:27 +0800</pubDate>
-        
-        
-        <guid>https://www.cnsre.cn/categories/eks/</guid>
-        <description></description>
-        <content:encoded></content:encoded>
-        
-        
-        
-        
-        
-        
-        
-      </item>
-      
-      <item>
         <title>Fargate</title>
         <link>https://www.cnsre.cn/categories/fargate/</link>
         <pubDate>Mon, 09 Sep 2024 09:28:27 +0800</pubDate>
@@ -262,24 +280,6 @@
         
         
         <guid>https://www.cnsre.cn/categories/sns/</guid>
-        <description></description>
-        <content:encoded></content:encoded>
-        
-        
-        
-        
-        
-        
-        
-      </item>
-      
-      <item>
-        <title>K8s</title>
-        <link>https://www.cnsre.cn/categories/k8s/</link>
-        <pubDate>Wed, 07 Dec 2022 11:16:00 +0800</pubDate>
-        
-        
-        <guid>https://www.cnsre.cn/categories/k8s/</guid>
         <description></description>
         <content:encoded></content:encoded>
         
